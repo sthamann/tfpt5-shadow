@@ -1,0 +1,24 @@
+
+=== Build ===
+  [PASS] lake build succeeded
+
+=== sorry / admit ===
+  [PASS] no sorry or admit found
+
+=== axiom / constant declarations ===
+  [PASS] no axiom or constant declarations
+
+=== unsafe / opaque / partial declarations ===
+  [PASS] no unsafe / opaque / partial declarations
+
+=== axiom audit (#print axioms) ===
+  [PASS] all theorems use only [propext, Classical.choice, Quot.sound]
+
+=== headline theorems (Lean #check) ===
+  [PASS] AuditCheck.lean elaborated; all headline #checks succeeded
+
+=== theorem signatures (Lean example signature-lock) ===
+  [PASS] AuditContract.lean elaborated; all signature locks hold
+
+=== Final verdict ===
+  AUDIT: PASS

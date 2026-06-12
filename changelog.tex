@@ -1,0 +1,476 @@
+% ---------------------------------------------------------------------
+%  changelog.tex -- THE canonical TFPT changelog.
+%  Dual-mode file:
+%    * standalone:  pdflatex changelog.tex   (own preamble below)
+%    * imported:    \def\ChangelogImported{1}\input{changelog}
+%                   (at the END of introduction.tex)
+%  Maintenance rule (.cursor/rules): every committed change to the
+%  theory, the verification suite, the papers or the website adds a
+%  dated entry here IN THE SAME CHANGE.  Newest first.
+%  Content uses only plain LaTeX (no document-specific macros).
+% ---------------------------------------------------------------------
+\ifdefined\ChangelogImported\else
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\setlist{itemsep=1.5pt,topsep=2pt}
+\emergencystretch=2.5em
+% standalone fallbacks for the status markers (defined by tfpt_style when imported)
+% 4-class display system: [E] exact/proven, [C] conditional, [O] open/axiom, [X] kill test.
+\providecommand{\mE}{\textbf{[E]}}\providecommand{\mC}{\textbf{[C]}}
+\providecommand{\mO}{\textbf{[O]}}\providecommand{\mX}{\textbf{[X]}}
+% legacy fine-grained names kept as aliases so older entries still compile standalone
+\providecommand{\tI}{\mE}\providecommand{\tL}{\mE}\providecommand{\tF}{\mE}\providecommand{\tN}{\mE}
+\providecommand{\tIalg}{\mE}\providecommand{\tInum}{\mE}
+\providecommand{\tP}{\mC}\providecommand{\tB}{\mC}\providecommand{\tR}{\mC}
+\providecommand{\tA}{\mO}\providecommand{\tX}{\mX}
+\providecommand{\vref}[1]{\texttt{#1}}
+\providecommand{\TFPTversion}{5.1}\providecommand{\TFPTrev}{dev}
+% standalone fallbacks for doc-specific math macros used in entries
+\providecommand{\cthree}{c_3}\providecommand{\phiz}{\varphi_0^{\mathrm{ret}}}
+\providecommand{\gcar}{g_{\mathrm{car}}}\providecommand{\Nfam}{N_{\mathrm{fam}}}
+\providecommand{\Oadm}{\Omega_{\mathrm{adm}}}\providecommand{\ainv}{\alpha^{-1}}
+\providecommand{\Mbar}{\bar M_{\mathrm{Pl}}}\providecommand{\Z}{\mathbb{Z}}\providecommand{\PP}{\mathbb{P}}
+\title{\textbf{TFPT --- Changelog}\\[1mm]\large All changes and new results, by date}
+\author{Stefan Hamann \and Alessandro Rizzo}
+\date{\today}
+\begin{document}
+\maketitle
+\noindent This file is the canonical, dated record of every change to the TFPT theory
+development: new verification modules (\texttt{vN}), status changes, editorial passes and
+infrastructure. It is maintained \emph{in the same change} as the work it records, and it is
+also imported at the end of the \texttt{introduction} document. Module numbers \texttt{vN}
+refer to \texttt{verification/vN\_*.py}; claim IDs refer to rows of
+\texttt{verification/status\_ledger.csv}.
+\fi
+
+\ifdefined\ChangelogImported
+\clearpage
+\section*{Appendix: changelog}
+\addcontentsline{toc}{section}{Appendix: changelog}
+\noindent The dated record of every change (canonical source: \texttt{changelog.tex}, also
+compiled standalone). Module numbers \texttt{vN} refer to \texttt{verification/vN\_*.py}.
+\fi
+
+\subsection*{2026-06-12 (Overleaf shadow mirror: tfpt5-shadow)}
+\begin{itemize}
+\item \textbf{One-way GitHub mirror for Overleaf sync.} Added \texttt{scripts/export-shadow.sh} and
+  \texttt{.github/workflows/shadow-sync.yml}: on every push to \texttt{main}, a filtered copy is pushed to
+  \texttt{sthamann/tfpt5-shadow} (papers, \texttt{tex-artefacts/}, \texttt{figures/},
+  \texttt{verification/}, \texttt{experiments/}; excludes \texttt{\_archive/}, \texttt{website/}, all
+  \texttt{*.pdf}, \texttt{.cursor/}). $\sim$270 files / $\sim$3\,MB --- within Overleaf GitHub-sync limits.
+\end{itemize}
+
+\subsection*{2026-06-12 (origin\_theory style alignment + box reduction)}
+\begin{itemize}
+\item \textbf{Fewer boxes, embedded in text.} \texttt{origin\_theory} from $22$ to $16$ boxes: the
+  narrative/interpretation callouts (``Why the interpretation is internally consistent'', ``Dependency
+  chain of the birefringence test'', ``The precise reformulation'', ``The three theses honestly graded'',
+  ``The whole story'', ``One-line summary'') become run-in bold prose; the boxed reformulation becomes a
+  \texttt{keyeq}. The exact result keyboxes (\vref{v53}--\vref{v56}, \vref{v101}, \vref{v105},
+  \vref{v113}, \ldots) and the master-principle / Seam--Horizon target boxes are kept.
+\item \textbf{Colour-marked module references + marker hygiene.} \texttt{\textbackslash vref} applied to
+  the inline \texttt{vN} references; stale literal \texttt{[A]}/\texttt{[I]/[L]} markers in running text
+  replaced by the 4-class \mO/\mE.
+\end{itemize}
+
+\subsection*{2026-06-12 (tfpt\_5 / horizon / research-contracts pass + build hardening)}
+\begin{itemize}
+\item \textbf{Forked document-set box removed (horizon).} \texttt{tfpt\_horizon\_readouts} carried a
+  hand-written, \emph{stale} copy of the document-set card (``five short documents'', missing
+  \texttt{tfpt\_5}) \emph{and} the canonical \texttt{\textbackslash input\{tex-artefacts/tfpt\_docset\}};
+  the fork is deleted so the single-source card (all five papers $+$ three companions) appears once.
+\item \textbf{Fewer boxes, embedded in text.} Narrative/result callouts converted to run-in bold prose
+  (with the \texttt{\textbackslash veri\{\}} citation moved out of the bold title into the body):
+  \texttt{tfpt\_horizon\_readouts} from $22$ to $7$ boxes (the ten-box ``clock'' wall becomes prose);
+  \texttt{tfpt\_research\_contracts} from $19$ to $10$ (the nine progress/result winboxes become prose,
+  the named-theorem keyboxes kept); \texttt{tfpt\_5\_redteam} from $10$ to $9$ (the outcome summary; the
+  per-target verdict boxes are kept as the structured red-team output).
+\item \textbf{Colour-marked module references + marker hygiene.} \texttt{\textbackslash vref} applied to
+  the inline \texttt{vN} references in all three documents; the horizon ``Scope/typing'' marker line and a
+  stale literal \texttt{[A]} in the research contracts updated to the 4-class markers.
+\item \textbf{Build hardening.} \texttt{build.sh} now removes a document's \texttt{.aux}/\texttt{.toc}/%
+  \texttt{.out} \emph{on failure}, so a half-written cross-reference file from a crashed compile cannot
+  poison the next build; artefacts are still kept on success.
+\end{itemize}
+
+\subsection*{2026-06-12 (sync infrastructure: single-source script index, content maps, one audit)}
+\begin{itemize}
+\item \textbf{Single-source script index.} The master script$\to$check table
+  (\texttt{tex-artefacts/verification.tex}) and the website
+  \texttt{ScriptIndex.tsx} are now \emph{generated} from one registry
+  (\texttt{script\_registry.csv} $+$ \texttt{script\_clusters.csv} in
+  \texttt{verification/}) by \texttt{make\_script\_index.py}; both targets carry a
+  generated-file header and are never edited by hand.
+\item \textbf{Content maps without splitting the papers.}
+  \texttt{verification/make\_docs\_map.py} generates \texttt{docs\_map.csv} (every
+  paper section with line range, the \texttt{vN} scripts cited there, a content hash
+  and a last-changed date) and \texttt{website\_map.csv} (which website file mentions
+  which scripts/documents) --- the machine-readable enumeration of all sync surfaces.
+\item \textbf{One sync audit.} \texttt{verification/audit\_sync.py} bundles and
+  extends the previous loose shell checks, now in \emph{both} directions: suite
+  $\leftrightarrow$ \texttt{run\_all.py} $\leftrightarrow$ registry
+  $\leftrightarrow$ ledger; every script cited in a paper \emph{body} (the master
+  index alone no longer counts); no stale \texttt{\textbackslash veri}/\texttt{\textbackslash vref}
+  targets; every new module mentioned in this changelog; website mirror byte-identical
+  (PDFs, scripts, \texttt{release.ts} hashes, version stamps); wolfram counts; overfull
+  boxes. Frozen exceptions live in \texttt{audit\_baseline.json} (remove-only).
+\item \textbf{Build pipeline.} \texttt{build.sh} gains \texttt{gen} /
+  \texttt{website} / \texttt{audit} / \texttt{release} steps; \texttt{notes} now
+  regenerates the single-source surfaces first; \texttt{website} copies all active
+  PDFs (now incl.\ \texttt{tfpt\_5\_redteam.pdf} and \texttt{changelog.pdf}, with new
+  \texttt{release.ts} entries) and the \texttt{vN} scripts, and stamps version, date
+  and git revision into \texttt{website/lib/version.ts} (shown in the site header) and
+  \texttt{release.ts}.
+\item \textbf{Citation gaps closed.} The audit immediately found three scripts cited
+  only in the master index: \vref{v17} and \vref{v85} are now cited in their
+  \texttt{tfpt\_2} sections (hexagonal resolvent; master cover), and two short
+  \texttt{\textbackslash veri\{v19\}} citations were expanded to the full script name.
+  \vref{v91} (spine tetrahedron) had no paper section at all --- it is now integrated:
+  a keybox in \texttt{tfpt\_3} (``Three views of one spine'': anchor closure, edge/face
+  products, volume $120$, $K_6$ negative control, the tautology/sub-grammar caveats) and
+  a closing note in the \texttt{tfpt\_1} Spine Quotient Lemma; the
+  \texttt{ARCH.SPINE.01} ledger location is corrected to \texttt{tfpt\_1;tfpt\_3} and the
+  baseline exception list is empty again.
+\item \textbf{Rules.} \texttt{.cursor/rules} updated (\texttt{tfpt-workflow},
+  \texttt{website-sync}) and a new \texttt{sync-maps} rule added describing the agentic
+  procedure: \emph{regenerate} the maps first, enumerate the affected surfaces from
+  them, audit as the exit gate. The mirror map (\texttt{website\_map.csv}) also covers
+  the root \texttt{README.md} and \texttt{next.txt} (bare \texttt{vN} ids resolved to
+  full script names), and both files are named explicitly as status surfaces that move
+  with every finding.
+\end{itemize}
+
+\subsection*{2026-06-12 (tfpt\_3 / tfpt\_4 style alignment + box reduction)}
+\begin{itemize}
+\item \textbf{Shared header/footer on tfpt\_3.} \texttt{tfpt\_3\_e8\_audit\_bootstrap} dropped its custom
+  \texttt{\textbackslash footmarkers} footer (the post-collapse four-\mE\ artefact) and inherits the
+  shared \texttt{tfpt\_style} header/footer with the version stamp; the box-orphan \texttt{needspace}
+  guards are kept.
+\item \textbf{Fewer boxes, embedded in text.} Narrative/commentary callouts converted to run-in bold
+  paragraphs (boxed one-line formulas to \texttt{keyeq}): tfpt\_3 from $39$ to $27$ boxes (e.g.\
+  ``Purpose and discipline'', the five ``(i)--(v)'' audit-lemma boxes, ``Net'', ``The connection in one
+  sentence'', ``The unification'', ``The question and the honest answer'', ``Net: two axioms''); tfpt\_4
+  from $18$ to $7$ (the seven-box Koide stack and the two dark-matter conjecture boxes become prose). The
+  per-item ``Honest status of \ldots'' keyboxes are kept --- tfpt\_4 is the status authority for the
+  frontier.
+\item \textbf{Colour-marked module references.} \texttt{\textbackslash vref} applied to the inline
+  \texttt{vN} references in tfpt\_3 and tfpt\_4 (TikZ node names excluded).
+\item \textbf{Marker hygiene.} A stale literal \texttt{[P]} in tfpt\_4 (Koide flow-time) replaced by the
+  4-class \mC; status tables checked against the ledger.
+\end{itemize}
+
+\subsection*{2026-06-12 (tfpt\_1 / tfpt\_2 style alignment + box reduction)}
+\begin{itemize}
+\item \textbf{Shared header/footer everywhere.} \texttt{tfpt\_1\_architecture\_e8} dropped its custom
+  \texttt{\textbackslash footmarkers} footer (which after the marker collapse showed four redundant
+  \mE) and now inherits the shared \texttt{tfpt\_style} header/footer with the version stamp, identical
+  to every other document.
+\item \textbf{Fewer boxes, embedded in text.} The narrative/commentary callouts of both documents are
+  converted to run-in bold paragraphs (and the boxed one-line formulas to the colour-marked
+  \texttt{keyeq}): tfpt\_1 from $21$ to $14$ loud boxes ($+3$ \texttt{keyeq}); tfpt\_2 from $52$ to $43$
+  (e.g.\ ``In one sentence'', ``The one-paragraph version'', the four ``Sharpening'' notes, ``What the
+  simplification means net'', ``The disciplined main statement'', ``What improves\ldots'', ``Scope and
+  honesty''). Only genuine results / theorems / gates keep a box.
+\item \textbf{Colour-marked module references.} \texttt{\textbackslash vref} now also colours the inline
+  \texttt{vN} references throughout tfpt\_1 and tfpt\_2 (TikZ node names accidentally matching the
+  pattern were excluded).
+\item \textbf{Status currency.} tfpt\_2's inflation-pivot table gains the \vref{v86} scalaron-reheating
+  point ($N_\star{=}51.4\Rightarrow n_s{=}0.9611$, $r{=}0.0045$, $A_s$-disfavoured) and states the
+  band-of-record explicitly, matching \texttt{COSMO.NSTAR.01} and the introduction; the box is re-typed
+  \mC. The other status tables were checked against the ledger and are current under the 4-class markers.
+\end{itemize}
+
+\subsection*{2026-06-12 (marker simplification to 4 classes + status reconciliation)}
+\begin{itemize}
+\item \textbf{Four-class display markers.} The reader-facing marker system is collapsed from eleven
+  symbols to four: \mE\ exact / machine-proven (identity, Lie/lattice, formalised, numerical FP),
+  \mC\ conditional (physical / bridge / readout under named hypotheses), \mO\ open / axiom, and \mX\
+  kill test. \texttt{tex-artefacts/tfpt\_style.tex} defines \texttt{\textbackslash mE/\textbackslash
+  mC/\textbackslash mO/\textbackslash mX} and keeps the legacy \texttt{\textbackslash tI \ldots
+  \textbackslash tX} names as aliases that render their class. All marker call-sites across the nine
+  documents and the shared fragments were rewritten, collapsing same-class combinations (e.g.\
+  \texttt{[I]/[L]}\,$\to$\,\mE, \texttt{[N]/[P]}\,$\to$\,\mE/\mC). The fine-grained per-claim type
+  (Axiom / Formal / Lattice / Numerical / Identity / Physical) is unchanged in
+  \texttt{status\_ledger.csv} --- the single source of truth --- so no fidelity is lost. The marker key,
+  badge bar, README marker table and the workflow rule were updated to match.
+\item \textbf{Status tables reconciled against the ledger.} The introduction's inflation/$N_\star$ rows
+  are made consistent with \vref{v86}/\texttt{COSMO.NSTAR.01}: $r$ and $n_s$ are shown as the frozen
+  \emph{bands} over $N_\star\in[50,60]$ with the scalaron-reheating conditional point $N_\star{=}51.4$
+  ($n_s{=}0.9611$, $r{=}0.0045$), replacing the stale point values $N_\star{=}55$ (predictions table)
+  and $N_\star\simeq57$ (residual card); the closure-ledger inflation row is re-typed \mE\,$\to$\,\mC
+  (conditional on $M_{\rm Star}{=}M_{\rm scal}$ $+$ reheating), matching the other two tables and the
+  ledger \texttt{[P]} typing.
+\end{itemize}
+
+\subsection*{2026-06-12 (version system, predictions/K5, readability pass B3)}
+\begin{itemize}
+\item \textbf{Authors, auto-date and auto-version on every paper.} New single source
+  \texttt{tex-artefacts/version.tex} defines \texttt{\textbackslash TFPTauthors} (Stefan Hamann,
+  Alessandro Rizzo), a curated \texttt{\textbackslash TFPTversion}, and a title/footer date stamp
+  (\texttt{\textbackslash today} $+$ version $+$ revision). \texttt{build.sh} writes the auto build
+  revision (git commit count) into the gitignored \texttt{tex-artefacts/version-auto.tex}, so every
+  document's title page and page footer carry author, date and \texttt{v\TFPTversion\,(rev~N)}
+  automatically. All nine active documents and \texttt{changelog.tex} now set
+  \texttt{\textbackslash author\{\textbackslash TFPTauthors\}}.
+\item \textbf{Builder keeps build artefacts.} \texttt{build.sh} no longer deletes the
+  \texttt{.aux/.log/.out/.toc} after a successful build (the \texttt{.log} is needed for the
+  overfull-box audit and the \texttt{.aux/.toc} for correct cross-references on the next incremental
+  build).
+\item \textbf{Predictions table outsourced.} The running/upcoming-experiment predictions table is moved
+  from \texttt{introduction.tex} into the shared fragment \texttt{tex-artefacts/predictions.tex}
+  (\texttt{\textbackslash input} in the predictions section).
+\item \textbf{K5 figure fixed.} The \texttt{\textbackslash TFPTactionkfive} mnemonic ($K_5$ on the five
+  carrier slots) is redrawn so the complete graph and the Pascal-row reading list sit side by side
+  instead of overlapping.
+\item \textbf{Colour-marked script references.} New \texttt{\textbackslash vref} macro colours inline
+  module references (e.g.\ \vref{v108}--\vref{v113}, \vref{v49}/\vref{v71}) in the introduction,
+  predictions and verification fragments, matching the blue of the \texttt{\textbackslash veri}
+  citation, so machine-checked references are visible at a glance.
+\item \textbf{Lighter, non-breaking, embedded boxes.} The \texttt{tcolorbox} families are restyled to a
+  light tint $+$ thin frame $+$ light title band with dark coloured title (no heavy
+  white-on-saturated bars); a neutral \texttt{navbox} carries the document map and a colour-marked
+  \texttt{keyeq} sets off load-bearing display formulas. The introduction's callouts use the
+  non-breaking variants (\texttt{keyboxnb}/\texttt{winboxnb}/\texttt{gapboxnb}) so no box splits across
+  a page, and the shared status card is non-breaking.
+\item \textbf{Readability / sectioning.} The dense run-in prose of the introduction is broken into
+  \texttt{\textbackslash subsection*} headings (In plain words; one anchor and $E_8$ as a compiler
+  hull; the companion documents; the compact status formula; the hard reduction; the Pascal action
+  grammar; the closure ledger) with added whitespace.
+\item \textbf{Orphan results linked to scripts.} The Glue theorem, the ``Reduction in one line'' and the
+  fermion-spectrum callouts now carry inline \texttt{\textbackslash veri\{\}} citations
+  (\vref{v1}, \vref{v6}/\vref{v14}/\vref{v23}, \vref{v18}/\vref{v20}/\vref{v46}).
+\end{itemize}
+
+\subsection*{2026-06-12 (tex-artefacts refactor + introduction visual pass B2)}
+\begin{itemize}
+\item \textbf{Shared imports moved to \texttt{tex-artefacts/}.} The shared, imported-only TeX
+  fragments (\texttt{tfpt\_style.tex}, \texttt{tfpt\_figures.tex}, \texttt{tfpt\_docset.tex},
+  \texttt{tfpt\_status.tex}) now live in a dedicated \texttt{tex-artefacts/} folder; all nine active
+  documents \texttt{\textbackslash input} them via \texttt{tex-artefacts/<name>} (and
+  \texttt{tfpt\_style} loads \texttt{tex-artefacts/tfpt\_figures}). \texttt{changelog.tex} stays at the
+  repo root because it is also a standalone \texttt{build.sh notes} deliverable. The
+  \texttt{make\_manifest.py} \texttt{TEX} list and the workflow rule were updated to the new paths.
+\item \textbf{Master script index outsourced (\texttt{tex-artefacts/verification.tex}).} The long
+  \texttt{vN}$\to$check table is moved out of \texttt{introduction.tex} into the shared fragment
+  \texttt{tex-artefacts/verification.tex} (\texttt{\textbackslash input} in the verification appendix);
+  the paper-consistency audit now also reads that file, so every registered script stays cited exactly
+  once.
+\item \textbf{Introduction box reduction (B2).} The introduction's eleven \texttt{keybox}es are reduced
+  to the single headline ``In one sentence'' card; the explanatory keyboxes (\emph{In plain words},
+  \emph{Sharper still}, \emph{compact status formula}, \emph{hard reduction}, \emph{Cosmology Pascal},
+  \emph{$E_6{\times}A_2$}, \emph{closure ledger}, \emph{Plausibility balance}) are converted to inline
+  run-in paragraphs, the \emph{Glue theorem} is re-typed as a \texttt{winbox} (a result, not a claim),
+  and the explanatory \emph{plausible}/\emph{follows next} \texttt{winbox}es become prose. The loud
+  boxes now carry only genuinely load-bearing callouts (one \texttt{keybox}, five \texttt{winbox}es,
+  one \texttt{gapbox}) plus the two shared orientation cards.
+\item \textbf{Document-count consistency.} The introduction's document map gained the missing
+  \texttt{tfpt\_5\_redteam} row; ``seven/eight companion documents'' and the ledger ``six documents''
+  wording are corrected to the true count (nine active documents); \texttt{README.md} (``10 ok'', 140
+  scripts) and the workflow rule (``9 docs'') are reconciled.
+\end{itemize}
+
+\subsection*{2026-06-12 (visual pass: box reduction B1)}
+\begin{itemize}
+\item \textbf{Box reduction (B1).} The $26$ non-load-bearing aside boxes (audit / recorded /
+  interpretation: \texttt{auditbox}/\texttt{audbox}/\texttt{intbox}/\texttt{resbox}/\texttt{roadbox})
+  across tfpt\_1, tfpt\_2, tfpt\_3 and \texttt{origin\_theory} are converted to inline bold run-in
+  paragraphs --- the reviewer's prescription that an audit fingerprint must not carry the same visual
+  volume as a theorem. The loud box families are now only \texttt{keybox} (claim), \texttt{winbox}
+  (result) and \texttt{gapbox} (open/caveat).
+\end{itemize}
+
+\subsection*{2026-06-12 (visual pass: shared figures, badges, marker typology)}
+\begin{itemize}
+\item \textbf{Shared figure library \texttt{tfpt\_figures.tex}} (\texttt{\textbackslash input} by
+  \texttt{tfpt\_style}): reusable TikZ macros for the architecture \emph{claim stack}
+  (\texttt{\textbackslash TFPTclaimstack[zone]}, B3), the \emph{anchor cockpit} $a=(1,1,2)$ (B4), the
+  \emph{$E_8$ glue} diagram (B5), the \emph{$2/3$ motif map} (B6) and the \emph{$K_5$ action lattice}
+  (B7). The claim stack and a marker \emph{badge bar} are now shown near the front of \emph{every}
+  document, each highlighting that document's layer; the topical figures are placed in their natural
+  homes (cockpit + $K_5$ in the introduction, cockpit + glue in tfpt\_1, motif in the horizon note).
+\item \textbf{Marker typology (A2).} \texttt{tfpt\_style} adds the sharper sub-types
+  \mE\ (exact algebra), \mE\ (exact number), \mC\ (readout / standard physics in TFPT units) to the
+  existing \mC\ (bridge) and \mX\ (kill test); the marker key and the new \texttt{\textbackslash TFPTbadges}
+  bar show the full typology. (Inline body markers retain \mE\ where they are genuine exact identities.)
+\end{itemize}
+
+\subsection*{2026-06-12 (review pass on list.txt)}
+\begin{itemize}
+\item \textbf{Claim hygiene (review section A).} The introduction's one-sentence claim is softened from
+  ``derives all constants'' to ``constructs a discrete compiler; physical readouts run through named,
+  status-typed bridges''; the ledger zombie in \texttt{FLAV.QRATIO.01} is removed (the statement no longer
+  says ``stays [P]'' --- ratios are \mE\ closed on the derived stratum, only the absolute scale stays \mO,
+  with an explicit forbidden-wording note); the seam misalignment is written explicitly as
+  $\varepsilon=\tfrac34\phiz=\cthree+36\cthree^4$ (leading $\cthree$, fourth-order puncture correction
+  exact); $\theta_{12}$ has a single prediction of record $0.306747$ with the seam/non-linear values typed
+  as scheme diagnostics; JUNO's first $59.1$-day result ($0.3092\pm0.0087$, compatible, precision pending)
+  is recorded and NuFIT~6.0 is marked the pre-JUNO baseline; the ACT~DR6 birefringence hint carries a
+  systematics caveat (not a validation target); CODATA-2022 is dated; the null-model figure is moved out
+  of the main text and typed as a grammar-internal bound. ``Complete solutions of the five open
+  questions'' becomes ``Closure status of the five former open questions''.
+\item \textbf{Interface language unified (review sections A5/C2/C3/C6/C7/C8).} The live residual is stated
+  everywhere as $v_{\mathrm{geo}}\oplus G_{\mathrm{net}}\oplus F_{\mathrm{transfer}}$ (historical
+  $U_{\mathrm{wall}}/G_{\mathrm{metric}}/F_{\mathrm{frontier}}$ kept only for ledger continuity);
+  \texttt{tfpt\_research\_contracts} is retitled and its recommended order rewritten (selector-triangle
+  pairings $\to v_{\mathrm{geo}}\to G_{\mathrm{net}}$); $F_{\mathrm{transfer}}$ is named as one missing
+  functor with Koide/$\eta_B$/axion/$m_p/m_e$ as its four instances; full QG closure is framed as a
+  certification layer, not a prerequisite. Document numbering aligned with file names (the Red Team paper
+  is now in the canonical set; document~$N\equiv$ \texttt{tfpt\_N}). Website mirrored throughout
+  (\texttt{papers.ts}, \texttt{predictions.ts}, \texttt{faq.ts}, \texttt{glossary.ts}, \texttt{OpenGates},
+  \texttt{Hero}, orientation components).
+\end{itemize}
+
+\subsection*{2026-06-12 (later)}
+\begin{itemize}
+\item \textbf{Shared style and central status artifact.} Two new single-source fragments:
+  \texttt{tfpt\_style.tex} (the canonical palette, status markers, marker key, \texttt{\textbackslash veri}
+  reference, the four tcolorbox families with back-compat aliases, and one running header/footer)
+  is now \texttt{\textbackslash input} by all eight documents --- the per-paper duplicated preambles
+  are gone; and \texttt{tfpt\_status.tex} (``TFPT status at a glance'') gives one canonical overall-status
+  card imported near the front of every document, replacing the divergent per-paper status statements.
+  Both registered in \texttt{build.sh} and the manifest \texttt{TEX} list.
+\end{itemize}
+
+\subsection*{2026-06-12}
+\begin{itemize}
+\item \textbf{Margin theorem (v122).} The established frozen selectors ($D_4$ annihilator
+  $n=(5,-9,6)$, $\det R=8$, $\det K=4$) pin $R$ uniquely among hexagon matrices
+  ($64\to12\to1$); the atom margins become theorems --- H2 introduces no new residual class.
+\item \textbf{Inventory update (v123).} Residual table re-pinned post v110--v122: exactly five
+  structural classes (R1 clock, R2 index-4 net, R3 EH step, R4$'$ selector establishment ---
+  replacing the discharged H2 dictionary --- and R5 $Q$ realisation); R2 carries three loads
+  (metric $+$ carrier $+$ QBL: one theorem, three doors).
+\item \textbf{Resummed clock $+$ glue Q-system (v124/v125).} R1's bend in closed form:
+  $\mathrm{rate}(n)=-p_2\ln(1-n/N_{\mathrm{fam}})$ (pole at $N_{\mathrm{fam}}$ forces the
+  three-level spectrum); the index-4 $\mu_4$ extension exists explicitly as a Longo Q-system
+  on $\mathbb C[\mathbb Z_4]$ (all Frobenius axioms exact) --- R2 sharpens from ``find'' to
+  ``identify''.
+\item \textbf{Clock--wall bridge (v126) and ring resummation (v127).} The resummed-clock
+  weights are the Mehta--Seshadri parabolic weights ($\operatorname{spec}A_0^\star$);
+  $\det(\mathbf 1-A_0^\star)=\tfrac29$ $=$ the entropy curvature; the clock is a
+  log-determinant (RPA rings, one tower per hexagon site, coupling $=$ parabolic weight).
+\item \textbf{Graded hull (v128).} $E_8$ is a $\mathbb Z_4$-graded Lie algebra over the
+  carrier (grading $=$ glue Q-system; exact on all $6720$ root-pair sums); ring multiplicity
+  $6$ $=$ sheet-doubled Ginsparg--Perry zero modes. \emph{Notation fix in the same round:}
+  the clock factor $6$ is $p_2(a)$, not $2p_2$ --- labels corrected across modules, ledger,
+  papers, website (numbers unchanged).
+\item \textbf{Entropy power law $\to$ zeta budget (v129--v133).} The clock is
+  $\Gamma_n\propto(S_n/S_{dS})^{p_2}$ (Gibbons--Hawking form); $p_2=2h$ with
+  $h=N_{\mathrm{fam}}$ from mode counting $+$ the Born rule (v130); the zero-mode norm is the
+  area, $\|Y_{1m}\|^2=A/(4\pi)$ exactly (v131); the det-ratio anomaly is the Koide constant,
+  $\zeta(0)|_{\det'}=-\tfrac23$ (v132); both $\zeta(0)$ budget routes computed exactly --- the
+  reduced seam route carries pure anchor ratios ($-\tfrac43$ $=$ minus the seed gain), the
+  naive 4d route ($-\tfrac{109}{45}$) carries no atom (v133).
+\item \textbf{Dual anchor $+$ determinant surface (v134/v135).} $d:=a^\top R^{-1}=a^\top
+  L^{-1}=(-\tfrac12,-\tfrac12,1)$ with $(1,1,-2)=-2d$ --- the inverse flavor response is the
+  Nariai root, invariance exact via Sherman--Morrison (third algebraic flavor--horizon bridge
+  leg); $\det M(s,t)=3s(t{+}1)(t{+}2)+t^2+5t+8$ with iso-volume walls at the $\mathbb
+  Z_2$/$\mu_4$ atoms, winding line $(8,14,20)$, $\det F=32$, row-budget axes with
+  $\mathrm{rowsum}(V)=\operatorname{Spec}(Q_+)$; micro-identities $41=16+25$, $52=16+36$.
+\item \textbf{Dual-normal selector, $Q_+$ cohomology, Volkov--Wipf firewall (v136--v138).}
+  $(d,n)$ pins $R$ \emph{columnwise} (each column the unique lattice point of the address
+  box; kernel $(6,8,7)$); the $A_0^\star$ zero mode carries the spectral normal
+  $\sigma=(2,-9,5)$ with a $W(A_3)$ orbit control excluding the naive lift;
+  $H^1(\mathbb P^1\setminus\mu_4)=\chi_1\oplus\chi_2\oplus\chi_3$ with degrees
+  $(1,2,3)=\operatorname{Spec}(Q_+)=$ the $A_3$ exponents and cusp weights
+  $=\operatorname{spec}A_0^\star$; the external full-4d graviton/ghost value $-\tfrac{98}{45}$
+  is pinned (arXiv:2506.02142 $=$ Volkov--Wipf hep-th/0003081) and its \emph{edge} part is
+  exactly two copies of the reduced seam budget --- R1 typed closed as an edge-sector object.
+\item \textbf{Selector triangle $+$ canonical map (v139/v140).} $d=\tfrac32a-2\cdot\mathbf 1$
+  is pure anchor data (first selector \emph{derived}); the frame $(\mathbf 1,a,\sigma)$ has
+  volume $11$ and $n$ is the unique covector with atom pairings $(2,8,121)$ --- the R4$'$
+  residue is three pairings; the $H^1\to$ generation equivariant map exists and is
+  Schur-rigid (only sign-twisted $\mu_4$ actions match), so the \texttt{GATE.QGEO} residue
+  collapses to one $\mathbb Z_3$ choice.
+\item \textbf{Editorial and consistency passes.} Content-currency sweep (superseded
+  ``single remaining input'' claims retired across contracts, paper 3, intro, website);
+  introduction: self-explanatory title (spells out Topological Fixed-Point Theory), the
+  old-version comparison removed throughout, redundant diagrams dropped, the unreadable
+  status heatmap removed, the script-index master table converted to a page-breaking
+  \texttt{xltabular} (it had silently truncated $\sim$110 rows), status card extended with
+  the v134--v140 reductions, predictions table completed (CP phase, cosmic birefringence);
+  the canonical document-set box extracted into the shared \texttt{tfpt\_docset.tex}; paper 1
+  cleaned of all 35 old-series references, every section now opens with its machine-check
+  script references; smaller box fonts across all eight documents; this \texttt{changelog.tex}
+  introduced as a dual-mode (standalone $+$ imported) document.
+\end{itemize}
+
+\subsection*{2026-06-11}
+\begin{itemize}
+\item \textbf{External-review integration (v83) and release hygiene.} Manifest
+  \texttt{--check} mode and the release rule; holomorphy pins $(E_8)_1$ (the unique even
+  unimodular rank-8 lattice theory).
+\item \textbf{Sheet diamond and centered form (v94/v95).} All four flavor operators are
+  points of one two-parameter surface $M(s,t)$; centered cross $R,L=C\mp U$, $K,F=C\mp V$
+  with the cofactor seam normal $n=(5,-9,6)$; documentation pass (``The Sheet Diamond and
+  the Winding Line'' in paper 3).
+\item \textbf{Horizon/anchor round (v101--v103).} The maximal (Nariai) black hole is the
+  anchor: roots $(1,1,-2)$, entropy bound $\tfrac23=|\mathbb Z_2|/N_{\mathrm{fam}}$; one
+  repeller/attractor orientation in both sectors; trisection normal form (the canonical
+  cosine coordinate).
+\item \textbf{Clock/ladder round (v104--v108) $+$ Lean hardening.} The classical Nariai
+  clock speaks anchor ($\chi_{\mathrm{clock}}=(\lambda-1)(\lambda+2)$); machine-pinned
+  residual inventory; first review validation; quantum-clock target made quantitative;
+  Pascal Ladder Theorem ($g=2K+1$ $\Leftrightarrow$ the closure).
+\item \textbf{QBL theorem chain (v109--v113).} Sheet-Pairing Lemma; Calder\'on-sheet
+  selection (a scalar seam datum exists iff the involution is sheet-odd); Quadratic-Transport
+  Theorem (degree exactly 2); Self-Counting Channel (the Pascal closure as an identity);
+  quasi-free kernel (one 2-point kernel determines the whole net, rank $=c$) --- the QBL
+  input merges with the R2/holomorphy premise; communicated across all status surfaces.
+\item \textbf{$U_{\mathrm{wall}}$ made exact (v114--v118).} Torsion normal form and
+  $\delta=\tfrac12$ theorem; exact anchor residue $A_0^\star$ (diag $=a/|\mu_4|$,
+  off-weights $(8,0,5)/144$); resonance theorem ($M_\infty=\mathbf 1\iff a_{13}=0$, one gauge
+  orbit); the holonomy is the exact 24-element $W(A_3)=S_4$; the hypercharge hexagon is the
+  sign-twisted family spectrum with the lepton coefficients as resolvent determinants.
+\item \textbf{Second review validation $+$ address pinning (v119--v121).} Anchor ratio triad
+  $(\tfrac23,\tfrac43,\tfrac53)$; the $121$ audit lemma; the lepton words are the compiler
+  atoms $(8,5,3)$ with divmod-hexagon addresses; $R$ is the unique hexagon matrix with atom
+  margins and $\det 8$ --- the address table carries zero residual information.
+\end{itemize}
+
+\subsection*{2026-06-10}
+\begin{itemize}
+\item \textbf{B/C/D round closed.} Koide attractor toy model (v93), glue uniqueness (v92),
+  the Wolfram extension as the independent second verification path, Lean hardening; papers
+  and website synced with the round.
+\item \textbf{Content rounds v96--v100.} Sheet conjugation bridge, discriminant dictionary,
+  Koide flow time, and the look-elsewhere-corrected numerology null test (v100: joint null
+  probability $\le10^{-30.7}$, conditional on the declared grammar).
+\end{itemize}
+
+\subsection*{2026-06-09}
+\begin{itemize}
+\item \textbf{Blind registry frozen (v84).} Machine-enforced prediction registry
+  (\texttt{predictions\_frozen.json}): exactly one $\theta_{12}$ number of record before
+  JUNO; conditional entries carry their hypotheses by name. Research-contracts document
+  added to the set.
+\end{itemize}
+
+\subsection*{2026-06-07 / 2026-06-08}
+\begin{itemize}
+\item \textbf{Compiler-closure consolidation.} The TFPT development is consolidated into the
+  current document set with the verification suite (modules v1--v82: $E_8$ glue, carrier
+  Pascal, EM fixed point, flavor matrix, cascade, bootstrap, gravity/cosmology, transport,
+  masses, registry and gate audits) as the single proof layer; manifests
+  (\texttt{manifest.sha256}, \texttt{lean\_manifest.sha256}) as content identity; website
+  mirrors the suite (interactive DAG, in-browser script reproducer, script index).
+\end{itemize}
+
+\subsection*{2026-04-27}
+\begin{itemize}
+\item \textbf{Initial commit.} TFPT papers and website baseline: electromagnetic closure and
+  flavor transport (UFE bridge, birefringence seed, dyonic intercept), PDF-download
+  tracking, accessibility and metadata passes.
+\end{itemize}
+
+\ifdefined\ChangelogImported\else
+\end{document}
+\fi
