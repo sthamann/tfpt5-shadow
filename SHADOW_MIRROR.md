@@ -12,6 +12,6 @@ This repository is a **one-way mirror** of the main TFPT repository, maintained 
 
 **Do not edit here.** Changes flow: main repo → this mirror (GitHub Action) → Overleaf pull.
 
-Source: `sthamann/tfpt-theoryv4` @ `19a359faf3aaef5a23a567ee5a6a298784b4d3d8`
-Last export: 2026-06-13 09:37:02Z
+Source: `sthamann/tfpt-theoryv4` @ `b8f88d4e4ef29cd2bf28bcfa890a01e4984e9776`
+Last export: 2026-06-13 09:43:17Z
 Files exported: 302
