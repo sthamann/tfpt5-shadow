@@ -59,6 +59,86 @@ refer to \texttt{verification/vN\_*.py}; claim IDs refer to rows of
 compiled standalone). Module numbers \texttt{vN} refer to \texttt{verification/vN\_*.py}.
 \fi
 
+\subsection*{2026-06-15 (QGEO: the four marks emerge from Gauss--Bonnet --- K1 executed)}
+\begin{itemize}
+\item \textbf{The four marks emerge from Gauss--Bonnet --- count derived, not assumed
+  (\texttt{v216\_marks\_gauss\_bonnet}, \texttt{tfpt\_research\_contracts}, \mE; ledger \texttt{QGEO.MARKS.03}).}
+  The K1 lever of the \texttt{v215} kill-test (``exactly four marks'') is
+  \emph{executed}: if the marks are $\Z_2$ branch points (deficit $\pi$) on the flat seam sphere ($\chi=2$,
+  the same $\chi$ as the $8$ in $c_3$), Gauss--Bonnet forces $n\pi=2\pi\chi=4\pi$, so
+  $n=2\chi=4=|\mu_4|=\Nfam+1$. The closed Euclidean sphere $2$-orbifolds are exactly
+  $(2,3,6)$, $(2,4,4)$, $(3,3,3)$, $(2,2,2,2)$, and three independent criteria --- all cone orders $=2$ (the $|\Z_2|$
+  sheet branch), $\mathrm{rank}\,H^1=\#\text{marks}-1=3=\Nfam$ (the three generations pick the $4$-mark square
+  over the $3$-mark hexagonal), and a free order-$4$ deck --- converge on the pillowcase $(2,2,2,2)$. The
+  numerical sibling \texttt{v217\_marks\_emergence\_scan} (\mC, ledger \texttt{QGEO.EMERGE.01}) confirms it on
+  the actual DtN/state (number $n$ and positions free, the $4$-square config is the unique joint minimiser of
+  clock-invariance $+$ $3$-family cohomology $+$ gap $(2/3)^6$). The mark \emph{count} and \emph{equality}
+  move from input to derived; only the square
+  \emph{modulus} (cross-ratio $2$, the order-$4$ clock) stays the one carrier input, and the from-zero
+  raw-seam emergence \texttt{QGEO.REALIZE.01} stays \mO. \texttt{v216} exact (Wolfram extension
+  $\to248/248$); \texttt{v217} numerical (Python-only). Suite $\to$ 217 modules.
+\end{itemize}
+
+\subsection*{2026-06-15 (QGEO: the bedrock recast as a falsifiable kill-test)}
+\begin{itemize}
+\item \textbf{\texttt{QGEO.SYM.01} as a kill-test, not a proof-promise (\texttt{v215\_seam\_deck\_killtest},
+  \texttt{tfpt\_research\_contracts}, \mE/\mO; ledger \texttt{QGEO.KILL.01}).} A foundational symmetry cannot
+  be derived from nothing (Bisognano--Wichmann would presuppose the covariance it should produce), so the
+  bedrock $\omega\circ\rho=\omega$ is recast as four independently-falsifiable predictions about the raw seam
+  DtN. The non-circular reduction (\texttt{v198}/\texttt{v199}/\texttt{v201}) gives
+  $\omega\circ\rho=\omega\Leftrightarrow[\rho,C]=0$ with $|k|$ commuting exactly, so the residual is the
+  bounded sub-principal $M_f$ (equivalently the raw Gaussian bulk form $A$ is $\mu_4$-deck-invariant). Levers:
+  \textbf{K1} exactly four marks ($b_1=\#\text{marks}-1=3=\Nfam\Rightarrow\#\text{marks}=4=|\mu_4|$);
+  \textbf{K2} the square config (cross-ratio $2\Rightarrow j=1728$, $\mathrm{Aut}=\Z/4$; order $4$ selects
+  $\Z/4$ not the $j=0$ $\Z/6$; generic $\Rightarrow\Z/2$); \textbf{K3} mod-$4$ sub-principal support
+  ($[\rho,M_f]=0\Leftrightarrow f$ $\Z_4$-invariant); \textbf{K4} transfer gap $(2/3)^6=64/729$. Freeze-bound
+  via \texttt{freeze\_file.csv} (\texttt{seam\_deck\_symmetry}), carrier-side \mE\ (regression guards), with
+  the \emph{decisive} kill deferred to \texttt{QGEO.REALIZE.01} \mO\ (the raw collar DtN must \emph{produce}
+  four square marks without inputting them --- an emergence test). A kill-test, not a closure. Python-only
+  (falsification layer; the exact sub-parts $j=1728$ and $(2/3)^6$ are Wolfram-mirrored via
+  \texttt{v214}/\texttt{v54}/\texttt{v56}). Suite $\to$ 215 modules.
+\end{itemize}
+
+\subsection*{2026-06-15 (QGEO: the pillowcase reduction --- two residuals become one canonical metric)}
+\begin{itemize}
+\item \textbf{Pillowcase reduction of \texttt{QGEO.SYM.01} (\texttt{v214\_seam\_pillowcase},
+  \texttt{tfpt\_research\_contracts}, \mE/\mO; ledger \texttt{QGEO.PILLOW.01}).} The two separately-tracked
+  open QGEO residuals --- \texttt{QGEO.ISO.01} (\texttt{v180}: the carrier clock is an order-$4$
+  \emph{isometry} of the seam metric) and \texttt{QGEO.SUBPRIN.01} (\texttt{v201}: the DtN sub-principal
+  symbol is \emph{mark-local}, the seam flat away from the $\mu_4$ marks) --- are shown to be \emph{one}
+  statement: the seam carries the uniformising flat orbifold (\emph{pillowcase}) metric. \textbf{(1)} The
+  four marks make the Euclidean orbifold $S^2(2,2,2,2)$ ($\chi_{\mathrm{orb}}=2-4(1-\tfrac12)=0$), so by
+  Troyanov uniformisation the metric is flat (unique up to scale) with curvature only at the cone points
+  (Gauss--Bonnet $4\pi=2\pi\chi$) --- this \emph{is} the \texttt{v201} ``flat away from the marks''.
+  \textbf{(2)} New link: cross-ratio$(\mu_4)=2$ (\texttt{v168}) $\Rightarrow j=1728$
+  ($j(\lambda)=256(\lambda^2-\lambda+1)^3/(\lambda^2(\lambda-1)^2)$; all six harmonic cross-ratios give
+  $1728$) $\Rightarrow$ the \emph{square} modulus $\tau=i$, whose CM by $\Z[i]$ \emph{derives} the order-$4$
+  clock $z\mapsto iz$ (explicit $(x,y)\mapsto(-x,iy)$ on $y^2=x^3-x$); generic cross-ratio gives
+  $j\notin\{0,1728\}$ and only $\Z/2$. \textbf{(3)} Unification: ``seam $=$ uniformising flat pillowcase
+  metric'' implies \emph{both} \texttt{v201} and \texttt{v180}, so two residuals collapse to one
+  canonical-metric premise. \mO\ It does \emph{not} close \texttt{QGEO.SYM.01}: the choice ``RP seam metric
+  $=$ the constant-curvature representative'' stays open, milder and more canonical than the bare isometry
+  premise. Wolfram-mirrored (the exact orbifold/$j$-invariant/CM arithmetic); Klein-$J$ values
+  mpmath-numerical. Suite $\to$ 214 modules.
+\end{itemize}
+
+\subsection*{2026-06-15 (the F\_transfer functor contract CONTRACT.F.01)}
+\begin{itemize}
+\item \textbf{$F_{\mathrm{transfer}}$ formalised as a typed functor with four axioms
+  (\texttt{v213\_ftransfer\_functor}, \texttt{tfpt\_research\_contracts}, \mC).} The four frontier transfers
+  are consolidated into ONE functor $F_{\mathrm{transfer}}=F_{\mathrm{observable}}\circ F_{\mathrm{threshold}}
+  \circ F_{\mathrm{RG}}$, each instance a discrete compiler kernel \mE\ composed with an external continuous
+  solver \mC: \textbf{(1)} $\mu_4$-deck equivariance (the Koide multiplier $\lambda_2{=}(2/3)^6{=}64/729$ is
+  the deck transfer eigenvalue); \textbf{(2)} Pl\"ucker preservation ($53{=}a^T(R{+}Q)\mathbf1$,
+  $\mathrm{Pl}(F){=}(1,22,30)$, $\|\mathrm{Pl}(K)\|_1{=}11$); \textbf{(3)} positivity/stochasticity
+  ($\operatorname{spec}T$ positive, $\kappa_f\in(0,1)$); \textbf{(4)} external modules explicit
+  ($b_3{=}{-}7$ a carrier output). The four instances are $F_{\mathrm{pole}}$ (\texttt{v183}),
+  $F_{\mathrm{Boltzmann}}$ (\texttt{v212}), $F_{\mathrm{relic}}$ (\texttt{v211}), $F_{\mathrm{QCD}}$
+  (\texttt{v164}). \texttt{CONTRACT.F.01} is the third research contract alongside $(U_{\mathrm{wall}})$ and
+  $(G_{\mathrm{metric}})$, the structural complement of the \texttt{v187} typing guard --- an architectural
+  consolidation, \emph{not} a closure of any frontier number. Ledger \texttt{CONTRACT.F.01}.
+\end{itemize}
+
 \subsection*{2026-06-15 (frontier: two sharper [C] scenario branches --- axion angle + leptogenesis)}
 \begin{itemize}
 \item \textbf{Axion DM spine-angle branch $\theta_i=\pi\Nfam/\gcar=3\pi/5$ (\texttt{v211\_axion\_spine\_angle},
