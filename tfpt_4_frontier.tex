@@ -425,6 +425,18 @@ $m_a\simeq5.70\,\mu\mathrm{eV}\,(10^{12}\,\mathrm{GeV}/f_a)$, a mass $m_a\approx
 This is consistent with the closed near-hilltop misalignment $\theta_i=170.4^\circ$, but it is a
 \emph{cosmological scenario} (sensitive to anharmonic / string corrections near the hilltop), not a closed
 hit. \veri{v25\_frontier\_conjectures.py}
+\par\smallskip\noindent\textbf{The haloscope coupling is tied to $\cthree$.} In the determinant-line
+normalization (Lagrangian $\mathcal L\supset c\,a\,F\tilde F$) the axion--photon anomaly coefficient is fixed
+by the seam constant,
+\[
+  g_{a\gamma\gamma}=-4\cthree=-\frac{1}{2\pi},\qquad y^2\equiv g_{a\gamma\gamma}^2=16\cthree^2=\frac{1}{4\pi^2}\approx0.0253,
+\]
+so the haloscope $F\tilde F$ coupling is set by the \emph{same} $\cthree$ that fixes $\alpha$ and the cosmic
+birefringence $\beta_{\mathrm{rad}}=\varphi_0/4\pi$ --- a \mC\ structural relation (the coefficient, not a
+parameter-free physical $g_{a\gamma\gamma}$ in $\mathrm{GeV}^{-1}$, which still carries $f_a$). The
+small-angle reading $\theta_i=\varphi_0$ of the determinant-line axion (an earlier note) is \emph{superseded}
+by the closed near-hilltop $\theta_i=\pi(1-\varphi_{\mathrm{seam}})=170.4^\circ$ above; it is recorded as a
+retired reading, never used.
 \par\smallskip\noindent\textbf{Why it stays a scenario, quantified (\veri{v185\_axion\_relic\_solver.py}).}
 The harmonic misalignment \emph{under-produces} at this $f_a$: $\Omega_a h^2\sim0.12\,(f_a/9{\times}10^{11})^{7/6}\langle\theta^2\rangle$
 gives a prefactor ${\sim}0.026$ per $\theta^2$, so $\theta_i\sim O(1)$ would make only ${\sim}21\%$ of
@@ -450,6 +462,31 @@ extra dilution (entropy injection) or a lower $f_a$. This stays \mC, and over-pr
 \emph{axion-as-dominant-DM} reading, not the compiler.
 
 % =====================================================================
+\section{The muon anomalous magnetic moment --- a seam vertex readout}
+% =====================================================================
+A \mC\ downstream readout (archive integration), \emph{not} a compiler power. The carrier algebra
+carries a \emph{second-order} topological defect beyond the one that fixes $\alpha$: with
+$\delta_{\mathrm{top}}=\Omega_{\mathrm{adm}}\,\cthree^4=48\cthree^4=3/(256\pi^4)$ and the carrier compression quotient
+$B\gamma=\tfrac32\!\cdot\!\tfrac56=\tfrac54$ (\veri{v51\_boundary\_half\_step.py}),
+$\delta_2=B\gamma\,\delta_{\mathrm{top}}^2=\tfrac54\,\delta_{\mathrm{top}}^2$. Projected through the
+seam-loop phase $\Delta_\Sigma=2\pi$ (the same $1/(2\pi)=4\cthree$ unit that normalises $\cthree$ itself),
+it reads as a magnetic vertex correction
+\[
+  \boxed{\ a_\mu^{\mathrm{seam}}=\frac{\delta_2}{2\pi}=\frac{45}{524288\,\pi^9}\approx2.879\times10^{-9}\ }\qquad\mC .
+\]
+The \emph{value} is an exact compiler number (only $\cthree,\Omega_{\mathrm{adm}},B\gamma$; trace reading
+$\delta_2=4!\,\mathrm{Tr}_{S^+}(X^2)\,\cthree^8$, $\mathrm{Tr}=120=5!$) --- but the \emph{identification} of
+$\delta_2/(2\pi)$ as the anomalous moment is a physical bridge, so the prediction is \mC, never a compiler
+power. \veri{v204\_muon\_seam\_g2.py}
+
+\par\smallskip\noindent\textbf{Data, honestly.} Against the dispersive discrepancy
+$\Delta a_\mu=(2.49\pm0.48)\times10^{-9}$ (Fermilab/BNL world average minus the WP2020 SM) this is
+$0.81\sigma$. \textbf{Caveat:} lattice/CMD-3 hadronic-vacuum-polarisation evaluations \emph{shrink} the
+discrepancy ($\Delta a_\mu\sim1.5\times10^{-9}$); the TFPT value is \emph{fixed} and would then sit
+${\sim}1.5\sigma$ high. A converged $\Delta a_\mu$ outside $2.879\times10^{-9}\pm0.5\times10^{-9}$ excludes
+the seam-vertex mechanism in its present form (\mX) --- the compiler core untouched.
+
+% =====================================================================
 \section{Full quantum gravity --- induced from the boundary kernel}
 % =====================================================================
 \emph{Framing (read this first):} full QG closure is a \textbf{certification layer}, not a prerequisite.
@@ -466,6 +503,24 @@ The normalisation $\cthree=1/(8\pi)$ \emph{is} the gravitational seam constant: 
 $G_N$ is read out \emph{after} selecting the physical $\Lambda$ branch \emph{and} fixing the one dimensionful
 induced-gravity (Sakharov) anchor (\mE/\mC, \veri{v60\_lambda\_metrology\_branch.py}) --- a metrology readout,
 not a from-nothing prediction.
+
+\par\smallskip\noindent\textbf{Two independent fixings of the gravitational $3/4$
+(\veri{v205\_xi\_threequarter.py}).} The induced-gravity coefficient the seam-determinant replica pins,
+$k=\cthree/2\Leftrightarrow\ln(m/\mu)=3/4=q(A_3)$ (\veri{v152\_norm\_is\_anchor.py}), is reached a
+\emph{second}, independent way: the old torsion-compression ansatz $\kappa^2=\xi\,\phiz/\cthree^2$ with the
+Einstein limit $\kappa^2=8\pi G$ forces $\xi=\cthree/\phiz$, which at tree level $\phiz\!\to\!1/(6\pi)$ is
+\emph{exactly} $3/4$ (with the retained seed $0.7483$, $-0.22\%$). So $3/4$ appears in the gravitational
+sector both as a gapped-replica EH coefficient and as a torsion-compression ratio --- an over-determination,
+not a coincidence; the ansatz stays \mC\ and $1/G$ stays the one declared anchor.
+
+\par\smallskip\noindent\textbf{The $\Lambda$ branch sharpens $H_0$ (\veri{v206\_h0\_lambda\_branch.py}).}
+Reading the seam vacuum number $\delta_\Sigma=\Omega_{\mathrm{adm}}\,e^{-2\pi\alpha^{-1}/3}\approx1.085\times10^{-123}$ (lowest
+admissible block $m_1=\Omega_{\mathrm{adm}}=48$) through the flatness closure gives a TFPT Hubble value
+$H_0=66.5\text{--}67.1\ \mathrm{km\,s^{-1}\,Mpc^{-1}}$ ($1.6$--$0.5\sigma$ \emph{below} Planck, far below
+SH0ES). \textbf{Honest:} the Hubble tension is \emph{not} relieved by raising the vacuum scale, and $H_0$
+uses the imported $\Omega_b,\omega_{\mathrm{DM}}$, so it is a \mC\ readout; $|\log_{10}\delta_\Sigma|\approx
+122.96$ matches the independent $123$-orders split (\veri{v60\_lambda\_metrology\_branch.py}), and
+$M_{\mathrm{Pl}}^4/\bar M_{\mathrm{Pl}}^4=(8\pi)^2$ must be displayed, never silently interchanged.
 
 \begin{center}
 \begin{tikzpicture}[font=\footnotesize,
@@ -512,6 +567,15 @@ $\mu_4$-equivariance (\vref{v162}); and the residual factors into the already-op
 assembly of established net constructions, \mC) and $R_1=$ \texttt{GATE.QGEO}, with the irreducible core
 $\{\pi,v_{\mathrm{geo}}\}$ a theorem (\vref{v165}). So the metric-sector gate carries \emph{zero new}
 independent open content. \veri{v165\_premise\_a\_closure.py}
+\smallskip\\
+\noindent\emph{A second, independent route (\veri{v207\_asymptotic\_safety.py}, \mO).} Beside the seam-net
+programme, the boundary data also support a \textbf{continuum} attack: an FRG truncation with an independent
+torsion field (the old UFE truncation) has a non-Gaussian UV fixed point --- $\partial_t g=(2+\eta_R)g$ is
+UV-repulsive at $g\!\to\!0$ and damped at large $g$ by the positive-definite torsion $K^2$ term, so
+$2+\eta_R=0$ has a root $g_\star>0$ (intermediate value), with the scale-invariant axion coupling fixed and
+small, $y^2=16\cthree^2=1/(4\pi^2)=0.0253$. This is recorded as a \emph{plausibility cross-check} that the
+QG gap is reachable from a second direction --- it is \textbf{not} load-bearing and does \emph{not} close
+$G_{\mathrm{metric}}$; the primary, machine-checked route stays the seam-net.
 \end{keybox}
 
 % =====================================================================
@@ -528,6 +592,7 @@ $\eta_B$ & \mC & downstream readout $=6.1{\times}10^{-10}$ from closed $\Omega_b
 $m_p/m_e$ & \mO & cross-sector (QCD scale / closed $m_e$); scheme-level, not a compiler power \\
 Koide $Q$ & \mC & source ratio $Q=0.664$ near $2/3$; the source$\to$pole factor $53/54$ is an \emph{exact operator readout} of the missing $F{=}R{+}Q$ Sheet-Diamond corner \mE; the physical pole transfer ($F_{\mathrm{pole}}$) stays \mC \\
 dark matter & \mC/\mO & determinant-line axion fixed: $\theta_i\approx170^\circ$, $f_a{=}M_{\mathrm{scal}}/128$, $m_a\approx23.8\,\mu$eV define the branch; relic needs the hilltop anharmonic enhancement --- a branch-level kill test, not a theory closure \\
+muon $a_\mu$ & \mC & seam vertex $a_\mu^{\mathrm{seam}}{=}\delta_2/(2\pi){=}45/(524288\pi^9){=}2.879{\times}10^{-9}$; exact \emph{value}, but the vertex projection is the \mC\ bridge ($0.81\sigma$ dispersive, ${\sim}1.5\sigma$ lattice) \\
 quantum gravity & \mE/\mO & $R+R^2$ heat-kernel grounded (G2); physical sector gap-decoupled; only ambient limit (G6) open \\
 \bottomrule
 \end{tabularx}
