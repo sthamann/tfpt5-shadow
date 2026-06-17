@@ -5,13 +5,18 @@ This repository is a **one-way mirror** of the main TFPT repository, maintained 
 
 | Included | Excluded |
 |----------|----------|
-| Active `.tex` papers, `tex-artefacts/`, `figures/` | `_archive/` |
-| `verification/` (Python suite, ledger, maps) | `website/` |
-| `experiments/` (Lean, discovery) | All `*.pdf` |
-| `build.sh`, manifests, README | `.cursor/` |
+| Active `.tex` papers, `tex-artefacts/`, `figures/*.pdf` | `_archive/`, `website/` |
+| `verification/` (Python suite, ledger, maps, redteam, wolfram) | `.cursor/`, `.github/` |
+| `experiments/` (Lean, discovery) | Compiled paper `*.pdf` (non-figure) |
+| `build.sh`, manifests, README | |
+
+**Shadow-mode note.** This subset ships `figures/` (so `python3 verification/make_manifest.py --check`
+passes literally on the export) but **not** `website/`. The single-source generator
+`verification/make_script_index.py` detects the missing `website/` and skips its `ScriptIndex.tsx`
+mirror, so `bash build.sh notes` runs on the subset without it.
 
 **Do not edit here.** Changes flow: main repo → this mirror (GitHub Action) → Overleaf pull.
 
-Source: `sthamann/tfpt-theoryv4` @ `14b85a4c9d2971424257e997a1d87e8e73faf6d5`
-Last export: 2026-06-17 06:48:05Z
-Files exported: 588
+Source: `sthamann/tfpt-theoryv4` @ `fcbc220c3f1d631c9112b4f7dd1b4f357a718094`
+Last export: 2026-06-17 07:30:53Z
+Files exported: 608
