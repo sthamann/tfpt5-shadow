@@ -59,6 +59,55 @@ refer to \texttt{verification/vN\_*.py}; claim IDs refer to rows of
 compiled standalone). Module numbers \texttt{vN} refer to \texttt{verification/vN\_*.py}.
 \fi
 
+\subsection*{2026-06-18 (The bedrock in its minimal-axiom form: a rigidity theorem for \texttt{QGEO.SYM.01}, \texttt{v267})}
+\begin{itemize}
+\item \textbf{\texttt{v267\_qgeo\_rigidity\_minimal\_axiom.py} (\texttt{QGEO.SYM.02}) sharpens the one bedrock
+  postulate to its irreducible kernel} (it does \emph{not} close it). \mE\ the \emph{single} bare statement
+  ``the seam admits the carrier order-$4$ clock as a conformal symmetry permuting its four marks''
+  ($=\omega\circ\rho=\omega$) forces \emph{everything}: an order-$4$ M\"obius orbit $\{a,ia,-a,-ia\}$ has
+  cross-ratio $2$ independent of $a$; cross-ratio $2\Leftrightarrow j{=}1728$ (only $\lambda\in\{-1,\tfrac12,2\}$)
+  $\Leftrightarrow$ the order-$4$ CM automorphism on $y^2{=}x^3{-}x$; and the unique flat pillowcase metric,
+  mark-locality, $[\rho,\Lambda]{=}0$ and $\omega\circ\rho{=}\omega$ all follow (\vref{v214}/\vref{v201}/\vref{v264}/\vref{v198}).
+  \mE\ neg controls: generic config $j\neq1728$ ($\Z_2$ only), hexagonal $j{=}0$ ($\Z_6$, order $6$) --- only
+  the square (order-$4$) realises the $\mu_4$ clock. \mC\ second, independent reason: $\{1,i,-1,-i\}$ over
+  $\mathbb Q$ with $j{=}1728$ (CM by $\Z[i]$), Belyi/dessins Galois-rigidity. \mO\ the bare order-$4$ symmetry stays
+  the one foundational postulate (like $c{=}$const) --- the \emph{reduction} is closed (axiom $\Rightarrow$
+  everything), the axiom is not. \mE\ build green, \texttt{AUDIT OK}.
+\end{itemize}
+
+\subsection*{2026-06-18 (Branch B decided: the explicit PS threshold model $+$ proton-decay window --- minimal content killed, $+(15,1,1)$ survives, Hyper-K decisive, \texttt{v266})}
+\begin{itemize}
+\item \textbf{\texttt{v266\_ps\_threshold\_proton.py} (\texttt{PS.PROTON.02}/\texttt{PS.THRESHOLD.02}) decides
+  branch B of the \vref{v265} fork.} The explicit two-step Pati--Salam thresholds give $d{=}6$
+  $\tau_p(p{\to}e^+\pi^0)$ (writes \texttt{ps\_threshold\_proton.json}): \mX\ the minimal $16$-Higgs content
+  ($M_{GUT}{\sim}2.4{\times}10^{15}$) gives $\tau_p{\sim}4.4{\times}10^{33}$ yr $<$ Super-K and is
+  \emph{killed} even at the high hadronic band; \mC\ the $E_8$-allowed $(15,1,1)$ [the single $45$] raises
+  $M_{GUT}{\sim}5.9{\times}10^{15}$ $\Rightarrow\tau_p{\sim}1.6{\times}10^{35}$ yr, proton-safe \emph{now};
+  \mX\ but that sits at the Hyper-K reach (${\sim}1.4{\times}10^{35}$ yr) --- a \emph{dated} kill test
+  decisive within the decade. So branch B is promoted from ``well-mannered candidate'' to
+  \emph{content-selected (must be $+(15,1,1)$), Hyper-K-decisive UV branch}; \mO\ structurally marginal
+  (only one $45$ in the hull, \vref{v247}) with an $O(3)$ $\tau_p$ band. Branch A (boundary-only) is
+  unchanged and canonical. \mE\ build green, \texttt{AUDIT OK}.
+\end{itemize}
+
+\subsection*{2026-06-18 (The 4D-QFT fork frozen as a branch policy: boundary-only canonical, Pati--Salam a falsifiable UV branch, SM-only GUT killed, \texttt{v265})}
+\begin{itemize}
+\item \textbf{\texttt{v265\_qft4d\_fork\_freeze.py} (\texttt{QFT4D.FORK.01}) turns the 4D-QFT fork from an open
+  ambiguity into a frozen decision tree} (\texttt{qft4d\_fork\_freeze.json}), no new physics. \textbf{A
+  (canonical):} boundary-only is the default 4D reading --- a 4D-GUT is \emph{not claimed by default}
+  ($E_8$ is the audit hull). \mX\ SM-only 4D-GUT unification is killed (1-loop: at the
+  $\alpha_1{=}\alpha_2$ scale $\alpha_3^{-1}$ off by ${\sim}5.6$, spread ${\sim}8.8$ at $2{\times}10^{16}$
+  GeV, re-deriving \vref{v246}) --- the canonical expectation, not a failure. \textbf{B (conditional):}
+  carrier-native Pati--Salam is a falsifiable UV branch only with the $E_8$-allowed content
+  $\{1,10,16,45\}$ (no $\mathbf{126}$, \vref{v247}), $\sin^2\theta_W{=}3/8$ (\vref{v248}), the $O(1)$
+  $\kappa{=}M_{PS}/M_s$ band (\vref{v249}/\vref{v253}), a threshold model and a proton-decay kill test
+  (\mX, no fake $\tau_p$ window; carrier gauging stays the contract). \mE\ a prose guard
+  (\texttt{QFT4D.NO\_OVERCLAIM.01}) forbids bare 4D over-claims and requires the scoped policy wording. New
+  ledger rows \texttt{QFT4D.BOUNDARY.DEFAULT.01}, \texttt{QFT4D.SMONLYGUT.01}, \texttt{PS.UVBRANCH.01},
+  \texttt{PS.THRESHOLD.01}, \texttt{PS.PROTON.KILL.01}. A fork-policy box added to
+  \texttt{tfpt\_research\_contracts}; \mE\ build green, \texttt{AUDIT OK}.
+\end{itemize}
+
 \subsection*{2026-06-18 (Three open-residual advances: the $F_{\mathrm{QCD}}$ solver, $M_\nu$ from $D_F$, and the raw-seam$\Rightarrow$mark-locality reduction, \texttt{v262}--\texttt{v264})}
 \begin{itemize}
 \item \textbf{\texttt{v262\_fqcd\_mp\_me.py} (\texttt{FR.MPME.02}) implements the one contract-only
