@@ -17,6 +17,6 @@ mirror, so `bash build.sh notes` runs on the subset without it.
 
 **Do not edit here.** Changes flow: main repo → this mirror (GitHub Action) → Overleaf pull.
 
-Source: `sthamann/tfpt-theoryv4` @ `a0edd80f55a04debca98c94805f01de508a31bdb`
-Last export: 2026-06-22 12:18:45Z
-Files exported: 834
+Source: `sthamann/tfpt-theoryv4` @ `08de82ffbf64a05e698bd32f634b04e92eefa964`
+Last export: 2026-06-22 12:35:10Z
+Files exported: 835
