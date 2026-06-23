@@ -239,6 +239,14 @@ form factor $a(\Box)$, and a ghost-free \emph{perturbative} graviton is still no
 measure. (\texttt{QGAMB.IDG.01}, \mC/\mO; consistent with the \texttt{SEAM.EQUIV.01} firewall.)
 \veri{v304\_idg\_nonlocal\_ghost.py}
 
+\par\smallskip\noindent\textbf{Sharpened by spin sector (\mC).} The Barnes--Rivers spin decomposition makes
+this precise: of the $5{+}3{+}1{+}1{=}10$ symmetric-tensor components the Stelle ghost is a \emph{spin-2} state,
+so the entire form factor $a(p^2){=}e^{p^2/M^2}$ cures exactly the spin-2 sector (its only pole stays at
+$p^2{=}0$), while the wrong-sign \emph{spin-0} conformal mode ($c_{\mathrm{conf}}(4){=}-3/2$) is handled
+separately by the GHP contour (\vref{v334}). So the full \emph{perturbative} graviton is ghost-free
+sector-by-sector under the TFPT-fixed package --- still \mC\ (it inherits the entire-analyticity assumption) and
+still not the nonperturbative measure. (\texttt{GRAV.SPIN2.UNITARITY.01}.) \veri{v370\_grav\_spin2\_unitarity.py}
+
 % =====================================================================
 \section*{Outcome}
 % =====================================================================
@@ -248,6 +256,14 @@ four targets (B, D, E, F) \emph{survive once a silent assumption is named}; one 
 worded. The net effect is not new physics but sharper typing: the package now states \emph{where}
 each reduction would fail and \emph{which} assumptions are truly necessary, exactly at the weakest
 logical transitions. Reproduce with \texttt{cd verification/redteam \&\& python run\_redteam.py}.
+
+\par\smallskip\noindent\textbf{The falsifiability surface is machine-checked (\veri{v375\_observatory\_registry.py}).}
+The frozen prediction registry (\texttt{freeze\_file.csv}) is verified by a status-typed CI: every prediction
+carries a kill criterion (no orphan claims), the headline values re-derive from $\{\varphi_0\}$, and a live scorecard
+records each one's distance to the current data --- $\theta_{12}$ vs the JUNO first run ($0.3092{\pm}0.0087$,
+$0.28\sigma$, compatible), $\theta_{13}$ vs NuFIT~6.0 NO ($2.0\sigma$, the openly-flagged most-tensioned core
+prediction), $\beta_{\mathrm{rad}}$ vs ACT~DR6 ($0.37\sigma$, a hint with systematics pending), and $r<0.036$
+(BK18, compatible). The observatory states its own weakest point rather than hiding it.
 
 \begin{winbox}[Follow-up --- the verdicts were then used as a worklist \mE\ (\veri{v83\_e8net\_holomorphic\_uniqueness.py})]
 Two residuals were attacked directly after the red-team pass; the result is recorded in ledger rows

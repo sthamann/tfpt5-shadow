@@ -472,8 +472,8 @@
   "date": "2026-06-13"
  },
  "tfpt_2_standard_model::section::The solar angle $\\theta_{12}$: derived from the seam::1": {
-  "hash": "47a208ca1aea",
-  "date": "2026-06-12"
+  "hash": "28e10eb01428",
+  "date": "2026-06-23"
  },
  "tfpt_2_standard_model::section::Quark $c$-rationals: best values at current precision::1": {
   "hash": "8868ee5c77eb",
@@ -612,7 +612,7 @@
   "date": "2026-06-23"
  },
  "tfpt_4_frontier::section::Summary::1": {
-  "hash": "b391d25fbe5a",
+  "hash": "127dd88a3bde",
   "date": "2026-06-23"
  },
  "tfpt_4_frontier::section::Appendix: computational verification::1": {
@@ -648,12 +648,12 @@
   "date": "2026-06-12"
  },
  "tfpt_5_redteam::section::Target F --- the perturbative 4D-QFT $+$ scale round (v269--v275)::1": {
-  "hash": "097b6533521b",
-  "date": "2026-06-22"
+  "hash": "e6cb1786cb94",
+  "date": "2026-06-23"
  },
  "tfpt_5_redteam::section::Outcome::1": {
-  "hash": "34885907f98d",
-  "date": "2026-06-22"
+  "hash": "c16d8643a3d4",
+  "date": "2026-06-23"
  },
  "tfpt_horizon_readouts::front::(front matter)::1": {
   "hash": "091987bff9bb",
@@ -700,7 +700,7 @@
   "date": "2026-06-23"
  },
  "tfpt_research_contracts::section::Research Contract 1 --- $(U_{\\mathrm{wall}})$::1": {
-  "hash": "e1d4149def8d",
+  "hash": "e9aa5069b551",
   "date": "2026-06-23"
  },
  "tfpt_research_contracts::section::Research Contract 2 --- $(G_{\\mathrm{metric}})$::1": {
