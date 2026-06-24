@@ -501,12 +501,27 @@ adiabatic $S$-matrix (\vref{v381}) and horizon recovery (\vref{v221}). So ``para
 $F_{\mathrm{transfer}}$ reading \vref{v303} to the whole theory); the two gap families --- golden
 $\varphi\in\mathbb Q(\sqrt5)$ (the carrier-$5$, static facet) and $(2/3)^6\in\mathbb Q$ (the family-$3$, dynamic
 facet) --- are the prime-$5$ and prime-$3$ facets of the order-$30$ Coxeter clock $30=2{\cdot}3{\cdot}5=h(E_8)$
-(\vref{v314}), not one number. \textbf{And the gap does double duty (\veri{v387\_corrections\_gap.py}):} the same
+(\vref{v314}), not one number. \textbf{The third prime is the missing prime-$2$ facet (\veri{v390\_prime2\_facet.py}):}
+$h(E_8)=30$ factors into exactly three primes, and each is the ramified prime of one quadratic facet field ---
+$\mathbb Q(i)$ ($\operatorname{disc}-4$, the Gaussian / square facet: $\tau=i$, $j(i)=1728$, the order-$4$
+$\mu_4=\mathbb Z/4$ seam deck), $\mathbb Q(\sqrt{-3})$ ($\operatorname{disc}-3$, the Eisenstein / hexagonal CP
+facet $\zeta_3$) and $\mathbb Q(\sqrt5)$ ($\operatorname{disc}5$, the golden / pentagonal carrier facet). So the
+clock's three primes each carry a number-field facet (square/hexagon/pentagon $=$ seam/CP/carrier), the prime-$2$
+(Gaussian, seam-orientation) one having been the previously unnamed facet. \textbf{And the gap does double duty (\veri{v387\_corrections\_gap.py}):} the same
 $\lambda_2/\lambda_1$ that forces uniqueness also \emph{sizes} the first correction in each sector
 ($\mathrm{correction}_n\sim(\lambda_2/\lambda_1)^n$) --- flavor, horizon recovery and the QG bound all carry the
 $(2/3)^6$ rate (the QG susceptibility $\chi=729/665$ caps the ambient correction), while the discrete compiler
 transient decays at the golden $(\varphi+2)/4$. So the magnitude of sub-leading effects across TFPT is
-\emph{organised} by the gaps, not free.
+\emph{organised} by the gaps, not free. \textbf{Crucially, this correction is a \emph{typed} budget, not a
+uniform band on every prediction (\veri{v388\_corrections\_budget.py}):} since $(\lambda_2/\lambda_1)^n$ is the
+distance from a gapped operator's leading eigenvector, it is defined only where a subleading $\lambda_2$ exists.
+The prediction surface therefore splits into four classes --- \emph{seam-gapped} (Koide $F_{\mathrm{pole}}$,
+recovery, the QG bound: rate $(2/3)^6$; the compiler: golden $(\varphi+2)/4$), \emph{exact identity}
+($\det R=8$, $N_\Phi=1$, $\theta_{\mathrm{eff}}=0$, $\sin^2\theta_{13}$: \emph{no} $\lambda_2$, so the correction is
+$0$ structurally and a band there would contradict the \mE\ status), \emph{external-rate} ($\eta_B$ washout,
+axion freeze, $m_p/m_e$ RG: the gapped shape with an external rate, only $F_{\mathrm{pole}}$ carries the seam rate,
+\vref{v303}, firewalled \vref{v187}), and \emph{fixed-point} (where the texture is already explicit, e.g.\
+$\sin^2\theta_{12}$ with $\varepsilon=c_3+36c_3^4$). Only the seam-gapped class receives the $(2/3)^6$/golden band.
 
 \begin{keybox}[Parameter-freeness is an attractor, not a tuning \mE]
 A primitive operator with a spectral gap has (i) a unique dominant eigenvector and (ii) geometric
@@ -514,6 +529,11 @@ convergence to it from any initial state. Numerically, three very different star
 identical fixed direction (cosine $=1$); the iterated operator tends to the rank-$1$ projector onto that
 eigenvector (only the boundary ``law'' survives). The convergence rate is exactly $(2/3)^6$. Hence the
 realized boundary state is a \emph{dynamical attractor}: the constants are selected, not chosen.
+The scalar core of this statement --- gap $\Rightarrow$ unique attractor $+$ geometric decay $\Rightarrow$
+parameter-freeness, and the converse that without a gap ($r{=}1$) the start is never forgotten --- is now
+Lean-4 formalised (no \texttt{sorry}, only the standard kernel axioms; ledger \texttt{FORM.SPECTRALGAP.01},
+module \texttt{TfptCarrier/SpectralGapAttractor.lean}); the full multi-dimensional Perron--Frobenius statement
+stays the cited theorem.
 \end{keybox}
 
 \noindent\textbf{The same gap is a finite recoverability code \mE/\mC\ (\veri{v221\_seam\_qecc.py}).} Read as

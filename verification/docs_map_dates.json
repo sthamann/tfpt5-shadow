@@ -152,8 +152,8 @@
   "date": "2026-06-12"
  },
  "tfpt_1_architecture_e8::subsection::The EM closure: $\\ainv$ as an explicit fixed point (made explicit here)::1": {
-  "hash": "f07ead13781e",
-  "date": "2026-06-23"
+  "hash": "34ee1fea0757",
+  "date": "2026-06-24"
  },
  "tfpt_1_architecture_e8::subsection::The decuple bridge (new, exact headline)::1": {
   "hash": "604a14549a07",
@@ -612,7 +612,7 @@
   "date": "2026-06-23"
  },
  "tfpt_4_frontier::section::Summary::1": {
-  "hash": "6a385edc9fc8",
+  "hash": "e514e017e829",
   "date": "2026-06-24"
  },
  "tfpt_4_frontier::section::Appendix: computational verification::1": {
@@ -728,7 +728,7 @@
   "date": "2026-06-12"
  },
  "origin_theory::section::The unique attractor: a gapped transport selects ONE fixed point::1": {
-  "hash": "998be30808be",
+  "hash": "1f11f137f690",
   "date": "2026-06-24"
  },
  "origin_theory::section::One $\\ainv$ for electromagnetism, the cosmic horizon and $\\Lambda$::1": {
