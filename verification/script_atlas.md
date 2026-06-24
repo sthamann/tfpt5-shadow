@@ -2,13 +2,13 @@
 
 > **Generated** by `make_script_atlas.py` (`bash build.sh gen`) from the ledger + registry + clusters + docs map. Do not edit by hand.
 
-`386` registered scripts · `446` ledger claims · `10` clusters.
+`388` registered scripts · `448` ledger claims · `10` clusters.
 
 **How to read:** each script line is `vN_name  [markers]  CLAIM.IDs  — one-liner`; the sub-line shows `deps` (resolved to the scripts they come from), `supersedes`, and the papers that cite it. The four-class markers are `[E]` exact/proven, `[C]` conditional, `[O]` open/axiom, `[X]` kill-test.
 
 ## Clusters (themes / branches)
 
-### `core` — Compiler core & the E₈ glue  (40 scripts)
+### `core` — Compiler core & the E₈ glue  (41 scripts)
 _Why the two axioms build E₈, why the carrier rank is forced, and the integer skeleton that follows._
 
 - **v1_e8_glue** [E] `E8.GLU.01, E8.NUM.01` — E₈ glue: disc ℤ₄, q(D₅)+q(A₃)=2, 240=16·5·3, 248
@@ -91,6 +91,8 @@ _Why the two axioms build E₈, why the carrier rank is forced, and the integer 
   - deps: v286_seam_equivalence_contract, v344, v154, v369, v83, v87 · cited: research contracts
 - **v379_seam_s3_rp** [E/C/O] `SEAM.S3.RP.01` — C7 / OS reconstruction: reflection positivity (the OS axiom) of the explicit gapped collar measure, verified numerically -- the remaining constructive-QFT ingredient for the OS rec
   - deps: QG.AMB.01, v367, v369, v240, v76, v376, v377, v378 · cited: research contracts
+- **v392_seam_s3_scalinglimit** [E/O] `SEAM.S3.SCALINGLIMIT.01` — SEAM.S3.SCALINGLIMIT.01: an HONEST attack on the one open lemma of SEAM.EQUIV.01 (the continuum scaling-limit existence, v336) -- does NOT close it (the abstract existence is the c
+  - deps: v336_continuum_limit, v336, v367, v368, v376, v377, v378 · cited: research contracts
 
 ### `em` — Electromagnetic fixed point  (6 scripts)
 _The fine-structure constant as the unique root of the boundary U(1) Ward identity._
@@ -270,7 +272,7 @@ _The parabolic wall-selection contract: the quark ratios are closed; only the ab
 - **v75_upoint_to_vgeo** [E/O] `FLAV.UPOINT.01` — Gate 1 complete: U_point → v_geo (ratios + Grand Mass Volume); same anchor as 1/G
   - deps: v71_simple_r_bridge, v20_lepton_c_derivation, v46_grand_mass_volume, v68 · cited: origin theory, research contracts
 
-### `frontier` — Open gate (G_metric) & the frontier  (104 scripts)
+### `frontier` — Open gate (G_metric) & the frontier  (105 scripts)
 _The quantum-gravity measure contract, the audit ledger, the data scorecard, and the honestly-typed frontier items._
 
 - **v5_e8_cascade** [E] `CAS.01` — cascade D = 60 − 2n: endpoints, exponent rungs → 240
@@ -481,6 +483,8 @@ _The quantum-gravity measure contract, the audit ledger, the data scorecard, and
   - deps: v253, v259, v304, v370, v380, v386 · cited: 4 frontier
 - **v390_prime2_facet** [E/C] `COXETER.PRIME2.01` — COXETER.PRIME2.01: the prime-2 facet of the order-30 Coxeter clock, completing v383. The clock 30=2*3*5=h(E8) had two named number-field facets (golden phi in Q(sqrt5), prime-5/car
   - deps: v220, v282, v288, v314, v333, v383, v387 · cited: origin theory
+- **v393_corrections_numeric** [E/C] `CORRECTIONS.NUMERIC.01` — CORRECTIONS.NUMERIC.01: the typed correction budget (v388) turned into ACTUAL first-correction magnitudes -- a computed theoretical-uncertainty surface, the short-term testable har
+  - deps: v388_corrections_budget, v388, v337, v374, v212, v187 · cited: origin theory
 
 ### `registry` — Blind registry & red-team follow-ups (v84–v175)  (167 scripts)
 _The frozen prediction registry and the follow-up rounds: Target A merged to one residual, the CP residual quantified, N★ from reheating, the F_transfer gauge inputs cross-checked with an external RGE tool, and the AQFT closure round — net existence and full-cone reflection positivity discharged to [E], leaving the seam realisation as the single open premise. Every freeze machine-enforced._
@@ -836,14 +840,12 @@ _The frozen prediction registry and the follow-up rounds: Target A merged to one
 
 ## Dependency overview
 
-**Most-depended-on claims** (the load-bearing roots): `QGEO.SYM.01`×28, `SEAM.EQUIV.01`×23, `v76`×17, `v56`×17, `E8.GLU.01`×15, `QG.AMB.01`×15, `HOR.NARIAI.01`×15, `v336`×14, `v216`×13, `REG.FREEZE.01`×12, `AX.P1.01`×11, `v3`×11, `v312`×11, `QGEO.SUBPRIN.01`×11, `FLAV.KQ.01`×10
+**Most-depended-on claims** (the load-bearing roots): `QGEO.SYM.01`×28, `SEAM.EQUIV.01`×23, `v76`×17, `v56`×17, `E8.GLU.01`×15, `QG.AMB.01`×15, `v336`×15, `HOR.NARIAI.01`×15, `v216`×13, `REG.FREEZE.01`×12, `AX.P1.01`×11, `v3`×11, `v312`×11, `QGEO.SUBPRIN.01`×11, `FLAV.KQ.01`×10
 
 **Axiom/root claims with no dependencies:** 5 (e.g. `BOOT.01`, `CAR.PAS.01`, `CAS.01`, `FLAV.R.01`, `FR.KOIDE.01` …)
 
 ## Current frontier (highest-id scripts)
 
-- **v380_grav_kms_hessian** — `GRAV.KMS.HESSIAN.01`
-- **v381_qft4d_eg_allorder** — `QFT4D.EG.ALLORDER.01`
 - **v382_alpha_quillen_exact** — `ALPHA.QUILLEN.EXACT.01`
 - **v383_dynamics_universal** — `DYNAMICS.UNIVERSAL.01`
 - **v384_residual_certification** — `RESIDUAL.CERTIFICATION.01`
@@ -854,4 +856,6 @@ _The frozen prediction registry and the follow-up rounds: Target A merged to one
 - **v389_grav_loop_finiteness** — `GRAV.LOOP.FINITE.01`
 - **v390_prime2_facet** — `COXETER.PRIME2.01`
 - **v391_alpha_quillen_progress** — `ALPHA.QUILLEN.PROGRESS.01`
+- **v392_seam_s3_scalinglimit** — `SEAM.S3.SCALINGLIMIT.01`
+- **v393_corrections_numeric** — `CORRECTIONS.NUMERIC.01`
 

@@ -700,8 +700,8 @@
   "date": "2026-06-23"
  },
  "tfpt_research_contracts::section::Research Contract 1 --- $(U_{\\mathrm{wall}})$::1": {
-  "hash": "0ac43489c9ea",
-  "date": "2026-06-23"
+  "hash": "5269344626b2",
+  "date": "2026-06-24"
  },
  "tfpt_research_contracts::section::Research Contract 2 --- $(G_{\\mathrm{metric}})$::1": {
   "hash": "6d4b577571f2",
@@ -728,7 +728,7 @@
   "date": "2026-06-12"
  },
  "origin_theory::section::The unique attractor: a gapped transport selects ONE fixed point::1": {
-  "hash": "1f11f137f690",
+  "hash": "5c1988ea6a05",
   "date": "2026-06-24"
  },
  "origin_theory::section::One $\\ainv$ for electromagnetism, the cosmic horizon and $\\Lambda$::1": {
