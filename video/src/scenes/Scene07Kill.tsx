@@ -21,21 +21,21 @@ const KILLS = [
   { lab: "Hyper-K", sub: "proton decay" },
 ];
 
-export const Scene05Kill: React.FC = () => {
+export const Scene07Kill: React.FC = () => {
   const frame = useCurrentFrame();
   const eyebrow = enterUp(frame, 6, 22);
 
   // phase 1: frozen registry + predictions; phase 2: near-term kill tests
-  const phase1 = 1 - fade(frame, 700, 760);
-  const phase2 = fade(frame, 745, 805);
+  const phase1 = 1 - fade(frame, 575, 615);
+  const phase2 = fade(frame, 585, 625);
 
-  const sealScale = interpolate(frame, [50, 96], [0.6, 1], {
+  const sealScale = interpolate(frame, [135, 181], [0.6, 1], {
     easing: Easing.bezier(0.34, 1.56, 0.64, 1),
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const seal = enterUp(frame, 50, 26);
-  const note = enterUp(frame, 560, 24);
+  const seal = enterUp(frame, 135, 26); // sealed registry (~193.5s)
+  const note = enterUp(frame, 460, 24); // "within ~1σ today" (~204s)
 
   return (
     <AbsoluteFill>
@@ -75,13 +75,13 @@ export const Scene05Kill: React.FC = () => {
                 color: COLORS.textBright,
               }}
             >
-              <span style={{ fontSize: 24 }}>🔒</span> FROZEN · BLIND REGISTRY · PRE-DATA
+              <span style={{ fontSize: 24 }}>🔒</span> SEALED · BLIND REGISTRY · PRE-DATA
             </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 4 }}>
             {PREDS.map((p, i) => {
-              const e = enterUp(frame, 130 + i * 22, 20, 16);
+              const e = enterUp(frame, 285 + i * 20, 20, 16);
               return (
                 <div
                   key={p.name}
@@ -108,7 +108,7 @@ export const Scene05Kill: React.FC = () => {
           </div>
 
           <div style={{ ...note, fontFamily: SANS, fontSize: 28, color: COLORS.textDim }}>
-            Closed core predictions sit within <b style={{ color: COLORS.text }}>~1σ</b> today — every tension tracked in the open.
+            Today, every one sits within <b style={{ color: COLORS.text }}>~1σ</b> — each tension tracked in the open.
           </div>
         </div>
 
@@ -138,7 +138,7 @@ export const Scene05Kill: React.FC = () => {
           </div>
           <div style={{ display: "flex", gap: 40 }}>
             {KILLS.map((k, i) => {
-              const e = enterUp(frame, 790 + i * 24, 24, 26);
+              const e = enterUp(frame, 610 + i * 24, 24, 26);
               return (
                 <div
                   key={k.lab}
@@ -161,6 +161,9 @@ export const Scene05Kill: React.FC = () => {
                 </div>
               );
             })}
+          </div>
+          <div style={{ fontFamily: SANS, fontSize: 28, color: COLORS.text }}>
+            One clean miss, and the theory is <b style={{ color: COLORS.open }}>wrong</b>.
           </div>
         </div>
       </AbsoluteFill>
