@@ -25,5 +25,5 @@ that says \"ALL CHECKS PASSED\" cannot ship unless it actually reproduces as exp
 **Do not edit here.** Changes flow: main repo → this mirror (GitHub Action) → Overleaf pull.
 
 Source: `sthamann/tfpt-theoryv4` @ `d2a7bc23a04f0df399aebe51aafcc6d1d25bcbbd`
-Last export: 2026-07-02 17:08:40Z
+Last export: 2026-07-02 19:55:51Z
 Files exported: 1181
