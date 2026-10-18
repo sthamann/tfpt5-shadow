@@ -427,6 +427,313 @@ checkExact["branch divisor = (scalaron,A_Lambda): sum roots=-7/3=-scalaron/N_fam
     q = Det[bb[K + xx*Q]]; rt = Sort[xx /. Solve[q == 0, xx]];
     (Total[rt] == -7/3) && (Times @@ rt == 10/9) && (2 + 5 == 7) && (2*5 == 10) && (5 - 2 == 3)]];
 
+(* ==== 2026-08-28 catch-up: exact mirrors deferred by the v974-v997 waves ====
+   Exact algebraic / identity / lattice cores of v983, v985, v987, v993, v994,
+   v997.  Numerical / ODE / QCA / entropy / SMG-toy siblings stay Python-only
+   (flagged in the README v974-v997 census). *)
+
+(* 2026-08-30 late-evening harvest: v1013 thermodynamic-dynamics numeric twin
+   and v1014 detline/W-bridge refinements stay Python-only (LR/expm + QWZ
+   eigensolves; W-bridge is sympy-exact but Wolfram engine DEFERRED_NO_ENGINE).
+   2026-08-31 Monday-morning harvest: v1015 axiom-core closure (sympy-exact P-dem)
+   and v1016 state/gap batteries (euclidean cap / TEL-B / nuclearity / DFP)
+   stay Python-only; engine still DEFERRED_NO_ENGINE.
+   2026-09-02: v1018 (sympy-exact E8 readout identities; C7 open) and v1019
+   (exact cyclotomic + mpmath Euler products) stay Python-only;
+   engine still DEFERRED_NO_ENGINE. *)
+
+(* ---- (v983) SEAM.SIMPLECURRENT.GENERATOR.01: glue vector lambda = (omega_s, omega_f) ---- *)
+Module[{omegaS, omegaF, lam, inD5, inA3, inL0, gensD5, gensA3, dots,
+    cosetRoots, census, lamV, omega2, nV, n2, cartanD8},
+  omegaS = ConstantArray[1/2, 5];
+  omegaF = {3/4, -1/4, -1/4, -1/4};
+  lam = Join[omegaS, omegaF];
+  inD5[x_] := (And @@ (IntegerQ /@ x)) && EvenQ[Total[x]];
+  inA3[y_] := (And @@ (IntegerQ /@ y)) && Total[y] === 0;
+  inL0[z_] := inD5[Take[z, 5]] && inA3[Take[z, {6, 9}]];
+  checkExact["v983 NORMS+WEIGHT [E]: |omega_s|^2=5/4, |omega_f|^2=3/4, |lambda|^2=2, h_lambda=1",
+    Total[omegaS^2] === 5/4 && Total[omegaF^2] === 3/4 &&
+    Total[lam^2] === 2 && Total[lam^2]/2 === 1];
+  checkExact["v983 ORDER FOUR [E]: 4*lambda in D5(+)A3, lambda and 2*lambda not -- [lambda] generates the diagonal Z4",
+    inL0[4 lam] && ! inL0[2 lam] && ! inL0[lam]];
+  gensD5 = {{1, 1, 0, 0, 0}, {1, -1, 0, 0, 0}, {0, 1, 1, 0, 0},
+    {0, 0, 1, 1, 0}, {0, 0, 0, 1, 1}};
+  gensA3 = {{1, -1, 0, 0}, {0, 1, -1, 0}, {0, 0, 1, -1}};
+  dots = Join[omegaS . # & /@ gensD5, omegaF . # & /@ gensA3];
+  checkExact["v983 ISOTROPY+UNIMODULAR [E]: lambda.L0 subset Z on a generator set; det(D5)*det(A3)=16, index-4 glue => det L=1",
+    (And @@ (IntegerQ /@ dots)) && 16/4^2 === 1];
+  cosetRoots[k_] := Module[{t = k lam, d5, a3},
+    d5 = Counts @ Select[
+      Total[(# + Take[t, 5])^2] & /@
+        Select[Tuples[Range[-5, 3], 5], EvenQ[Total[#]] &],
+      # <= 2 &];
+    a3 = Counts @ Select[
+      Total[(Join[#, {-Total[#]}] + Take[t, {6, 9}])^2] & /@
+        Tuples[Range[-6, 6], 3],
+      # <= 2 &];
+    Total[KeyValueMap[#2 Lookup[a3, 2 - #1, 0] &, d5]]];
+  census = Table[cosetRoots[k], {k, 0, 3}];
+  checkExact["v983 COSET ROOT CENSUS [E]: norm-2 vectors per fusion power k=0..3 = {52,64,60,64}, total 240; odd powers 64+64=128",
+    census === {52, 64, 60, 64} && Total[census] === 240 &&
+    census[[2]] + census[[4]] === 128];
+  lamV = Join[{1, 0, 0, 0, 0}, omegaF];
+  omega2 = {1/2, 1/2, -1/2, -1/2};
+  nV = Total[lamV^2];
+  n2 = Total[omegaS^2] + Total[omega2^2];
+  cartanD8 = {{2, -1, 0, 0, 0, 0, 0, 0}, {-1, 2, -1, 0, 0, 0, 0, 0},
+    {0, -1, 2, -1, 0, 0, 0, 0}, {0, 0, -1, 2, -1, 0, 0, 0},
+    {0, 0, 0, -1, 2, -1, 0, 0}, {0, 0, 0, 0, -1, 2, -1, -1},
+    {0, 0, 0, 0, 0, -1, 2, 0}, {0, 0, 0, 0, 0, -1, 0, 2}};
+  checkExact["v983 KILLS+HOLOMORPHY SHADOW [E]: vector glue (v,omega_f) norm 7/4 and mismatched (omega_s, omega_2) norm 9/4 not in 2Z; det Cartan D8=4 vs glued det=1",
+    nV === 7/4 && n2 === 9/4 && Det[cartanD8] === 4 && 16/4^2 === 1];
+];
+
+(* ---- (v985) ALPHA.QUILLEN.EXACT.01: mu4 circulant spectra + graded channel swap ---- *)
+Module[{jumpPat, markPat, mu4Spec, eigJ, eigM, swapped, odd, gLog,
+    gJ, gM, ratios},
+  jumpPat = {2, -1, 0, -1};
+  markPat = {0, 1, 2, 1};
+  mu4Spec[pat_] := Table[
+    Simplify[Sum[pat[[m + 1]] I^(m k), {m, 0, 3}]], {k, 0, 3}];
+  eigJ = mu4Spec[jumpPat];
+  eigM = mu4Spec[markPat];
+  checkExact["v985 SPECTRA [E]: jump circ(2,-1,0,-1) -> {0,2,4,2} (kernel k=0); mark circ(0,1,2,1) -> {4,-2,0,-2} (kernel k=2)",
+    eigJ === {0, 2, 4, 2} && eigM === {4, -2, 0, -2}];
+  swapped = Table[Abs[eigJ[[Mod[k + 2, 4] + 1]]], {k, 0, 3}];
+  odd = Table[Abs[eigJ[[Mod[k + 1, 4] + 1]]], {k, 0, 3}];
+  checkExact["v985 DECK SWAP [E]: r->r+2 maps |jump| onto |mark| exactly; odd swap r->r+1 does NOT (Z2 deck, not arbitrary)",
+    swapped === (Abs /@ eigM) && odd =!= (Abs /@ eigM)];
+  gLog[eigs_, unit_] := Sum[
+    If[eigs[[k + 1]] === 0, 0,
+      (-1)^k Log[Abs[eigs[[k + 1]]] unit]], {k, 0, 3}];
+  gJ = gLog[eigJ, 16 c3];
+  gM = gLog[eigM, 4 c3 Log[2]];
+  checkExact["v985 GRADED DET' [E]: gr(jump)-gr(mark)=log(ln2/4) exactly, c3-free",
+    PossibleZeroQ[FullSimplify[gJ - gM - Log[Log[2]/4]]]];
+  ratios = Table[
+    If[eigM[[k + 1]] === 0, Nothing,
+      Simplify[(16 c3 Abs[eigJ[[Mod[k + 2, 4] + 1]]])/
+        (4 c3 Log[2] Abs[eigM[[k + 1]]])]], {k, 0, 3}];
+  checkExact["v985 UNIFORM RATIO [E]: after deck swap, (16 c3 |lambda^J_{r+2}|)/(4 c3 ln2 |lambda^M_r|)=4/ln2 in every matched nonzero channel",
+    (And @@ ((# === 4/Log[2]) & /@ ratios)) && Length[ratios] === 3];
+];
+
+(* ---- (v987) DYN.UNITARY.DILATION.01: B spectral decomp, H=-log B, Wick, congruence ----
+   Python-only: size-uniform free-band D2/LR (numeric collision), interacting
+   gap plateau, quantum SWAP coupling. *)
+Module[{u1, u2, u3, P1, P2, P3, B, H, Ut, n, Kdiag, K12, Bbad, zero3, zQ},
+  u1 = {1, 1, 1}/Sqrt[3];
+  u2 = {1, -1, 0}/Sqrt[2];
+  u3 = {1, 1, -2}/Sqrt[6];
+  P1 = Outer[Times, u1, u1];
+  P2 = Outer[Times, u2, u2];
+  P3 = Outer[Times, u3, u3];
+  B = {{13, 1, 4}, {1, 13, 4}, {4, 4, 10}}/18;
+  zero3 = ConstantArray[0, {3, 3}];
+  zQ[m_] := And @@ PossibleZeroQ /@ Flatten[Simplify[m]];
+  checkExact["v987 SPECTRAL [E]: B=P1+(2/3)P2+(1/3)P3 with orthogonal projectors summing to I",
+    zQ[B - (P1 + (2/3) P2 + (1/3) P3)] &&
+    zQ[P1 + P2 + P3 - IdentityMatrix[3]] &&
+    zQ[P1.P2] && zQ[P1.P3] && zQ[P2.P3]];
+  H = Log[3/2] P2 + Log[3] P3;
+  checkExact["v987 H=-log B [E]: spectrum {0, log(3/2), log 3}, gap log(3/2), H.u1=0",
+    SortBy[Simplify[Eigenvalues[H]], N] === {0, Log[3/2], Log[3]} &&
+    zQ[{H.u1}]];
+  Ut[t_] := P1 + (2/3)^(I t) P2 + (1/3)^(I t) P3;
+  checkExact["v987 WICK ANCHOR [E]: U(-i n)=B^n for n=1..6",
+    And @@ Table[
+      zQ[Ut[-I n] - (P1 + (2/3)^n P2 + (1/3)^n P3)] &&
+      zQ[(P1 + (2/3)^n P2 + (1/3)^n P3) - MatrixPower[B, n]],
+      {n, 1, 6}]];
+  Kdiag = DiagonalMatrix[{2, 3, 5}];
+  K12 = DiagonalMatrix[{Sqrt[2], Sqrt[3], Sqrt[5]}];
+  Bbad = P1 - (1/10) P2 + (1/3) P3;
+  checkExact["v987 CONGRUENCE+MUST-FAIL [E]: K^{1/2} B K^{1/2} symmetric (Sylvester: B SPD with eigs {1,2/3,1/3}); mutant K.B not symmetric; v971 negative kernel det<0",
+    Sort[Eigenvalues[B]] === {1/3, 2/3, 1} &&
+    zQ[K12.B.K12 - Transpose[K12.B.K12]] &&
+    ! zQ[Kdiag.B - Transpose[Kdiag.B]] &&
+    Det[Bbad] < 0];
+];
+
+(* ---- (v993) AX.P2.01 census: SNF disc groups, unique (D5,A3), [lambda]^2=[v], CE dims ----
+   Python-only: random CE axiom sampling on M_d^{Z4} / crossed product. *)
+Module[{cartanA, cartanD, cartanE, snfF, cyclicZ4, hasZ4, genOQ,
+    addPair, rows, find, hits, daHits, uniqueDA, canon, uniqueFull,
+    rD4A4, rA4A4, rE7A1, rD4D4, rA7A1, rE6A2, rD5A3,
+    omegaS, omegaF, lam, vD5, inD5, inA3, inL0,
+    freeQ, nFree, devKer, n, m, C1, C2},
+  cartanA[n_] := Normal[SparseArray[
+    {{i_, i_} -> 2, {i_, j_} /; Abs[i - j] === 1 -> -1}, {n, n}]];
+  cartanD[n_] := Module[{M},
+    If[n === 2, Return[DiagonalMatrix[{2, 2}]]];
+    M = Normal[cartanA[n]];
+    M[[n, n - 1]] = M[[n - 1, n]] = 0;
+    M[[n, n - 2]] = M[[n - 2, n]] = -1;
+    M];
+  cartanE[n_] := Module[{M = 2 IdentityMatrix[n]},
+    Do[M[[i, i + 1]] = M[[i + 1, i]] = -1, {i, 1, n - 2}];
+    M[[3, n]] = M[[n, 3]] = -1;
+    M];
+  snfF[C_] := Select[Abs[Diagonal[SmithDecomposition[C][[2]]]], # > 1 &];
+  cyclicZ4[f_] := f === {4};
+  hasZ4[f_] := f =!= {} && Mod[LCM @@ f, 4] === 0;
+  checkExact["v993 SNF TEXTBOOK [E]: A_n=Z_{n+1} (n=1..8); D_n=Z4 (n odd)/Z2xZ2 (n even) (n=2..8); E6=Z3, E7=Z2, E8=1; D3 cong A3",
+    (And @@ Table[snfF[cartanA[n]] === {n + 1}, {n, 1, 8}]) &&
+    (And @@ Table[snfF[cartanD[n]] === If[OddQ[n], {4}, {2, 2}], {n, 2, 8}]) &&
+    snfF[cartanE[6]] === {3} && snfF[cartanE[7]] === {2} &&
+    snfF[cartanE[8]] === {} &&
+    snfF[cartanD[3]] === snfF[cartanA[3]] === {4} &&
+    Abs[Det[cartanD[3]]] === Abs[Det[cartanA[3]]] === 4];
+  genOQ[C_] := Module[{Cinv = Inverse[C], nn = Length[C], k, order, q},
+    k = UnitVector[nn, nn];
+    order = Catch[Do[
+      If[And @@ (IntegerQ /@ Flatten[Cinv.(t k)]), Throw[t]],
+      {t, 1, Abs[Det[C]] + 1}]];
+    q = Simplify[k.Cinv.k];
+    {order, q}];
+  rows = {};
+  addPair[fam_, t1_, n1_, CC1_, t2_, n2_, CC2_, alias_: None] := Module[
+    {f1 = snfF[CC1], f2 = snfF[CC2], d1 = Abs[Det[CC1]], d2 = Abs[Det[CC2]],
+      both, prod, unimod, o1, q1, o2, q2, iso, hit},
+    both = cyclicZ4[f1] && cyclicZ4[f2];
+    prod = d1 d2;
+    unimod = prod === 16;
+    iso = False; q1 = None; q2 = None;
+    If[both,
+      {o1, q1} = genOQ[CC1]; {o2, q2} = genOQ[CC2];
+      iso = o1 === 4 && o2 === 4 && IntegerQ[Simplify[(q1 + q2)/2]]];
+    hit = both && unimod && TrueQ[iso];
+    AppendTo[rows, <|"fam" -> fam, "n1" -> n1, "n2" -> n2, "f1" -> f1,
+      "f2" -> f2, "prod" -> prod, "both" -> both, "q1" -> q1, "q2" -> q2,
+      "iso" -> iso, "hit" -> hit, "alias" -> alias, "t1" -> t1, "t2" -> t2|>]];
+  Do[addPair["D+A", "D", n, cartanD[n], "A", 8 - n, cartanA[8 - n]], {n, 2, 7}];
+  Do[addPair["D+D", "D", n, cartanD[n], "D", 8 - n, cartanD[8 - n],
+    If[{n, 8 - n} === {3, 5} || {n, 8 - n} === {5, 3}, "D5(+)A3", None]],
+    {n, 2, 4}];
+  Do[If[8 - n >= 1 && 8 - n <= n,
+    addPair["A+A", "A", n, cartanA[n], "A", 8 - n, cartanA[8 - n]]], {n, 4, 7}];
+  addPair["E+A", "E", 6, cartanE[6], "A", 2, cartanA[2]];
+  addPair["E+D", "E", 6, cartanE[6], "D", 2, cartanD[2]];
+  addPair["E+A", "E", 7, cartanE[7], "A", 1, cartanA[1]];
+  find[fam_, n1_, n2_] := SelectFirst[rows,
+    #["fam"] === fam && #["n1"] === n1 && #["n2"] === n2 &, None];
+  hits = Select[rows, #["hit"] &];
+  daHits = Select[rows, #["fam"] === "D+A" && #["hit"] &];
+  uniqueDA = Length[daHits] === 1 && daHits[[1]]["n1"] === 5 &&
+    daHits[[1]]["n2"] === 3;
+  canon = Table[
+    If[(r["t1"] === "D" && r["n1"] === 5 && r["t2"] === "A" && r["n2"] === 3) ||
+      r["alias"] === "D5(+)A3", "D5(+)A3",
+      r["t1"] <> ToString[r["n1"]] <> "(+)" <> r["t2"] <> ToString[r["n2"]]],
+    {r, hits}];
+  uniqueFull = Length[hits] >= 1 && Union[canon] === {"D5(+)A3"};
+  checkExact["v993 ADE RANK-8 CENSUS [E]: only diagonal cyclic-Z4 isotropic unimodular glue is (D5,A3), up to D3 cong A3",
+    uniqueDA && uniqueFull];
+  rD4A4 = find["D+A", 4, 4]; rA4A4 = find["A+A", 4, 4];
+  rE7A1 = find["E+A", 7, 1]; rD4D4 = find["D+D", 4, 4];
+  rA7A1 = find["A+A", 7, 1]; rE6A2 = find["E+A", 6, 2];
+  rD5A3 = find["D+A", 5, 3];
+  checkExact["v993 KILLS [X]: (D4,A4) not cyclic Z4; (A4,A4) prod 25; (E7,A1) prod 4; (D4,D4) Klein no order-4; (A7,A1) A1=Z2; (E6,A2)=Z3xZ3; isotropic q(D5)+q(A3)=5/4+3/4=2",
+    rD4A4 =!= None && ! rD4A4["both"] && ! rD4A4["hit"] &&
+    rA4A4 =!= None && rA4A4["prod"] === 25 && ! rA4A4["hit"] &&
+    rE7A1 =!= None && rE7A1["prod"] === 4 && ! rE7A1["hit"] &&
+    rD4D4 =!= None && rD4D4["prod"] === 16 && rD4D4["f1"] === {2, 2} &&
+    rD4D4["f2"] === {2, 2} && ! rD4D4["both"] && ! hasZ4[rD4D4["f1"]] &&
+    rA7A1 =!= None && rA7A1["prod"] === 16 && hasZ4[rA7A1["f1"]] &&
+    ! hasZ4[rA7A1["f2"]] && ! rA7A1["both"] &&
+    rE6A2 =!= None && rE6A2["f1"] === {3} && rE6A2["f2"] === {3} &&
+    rE6A2["prod"] === 9 && ! rE6A2["hit"] &&
+    rD5A3 =!= None && rD5A3["q1"] === 5/4 && rD5A3["q2"] === 3/4 &&
+    TrueQ[rD5A3["iso"]]];
+  omegaS = ConstantArray[1/2, 5];
+  omegaF = {3/4, -1/4, -1/4, -1/4};
+  lam = Join[omegaS, omegaF];
+  vD5 = {1, 0, 0, 0, 0};
+  inD5[x_] := (And @@ (IntegerQ /@ x)) && EvenQ[Total[x]];
+  inA3[y_] := (And @@ (IntegerQ /@ y)) && Total[y] === 0;
+  inL0[z_] := inD5[Take[z, 5]] && inA3[Take[z, {6, 9}]];
+  checkExact["v993 [lambda]^2=[v] [E]: 2[omega_s]=[v] in disc(D5); 4*lambda in L0, 2*lambda not; order-2 vector glue norm 7/4 not in 2Z",
+    inD5[2 omegaS - vD5] && 2 omegaS === {1, 1, 1, 1, 1} &&
+    inL0[2 lam - Join[vD5, 2 omegaF]] && ! inA3[2 omegaF] &&
+    inL0[4 lam] && ! inL0[2 lam] && ! inL0[lam] &&
+    Total[Join[vD5, omegaF]^2] === 7/4 && Total[lam^2] === 2];
+  freeQ[{i_, j_, k_, l_}, bim_] :=
+    Mod[k, 4] === Mod[l, 4] && Mod[i, 4] =!= Mod[j, 4] &&
+    (! bim || (Mod[k, 4] === Mod[i, 4] && Mod[l, 4] === Mod[j, 4]));
+  nFree[d_, bim_] := Count[Tuples[Range[0, d - 1], 4], x_ /; freeQ[x, bim]];
+  devKer[d_, bim_] := Module[{idx, coord, rowsA, A},
+    idx = Select[Tuples[Range[0, d - 1], 4], freeQ[#, bim] &];
+    If[idx === {}, Return[0]];
+    coord = Association[MapIndexed[#1 -> First[#2] &, idx]];
+    rowsA = Flatten[Table[
+      Module[{row = ConstantArray[0, Length[idx]], nonempty = False, key},
+        Do[key = {i, j, k, k};
+          If[KeyExistsQ[coord, key],
+            row[[coord[key]]] = 1; nonempty = True], {k, 0, d - 1}];
+        If[nonempty, row, Nothing]],
+      {i, 0, d - 1}, {j, 0, d - 1}], 1];
+    If[rowsA === {}, Length[idx], Length[idx] - MatrixRank[rowsA]]];
+  checkExact["v993 UNIQUE-CE DIMS [E]: bimodule deviations force D=0 (n_free=0 at d=4,8); dropping the module property leaves kernel 36 (d=4) / 720 (d=8)",
+    nFree[4, True] === 0 && nFree[8, True] === 0 &&
+    devKer[4, False] === 36 && devKer[8, False] === 720];
+];
+
+(* ---- (v994) SEAM.EQUIV.MMST.01 C3: Theta_E8 / eta^8 = {1,248,4124,34752} ----
+   Python-only: C1 entropy, C2 QWZ spectrum, C4 two-point numeric, C5 sector
+   recombination beyond det, C6 cited, C7 open, GSO/N=8 must-fail combinatorics. *)
+Module[{z, q, th2, th3, th4, thE8, e4theta, e4sigma, inv8, chi, coeffs},
+  (* EllipticTheta[a,0,z] defining sums (Jacobi nome z; lattice q = z^2). *)
+  th2 = 2 z^(1/4) Sum[z^(n (n + 1)), {n, 0, 6}];
+  th3 = 1 + 2 Sum[z^(n^2), {n, 1, 6}];
+  th4 = 1 + 2 Sum[(-1)^n z^(n^2), {n, 1, 6}];
+  thE8 = Expand[(th2^8 + th3^8 + th4^8)/2];
+  e4theta = Sum[Coefficient[thE8, z, 2 n] q^n, {n, 0, 4}];
+  e4sigma = 1 + 240 Sum[DivisorSigma[3, n] q^n, {n, 1, 4}];
+  inv8 = Normal[Series[Product[(1 - q^n)^-8, {n, 1, 8}], {q, 0, 4}]];
+  chi = Normal[Series[e4theta inv8, {q, 0, 3}]];
+  coeffs = Table[Coefficient[chi, q, n], {n, 0, 3}];
+  checkExact["v994 THETA_E8/eta^8 [E]: SeriesCoefficient of (EllipticTheta[2]^8+EllipticTheta[3]^8+EllipticTheta[4]^8)/2 / Product[(1-q^n)^8] = {1,248,4124,34752}; Jacobi theta_E8 matches E4=1+240 Sum sigma_3 (DedekindEta^8 = q^{1/3} Product)",
+    coeffs === {1, 248, 4124, 34752} &&
+    Expand[e4theta - e4sigma] === 0];
+];
+
+(* ---- (v997) GRAV.SPIN2.EMERGENCE.01: Barnes-Rivers ranks (5,3,1,1) ----
+   Python-only: Weyl^2 ghost residues, random-p numeric, SMG N=8 Fidkowski-Kitaev
+   toy (spectrum / Spin(7) / Schmidt / edge). *)
+Module[{basis, i, j, h, p, omega, theta, inner, act, proj, kinds, Ps, eye10, zero10, zQ},
+  basis = Flatten[Table[
+    h = ConstantArray[0, {4, 4}];
+    If[i === j, h[[i, i]] = 1, h[[i, j]] = h[[j, i]] = 1/Sqrt[2]];
+    h, {i, 1, 4}, {j, i, 4}], 1];
+  p = {0, 0, 0, 1};
+  omega = Outer[Times, p, p];
+  theta = IdentityMatrix[4] - omega;
+  inner[a_, b_] := Total[a b, 2];
+  act["2", h_] := theta.h.theta - theta Tr[theta.h]/(4 - 1);
+  act["1", h_] := theta.h.omega + omega.h.theta;
+  act["0s", h_] := theta Tr[theta.h]/(4 - 1);
+  act["0w", h_] := omega Tr[omega.h];
+  kinds = {"2", "1", "0s", "0w"};
+  proj[kind_] := Table[Simplify[inner[a, act[kind, b]]], {a, basis}, {b, basis}];
+  Ps = Association[# -> proj[#] & /@ kinds];
+  eye10 = IdentityMatrix[10];
+  zero10 = ConstantArray[0, {10, 10}];
+  zQ[m_] := And @@ PossibleZeroQ /@ Flatten[Simplify[m]];
+  checkExact["v997 BARNES-RIVERS [E]: projector algebra P_i P_j=delta_ij P_i, sum=I_10; ranks (spin-2, spin-1, 0s, 0w)=(5,3,1,1) at p=(0,0,0,1)",
+    (And @@ (zQ[Ps[#].Ps[#] - Ps[#]] & /@ kinds)) &&
+    (And @@ Flatten[Table[
+      If[a === b, True, zQ[Ps[a].Ps[b]]],
+      {a, kinds}, {b, kinds}]]) &&
+    zQ[Total[Ps /@ kinds] - eye10] &&
+    MatrixRank[Ps["2"]] === 5 && MatrixRank[Ps["1"]] === 3 &&
+    MatrixRank[Ps["0s"]] === 1 && MatrixRank[Ps["0w"]] === 1];
+];
+
+(* ---- round-4 representative exact mirrors; native Arb remains Python-only ---- *)
+Get[FileNameJoin[{DirectoryName[$InputFileName], "tfpt_round4.wl"}]];
+(* Round 7: bounded exact free-field/twist/mirror/Ward representatives. *)
+Get[FileNameJoin[{DirectoryName[$InputFileName], "tfpt_round7.wl"}]];
+
 (* ---- summary ---- *)
 Print["--- Wolfram readouts: ", $pass, " passed, ", $fail, " failed ---"];
 If[$fail == 0, Print["ALL WOLFRAM CHECKS PASSED"]];

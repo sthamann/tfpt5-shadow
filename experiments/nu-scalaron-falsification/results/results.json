@@ -1,0 +1,92 @@
+{
+  "project": "nu-scalaron-falsification",
+  "hypothesis_sha16": "4941b396729636de",
+  "candidate": "FLAV.NUSCALE.05 (v986)",
+  "axes": {
+    "m3_vs_nufit": {
+      "pred": 0.051240310179089595,
+      "meas": 0.050129831437977126,
+      "dev": 0.022152054161331147,
+      "verdict": "consistent",
+      "note": "dev inside the >50% v482 RG scheme envelope"
+    },
+    "sigma_mnu_vs_desi": {
+      "pred_a": 0.06006391345143634,
+      "pred_b": 0.059894788788457116,
+      "bound_95": 0.0642,
+      "margin_a": 0.00413608654856365,
+      "margin_b": 0.004305211211542877,
+      "verdict": "consistent",
+      "note": "K1 kill axis: LCDM 95% UL sits 6.9% above the prediction -- one DESI-class improvement decides. HONESTY (mirrors the corpus sum-m_nu row): the DESI DR2 effective-mass POSTERIOR squeeze puts even the NO floor 0.0588 eV at ~+3 sigma under LCDM (model-dependent; w0waCDM relaxes it) -- the candidate at 0.0600 eV sits under the same model-dependent pressure"
+    },
+    "m_beta_vs_katrin": {
+      "pred": 0.009165317023084412,
+      "bound": 0.45,
+      "verdict": "consistent",
+      "note": "prediction 0.0092 eV is ~49x below the KATRIN bound -- not a near-term discriminator"
+    },
+    "m_bb_vs_kamland": {
+      "pred_interval": [
+        0.001459987916773737,
+        0.0038281546873626315
+      ],
+      "bound_range": [
+        0.028,
+        0.122
+      ],
+      "verdict": "consistent",
+      "note": "NO interval [1.46e-03, 3.83e-03] eV sits below the current bound window; LEGEND-1000-class kills only IO"
+    }
+  },
+  "M_scal_GeV": 30599694999637.406,
+  "M_R_GeV": 91799084998912.22,
+  "m3_eV": 0.051240310179089595,
+  "pmns": {
+    "sin2_th12": 0.30674735724491053,
+    "sin2_th23": 0.5,
+    "sin2_th13": 0.023108435158881103,
+    "delta": "4pi/3",
+    "J_PMNS": -0.02965298692385133
+  },
+  "variants": {
+    "a_tfpt_internal": {
+      "m1_eV": 0.0,
+      "m2_eV": 0.008823603272346747,
+      "m3_eV": 0.051240310179089595,
+      "sigma_mnu_eV": 0.06006391345143634,
+      "m_beta_eV": 0.009165317023084412,
+      "m_bb_interval_eV": [
+        0.001459987916773737,
+        0.0038281546873626315
+      ],
+      "Ue_sq": [
+        0.6772326590112605,
+        0.2996589058298584,
+        0.023108435158881103
+      ]
+    },
+    "b_hybrid": {
+      "m1_eV": 0.0,
+      "m2_eV": 0.008654478609367522,
+      "m3_eV": 0.051240310179089595,
+      "sigma_mnu_eV": 0.059894788788457116,
+      "m_beta_eV": 0.009116866346889721,
+      "m_bb_interval_eV": [
+        0.0014093082053165387,
+        0.003777474975905433
+      ],
+      "Ue_sq": [
+        0.6772326590112605,
+        0.2996589058298584,
+        0.023108435158881103
+      ]
+    }
+  },
+  "leptogenesis": {
+    "M1_GeV": 733784906.4466358,
+    "washout_m1_eV": 0.005124031017908959,
+    "note": "v184 relations at the frozen M_R; Boltzmann re-run is a declared follow-up, not consumed here"
+  },
+  "verdict": "consistent",
+  "honest_scope": "consistency pass against frozen dated bounds; NOT blind confirmation (m3/PMNS channels were known); holdout = future releases only; candidate stays [C]/[N], mechanism [O]; the LCDM posterior squeeze (corpus sum-m_nu row: tension) applies to the whole NO branch incl. this candidate -- model-dependent"
+}

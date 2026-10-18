@@ -28,6 +28,35 @@
       "note": "the original 2.4 sigma hint; SUPERSEDED by PR4 (same Planck data family + shared absolute-angle calibration systematic -> NOT independent of the PR4 value)"
     }
   ],
+  "beta_frequency_exponent": [
+    {
+      "experiment": "Planck PR4 all bands, f_sky=0.93 (Eskilt 2022)",
+      "value": -0.35,
+      "sigma_plus": 0.48,
+      "sigma_minus": 0.47,
+      "nu0_GHz": 150,
+      "reference": "arXiv:2201.13347 (A&A 662 A10)",
+      "note": "power law beta_nu = beta_0 (nu/nu_0)^n, LFI 30/44 GHz included, no intrinsic-dust-EB model; consistent with the frequency-independent n=0"
+    }
+  ],
+  "anisotropic_birefringence": [
+    {
+      "experiment": "Planck PR3+PR4 harmonic estimator (Zagatti et al. 2024)",
+      "A_CB_limit_95CL_deg2": 0.09,
+      "L_max": 1500,
+      "reference": "arXiv:2401.11973 (JCAP 05 (2024) 034)",
+      "note": "scale-invariant C_L^{alpha alpha} amplitude bound; spectrum consistent with zero at ~2 sigma up to L=1500"
+    }
+  ],
+  "birefringence_cross_correlations": [
+    {
+      "experiment": "Planck PR3+PR4 alpha x T/E/B (Zagatti et al. 2024)",
+      "compatible_with_null": true,
+      "L_max": 1500,
+      "reference": "arXiv:2401.11973 (JCAP 05 (2024) 034)",
+      "note": "cross-correlations of the reconstructed birefringence field with CMB T, E and B all compatible with null up to L=1500"
+    }
+  ],
   "omega_b": [
     {
       "experiment": "Planck 2018 TT,TE,EE+lowE+lensing",
@@ -75,5 +104,5 @@
       "note": "TFPT predicts lambda = sqrt(phi0(1-phi0)) = 0.224376"
     }
   ],
-  "downloaded": "2026-06-15 (values transcribed from the cited refereed/preprint sources)"
+  "downloaded": "2026-06-15 (values transcribed from the cited refereed/preprint sources); frequency-exponent, anisotropy and cross-correlation rows added 2026-08-27"
 }

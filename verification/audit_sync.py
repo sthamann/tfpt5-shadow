@@ -40,6 +40,8 @@ be REMOVED, never added for new work).
 
 stdlib only.
 """
+from tex_sources import read_tex, source_chunks
+
 import csv
 import json
 import hashlib
@@ -48,6 +50,7 @@ import sys
 from pathlib import Path
 
 import make_changelog_web
+import make_discipline_stats
 import make_docs_map
 import make_script_index
 
@@ -135,10 +138,24 @@ def check_suite(registered: list[str]) -> None:
         if not target.exists() or target.read_text() != content:
             err("A.generated", f"{target.relative_to(ROOT)} stale -- run make_changelog_web.py")
 
+    # website discipline-stats mirror fresh? (generated from the suite's own
+    # files by make_discipline_stats.py; keeps /method from drifting)
+    for target, content in make_discipline_stats.build().items():
+        if make_discipline_stats.WEBSITE_DIR in target.parents \
+                and not make_discipline_stats.WEBSITE_DIR.exists():
+            continue
+        if not target.exists() or target.read_text() != content:
+            err("A.generated", f"{target.relative_to(ROOT)} stale -- run make_discipline_stats.py")
+
 
 # -------------------------------------------------------------- B: papers
 def check_papers(registered: list[str], baseline: dict) -> None:
-    bodies = "".join((ROOT / f"{d}.tex").read_text() for d in ACTIVE_DOCS)
+    # A generated index is not a paper-body citation, even when included by TeX.
+    index = (ROOT / "tex-artefacts" / "verification.tex").resolve()
+    history = (ROOT / "changelog.tex").resolve()
+    bodies = "".join(chunk.text for d in ACTIVE_DOCS
+                     for chunk in source_chunks(ROOT / f"{d}.tex")
+                     if index not in chunk.include_chain and history not in chunk.include_chain)
     bodies_norm = normalise_tex(bodies)
     body_exceptions = set(baseline.get("body_citation_exceptions", []))
     for s in registered:
@@ -149,8 +166,8 @@ def check_papers(registered: list[str], baseline: dict) -> None:
                              f"(master index alone does not count)")
 
     # reverse: every citation target must be a registered script
-    all_tex = bodies + (ROOT / "changelog.tex").read_text()
-    all_tex += "".join(p.read_text() for p in (ROOT / "tex-artefacts").glob("*.tex"))
+    all_tex = bodies + read_tex(ROOT / "changelog.tex")
+    all_tex += "".join(read_tex(p) for p in (ROOT / "tex-artefacts").glob("*.tex"))
     reg_set = set(registered)
     for m in re.finditer(r"\\veri\{([^}]*)\}", all_tex):
         target = normalise_tex(m.group(1))
@@ -164,7 +181,7 @@ def check_papers(registered: list[str], baseline: dict) -> None:
             err("B.reverse", f"\\vref{{{m.group(1)}}} references unknown module")
 
     # changelog: every non-grandfathered module id must appear
-    chl = (ROOT / "changelog.tex").read_text()
+    chl = read_tex(ROOT / "changelog.tex")
     grandfathered = set(baseline.get("changelog_grandfathered", []))
     for s in registered:
         mid = module_id(s)
@@ -223,6 +240,8 @@ def check_website(registered: list[str]) -> None:
     # 1. verification mirror
     pub_v = WEB / "public" / "verification"
     want = {f"{s}.py" for s in registered} | {"tfpt_constants.py"}
+    want |= {p.name for p in VERIF.glob("math_support*.py")}
+    want.add("tex_sources.py")
     have = {p.name for p in pub_v.glob("*.py")}
     for name in sorted(want - have):
         err("D.verification", f"website/public/verification/{name} missing")
@@ -267,7 +286,10 @@ def check_website(registered: list[str]) -> None:
     reg_files = {f"{s}.py" for s in registered} | {"tfpt_constants.py"}
     for sub in ("app", "components", "lib"):
         for f in sorted((WEB / sub).rglob("*.ts*")):
-            for name in set(re.findall(r"v\d+_[A-Za-z0-9_]+\.py", f.read_text())):
+            # left word boundary: probe filenames like cotlar_v2_complete_comb_probe.py
+            # must not false-match as a vN script reference
+            for name in set(re.findall(r"(?<![A-Za-z0-9_])v\d+_[A-Za-z0-9_]+\.py",
+                                       f.read_text())):
                 if name not in reg_files:
                     err("D.code", f"{f.relative_to(ROOT)} references unknown script {name}")
 
@@ -280,7 +302,7 @@ def check_website(registered: list[str]) -> None:
 
 # -------------------------------------------------------------- E: versions
 def tex_version() -> str:
-    text = (ROOT / "tex-artefacts" / "version.tex").read_text()
+    text = read_tex(ROOT / "tex-artefacts" / "version.tex")
     return re.search(r"\\def\\TFPTversion\{([^}]*)\}", text).group(1)
 
 
@@ -346,6 +368,9 @@ def main() -> None:
     if SHADOW:
         print("shadow mode: website/ absent -- skipping website mirror (D), "
               "website version (E) and website wolfram-page (F) checks")
+    import check_project_scope
+    for problem in check_project_scope.check(ROOT):
+        err("G.ownership", problem)
     check_suite(registered)
     check_papers(registered, baseline)
     check_csv_wellformed()

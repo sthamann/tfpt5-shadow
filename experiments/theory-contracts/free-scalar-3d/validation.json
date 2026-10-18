@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-09-06",
+  "status": "EXACT_FREE_MATTER_THEORY_CONTRACT_UNPROMOTED",
+  "scope": "Fixed density/current admit a finite-range symmetric staggered stress with exact classical Ward identities on Z^3 and exact Weyl-quantized identities on a finite periodic lattice.",
+  "source_sha256": {
+    "free_scalar_ward.py": "6a07fde8b3c5336abac603e1979326784d9a2c451e5a5c68b4f03f9c7aed4d81",
+    "README.md": "467ab73b43cf1df335cb732e3fac452d0870be00a04f9ed7140fdb9c96bbc5d1"
+  },
+  "validation": {
+    "command": "python experiments/theory-contracts/free-scalar-3d/free_scalar_ward.py",
+    "result": "68/68 exact checks passed",
+    "exact_checks": 68,
+    "floating_checks": 0,
+    "exit_code": 0,
+    "runtime": "macOS arm64, Python 3.14, SymPy 1.14.0",
+    "transcript_sha256": "b638c7f8e18e724452b90b392904a05edca07b135ffbe72d45a433082c605ede",
+    "evidence": [
+      "Universal local Ward residuals vanish as polynomials in independent lattice symbols.",
+      "Finite support, symmetry and negative-control failures are checked.",
+      "Actual bilinear vertices obey reciprocal-axis sign gluing.",
+      "Periodic finite-volume energy/momentum telescoping is checked separately from the universal proof.",
+      "Hamiltonian Poisson action agrees with the real-space equations and exact quadratic Weyl commutators."
+    ],
+    "review": "Agent-authored derivation with parent-agent algebra review and strengthened symbolic tests; not external independent expert validation."
+  },
+  "cost": "Fixed-size exact symbolic local-stencil algebra plus separate 2^3 and 3^3 periodic audits; no external datasets or fitted inputs.",
+  "boundaries": [
+    "No interactions or nonlinear gravity feedback.",
+    "No order-g^2 constraint closure or Kubo response.",
+    "No receiver for nonzero total energy in the deleted homogeneous gravity block.",
+    "No shared microscopic TFPT parent or quantum continuum limit.",
+    "No T1-T8 status promotion, empirical evidence, full TOE or RH claim."
+  ]
+}

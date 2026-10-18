@@ -1,0 +1,117 @@
+{
+  "project": "nu-scalaron-falsification",
+  "pass": "v2 spectral-matrix (review wave 3)",
+  "hypothesis_sha16": "c912e95e91a247ac",
+  "premise": "PREMISE_FOUND (Q_+ at v10/v50/v69, Spec={1,2,3})",
+  "axes": {
+    "K5_untextured_Y": {
+      "pred_sigma_eV": 837.7489047742962,
+      "pred_heaviest_eV": 559.0050788301392,
+      "nufit_m3_eV": 0.050129831437977126,
+      "overshoot_vs_nufit_m3": 11151.146189704732,
+      "desi_bound_eV": 0.0642,
+      "katrin_bound_eV": 0.45,
+      "verdict": "killed",
+      "note": "naive m ~ v^2 yt^2 / M_1 is 11151x NuFIT m3 and 13049x the DESI Sigma bound -- texture suppression is mandatory; this kills Y proportional to I, not Q_+"
+    },
+    "m3_M3_slice_vs_nufit": {
+      "pred": 0.051240310179089546,
+      "meas": 0.050129831437977126,
+      "dev": 0.022152054161330037,
+      "verdict": "consistent",
+      "note": "this is the v1 number: M3 = 3 M_scal and y3 = yt are the same inputs.  Not a new confirmation."
+    },
+    "m_beta_m_bb": {
+      "pred": null,
+      "verdict": "data_limited",
+      "note": "m_beta and m_bb require a full 3x3 Y_nu (and charged-lepton basis).  Not computed; not invented."
+    }
+  },
+  "M_scal_GeV": 30599694999637.406,
+  "epsilon": 0.00028272564982967477,
+  "M_R_eigenvalues_GeV": {
+    "M1": 8651318653.362335,
+    "M2": 17302637306.72467,
+    "M3": 91799084998912.22
+  },
+  "unification": {
+    "M1_equals_v212_decuple_by_definition": true,
+    "M1_formula": "eps M_scal == M_scal phi0^2 / A_Lambda",
+    "M3_equals_v986_rung": true,
+    "M2_is_new_prediction": true,
+    "ansatz": "mixed insertion (eps, 2 eps, 3) is reviewer ansatz, not derived from Q_+",
+    "repackaging": "M1 (v212) and M3 (v986) packaged as eigenvalues; the unification is exact-by-construction",
+    "new": "M2 = 2 eps M_scal"
+  },
+  "rg": {
+    "yt_at_M3": 0.44197399765711176,
+    "R_at_M3": 0.7944014076884586,
+    "yt_at_M2": 0.5157067573329812,
+    "R_at_M2": 0.814380979370167,
+    "yt_at_M1": 0.5229368902337768,
+    "R_at_M1": 0.8167477841848322
+  },
+  "naive_Y_eq_yt_I": {
+    "Y_frozen": "y_t(M3) * I, y_t(M3) = 0.441974",
+    "M_nu_formula": "-(v^2/2) Y^T M_R^{-1} Y  (v = 246.22 GeV)",
+    "M_nu_match_GeV_diag": [
+      -6.844280323185243e-07,
+      -3.4221401615926215e-07,
+      -6.45017867329668e-11
+    ],
+    "m_matching_eV_sorted": [
+      0.0645017867329668,
+      342.21401615926214,
+      684.4280323185243
+    ],
+    "m_eV_on_Qplus_eigenlines_RGdown": [
+      559.0050788301392,
+      278.6925856339779,
+      0.051240310179089546
+    ],
+    "m_sorted_eV": [
+      0.051240310179089546,
+      278.6925856339779,
+      559.0050788301392
+    ],
+    "dm2_21_eV2": 77669.55466178272,
+    "dm2_31_eV2": 312486.6755323207,
+    "sigma_mnu_eV": 837.7489047742962,
+    "note_mixing": "M_nu is diagonal in the Q_+ eigenbasis; this is NOT the frozen v270 PMNS -- mass eigenvalues suffice to kill.  m_beta/m_bb not reported (need a 3x3 Y_nu in the charged-lepton basis)."
+  },
+  "constraint": {
+    "type": "DATA_CONSTRAINS_TEXTURE",
+    "y3_frozen": 0.44197399765711176,
+    "y3_equals_yt_M3": true,
+    "m3_from_frozen_y3_eV": 0.051240310179089546,
+    "m3_vs_v1": "same M3 = 3 M_scal and same y3 = yt => same m3 as v1",
+    "aligned_eigenbasis": {
+      "y1_for_m1_eq_0": 0.0,
+      "y1_DESI_95UL": 0.0012265523079875668,
+      "y2_for_nufit_m2": 0.0024629435983119638,
+      "y2_for_v1_internal_m2": 0.0024868924203535524,
+      "y2_over_y3_nufit": 0.005572598413861311,
+      "y1_over_y3_DESI_UL": 0.0027751684816063305,
+      "y2_over_y3_v1_internal": 0.005626784456860538
+    },
+    "targets_eV": {
+      "m1_floor": 0.0,
+      "m1_DESI_room": 0.004305211211542925,
+      "m2_nufit": 0.008654478609367522,
+      "m2_v1_internal": 0.008823603272346738,
+      "m3_from_y3": 0.051240310179089546,
+      "m3_nufit": 0.050129831437977126
+    },
+    "note": "no frozen 3x3 Y_nu exists; numbers above are the Yukawas the data WOULD require in the aligned eigenbasis.  They are constraints, not predictions.  An aligned diagonal Y does not produce v270 PMNS (M_nu would be diagonal in the Q_+ basis)."
+  },
+  "kill_status": {
+    "K1": "not triggered (M3-slice Sigma would still sit at v1 0.060 eV IF y1=y2 were suppressed as constrained; the untextured operator is already dead on K5)",
+    "K2": "not triggered (M3 unchanged vs v1)",
+    "K3": "not triggered (NO still assumed)",
+    "K4": "not applicable this pass (no m_bb without 3x3 Y_nu)",
+    "K5": "TRIGGERED -- untextured Y = yt I is killed",
+    "K6": "not triggerable (no frozen corpus 3x3 Y_nu)"
+  },
+  "verdict": "DATA_CONSTRAINS_TEXTURE",
+  "honest_scope": "EXPLORATION.  Q_+ is corpus (PREMISE_FOUND).  The mixed insertion (eps, 2 eps, 3) is a reviewer ansatz; M1 and M3 are a reparametrization of two existing scales; M2 is the one new prediction.  No 3x3 Dirac texture is frozen in the corpus -- this pass does not invent one.  Untextured Y ~ I is killed by ~10^4 overshoot.  Data require |y1|/y3 <~ 1e-3 and |y2|/y3 ~ few 1e-3 in the aligned eigenbasis.  Candidate row FLAV.NUSCALE.05 stays [C]/[N], mechanism [O]; nothing here moves a ledger marker."
+}

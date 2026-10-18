@@ -24,7 +24,7 @@ The lemma chain (reviewer's decomposition), with status:
   L4 [E] the quasi-free state covariance is determined by the DtN, C = (1+e^H)^{-1}
         with H = log-DtN -- v258 (PS.DIRAC.03): log((1-C)C^{-1}) = H exactly.
   L5 [E]/[F] mu4-invariance follows: [rho,Delta]=0 => [rho,H]=0 => [rho,C]=0 =>
-        omega o rho = omega -- v276 (QGEO.SYM.03) + Lean FORM.QGEO.03 + v280.
+        omega o rho = omega -- v276 (QGEO.SYM.03) + Lean FORM.QGEO.04 + v280.
   L_open [O] the ONE residual: the raw RP seam state is the CONSTANT-CURVATURE
         (geometric) state.  THEN Troyanov closes the geometry: 4 cone points of angle
         pi give chi_orb = 2 - 4(1-1/2) = 0, so the unique constant-curvature
@@ -61,7 +61,7 @@ CHAIN = [
     ("L2 four marks force the pillowcase class", "QGEO.MARKS.02/03 (v195/v216), QGEO.PILLOW.01 (v214)", True),
     ("L3 flat orbifold Steklov = sqrt(-Delta_flat)", "Lee-Uhlmann symbol + v280 (this)", True),
     ("L4 covariance determined by DtN C=(1+e^H)^-1", "PS.DIRAC.03 (v258)", True),
-    ("L5 mu4-invariance [rho,C]=0 => omega o rho=omega", "QGEO.SYM.03 (v276) + Lean FORM.QGEO.03 + v280", True),
+    ("L5 mu4-invariance [rho,C]=0 => omega o rho=omega", "QGEO.SYM.03 (v276) + Lean FORM.QGEO.04 + v280", True),
     ("L_open raw seam = constant-curvature geometric state", "OPEN (Troyanov -> flat tau=i)", False),
 ]
 

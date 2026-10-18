@@ -1,0 +1,368 @@
+% Source-preserving integrated proof body; input from toe_round7_proofs.tex.
+\subsubsection*{Round 7: the actual DET parent, its exact factorized gap, and the local-defect obstruction}
+\label{sec:toe-r7-mirror}
+\noindent\emph{The displayed arguments below are the proof-bearing source.  The current
+repository regression is \veri{v1034\_\allowbreak parent\_\allowbreak mirror.py}; its finite checks audit the
+implementation and do not replace the universal steps in the proof.}
+
+\begingroup
+\def\cH{\mathcal H}
+\def\1{\mathbf 1}
+\def\spec{\operatorname{spec}}
+\def\ket#1{|#1\rangle}
+\def\bra#1{\langle#1|}
+\begin{keybox}[Scope and exact claim boundary]
+The source audit separates three operators which had previously been discussed
+under one ``mirror parent'' label.  The v1002 DET16 onsite term is the flat
+defect projector $Q=\1-P_\phi$.  The v1008 wall scaffold instead tests the
+four-flavour momentum-cell Hamiltonian
+\[
+ h(d)=d(N-2)+2Q,\qquad |d|\leq 3/5.
+\]
+The later v1027 identity constructs an additive dressed-number parent $N_a$;
+it is not the same operator as $Q$.  For the actual v1008 momentum-factorized
+Hamiltonian we prove, without a grid scan, the volume-independent many-body and
+canonical-field threshold
+\[
+ \Delta_{\rm fact}\geq 1+\frac{\sqrt3}{2}=1.8660254037\ldots.
+\]
+This is the exact infimum of the continuous dispersion envelope; the source's
+129-point grid instead attains $1.8660698881694362$.  It is not a real-space
+locality theorem.  Indeed, for two real-space DET cells, a newly chosen bare
+flavour-diagonal bond analogue $T_{\rm bare}$ satisfies (for even $n\geq4$)
+\[
+ \|T_{\rm bare}\ket{\Omega\Omega}\|^2=\frac n2|s|^2>0,
+ \qquad (Q_x+Q_y)\ket{\Omega\Omega}=0.
+\]
+Consequently no finite $\kappa$ can obey
+$T_{\rm bare}\geq-\kappa(Q_x+Q_y)$.  An explicitly gauge-dressed operator,
+with the link shift applied as part of every hop, gives the same obstruction
+inside finite $\mathbb Z_2/\mathbb Z_4$ Gauss sectors.  Thus the
+desired elementary relative-$Q$ proof is impossible for the unmodified local
+parent; a genuine small-perturbation theorem or a changed local bond is needed.
+An explicit coupling-fixed bond repair is given, but is clearly marked as a
+new, unlanded interaction.  No T3, T4, TOE, or RH claim is made.
+\end{keybox}
+
+\paragraph{Source contract and nomenclature.}
+
+The certificate reads, but does not import, the following landed files at the
+audited repository tip:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+source & exact object used here & status relevant to this note\\
+\midrule
+v1002 & $Q=\1-P_\phi$ on 16 complex modes & onsite projector only\\
+v1008 & $h(d)=d(N-n/2)+JQ$, $n=4,J=2$ & momentum-cell scaffold\\
+v1024 & positive seam/number-square parent & separate construction\\
+v1027 & $N_a=\sum_i a_i^\dagger a_i$, $Q\leq N_a\leq nQ$ & algebraic identity\\
+\bottomrule
+\end{tabular}
+\end{center}
+In particular, ``DET32'' is sometimes used physically for 32 real components,
+whereas the repository's operator is named DET16 because it has 16 complex
+fermion modes.  We use $n$ for the number of complex modes and retain the
+repository's DET16 name.
+
+Let
+\begin{equation}
+ \ket{\Omega_\phi}=\frac{\ket0+e^{i\phi}\ket F}{\sqrt2},\qquad
+ P_\phi=\ket{\Omega_\phi}\bra{\Omega_\phi},\qquad Q=\1-P_\phi.
+ \label{eq:toe-r7-mirror-defect}
+\end{equation}
+Here $\ket F=c_1^\dagger\cdots c_n^\dagger\ket0$ and $n$ is even.  Both
+$\ket0$ and $\ket F$ are assumed to be gauge singlets; this is the inherited
+full-DET-singlet premise, not a conclusion of this note.  The common rotation
+$e^{-i\phi N/n}$ removes $\phi$ from~\eqref{eq:toe-r7-mirror-defect} and commutes with $N$ and
+ordinary flavour-diagonal hopping, so every spectrum below is phase independent.
+
+The elementary algebra already confirms the proposed diagnosis:
+\begin{equation}
+ [Q,(-1)^N]=0,
+ \qquad [Q,N]\neq0,
+ \qquad \|[Q,N]\|_{\rm F}^2=\frac{n^2}{2}.
+ \label{eq:toe-r7-mirror-paritynotnumber}
+\end{equation}
+Thus the flat projector preserves parity, not naive mirror number.  For the
+v1008 analogue $n=4$, the last value is $8$; for DET16 it is $128$.
+
+\paragraph{Exact theorem for the parent that v1008 actually computes.}
+
+The v1008 routine \texttt{edge\_cluster\_hamiltonian} is
+\begin{equation}
+ h(d)=d\left(N-\frac n2\right)+JQ,\qquad
+ n=4,\qquad J=2,\qquad |d|\leq t_{\rm src}=\frac35.
+ \label{eq:toe-r7-mirror-hd}
+\end{equation}
+The scan uses $d=\pm t_{\rm src}\sin k$.  This is a separate Fock cell at every
+sampled momentum, not a real-space hopping Hamiltonian.  In particular, a
+standard symmetric nearest-neighbour term
+$s\sum_x(c_x^\dagger c_{x+1}+\mathrm{h.c.})$ has dispersion magnitude
+$2|s|$ (up to a momentum/phase convention).  Matching the v1008 dispersion
+amplitude would therefore give $|s|=t_{\rm src}/2=3/10$, not $3/5$.
+
+\paragraph{Lemma 1 (complete one-cell spectrum).}
+For $1\leq r\leq n-1$, every occupation-$r$ state has energy
+\begin{equation}
+ E_r(d)=J+d\left(r-\frac n2\right).
+ \label{eq:toe-r7-mirror-intermediate}
+\end{equation}
+On $\operatorname{span}\{\ket0,\ket F\}$, after removing $\phi$, the matrix is
+\begin{equation}
+ \begin{pmatrix}
+ -nd/2+J/2&-J/2\\
+ -J/2&nd/2+J/2
+ \end{pmatrix},
+\end{equation}
+with eigenvalues
+\begin{equation}
+ E_\pm(d)=\frac J2\pm
+ \sqrt{\frac{J^2}{4}+\frac{n^2d^2}{4}}.
+ \label{eq:toe-r7-mirror-doublet}
+\end{equation}
+
+\paragraph{Proof.}
+$P_\phi$ vanishes on occupation sectors $1,\dots,n-1$, which gives
+\eqref{eq:toe-r7-mirror-intermediate}.  Its restriction to the empty/full doublet is the
+rank-one matrix specified by~\eqref{eq:toe-r7-mirror-defect}; the displayed characteristic
+polynomial gives~\eqref{eq:toe-r7-mirror-doublet}. \hfill$\square$
+
+For the source values, $E_-(d)\leq0$, while the least intermediate energy is
+$2-3/5=7/5>0$.  The ground state is therefore unique throughout the whole
+declared dispersion interval.  A canonical $c_i$ or $c_i^\dagger$ maps this
+ground doublet only to the $r=1$ or $r=n-1$ sectors, with nonzero amplitude.
+The exact canonical spectral threshold at $x=|d|$ is consequently
+\begin{equation}
+ g(x)=\frac J2-\left(\frac n2-1\right)x
+      +\sqrt{\frac{J^2}{4}+\frac{n^2x^2}{4}}.
+ \label{eq:toe-r7-mirror-gx}
+\end{equation}
+
+\paragraph{Theorem 1 (source-fixed all-volume factorized gap).}
+Let $K$ be any finite set of momentum cells, with arbitrary dispersions
+$|d_k|\leq3/5$, and define the graded tensor-product Hamiltonian
+$H_K=\sum_{k\in K}h(d_k)$.  Then $H_K$ has a unique product ground state and
+\begin{equation}
+ \operatorname{gap}(H_K)\geq
+ \inf_{0\leq x\leq3/5}g(x)
+ =1+\frac{\sqrt3}{2}.
+ \label{eq:toe-r7-mirror-factgap}
+\end{equation}
+The same number is the uniform lower edge of canonical one-fermion spectral
+support.
+
+\paragraph{Proof.}
+For $n=4,J=2$, differentiation of~\eqref{eq:toe-r7-mirror-gx} gives the unique interior
+minimum
+\begin{equation}
+ x_*=\frac{J(n-2)}{2n\sqrt{n-1}}=\frac1{2\sqrt3}<\frac35,
+\end{equation}
+and substitution gives $g(x_*)=1+\sqrt3/2$.  The other empty/full eigenstate
+costs at least $J=2$, and the $r=2$ sector also costs at least $2$, so neither
+undercuts~\eqref{eq:toe-r7-mirror-factgap}.  The even cell Hamiltonians commute on the graded
+tensor product and energies add.  Any state orthogonal to the product ground
+excites at least one cell, proving the same bound independently of $|K|$.
+\hfill$\square$
+
+The analytic infimum $1.8660254037844386\ldots$ explains the lower envelope of
+v1008's reported probe minimum; it is not the exact minimum of the finite scan.
+The source grid $k_j=-\pi+j\pi/64$, $j=0,\ldots,128$, attains
+$1.8660698881694362$.  The locality limit is equally exact: a projector local
+in momentum is not a bounded-range real-space interaction.
+Equation~\eqref{eq:toe-r7-mirror-factgap} therefore does not prove the missing local,
+operator-valued TFPT parent theorem.
+
+\paragraph{Why the desired relative-defect bound fails in real space.}
+
+Put two DET cells on a bond and let
+\begin{equation}
+ D=J(Q_x+Q_y),\qquad
+ T_{\rm bare}=s\sum_{i=1}^n
+ (c_{x i}^\dagger c_{y i}+c_{y i}^\dagger c_{x i}).
+ \label{eq:toe-r7-mirror-realbond}
+\end{equation}
+This is a bare-bond theorem.  The numerical choice $s=3/5$ below is a newly
+chosen stress analogue, not a real-space coefficient derived from v1008.
+For even $n\geq4$, the full-Fock CAR calculation contains only $2n$ nonzero
+output monomials and does not require construction of the $2^{2n}$ matrix.
+
+\paragraph{Lemma 2 (minimal kernel incompatibility).}
+For every even $n\geq4$ and $s\neq0$,
+\begin{align}
+ D\ket{\Omega\Omega}&=0,
+ &\bra{\Omega\Omega}T_{\rm bare}\ket{\Omega\Omega}&=0,\label{eq:toe-r7-mirror-zeroexp}\\
+ \|T_{\rm bare}\ket{\Omega\Omega}\|^2&=\frac n2|s|^2>0,
+ &(Q_x+Q_y)T_{\rm bare}\ket{\Omega\Omega}&=
+ 2T_{\rm bare}\ket{\Omega\Omega}.
+ \label{eq:toe-r7-mirror-nonzeroimage}
+\end{align}
+
+\paragraph{Proof.}
+Only the $\ket{F,0}$ and $\ket{0,F}$ components of the product DET vacuum can
+hop.  Each has amplitude $1/2$.  The two hopping orientations and $n$ flavours
+produce $2n$ mutually orthogonal states, each of modulus $|s|/2$, which proves
+the norm in~\eqref{eq:toe-r7-mirror-nonzeroimage}.  Both sites have occupation $1$ or $n-1$
+after the hop, hence both local projectors $P_x,P_y$ annihilate the image.
+\hfill$\square$
+
+The restriction $n\geq4$ is necessary for that counting statement.  At
+$n=2$ the two orientations land on the same two basis states and add
+constructively.  Direct CAR evaluation gives
+$\|T_{\rm bare}\ket{\Omega\Omega}\|^2=2|s|^2$, rather than the former
+formula's $|s|^2$.  The image is still nonzero, so the no-go below survives,
+but the claimed universal norm formula did not.
+
+\paragraph{Theorem 2 (no finite relative-defect constant).}
+There is no finite $\kappa$ such that
+\begin{equation}
+ T_{\rm bare}\geq-\kappa(Q_x+Q_y).
+ \label{eq:toe-r7-mirror-nokappa}
+\end{equation}
+
+\paragraph{Proof.}
+If~\eqref{eq:toe-r7-mirror-nokappa} held, the positive operator
+$B=T_{\rm bare}+\kappa(Q_x+Q_y)$ would have zero expectation in
+$\ket{\Omega\Omega}$ by~\eqref{eq:toe-r7-mirror-zeroexp}.  Positivity then implies
+$B\ket{\Omega\Omega}=0$.  Since $(Q_x+Q_y)\ket{\Omega\Omega}=0$, this would say
+$T_{\rm bare}\ket{\Omega\Omega}=0$, contradicting~\eqref{eq:toe-r7-mirror-nonzeroimage}.
+\hfill$\square$
+
+For the newly chosen bare-bond analogue $n=4,J=2,s=3/5$,
+\begin{equation}
+ \|T_{\rm bare}\ket{\Omega\Omega}\|^2=\frac{18}{25}.
+\end{equation}
+Let $b=\sqrt{18/25}$ and normalize
+$\ket w=T_{\rm bare}\ket{\Omega\Omega}/b$.  Direct CAR evaluation gives
+$\bra wT_{\rm bare}\ket w=0$ and $\bra wD\ket w=2J$.  The compression of
+$D+T_{\rm bare}$ to
+$\operatorname{span}\{\ket{\Omega\Omega},\ket w\}$ is
+\begin{equation}
+ \begin{pmatrix}0&b\\b&2J\end{pmatrix}.
+\end{equation}
+Thus the variational principle gives the exact strict bound
+\begin{equation}
+ E_0(D+T_{\rm bare})\leq
+ 2-\frac{\sqrt{118}}5=-0.172556\ldots<0.
+ \label{eq:toe-r7-mirror-ritz}
+\end{equation}
+The old product vacuum is not frustration free once ordinary hopping is on.
+This does not prove gap closure; it proves that the proposed elementary
+relative-$Q$ route cannot establish a gap.
+
+\paragraph{Gauge-dressed theorem and actual link action.}
+The bare theorem above makes no Gauss-sector claim.  For the $n=4$ analogue
+and $q=2,4$, now adjoin an oriented link basis
+$\{\ket e:e\in\mathbb Z_q\}$ and define
+\begin{equation}
+ U\ket e=\ket{e+1\bmod q},\qquad
+ T_U=s\sum_{i=1}^n
+ \left(c_{x i}^\dagger Uc_{y i}
+ +c_{y i}^\dagger U^\dagger c_{x i}\right).
+ \label{eq:toe-r7-mirror-gaugehopping}
+\end{equation}
+This operator is implementable on matter Fock space tensored with the finite
+link space; it is fermion-even because each summand is a matter bilinear.
+Take the endpoint Gauss constraints to be
+$n_x-e=0$ and $n_y+e=0\pmod q$.  The starting vector
+$\ket{\Omega\Omega}\ket{0}_E$ is physical because its site occupations are
+$0$ or $4$.  Applying~\eqref{eq:toe-r7-mirror-gaugehopping}, including the link shift rather
+than assigning a flux afterwards, produces only
+\[
+ (n_x,n_y,e)=(3,1,3\bmod q)\quad\hbox{or}\quad(1,3,1\bmod q),
+\]
+and in both cases $n_x-e=0$ and $n_y+e=0\pmod q$.  Hence the nonzero hopping
+image is a physical flux excitation.  The checker applies the CAR and link
+actions term by term for both $q=2$ and $q=4$ and verifies every nonzero output,
+so Gauss preservation is not a post-hoc flux assignment.
+
+Let $E^2\ket{\pm1}=\ket{\pm1}$ and
+\begin{equation}
+ H_0=J(Q_x+Q_y)+h_EE^2,\qquad h_E\geq0.
+\end{equation}
+Both terms annihilate the physical starting vector, whereas $T_U$ does not.
+The same positivity-kernel argument therefore rules out any finite relative
+bound of $T_U$ by this complete positive local parent.  Moreover, with
+$\ket w=T_U\ket{\Omega\Omega,0_E}/b$, the exact Ritz compression is
+\begin{equation}
+ \begin{pmatrix}0&b\\b&2J+h_E\end{pmatrix},\qquad
+ E_0(H_0+T_U)\leq \frac{2J+h_E}{2}
+ -\sqrt{\frac{(2J+h_E)^2}{4}+b^2}.
+ \label{eq:toe-r7-mirror-gaugeritz}
+\end{equation}
+Thus the electric cost is part of the excited diagonal entry.  For the same
+newly chosen bond analogue $J=2,s=3/5$ and the illustrative choice $h_E=1$,
+$b^2=18/25$ and~\eqref{eq:toe-r7-mirror-gaugeritz} is
+$(25-\sqrt{697})/10=-0.140075756489\ldots<0$.
+
+\paragraph{An exact local repair boundary.}
+
+The following repair is included to make the result actionable, not to present
+a new source claim.  On a bond let
+\begin{equation}
+ R_{xy}=\1-P_xP_y=Q_x+Q_y-Q_xQ_y.
+\end{equation}
+It obeys $0\leq R_{xy}\leq Q_x+Q_y$.  For the flavour-diagonal hopping
+$K_{xy}$ with unit coefficient, $\|K_{xy}\|=n$ exactly.  Therefore
+\begin{equation}
+ R_{xy}K_{xy}R_{xy}\geq-nR_{xy}
+ \geq-n(Q_x+Q_y).
+ \label{eq:toe-r7-mirror-projectedbound}
+\end{equation}
+On a graph of maximum degree $z$, replacing ordinary hopping by its projected
+version yields
+\begin{equation}
+ J\sum_xQ_x+s\sum_{\langle xy\rangle}R_{xy}K_{xy}R_{xy}
+ \geq (J-zn|s|)\sum_xQ_x.
+ \label{eq:toe-r7-mirror-rawrepair}
+\end{equation}
+For the newly chosen periodic-1D bond analogue
+$J=2,z=2,n=4,s=3/5$, the margin is $-14/5$: projection alone is not enough.
+This number is not source-derived.  Mode-normalizing $K/n$ would give the
+positive margin $2-2(3/5)=4/5$, but that is another changed normalization.
+
+There is also a coupling-fixed positive repair with no new tunable parameter:
+\begin{equation}
+ B_{xy}=|s|\left[nR_{xy}+\operatorname{sgn}(s)
+ R_{xy}K_{xy}R_{xy}\right]\geq0.
+ \label{eq:toe-r7-mirror-counterterm}
+\end{equation}
+For the newly chosen $s=3/5$ bond analogue its added coefficient is
+$|s|n=12/5$ per bond; neither value is inferred from v1008.
+The Hamiltonian $J\sum_xQ_x+\sum B_{xy}$ has the common product DET vacuum and
+is bounded below by $J\sum_xQ_x$, hence has gap at least $J$.  If $P_x$ and
+$K_{xy}$ are gauge invariant/covariant as assumed, so are $R_{xy}$ and
+$B_{xy}$.  Equation~\eqref{eq:toe-r7-mirror-counterterm} is nevertheless a new many-body
+bond counterterm and may alter the desired continuum dynamics.  It is an
+explicit design option, not evidence that TFPT already contains it.
+
+Keeping the ordinary hopping instead requires a real local-stability theorem.
+The existing repository audit correctly notes that such theorems yield a
+volume-independent window only under verified tensor-product/local-gap and
+small-coupling premises, and that their unevaluated constants do not certify
+the newly chosen $s=0.6$ bond point.  The exact obstruction above explains why
+those premises cannot be replaced by the wished-for one-line inequality.
+
+\paragraph{Reproducibility and claim boundary.}
+
+The repository certificate \veri{v1034\_\allowbreak parent\_\allowbreak mirror.py} is read-only.  Its JSON separates 29 exact
+algebra checks, six exact source-contract checks, and one floating-grid
+regression.  The printed tag identifies each class.  The checker
+performs an AST source-contract audit, exact $16\times16$ onsite algebra, exact
+symbolic minimization, and a sparse CAR-monomial two-cell calculation.  It does
+not build the $256\times256$ two-cell matrix; for general $n$ the obstruction
+uses only $2n$ output monomials when even $n\geq4$.  It also retains the
+exceptional $n=2$ collision as a regression and applies the $\mathbb Z_2$ and
+$\mathbb Z_4$ link shifts explicitly.  The reported decimal radical values are
+labelled evaluations; the separately labelled 129-point value is a floating
+reproduction of the actual finite-grid minimum, not an exact trigonometric
+certificate.
+
+What is finished is precise: v1008's factorized parent has an exact all-volume
+gap, while ordinary real-space hopping admits no relative bound against the
+flat local DET defects.  What remains open is equally precise: no local
+operator-valued TFPT Hamiltonian at a source-derived real-space coupling has
+acquired a proved volume-uniform mirror gap, and no net-chiral T3/T4
+construction follows.
+\textbf{NO RH CLAIM.}
+\endgroup

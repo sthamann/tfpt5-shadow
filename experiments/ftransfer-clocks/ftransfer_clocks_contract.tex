@@ -1,0 +1,182 @@
+% FTRANSFER.CLOCKS.01 -- the frozen external-clock contract for the F_transfer jets.
+% Companion to experiments/ftransfer-clocks/hypotheses/ftransfer_clocks_v1.yaml
+% (the YAML is the frozen preregistration of record; this document explains it).
+% Self-contained: compile with pdflatex; deliberately does NOT use the repo
+% style/macros (\veri etc.) -- it is an experiments/ design document, not a paper.
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1.9cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\titleformat{\section}{\normalfont\bfseries}{\thesection}{0.6em}{}
+\titlespacing*{\section}{0pt}{7pt}{2pt}
+\abovedisplayskip=4pt \belowdisplayskip=4pt
+\abovedisplayshortskip=2pt \belowdisplayshortskip=2pt
+
+\newcommand{\Fpole}{F_{\mathrm{pole}}}
+\newcommand{\FB}{F_{\mathrm{Boltzmann}}}
+\newcommand{\FQ}{F_{\mathrm{QCD}}}
+\newcommand{\FR}{F_{\mathrm{relic}}}
+\newcommand{\sch}[2]{\{#1,#2\}}
+
+\title{\vspace{-1.4cm}\textbf{FTRANSFER.CLOCKS.01 --- the frozen external-clock contract\\for the $F_{\mathrm{transfer}}$ jets}\\[1mm]
+\large Preregistration companion (design, type [X]); frozen 2026-08-04}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1.4cm}
+
+\textbf{Status.} Experiments-only design document (\texttt{experiments/ftransfer-clocks/}); the frozen
+preregistration of record is \texttt{hypotheses/ftransfer\_clocks\_v1.yaml}. Nothing here is load-bearing;
+no ledger row, no marker moves, no paper citation until a future promotion round carries the executed
+contract into \texttt{tfpt\_research\_contracts.tex}.
+
+\section*{1. Where the contract starts}
+
+The $F_{\mathrm{transfer}}$ interface (\texttt{CONTRACT.F.01}) has its PGL$_2$ \emph{syntax} closed:
+one common parabolic action on the discrete half, and on the native continuous half the classified
+degeneration $g_{\mathrm{Boltzmann}}=g_{\mathrm{pole}}$ (hyperbolic, forced identical by the single-flow
+theorem \texttt{v425}), $g_{\mathrm{QCD}}$ parabolic and exactly conjugate to the base translation,
+$g_{\mathrm{relic}}$ the identity (\texttt{v632\_ftransfer\_pgl2.py}). At jet level the native wall-time
+Schwarzian quadruple is
+\begin{equation}
+\Bigl\{\; -\tfrac{\Delta^2}{2},\; -\tfrac{\Delta^2}{2},\; 0,\; \text{degenerate} \;\Bigr\},
+\qquad \Delta = 6\ln\tfrac32 ,
+\label{eq:quadruple}
+\end{equation}
+each flow M\"obius \emph{in its own clock} (\texttt{v578\_native\_jets.py}): the obstruction to a shared
+projective dynamics is the \emph{clock}, not the projective structure. Both internal-clock rescues are
+machine-killed: strong thermal time (a modular generator is diagonalizable; the QCD clock map is parabolic
+with no real-diagonalizable logarithm, \texttt{v723}), and conditioned modular flows of one internal mother
+state (loxodromic, wrong classes, \texttt{v724}). \emph{Diagnosis:} the clocks must be external --- and
+without clocks fixed \emph{in advance}, every jet statement is arbitrarily reparametrizable. This contract
+fixes the clocks.
+
+\section*{2. The four frozen clocks (one per solver, no residual freedom)}
+
+\begin{center}\footnotesize
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Solver} & \textbf{Clock} & \textbf{Operational definition} & \textbf{Chart / gauge (frozen)} \\
+\midrule
+$\Fpole$ (Koide) & proper time $\tau$ &
+\begin{tabular}[t]{@{}l@{}}rest-frame proper time of the lepton\\one-particle state $=$ the phase clock of\\the propagator pole, $e^{-im_\ell\tau}$ (on-shell\\scheme; PDG pole masses)\end{tabular} &
+\begin{tabular}[t]{@{}l@{}}$x_1=\ln(m_{\mathrm{ref}}\tau)$;\\one \texttt{v99} seam tick $=$\\one proper-phase e-fold\end{tabular} \\[8.5mm]
+$\FB$ ($\eta_B$) & inverse temperature $\beta$ &
+\begin{tabular}[t]{@{}l@{}}$\beta=1/T$, FRW radiation plasma;\\adiabatic chart $g_{*s}T^3a^3=$ const\\anchored at FIRAS $T_0=2.7255(6)$ K\end{tabular} &
+\begin{tabular}[t]{@{}l@{}}$x_2=\ln(M_1\beta)$;\\seam contraction $(2/3)^6$\\per $\beta$ e-fold\end{tabular} \\[6.5mm]
+$\FQ$ ($m_p/m_e$) & RG time $t$ &
+\begin{tabular}[t]{@{}l@{}}$t=\ln(\mu/\mu_0)$, $\overline{\mathrm{MS}}$, $\mu_0=M_Z$ frozen;\\1-loop object $\dot\alpha_s=-\tfrac{b_0}{2\pi}\alpha_s^2$, $b_0=7$;\\window $\mu\in[m_t,\,1\,\mathrm{TeV}]$\end{tabular} &
+identity gauge \\[6.5mm]
+$\FR$ (axion) & e-folds $\ln a$ &
+\begin{tabular}[t]{@{}l@{}}$a_0=1$; Planck 2018 background;\\$\theta=\theta_i$ pre-onset, $n_aa^3$ const\\post-onset ($3H(T_{\mathrm{osc}})=m_a$)\end{tabular} &
+\begin{tabular}[t]{@{}l@{}}degenerate channel:\\scored on kills only\end{tabular} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The Koide clock is made precise deliberately: the on-shell (pole) chart \emph{is} the proper-time chart,
+and this assignment is falsifiable --- $Q=\tfrac23$ holds for pole masses
+($Q_{\exp}=0.6666645(51)$, pull $-0.43\sigma$) and fails by a factor $\gtrsim 500$ for running
+$\overline{\mathrm{MS}}$ masses at $M_Z$; the preregistration requires
+$|Q_{\mathrm{run}}(M_Z)-\tfrac23| > 10\,|Q_{\mathrm{pole}}-\tfrac23|$ as a dictionary check. The excluded
+alternative gauge for $\FB$ (contraction per unit $z=M_1\beta$ instead of per $\beta$ e-fold) is named in
+the YAML so it cannot be adopted post hoc.
+
+\section*{3. Transport and the preregistered prediction}
+
+The common projective connection lives on the log-scale line $\sigma=\ln(\mu/M_Z)$. The four dictionaries
+are affine in their log charts with slopes $(-1,-1,+1,-1)$ \emph{frozen}; every dimensionful anchor
+($m_{\mathrm{ref}}$, $M_1$, $\mu_0$, $a_0$, the thermal matching constant $\xi=1$) enters as an affine
+offset only and drops out of every Schwarzian and every conjugacy class --- the contract tests exactly the
+anchor-\emph{free} jet content, consistent with the \texttt{v723} anchor census
+$\{\Lambda_{\mathrm{QCD}}\ \text{unit},\ \theta_i,\ C_p\}$ staying external. Each channel exports the
+order-3 jet $(y,y',y'',y''')$ of its native trajectory in its own frozen clock at the frozen base point;
+transport is the Schwarzian cocycle
+\begin{equation}
+\sch{y\circ h}{\sigma} \;=\; \bigl(\sch{y}{x}\circ h\bigr)\,(h')^{2} \;+\; \sch{h}{\sigma},
+\qquad
+\sch{e^{a\sigma}}{\sigma} = -\tfrac{a^2}{2},
+\end{equation}
+with $h$ the frozen dictionary. All kernel steps are symbolic (sympy exact); data enter only through base
+points and dictionary-validity checks.
+
+\textbf{Prediction FTC.P1 (frozen).} There exists \emph{one} constant-coefficient Riccati equation
+$y'=c_0+c_1y+c_2y^2$ on $\sigma$ satisfied by all non-degenerate transported jets. Since all non-constant
+solutions of one such equation share the constant Schwarzian $S=-(c_1^2-4c_0c_2)/2$, this is equivalent to:
+the transported Schwarzians of $\Fpole$, $\FB$, $\FQ$ are \emph{equal} --- the native quadruple
+\eqref{eq:quadruple} collapses into \emph{one} PGL$_2$ class under the fixed physical clocks. The seam
+channels transport to $\sch{q}{\sigma}=\sch{y_B}{\sigma}=-\Delta^2/2$ exactly, so the prediction forces
+\begin{equation}
+\sch{\alpha_s}{\sigma} \;=\; -\frac{\Delta^2}{2} \;=\; -18\ln^2\tfrac32 \;=\; -2.9592351700\ldots
+\end{equation}
+If it does not hold, the contract dies. The degenerate $\FR$ carries no class information (its content is
+the anchor $\theta_i$); it is scored on the kill criteria and dictionary validity only --- fixed-point
+membership of a constant is \emph{not} scored, because with a per-channel M\"obius frame it would be
+vacuous.
+
+\section*{4. Kill criteria (frozen)}
+
+\begin{itemize}\itemsep2pt
+\item[\textbf{K1}] \textsc{no-common-connection}: with the clocks and dictionaries exactly as frozen, the
+transported Schwarzians differ (symbolic inequality, no tolerance). On kill, the executor must exhibit the
+reparametrization that \emph{would} be needed per failing pair, documenting the forbidden freedom.
+\item[\textbf{K2}] \textsc{free-reparam-needed}: a pass is achievable only by a post-freeze, per-channel
+change of gauge or dictionary (re-sloped or non-affine dictionary, either e-fold gauge, $\xi$, $\mu_0$,
+scheme, window, frame re-fit). Machine form: the executor runs against the byte-frozen YAML (sha256
+recorded); any deviation needed for a pass is K2.
+\item[\textbf{K3}] \textsc{second-clock-needed}: any channel needs a second time variable to express its
+exported jet (e.g.\ $\FQ$ needing both $\mu$ and $T$). Each export must be a function of exactly one clock,
+asserted structurally on the symbolic exports.
+\end{itemize}
+
+\section*{5. Decision rules and executor}
+
+\textbf{Data} (pin base points and dictionary validity only): PDG 2024 pole masses
+($m_\tau=1776.93(9)$ MeV dominates; frozen tolerance $|q_{\exp}-2|\le 3\sigma_q$, $\sigma_q=1.52\times10^{-5}$);
+FIRAS $T_0$ + Saikawa--Shirai $g_{*s}$ table + Planck $N_{\mathrm{eff}}=2.99(17)$ for the $\beta$ chart;
+$\alpha_s(M_Z)=0.1180(9)$ (PDG world average) with the frozen 1-loop chain
+$\alpha_s^{(1\ell)}(m_t)=0.10807$ and a $10\%$ overlay tolerance on $[m_t,1\,\mathrm{TeV}]$ (honestly
+covering the $\ge2$-loop truncation, where the flow is no longer Riccati at all --- a named, frozen
+limitation); Planck 2018 background for $\ln a$ with slope tolerance
+$|\mathrm{d}\sigma/\mathrm{d}\ln a+1|\le 0.15$ across the onset window. A broken dictionary is
+\textsc{construction-fail}, not a physics kill.
+
+\textbf{Controls:} identity dictionaries must reproduce \eqref{eq:quadruple} exactly (calibration);
+a deliberate clock swap ($\FQ$ dictionary on the Koide channel) must \emph{fail}; a frozen M\"obius
+re-framing must change nothing (cocycle correctness).
+
+\textbf{Executor:} a future verification module (name pattern \texttt{vN\_ftransfer\_clock\_jets.py}),
+$N$ assigned at the next promotion round ($\ge 15$; round 14 runs on the suite surfaces), entered
+exclusively via the promotion workflow; verdict enum frozen as
+\{\textsc{one-class}, \textsc{no-common-connection}, \textsc{free-reparam-needed},
+\textsc{second-clock-needed}, \textsc{construction-fail}\}. No execution before promotion.
+\emph{[Post-execution note, 2026-08-05: executed as
+\texttt{run\_clocks\_executor.py} (experiments side, $24$ checks, $0$ failures) and promoted as
+\texttt{verification/v777\_ftransfer\_clock\_jets.py}; verdict \textsc{no-common-connection} --- the K1
+kill fired exactly as the honest prior below expected; the frozen bars, dictionaries and data freezes
+above were not touched.]}
+
+\section*{6. Honest priors}
+
+Stated before execution (the \texttt{v723} precedent: preregistering the expected kill is house style).
+The expected verdict is \textbf{K1}: all four frozen dictionaries are affine on the log-scale chart,
+affine transport scales a Schwarzian by $(\text{slope})^2$ and cannot move $0$ (the QCD value) onto
+$-\Delta^2/2$ (the seam value) --- the \texttt{v578} split survives every slope, and the
+no-diagonalizable-logarithm kill of \texttt{v723} is the operator-side shadow of the same fact. The
+survival branch would require a non-affine \emph{physical} dictionary for at least one channel, and none is
+admissible under the frozen operational definitions. Executing anyway is the point: a K1 kill makes the
+clock obstruction \emph{final} at the physical-clock level --- the jet route of \texttt{CONTRACT.F.01}
+closes, and the anchor census $\{\Lambda_{\mathrm{QCD}}\ \text{unit},\ \theta_i,\ C_p\}$ stands as the full
+residual --- while \textsc{one-class}, the only surprising outcome, would falsify this expectation and
+revive a shared projective dynamics. Either way the answer is forced, which is what freezing the clocks is
+for.
+
+\end{document}

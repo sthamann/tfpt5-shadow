@@ -38,6 +38,14 @@ clock-map gate, μ₄ = Galois gear without a pointer, prime 2 without a rate).
 - **CHIME Cat1** (VizieR) — FO.06 (excluded_flag = 0, first sub-bursts, clean
   fitburst width; 474 events, 59 repeater bursts, 126 flagged out).
 
+**Data-availability note (2026-08-04, news check — no re-analysis performed):**
+the full CHIME/FRB Catalog 2 (4,539 bursts, arXiv:2601.09399) and RepCat4
+(arXiv:2605.08410: 30 new repeaters, uniform 80-source sample) are published;
+the Cat2 **baseband** paper is still forthcoming. Relevant here: FO.06
+("exactly two morphological classes", BIC preferred k = 3 on Cat1) has a
+natural, higher-statistics re-run bed once Cat2 morphology parameters land —
+kept as a dated future step, not run.
+
 ## Results (seed 0, `results/results.json`; seed 1 cross-checked, identical verdicts)
 
 - **FO.01 (theory contract): 5/5 PASS.** (C1) the uniform functional is *exactly*

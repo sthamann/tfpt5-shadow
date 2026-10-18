@@ -1,0 +1,395 @@
+<template data-composition-id="09-ehrlicher-stand" data-width="1920" data-height="1080" data-duration="16.004">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+<style>
+  /* — fonts (Google-hosted files; frame.md: Newsreader display / Inter body / JetBrains Mono chrome) — */
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* digits + U+2248 ("≈") — the approx glyph is outside the latin subset range */
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/l/font?kit=cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wpojACexEPjGogGqu7RZ0ANAeA4YKDSLOcQ&skey=e69ba3232be0ce27&v=v26) format("woff2");
+    unicode-range: U+30-39, U+2248;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxTOlOVk6OThhvA.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* full-bleed ground — flat ink-black plane (broadside: no gradient, no texture) */
+  #ehrlicher-stand-09-bg {
+    position: absolute;
+    inset: 0;
+    background: #020617;
+  }
+
+  #ehrlicher-stand-09-content {
+    position: absolute;
+    inset: 0;
+    container-type: size;
+  }
+  #ehrlicher-stand-09-stage {
+    position: absolute;
+    inset: 0;
+    color: #e2e8f0;
+  }
+
+  /* — statement area (Scenes 1–3): centered in the top-83% content region — */
+  #ehrlicher-stand-09-statement {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 896px; /* caption keep-out: band starts at y=900 */
+  }
+  #ehrlicher-stand-09-beat1,
+  #ehrlicher-stand-09-beat2 {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .ehrlicher-stand-09-word {
+    display: inline-block;
+    margin: 0 0.13em;
+    will-change: transform, opacity, filter;
+  }
+
+  #ehrlicher-stand-09-kb {
+    font-family: "Newsreader", serif;
+    font-weight: 700;
+    font-size: 9.2cqw;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: #e2e8f0;
+  }
+  #ehrlicher-stand-09-sub {
+    margin-top: 42px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1.7cqw;
+    line-height: 1.5;
+    color: #94a3b8;
+    max-width: 1400px;
+  }
+
+  .ehrlicher-stand-09-b2line {
+    font-family: "Newsreader", serif;
+    font-weight: 600;
+    font-size: 4.8cqw;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: #e2e8f0;
+    max-width: 1500px;
+  }
+  #ehrlicher-stand-09-b2l2 {
+    margin-top: 20px;
+  }
+  #ehrlicher-stand-09-klein {
+    /* keyword glow lands via timeline at 6.7s */
+    color: #e2e8f0;
+  }
+  #ehrlicher-stand-09-praezise {
+    color: #38bdf8;
+  }
+  #ehrlicher-stand-09-b2l2 .ehrlicher-stand-09-word {
+    opacity: 0; /* hard-cut word reveal — instants set on the timeline */
+  }
+
+  /* — Scene 4/5: stat line, callback line, end card — */
+  #ehrlicher-stand-09-statrow {
+    position: absolute;
+    top: 402px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1.9cqw;
+    line-height: 1.25;
+    color: #e2e8f0;
+    will-change: transform, opacity;
+  }
+  .ehrlicher-stand-09-seg {
+    display: inline-block;
+    margin: 0 0.35em;
+    will-change: transform, opacity;
+  }
+  .ehrlicher-stand-09-statnum {
+    font-family: "Newsreader", serif;
+    font-weight: 600;
+    font-size: 3.4cqw;
+    letter-spacing: -0.01em;
+    color: #38bdf8;
+    vertical-align: -0.06em;
+  }
+  #ehrlicher-stand-09-count {
+    display: inline-block;
+    min-width: 4.3ch;
+    text-align: right;
+  }
+  .ehrlicher-stand-09-sep {
+    color: #475569;
+    margin: 0 0.15em;
+  }
+
+  #ehrlicher-stand-09-linewrap {
+    position: absolute;
+    top: 598px;
+    left: 50%;
+    width: 880px;
+    height: 44px;
+    margin-left: -440px;
+  }
+  #ehrlicher-stand-09-critline {
+    stroke: #38bdf8;
+    stroke-width: 2;
+    stroke-linecap: round;
+    fill: none;
+  }
+  .ehrlicher-stand-09-zero {
+    fill: #e2e8f0;
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  #ehrlicher-stand-09-title {
+    position: absolute;
+    top: 374px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "Newsreader", serif;
+    font-weight: 700;
+    font-size: 8.4cqw;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: #e2e8f0;
+    will-change: transform, opacity, filter;
+  }
+
+  #ehrlicher-stand-09-url {
+    position: absolute;
+    top: 668px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    font-size: 1.05cqw;
+    letter-spacing: 0.14em;
+    color: #94a3b8;
+    will-change: transform, opacity;
+  }
+</style>
+
+<div id="root" data-composition-id="09-ehrlicher-stand" data-start="0" data-duration="16.004" data-fps="30" data-width="1920" data-height="1080">
+  <div id="ehrlicher-stand-09-bg" class="clip" data-start="0" data-duration="16.004" data-track-index="0"></div>
+
+  <div id="ehrlicher-stand-09-content" class="clip" data-start="0" data-duration="16.004" data-track-index="1">
+    <div id="ehrlicher-stand-09-stage">
+
+      <!-- Scenes 1–3: the statement beats -->
+      <div id="ehrlicher-stand-09-statement">
+        <!-- beat 1 deliberately layers over the faint beat-2 palimpsest
+             (shipped design since 2026-08-03) -->
+        <div id="ehrlicher-stand-09-beat1" data-layout-allow-overlap>
+          <div id="ehrlicher-stand-09-kb"><span class="ehrlicher-stand-09-word">No proof</span><span class="ehrlicher-stand-09-word">of RH.</span></div>
+          <div id="ehrlicher-stand-09-sub"><span class="ehrlicher-stand-09-word">&mdash;&nbsp;says</span><span class="ehrlicher-stand-09-word">this</span><span class="ehrlicher-stand-09-word">program</span><span class="ehrlicher-stand-09-word">itself,</span><span class="ehrlicher-stand-09-word">at</span><span class="ehrlicher-stand-09-word">every</span><span class="ehrlicher-stand-09-word">step.</span></div>
+        </div>
+        <div id="ehrlicher-stand-09-beat2" data-layout-allow-overlap>
+          <div class="ehrlicher-stand-09-b2line" id="ehrlicher-stand-09-b2l1"><span class="ehrlicher-stand-09-word">But</span><span class="ehrlicher-stand-09-word">the</span><span class="ehrlicher-stand-09-word">question</span><span class="ehrlicher-stand-09-word">was</span><span class="ehrlicher-stand-09-word">never</span><span class="ehrlicher-stand-09-word">this</span><span class="ehrlicher-stand-09-word" id="ehrlicher-stand-09-klein">small.</span></div>
+          <div class="ehrlicher-stand-09-b2line" id="ehrlicher-stand-09-b2l2"><span class="ehrlicher-stand-09-word">&mdash;&nbsp;and</span><span class="ehrlicher-stand-09-word">never</span><span class="ehrlicher-stand-09-word">this</span><span class="ehrlicher-stand-09-word" id="ehrlicher-stand-09-praezise">precise.</span></div>
+        </div>
+      </div>
+
+      <!-- Scene 4: stat line -->
+      <div id="ehrlicher-stand-09-statrow">
+        <span class="ehrlicher-stand-09-seg" id="ehrlicher-stand-09-seg1"><span class="ehrlicher-stand-09-statnum" id="ehrlicher-stand-09-count">893</span>&nbsp;modules</span><span class="ehrlicher-stand-09-seg" id="ehrlicher-stand-09-seg2"><span class="ehrlicher-stand-09-sep">&middot;</span>&nbsp;machine-checked</span><span class="ehrlicher-stand-09-seg" id="ehrlicher-stand-09-seg3"><span class="ehrlicher-stand-09-sep">&middot;</span>&nbsp;<span class="ehrlicher-stand-09-statnum">84</span>&nbsp;Lean&nbsp;files</span>
+      </div>
+
+      <!-- callback motif: the critical line from frame 1, zeros locking onto it -->
+      <svg id="ehrlicher-stand-09-linewrap" viewBox="0 0 880 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line id="ehrlicher-stand-09-critline" x1="6" y1="22" x2="874" y2="22"></line>
+        <circle class="ehrlicher-stand-09-zero" cx="76" cy="22" r="4.5"></circle>
+        <circle class="ehrlicher-stand-09-zero" cx="187" cy="22" r="4.5"></circle>
+        <circle class="ehrlicher-stand-09-zero" cx="292" cy="22" r="4.5"></circle>
+        <circle class="ehrlicher-stand-09-zero" cx="415" cy="22" r="4.5"></circle>
+        <circle class="ehrlicher-stand-09-zero" cx="519" cy="22" r="4.5"></circle>
+        <circle class="ehrlicher-stand-09-zero" cx="648" cy="22" r="4.5"></circle>
+        <circle class="ehrlicher-stand-09-zero" cx="792" cy="22" r="4.5"></circle>
+      </svg>
+
+      <!-- Scene 5: end card -->
+      <div id="ehrlicher-stand-09-title">The Prime Front</div>
+      <div id="ehrlicher-stand-09-url">fixpoint-theory.com/prime-front</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var ID = "09-ehrlicher-stand";
+    var ACCENT = "#38bdf8";
+    function $(s) { return document.getElementById("ehrlicher-stand-09-" + s); }
+    function words(el) { return Array.prototype.slice.call(el.querySelectorAll(".ehrlicher-stand-09-word")); }
+
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    /* ============ Scene 1 (0.0–1.8s): "Kein Beweis." lands alone ============ */
+    var kbWords = words($("kb"));
+    tl.fromTo(kbWords[0], { opacity: 0, y: 18, filter: "blur(8px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 0.10);
+    tl.fromTo(kbWords[1], { opacity: 0, y: 18, filter: "blur(8px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, 0.40);
+
+    /* ============ Scene 2 (1.8–5.4s): sub-line reveals per word on the VO ============ */
+    var subWords = words($("sub"));
+    var subAt = [1.82, 2.22, 2.56, 2.95, 3.60, 3.78, 4.02];
+    subWords.forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, subAt[i]);
+    });
+
+    /* ============ Scene 3 (5.4–9.3s): waterfall seam (cut catalog #4) ============ */
+    // Exit: every beat-1 word rips leftward on power4.in; fade completes at ~28% of travel.
+    var exitWords = kbWords.concat(subWords);
+    var EXIT_START = 5.10, EXIT_STAGGER = 0.022;
+    exitWords.forEach(function (w, i) {
+      var t = EXIT_START + i * EXIT_STAGGER;
+      tl.to(w, { x: -230, duration: 0.34, ease: "power4.in" }, t);
+      tl.to(w, { opacity: 0, duration: 0.18, ease: "power1.in" }, t);
+    });
+
+    // Entry: line 1 cascades in mid-flight, mirrored back half of the composite
+    // (power4.out), waterfall stagger with shrinking gaps (0.05 × 0.84^i).
+    var l1Words = words($("b2l1"));
+    gsap.set(l1Words, { x: 230, opacity: 0 }); // pre-set — un-started words must not sit at rest
+    var entryT = 5.30, gap = 0.05;
+    l1Words.forEach(function (w) {
+      tl.fromTo(w, { x: 230, opacity: 0.35 },
+        { x: 0, opacity: 1, duration: 0.3, ease: "power4.out" }, entryT);
+      entryT += gap;
+      gap *= 0.84;
+    });
+
+    // Keyword glow on "klein." (VO 6.71s) — accent ink + soft bloom + gentle scale
+    tl.to($("klein"), { color: ACCENT, scale: 1.06, duration: 0.35, ease: "power2.out" }, 6.70);
+    tl.fromTo($("klein"),
+      { textShadow: "0 0 0px rgba(56,189,248,0)" },
+      { textShadow: "0 0 26px rgba(56,189,248,0.45)", duration: 0.35, ease: "power1.out" }, 6.70);
+
+    // "— und nie so präzise." appends by hard-cut word reveal (VO "präzise" 7.74s)
+    var l2Words = words($("b2l2"));
+    var l2At = [7.50, 7.62, 7.74, 7.86];
+    l2Words.forEach(function (w, i) {
+      tl.set(w, { opacity: 1 }, l2At[i]);
+    });
+
+    /* ============ Scene 4 (9.3–13.5s): statements yield upward, stats cascade ============ */
+    tl.to($("beat2"), { y: -130, scale: 0.9, duration: 0.55, ease: "power2.in" }, 9.30);
+    tl.to($("beat2"), { opacity: 0, duration: 0.5, ease: "none" }, 9.32);
+
+    // stat segments cascade on their cues
+    var segs = [$("seg1"), $("seg2"), $("seg3")];
+    var segAt = [9.42, 11.15, 12.15];
+    segs.forEach(function (s, i) {
+      tl.fromTo(s, { opacity: 0, y: 26 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, segAt[i]);
+    });
+
+    // counter ticks up to 893 on "nine hundred" — swap only on change
+    var countEl = $("count");
+    var counter = { v: 0 }, lastShown = -1;
+    tl.to(counter, {
+      v: 893, duration: 0.75, ease: "power2.out",
+      onUpdate: function () {
+        var v = Math.round(counter.v);
+        if (v !== lastShown) { lastShown = v; countEl.textContent = "" + v; }
+      }
+    }, 9.50);
+
+    // callback line draws (svg-path-draw: measured getTotalLength, power2.out)
+    var critLine = $("critline");
+    var lineLen = critLine.getTotalLength();
+    critLine.style.strokeDasharray = String(lineLen);
+    critLine.style.strokeDashoffset = String(lineLen);
+    tl.to(critLine, { strokeDashoffset: 0, duration: 1.25, ease: "power2.out" }, 10.45);
+
+    // zeros lock in silently along the line
+    var zeros = Array.prototype.slice.call(document.querySelectorAll(".ehrlicher-stand-09-zero"));
+    gsap.set(zeros, { scale: 0, opacity: 0 });
+    zeros.forEach(function (z, i) {
+      tl.fromTo(z, { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(1.3)" }, 11.75 + i * 0.13);
+    });
+
+    /* ============ Scene 5 (13.5–15.5s): end card locks, gentle settle ============ */
+    // stat line steps up into a kicker position
+    tl.to($("statrow"), { y: -138, scale: 0.6, duration: 0.6, ease: "power3.inOut" }, 13.55);
+
+    // "Die Prime Front" arrives oversized and retracts into the focal plane
+    // (inverse zoom-through entry — an arrival, not a progression)
+    tl.fromTo($("title"),
+      { opacity: 0, scale: 1.12, filter: "blur(8px)" },
+      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.75, ease: "expo.out" }, 13.92);
+
+    // mono sub-line
+    tl.fromTo($("url"), { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power1.out" }, 14.55);
+
+    // macro move: one slow decelerating push under the whole shot — at rest by ~14.5s,
+    // so the final frame is genuinely still (this frame owns the real exit: stillness)
+    tl.fromTo($("stage"), { scale: 1 },
+      { scale: 1.014, duration: 14.5, ease: "power1.out", transformOrigin: "50% 44%" }, 0);
+
+    // full-span anchor — timeline covers the whole 15.504s frame
+    tl.to({}, { duration: 15.504 }, 0);
+
+    window.__timelines[ID] = tl;
+  })();
+</script>
+</template>

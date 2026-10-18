@@ -41,6 +41,17 @@ leg uses only the Zhang+2023 VizieR table and the CHIME leg only CHIME-detected
 bursts — no burst enters twice. FRB 20201124A CHIME rows (34) are a separate,
 instrument-independent series.
 
+**Data-availability note (2026-08-04, news check — no re-analysis performed):**
+the full CHIME/FRB Catalog 2 is now published (4,539 bursts 2018-07-25 →
+2023-09-15, 8.5× Cat1; ApJS, arXiv:2601.09399 — the committed
+`chime_cat2_repeaters.csv` above is the 15-repeater subset of exactly this
+release); the **Cat2 baseband analysis is announced as a forthcoming paper**
+(the leg that could change the within-session picture here); and RepCat4
+(arXiv:2605.08410, 2026-05) adds 30 new repeaters for a uniform 80-source
+repeater sample. New within-session cascade legs stay pointless until the Cat2
+baseband release (transit sessions n < 30, see verdict); the RepCat4 sample is
+a future candidate bed for the episode/tooth axes only.
+
 ## What it checks (`src/repeater_cascade/`)
 
 Sessions: gap > 0.2 d; onset proxy `t0` = first burst; `τ_i = t_i − t0` (s), gated

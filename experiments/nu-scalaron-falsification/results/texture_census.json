@@ -1,0 +1,1139 @@
+{
+  "project": "nu-scalaron-falsification",
+  "probe": "nu_texture_census_probe.py",
+  "scope": "EXPLORATION ONLY",
+  "protocol": {
+    "candidate_grammar": {
+      "named": [
+        {
+          "name": "R",
+          "matrix": [
+            [
+              "1.0000000000000",
+              "3.0000000000000",
+              "0"
+            ],
+            [
+              "1.0000000000000",
+              "5.0000000000000",
+              "2.0000000000000"
+            ],
+            [
+              "2.0000000000000",
+              "5.0000000000000",
+              "3.0000000000000"
+            ]
+          ],
+          "provenance": "v85/v121 frozen residue/address matrix"
+        },
+        {
+          "name": "Q",
+          "matrix": [
+            [
+              "3.0000000000000",
+              "1.0000000000000",
+              "0"
+            ],
+            [
+              "3.0000000000000",
+              "2.0000000000000",
+              "0"
+            ],
+            [
+              "3.0000000000000",
+              "2.0000000000000",
+              "1.0000000000000"
+            ]
+          ],
+          "provenance": "v85 frozen address operator"
+        },
+        {
+          "name": "K",
+          "matrix": [
+            [
+              "4.0000000000000",
+              "2.0000000000000",
+              "0"
+            ],
+            [
+              "4.0000000000000",
+              "3.0000000000000",
+              "2.0000000000000"
+            ],
+            [
+              "5.0000000000000",
+              "3.0000000000000",
+              "2.0000000000000"
+            ]
+          ],
+          "provenance": "v85 frozen sheet-diamond corner"
+        },
+        {
+          "name": "L",
+          "matrix": [
+            [
+              "7.0000000000000",
+              "3.0000000000000",
+              "0"
+            ],
+            [
+              "7.0000000000000",
+              "5.0000000000000",
+              "2.0000000000000"
+            ],
+            [
+              "8.0000000000000",
+              "5.0000000000000",
+              "3.0000000000000"
+            ]
+          ],
+          "provenance": "v85/v121 frozen word table; L=K+Q"
+        },
+        {
+          "name": "F",
+          "matrix": [
+            [
+              "4.0000000000000",
+              "4.0000000000000",
+              "0"
+            ],
+            [
+              "4.0000000000000",
+              "7.0000000000000",
+              "2.0000000000000"
+            ],
+            [
+              "5.0000000000000",
+              "7.0000000000000",
+              "4.0000000000000"
+            ]
+          ],
+          "provenance": "v94/v183 frozen missing corner; F=R+Q"
+        },
+        {
+          "name": "Qplus",
+          "matrix": [
+            [
+              "3.0000000000000",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "2.0000000000000",
+              "0"
+            ],
+            [
+              "0",
+              "2.0000000000000",
+              "1.0000000000000"
+            ]
+          ],
+          "provenance": "v50 Sigma-even generation matrix"
+        },
+        {
+          "name": "D263_example",
+          "matrix": [
+            [
+              "0.30000000000000",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1.0000000000000",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "1.0000000000000"
+            ]
+          ],
+          "provenance": "v263 existence example, not a frozen Dirac Yukawa"
+        },
+        {
+          "name": "T9_reused",
+          "matrix": [
+            [
+              "-0.18531629089167",
+              "1.0000000000000",
+              "1.0000000000000"
+            ],
+            [
+              "1.0000000000000",
+              "1.0000000000000",
+              "0"
+            ],
+            [
+              "1.0000000000000",
+              "0",
+              "1.0000000000000"
+            ]
+          ],
+          "provenance": "v9 light-Majorana texture reused only as an example Y"
+        },
+        {
+          "name": "P1",
+          "matrix": [
+            [
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-2.0000000000000",
+              "1.0000000000000"
+            ]
+          ],
+          "provenance": "v50 Qplus Lagrange projector"
+        },
+        {
+          "name": "P2",
+          "matrix": [
+            [
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1.0000000000000",
+              "0"
+            ],
+            [
+              "0",
+              "2.0000000000000",
+              "0"
+            ]
+          ],
+          "provenance": "v50 Qplus Lagrange projector"
+        },
+        {
+          "name": "P3",
+          "matrix": [
+            [
+              "1.0000000000000",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0",
+              "0"
+            ]
+          ],
+          "provenance": "v50 Qplus Lagrange projector"
+        }
+      ],
+      "small_coefficients": [
+        "0",
+        "1",
+        "phi",
+        "phi2",
+        "phi3",
+        "53/54",
+        "5/3",
+        "2/3"
+      ],
+      "small_family": "sum_i c_i P_i, not all c_i zero",
+      "tail": "r*phi0^n*sum_{i in S} P_i; n=4..6; four rationals; seven nonempty subsets",
+      "involutions": [
+        "raw",
+        "transpose",
+        "Hermitian/symmetric part"
+      ],
+      "deduplication": "50-digit matrix value key"
+    },
+    "normalization": "largest singular value = y_t(M3); one global factor",
+    "y3_frozen": 0.44197399765711176,
+    "matching_formula": "-(246.22^2/2) Y^T M_R^-1 Y",
+    "low_energy_formula": "-(246.22^2/2) Y^T diag(R_i/M_i) Y",
+    "R_down_frozen_v2": [
+      0.8167477841848322,
+      0.814380979370167,
+      0.7944014076884586
+    ],
+    "charged_lepton_basis_assumption": "published generation/address basis equals charged-lepton basis; M_R uses v69 ordering",
+    "hit_gate": "all four NuFIT pulls <=3 and Sigma<0.0642 eV",
+    "near_gate": "non-hit with max(pull/3, Sigma/0.0642)<=10"
+  },
+  "constants": {
+    "phi0": 0.053171952176845526,
+    "epsilon": 0.00028272564982967477,
+    "M_scal_GeV": 30599694999637.4,
+    "M1_GeV": 8651318653.362333,
+    "M2_GeV": 17302637306.724667,
+    "M3_GeV": 91799084998912.2,
+    "dm2_ratio_target": 0.0298050139275766,
+    "dm2_ratio_sigma": 0.0007960363352725435,
+    "tfpt_v270_angles": {
+      "sin2_theta12": 0.3067473572449106,
+      "sin2_theta13": 0.023108435158881103,
+      "sin2_theta23": 0.5
+    }
+  },
+  "census": {
+    "unique_candidates": 1607,
+    "hits": 0,
+    "near_misses": 0,
+    "hit_rate": 0.0,
+    "top_10": [
+      {
+        "name": "P1",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.23606797749979,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0,
+          0.0,
+          0.05124031017908958
+        ],
+        "dm2_21_eV2": 0.0,
+        "dm2_31_eV2": 0.0026255693872493115,
+        "dm2_ratio": 0.0,
+        "sigma_mnu_eV": 0.05124031017908958,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.8,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0,
+        "m_bb_eV": 0.0,
+        "pulls_nufit": {
+          "dm2_ratio": 37.44177571664751,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 19.41176470588235
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 17.647058823529413
+        },
+        "matching_masses_eV": [
+          0.0,
+          0.0,
+          0.06450178673296682
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "spec[1,phi,0]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.1419954378914667,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0,
+          0.008962793241554766,
+          0.2139857394165505
+        ],
+        "dm2_21_eV2": 8.03316626908598e-05,
+        "dm2_31_eV2": 0.045789896673647856,
+        "dm2_ratio": 0.0017543534387814152,
+        "sigma_mnu_eV": 0.22294853265810527,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.9892441903952643,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0,
+        "m_bb_eV": 0.0,
+        "pulls_nufit": {
+          "dm2_ratio": 35.237914710502906,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 30.543775905603784
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 28.779070023250842
+        },
+        "matching_masses_eV": [
+          0.0,
+          0.011224220710092277,
+          0.26412188310503415
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[1,phi,phi2]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.1419954378914667,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0009738881747557662,
+          0.008962793241554766,
+          0.2139857394165505
+        ],
+        "dm2_21_eV2": 7.938320451393069e-05,
+        "dm2_31_eV2": 0.04578894821547092,
+        "dm2_ratio": 0.0017336760857745387,
+        "sigma_mnu_eV": 0.22392242083286104,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.9892441903952643,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0009738881747557662,
+        "m_bb_eV": 0.0009738881747557662,
+        "pulls_nufit": {
+          "dm2_ratio": 35.26389009892509,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 30.543775905603784
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 28.779070023250842
+        },
+        "matching_masses_eV": [
+          0.0011923976943846507,
+          0.011224220710092277,
+          0.26412188310503415
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[1,phi,phi3]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.1419954378914667,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          2.7534316706925986e-06,
+          0.008962793241554766,
+          0.2139857394165505
+        ],
+        "dm2_21_eV2": 8.033165510947383e-05,
+        "dm2_31_eV2": 0.04578989666606647,
+        "dm2_ratio": 0.0017543532735029132,
+        "sigma_mnu_eV": 0.22295128608977596,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.9892441903952643,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 2.7534316706925986e-06,
+        "m_bb_eV": 2.7534316706925986e-06,
+        "pulls_nufit": {
+          "dm2_ratio": 35.23791491812974,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 30.543775905603784
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 28.779070023250842
+        },
+        "matching_masses_eV": [
+          3.371214130003063e-06,
+          0.011224220710092277,
+          0.26412188310503415
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[1,phi2,0]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.2310132919778916,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0,
+          8.929389934270147e-05,
+          0.051598510787708586
+        ],
+        "dm2_21_eV2": 7.973400459824503e-09,
+        "dm2_31_eV2": 0.002662406315509279,
+        "dm2_ratio": 2.9948097754190116e-06,
+        "sigma_mnu_eV": 0.05168780468705128,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.8018751145561409,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0,
+        "m_bb_eV": 0.0,
+        "pulls_nufit": {
+          "dm2_ratio": 37.43801356454124,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 19.522065562125935
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 17.757359679772996
+        },
+        "matching_masses_eV": [
+          0.0,
+          0.00010966505926659122,
+          0.06494161001577153
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[1,phi2,phi3]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.2310132919778916,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          2.538090309938723e-06,
+          8.929389934270147e-05,
+          0.051598510787708586
+        ],
+        "dm2_21_eV2": 7.966958557403098e-09,
+        "dm2_31_eV2": 0.0026624063090673767,
+        "dm2_ratio": 2.9923902036552305e-06,
+        "sigma_mnu_eV": 0.051690342777361224,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.8018751145561409,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 2.538090309938723e-06,
+        "m_bb_eV": 2.538090309938723e-06,
+        "pulls_nufit": {
+          "dm2_ratio": 37.43801660406551,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 19.522065562125935
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 17.757359679772996
+        },
+        "matching_masses_eV": [
+          3.107557019541722e-06,
+          0.00010966505926659122,
+          0.06494161001577153
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[1,phi3,0]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 2.2357990657698115,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0,
+          2.5204693771610663e-07,
+          0.05124131790321023
+        ],
+        "dm2_21_eV2": 6.352765881206693e-14,
+        "dm2_31_eV2": 0.0026256726604578532,
+        "dm2_ratio": 2.4194812921192263e-11,
+        "sigma_mnu_eV": 0.05124156995014795,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.7999597559826833,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0,
+        "m_bb_eV": 0.0,
+        "pulls_nufit": {
+          "dm2_ratio": 37.44177568625341,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 19.40939741074608
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 17.64469152839314
+        },
+        "matching_masses_eV": [
+          0.0,
+          3.0949526785585823e-07,
+          0.06450302413826463
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[2/3,0,0]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 1.4907119849998598,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0,
+          0.0,
+          0.05124031017908958
+        ],
+        "dm2_21_eV2": 0.0,
+        "dm2_31_eV2": 0.0026255693872493115,
+        "dm2_ratio": 0.0,
+        "sigma_mnu_eV": 0.05124031017908958,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.8,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0,
+        "m_bb_eV": 0.0,
+        "pulls_nufit": {
+          "dm2_ratio": 37.44177571664751,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 19.41176470588235
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 17.647058823529413
+        },
+        "matching_masses_eV": [
+          0.0,
+          0.0,
+          0.06450178673296682
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "spec[2/3,phi,0]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 1.3971868430107244,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.0,
+          0.010600160214702184,
+          0.44421117410506294
+        ],
+        "dm2_21_eV2": 0.00011236339657735504,
+        "dm2_31_eV2": 0.19732356719979854,
+        "dm2_ratio": 0.0005694372860368083,
+        "sigma_mnu_eV": 0.45481133431976517,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.9975420510833048,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.0,
+        "m_bb_eV": 0.0,
+        "pulls_nufit": {
+          "dm2_ratio": 36.726434895123525,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 31.031885357841464
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 29.267179475488522
+        },
+        "matching_masses_eV": [
+          0.0,
+          0.013312228758999562,
+          0.5467433501897732
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      },
+      {
+        "name": "spec[2/3,phi,phi2]",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 12.614942528735632,
+        "raw_spectral_norm": 1.3971868430107244,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.002288954716507285,
+          0.010600160214702184,
+          0.44421117410506294
+        ],
+        "dm2_21_eV2": 0.0001071240828831341,
+        "dm2_31_eV2": 0.19731832788610434,
+        "dm2_ratio": 0.000542899810832413,
+        "sigma_mnu_eV": 0.4571002890362724,
+        "sin2_theta12": 0.0,
+        "sin2_theta13": 0.0,
+        "sin2_theta23": 0.9975420510833048,
+        "delta_deg": null,
+        "J_CP": 0.0,
+        "m_beta_eV": 0.002288954716507285,
+        "m_bb_eV": 0.002288954716507285,
+        "pulls_nufit": {
+          "dm2_ratio": 36.75977191006683,
+          "sin2_theta12": 25.583333333333332,
+          "sin2_theta13": 37.8448275862069,
+          "sin2_theta23": 31.031885357841464
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.562279770409216,
+          "sin2_theta13": 39.842129584277764,
+          "sin2_theta23": 29.267179475488522
+        },
+        "matching_masses_eV": [
+          0.0028025233258414184,
+          0.013312228758999562,
+          0.5467433501897732
+        ],
+        "symmetry_residual": 3.2016660424437584e-72
+      }
+    ],
+    "all_hit_names": [],
+    "all_near_miss_names": []
+  },
+  "null": {
+    "seed": 20260828,
+    "count": 200,
+    "integer_entry_range_inclusive": [
+      -2,
+      8
+    ],
+    "hits": 0,
+    "near_misses": 0,
+    "hit_rate": 0.0,
+    "top_10": [
+      {
+        "name": "null_081",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 625.3098716697681,
+        "raw_spectral_norm": 9.514300198944259,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.020226146827388894,
+          2.0102587671347862,
+          38.11440884723694
+        ],
+        "dm2_21_eV2": 4.040731213826787,
+        "dm2_31_eV2": 1452.707752677318,
+        "dm2_ratio": 0.0027815169337258518,
+        "sigma_mnu_eV": 40.144893761199114,
+        "sin2_theta12": 0.9998757681942329,
+        "sin2_theta13": 0.9701509851694566,
+        "sin2_theta23": 7.252701409336733e-06,
+        "delta_deg": 0.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 37.54286701068957,
+        "m_bb_eV": 37.036728156618786,
+        "pulls_nufit": {
+          "dm2_ratio": 33.94756721073362,
+          "sin2_theta12": 57.73964734951941,
+          "sin2_theta13": 1634.829284774925,
+          "sin2_theta23": 27.646632194034744
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 57.760700912443525,
+          "sin2_theta13": 1632.8319827768544,
+          "sin2_theta23": 29.411338076387686
+        },
+        "matching_masses_eV": [
+          0.025455704695224488,
+          2.466263947753153,
+          46.71690235029928
+        ],
+        "symmetry_residual": 1.6008330212218792e-72
+      },
+      {
+        "name": "null_133",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 907.9392441042088,
+        "raw_spectral_norm": 11.986815344121782,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.007759150906294305,
+          5.114277934159224,
+          53.16766238642469
+        ],
+        "dm2_21_eV2": 26.155778583405155,
+        "dm2_31_eV2": 2826.8002634324157,
+        "dm2_ratio": 0.009252786240951367,
+        "sigma_mnu_eV": 58.2896994714902,
+        "sin2_theta12": 0.5043218415907715,
+        "sin2_theta13": 0.10248831069734378,
+        "sin2_theta23": 0.024466405709678736,
+        "delta_deg": 180.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 17.365283128420852,
+        "m_bb_eV": 7.767415672955416,
+        "pulls_nufit": {
+          "dm2_ratio": 25.81820298389853,
+          "sin2_theta12": 16.44348679923096,
+          "sin2_theta13": 138.85915637473067,
+          "sin2_theta23": 26.207858487665955
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 16.46454036215508,
+          "sin2_theta13": 136.8618543766598,
+          "sin2_theta23": 27.972564370018898
+        },
+        "matching_masses_eV": [
+          0.009767041979228099,
+          6.267233979606388,
+          65.2306243950222
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "null_085",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 919.1362405408942,
+        "raw_spectral_norm": 7.849562344237717,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.016481580939291595,
+          3.7479646510968676,
+          55.24410041068924
+        ],
+        "dm2_21_eV2": 14.046967383361405,
+        "dm2_31_eV2": 3051.910358543805,
+        "dm2_ratio": 0.004602680201283437,
+        "sigma_mnu_eV": 59.0085466427254,
+        "sin2_theta12": 0.9999593914817687,
+        "sin2_theta13": 0.19181312037513237,
+        "sin2_theta23": 0.8000370078308779,
+        "delta_deg": 0.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 24.42844314209359,
+        "m_bb_eV": 13.625476673849235,
+        "pulls_nufit": {
+          "dm2_ratio": 31.659778089984417,
+          "sin2_theta12": 57.74661595681406,
+          "sin2_theta13": 292.867448922642,
+          "sin2_theta23": 19.413941637110465
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 57.76766951973818,
+          "sin2_theta13": 290.87014692457115,
+          "sin2_theta23": 17.649235754757523
+        },
+        "matching_masses_eV": [
+          0.02074241713393153,
+          4.603068812037536,
+          67.64221756272454
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "null_046",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 1185.7774884299886,
+        "raw_spectral_norm": 9.182607022317049,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.025480716261057194,
+          15.115114916383273,
+          60.986319124560936
+        ],
+        "dm2_21_eV2": 228.46604966857097,
+        "dm2_31_eV2": 3719.330471095886,
+        "dm2_ratio": 0.06142666037450938,
+        "sigma_mnu_eV": 76.12691475720527,
+        "sin2_theta12": 0.1491765350712103,
+        "sin2_theta13": 0.29942492071274435,
+        "sin2_theta23": 0.8407734683603166,
+        "delta_deg": 0.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 33.72740313114941,
+        "m_bb_eV": 19.855682979675844,
+        "pulls_nufit": {
+          "dm2_ratio": 39.723873202479254,
+          "sin2_theta12": 13.151955410732477,
+          "sin2_theta13": 478.40503571162816,
+          "sin2_theta23": 21.810204021195098
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 13.130901847808358,
+          "sin2_theta13": 476.4077337135573,
+          "sin2_theta23": 20.04549813884216
+        },
+        "matching_masses_eV": [
+          0.032073892297322985,
+          18.512920148594233,
+          74.86405053058856
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "null_083",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 1429.49143733294,
+        "raw_spectral_norm": 10.89663712446889,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.004310964785795826,
+          12.570372628045943,
+          79.198666683943
+        ],
+        "dm2_21_eV2": 158.01424942350928,
+        "dm2_31_eV2": 6272.4287859298865,
+        "dm2_ratio": 0.02519187619602184,
+        "sigma_mnu_eV": 91.77335027677475,
+        "sin2_theta12": 0.40222578107666673,
+        "sin2_theta13": 0.5351422318802513,
+        "sin2_theta23": 0.5664612193589025,
+        "delta_deg": 0.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 58.19095042860299,
+        "m_bb_eV": 44.7341295356131,
+        "pulls_nufit": {
+          "dm2_ratio": 5.795134627837478,
+          "sin2_theta12": 7.935481756388892,
+          "sin2_theta13": 884.8141928969851,
+          "sin2_theta23": 5.674189374053089
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 7.956535319313011,
+          "sin2_theta13": 882.8168908989142,
+          "sin2_theta23": 3.909483491700148
+        },
+        "matching_masses_eV": [
+          0.005426540460708814,
+          15.426802106050275,
+          97.02551391061556
+        ],
+        "symmetry_residual": 3.2785060274624086e-69
+      },
+      {
+        "name": "null_136",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 1548.9429578670206,
+        "raw_spectral_norm": 11.961283853434427,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.009206752127478771,
+          8.8363873347238,
+          90.59654380821144
+        ],
+        "dm2_21_eV2": 78.08165636498244,
+        "dm2_31_eV2": 8207.73366522889,
+        "dm2_ratio": 0.009513181049692962,
+        "sigma_mnu_eV": 99.44213789506271,
+        "sin2_theta12": 0.02990746226551145,
+        "sin2_theta13": 0.01873555484805587,
+        "sin2_theta23": 0.8171312534126564,
+        "delta_deg": 0.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 12.492717938777766,
+        "m_bb_eV": 1.965463184574412,
+        "pulls_nufit": {
+          "dm2_ratio": 25.491088759078075,
+          "sin2_theta12": 23.09104481120738,
+          "sin2_theta13": 5.542146813696777,
+          "sin2_theta23": 20.41948549486214
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 23.06999124828326,
+          "sin2_theta13": 7.539448811767646,
+          "sin2_theta23": 18.654779612509202
+        },
+        "matching_masses_eV": [
+          0.011588997344051942,
+          10.823554035054764,
+          111.20427437532643
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "null_183",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 1604.9966030571268,
+        "raw_spectral_norm": 7.544468953081774,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.002836315580981161,
+          2.427179185731754,
+          100.61076641495481
+        ],
+        "dm2_21_eV2": 5.891190754963387,
+        "dm2_31_eV2": 10122.526310559913,
+        "dm2_ratio": 0.0005819881889383327,
+        "sigma_mnu_eV": 103.04078191626755,
+        "sin2_theta12": 0.9999815188755569,
+        "sin2_theta13": 0.2752316171918054,
+        "sin2_theta23": 0.19995621752545084,
+        "delta_deg": 180.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 52.823375170971616,
+        "m_bb_eV": 29.45037420757887,
+        "pulls_nufit": {
+          "dm2_ratio": 36.710668148876664,
+          "sin2_theta12": 57.748459906296404,
+          "sin2_theta13": 436.69244343414726,
+          "sin2_theta23": 15.884928380855833
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 57.76951346922052,
+          "sin2_theta13": 434.69514143607637,
+          "sin2_theta23": 17.649634263208775
+        },
+        "matching_masses_eV": [
+          0.0035689363940865733,
+          2.9779249025129193,
+          123.33680840646993
+        ],
+        "symmetry_residual": 0.0
+      },
+      {
+        "name": "null_020",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 2115.384158343218,
+        "raw_spectral_norm": 9.07277192567263,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          0.026561359897820776,
+          18.18685853088476,
+          117.59424307485202
+        ],
+        "dm2_21_eV2": 330.7611177165761,
+        "dm2_31_eV2": 13828.405298841542,
+        "dm2_ratio": 0.02391896321872235,
+        "sigma_mnu_eV": 135.8076629656346,
+        "sin2_theta12": 0.9180505502058762,
+        "sin2_theta13": 0.47387525183011964,
+        "sin2_theta23": 0.4760664302669472,
+        "delta_deg": 0.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 81.93107092851888,
+        "m_bb_eV": 64.51056519589301,
+        "pulls_nufit": {
+          "dm2_ratio": 7.394198540998771,
+          "sin2_theta12": 50.920879183823025,
+          "sin2_theta13": 779.1814686726201,
+          "sin2_theta23": 0.35684883923218996
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 50.94193274674714,
+          "sin2_theta13": 777.1841666745493,
+          "sin2_theta23": 1.407857043120751
+        },
+        "matching_masses_eV": [
+          0.033435519113445306,
+          22.33074882403644,
+          143.98826785318192
+        ],
+        "symmetry_residual": 6.557012054924817e-69
+      },
+      {
+        "name": "null_065",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 2263.7956279098257,
+        "raw_spectral_norm": 9.197114412768453,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          8.001016718580849e-05,
+          21.25814197660434,
+          124.07745732503929
+        ],
+        "dm2_21_eV2": 451.90860029106585,
+        "dm2_31_eV2": 15395.215416240544,
+        "dm2_ratio": 0.02935383416683755,
+        "sigma_mnu_eV": 145.33567931181082,
+        "sin2_theta12": 0.174871680080955,
+        "sin2_theta13": 0.1887428277348018,
+        "sin2_theta23": 0.8225778661712927,
+        "delta_deg": 180.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 54.49630183482477,
+        "m_bb_eV": 26.43458925535577,
+        "pulls_nufit": {
+          "dm2_ratio": 0.5667828725237521,
+          "sin2_theta12": 11.010693326587084,
+          "sin2_theta13": 287.57384092207207,
+          "sin2_theta23": 20.739874480664277
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 10.989639763662966,
+          "sin2_theta13": 285.57653892400117,
+          "sin2_theta23": 18.975168598311335
+        },
+        "matching_masses_eV": [
+          0.00010071465106871218,
+          26.095424446384577,
+          151.96751326236716
+        ],
+        "symmetry_residual": 7.330962342048738e-69
+      },
+      {
+        "name": "null_177",
+        "hit": false,
+        "near_miss": false,
+        "miss_factor": 2327.9122355113905,
+        "raw_spectral_norm": 13.181481588984672,
+        "normalized_spectral_norm": 0.44197399765711176,
+        "masses_eV": [
+          2.7638385357164875e-05,
+          1.4885402500728264,
+          147.96339763137308
+        ],
+        "dm2_21_eV2": 2.2157520753229925,
+        "dm2_31_eV2": 21893.16703861906,
+        "dm2_ratio": 0.00010120747132721617,
+        "sigma_mnu_eV": 149.45196551983128,
+        "sin2_theta12": 0.00017902455184594498,
+        "sin2_theta13": 0.6189781895187111,
+        "sin2_theta23": 0.9680560227976305,
+        "delta_deg": 180.0,
+        "J_CP": 0.0,
+        "m_beta_eV": 116.41045076597446,
+        "m_bb_eV": 91.58622804653967,
+        "pulls_nufit": {
+          "dm2_ratio": 37.31463645573354,
+          "sin2_theta12": 25.568414620679505,
+          "sin2_theta13": 1029.3589474460537,
+          "sin2_theta23": 29.29741310574297
+        },
+        "pulls_tfpt_angles": {
+          "sin2_theta12": 25.547361057755385,
+          "sin2_theta13": 1027.3616454479827,
+          "sin2_theta23": 27.53270722339003
+        },
+        "matching_masses_eV": [
+          3.477692158613085e-05,
+          1.826246877230312,
+          181.3933374346106
+        ],
+        "symmetry_residual": 0.0
+      }
+    ],
+    "corpus_over_null_hit_rate": 0.0
+  },
+  "verdict": "NU_TEXTURE_CENSUS_NULL",
+  "v3": {
+    "frozen": false,
+    "path": null,
+    "sha16": null,
+    "leptogenesis": null
+  },
+  "honest_scope": "Tree-level type-I seesaw with inherited frozen v2 low-energy factors; normal ordering; charged-lepton/address basis assumed; no continuous fit; no RG re-derivation of Y; v9 and v263 objects are examples, not frozen Dirac Yukawas; nothing closes FLAV.NUSCALE.05. Null comparison is exploratory because the corpus grammar contains correlated candidates."
+}

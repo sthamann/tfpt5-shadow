@@ -186,7 +186,7 @@ export function ScriptIndex() {
           <span className="font-mono text-slate-300">\\veri&#123;vN&#125;</span>{" "}
           and registered in <span className="font-mono text-slate-300">run_all.py</span>,
           which ends <span className="font-mono text-emerald-300">ALL CHECKS PASSED</span>.{" "}
-          <span className="text-slate-300">Click any script to run it live in your browser.</span>
+          <span className="text-slate-300">Click any script to inspect it. Browser-compatible scripts run live; native-only certificates show their pinned local command.</span>
         </p>
         <span className="rounded-full bg-slate-800/60 px-3 py-1 text-[11px] font-mono uppercase tracking-widest text-slate-300 ring-1 ring-slate-700/40">
           {TOTAL} scripts
@@ -229,7 +229,7 @@ export function ScriptIndex() {
                       type="button"
                       onClick={() => open(s.file)}
                       className="group flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-blue-500/5"
-                      title={`Open ${s.file} — full description + run it in your browser`}
+                      title={`Open ${s.file} — full description + reproduction path`}
                     >
                       <span className="mt-0.5 font-mono text-[11px] font-semibold text-blue-300 group-hover:text-blue-200">
                         {s.file.split("_")[0]}

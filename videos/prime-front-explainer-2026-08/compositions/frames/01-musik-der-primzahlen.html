@@ -1,0 +1,602 @@
+<template id="f01-template" data-composition-id="01-musik-der-primzahlen" data-width="1920" data-height="1080" data-duration="17.372">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Newsreader:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=block");
+</style>
+
+<style>
+  #root {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  .clip {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ground: ink-black + dim hairline grid (background layer, full-bleed) */
+  #f01-bg {
+    background-color: #020617;
+    background-image:
+      linear-gradient(rgba(30, 41, 59, 0.45) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 41, 59, 0.45) 1px, transparent 1px);
+    background-size: 96px 96px;
+    background-position: -8px -8px;
+  }
+
+  #f01-stage {
+    position: absolute;
+    inset: 0;
+    transform-origin: 74% 45%;
+  }
+
+  /* ---- Akt 1: Zahlenstrahl ---- */
+  #f01-strip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 414px;
+    height: 130px;
+    will-change: transform;
+  }
+  #f01-axis-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 130px;
+    display: block;
+  }
+  #f01-axis {
+    fill: none;
+    stroke: #475569;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  #f01-ticks {
+    position: absolute;
+    inset: 0;
+  }
+  .f01-tick {
+    position: absolute;
+    top: 26px;
+    width: 28px;
+    text-align: center;
+    transform-origin: 50% 0;
+    will-change: transform;
+  }
+  .f01-tick-bar {
+    width: 2px;
+    height: 26px;
+    margin: 0 auto;
+    background: #38bdf8;
+  }
+  .f01-tick-num {
+    margin-top: 7px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+  }
+
+  /* ---- Akt 2: Wellenfeld (3 Tiefen-Layer) ---- */
+  #f01-waves {
+    position: absolute;
+    left: 60px;
+    top: 150px;
+    width: 1260px;
+    height: 480px;
+  }
+  #f01-waves svg {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  .f01-wave {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-linecap: round;
+  }
+  #f01-wave-0 { stroke-width: 2.5; opacity: 0.30; }
+  #f01-wave-1 { stroke-width: 2;   opacity: 0.22; }
+  #f01-wave-2 { stroke-width: 2;   opacity: 0.14; }
+
+  /* Wellen-Knoten (outgoing) → Nullstellen-Punkte (incoming) */
+  .f01-node {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;
+    border: 2px solid #38bdf8;
+    border-radius: 50%;
+    opacity: 0;
+    transform-origin: 50% 50%;
+  }
+  .f01-dot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    will-change: transform;
+  }
+  .f01-dot-core {
+    position: absolute;
+    inset: 0;
+    background: #38bdf8;
+    border-radius: 50%;
+    transform-origin: 50% 50%;
+    opacity: 0;
+  }
+  .f01-dot-halo {
+    position: absolute;
+    inset: -9px;
+    border: 2px solid #38bdf8;
+    border-radius: 50%;
+    opacity: 0;
+    transform-origin: 50% 50%;
+  }
+
+  /* ---- Akt 3: kritische Linie ---- */
+  #f01-crit-svg {
+    position: absolute;
+    left: 1420px;
+    top: 170px;
+    width: 80px;
+    height: 640px;
+    display: block;
+  }
+  #f01-crit {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  #f01-relabel {
+    position: absolute;
+    left: 1486px;
+    top: 192px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.14em;
+    color: #38bdf8;
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  /* ---- Akt 4: Mono-Zeile + Counter ---- */
+  #f01-typeline {
+    position: absolute;
+    left: 170px;
+    top: 560px;
+    display: flex;
+    align-items: baseline;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: 0.14em;
+    color: #94a3b8;
+    opacity: 0;
+  }
+  #f01-type-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: 640px;
+    white-space: nowrap;
+  }
+  #f01-type-cursor {
+    display: inline-block;
+    width: 15px;
+    height: 28px;
+    margin-left: 5px;
+    background: #38bdf8;
+    align-self: center;
+  }
+
+  #f01-counter-block {
+    position: absolute;
+    left: 166px;
+    top: 258px;
+    opacity: 0;
+  }
+  #f01-counter-wrap {
+    display: flex;
+    align-items: baseline;
+    width: 460px;
+  }
+  #f01-counter {
+    font-family: "Newsreader", serif;
+    font-weight: 700;
+    font-size: 150px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #38bdf8;
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    transform-origin: 0% 80%;
+  }
+  #f01-counter-suffix {
+    font-family: "Newsreader", serif;
+    font-weight: 600;
+    font-size: 84px;
+    line-height: 1;
+    color: #38bdf8;
+    margin-left: 10px;
+    display: inline-block;
+    opacity: 0;
+  }
+  #f01-counter-label {
+    margin-top: 16px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+    opacity: 0;
+  }
+</style>
+
+<div
+  id="root"
+  data-composition-id="01-musik-der-primzahlen"
+  data-start="0"
+  data-duration="17.372"
+  data-fps="30"
+  data-width="1920"
+  data-height="1080"
+>
+  <div id="f01-bg" class="clip" data-start="0" data-duration="17.372" data-track-index="0"></div>
+
+  <div id="f01-content" class="clip" data-start="0" data-duration="17.372" data-track-index="1">
+    <div id="f01-stage">
+      <!-- Wellenfeld (Akt 2) -->
+      <div id="f01-waves">
+        <svg viewBox="0 0 1260 480" xmlns="http://www.w3.org/2000/svg">
+          <path id="f01-wave-0" class="f01-wave" d="" />
+          <path id="f01-wave-1" class="f01-wave" d="" />
+          <path id="f01-wave-2" class="f01-wave" d="" />
+        </svg>
+      </div>
+
+      <!-- Zahlenstrahl (Akt 1) -->
+      <div id="f01-strip">
+        <svg id="f01-axis-svg" viewBox="0 0 1920 130" xmlns="http://www.w3.org/2000/svg">
+          <path id="f01-axis" d="M 80 40 L 1840 40" />
+        </svg>
+        <div id="f01-ticks"></div>
+      </div>
+
+      <!-- Wellen-Knoten (outgoing marker der Swap-Transition) -->
+      <div class="f01-node" id="f01-node-0" style="left: 360px; top: 300px"></div>
+      <div class="f01-node" id="f01-node-1" style="left: 540px; top: 430px"></div>
+      <div class="f01-node" id="f01-node-2" style="left: 720px; top: 260px"></div>
+      <div class="f01-node" id="f01-node-3" style="left: 900px; top: 400px"></div>
+      <div class="f01-node" id="f01-node-4" style="left: 1060px; top: 300px"></div>
+      <div class="f01-node" id="f01-node-5" style="left: 1220px; top: 380px"></div>
+
+      <!-- Nullstellen-Punkte (incoming) -->
+      <div class="f01-dot" id="f01-dot-0" style="left: 360px; top: 300px">
+        <div class="f01-dot-halo" id="f01-halo-0"></div><div class="f01-dot-core" id="f01-core-0"></div>
+      </div>
+      <div class="f01-dot" id="f01-dot-1" style="left: 540px; top: 430px">
+        <div class="f01-dot-halo" id="f01-halo-1"></div><div class="f01-dot-core" id="f01-core-1"></div>
+      </div>
+      <div class="f01-dot" id="f01-dot-2" style="left: 720px; top: 260px">
+        <div class="f01-dot-halo" id="f01-halo-2"></div><div class="f01-dot-core" id="f01-core-2"></div>
+      </div>
+      <div class="f01-dot" id="f01-dot-3" style="left: 900px; top: 400px">
+        <div class="f01-dot-halo" id="f01-halo-3"></div><div class="f01-dot-core" id="f01-core-3"></div>
+      </div>
+      <div class="f01-dot" id="f01-dot-4" style="left: 1060px; top: 300px">
+        <div class="f01-dot-halo" id="f01-halo-4"></div><div class="f01-dot-core" id="f01-core-4"></div>
+      </div>
+      <div class="f01-dot" id="f01-dot-5" style="left: 1220px; top: 380px">
+        <div class="f01-dot-halo" id="f01-halo-5"></div><div class="f01-dot-core" id="f01-core-5"></div>
+      </div>
+
+      <!-- kritische Linie (Akt 3) -->
+      <svg id="f01-crit-svg" viewBox="0 0 80 640" xmlns="http://www.w3.org/2000/svg">
+        <path id="f01-crit" d="M 32 10 L 32 620" />
+      </svg>
+      <div id="f01-relabel">Re(s) = 1/2</div>
+
+      <!-- Counter + Mono-Zeile (Akt 4) -->
+      <div id="f01-counter-block">
+        <div id="f01-counter-wrap">
+          <span id="f01-counter">0</span><span id="f01-counter-suffix">+</span>
+        </div>
+        <div id="f01-counter-label">Years</div>
+      </div>
+      <div id="f01-typeline">
+        <span id="f01-type-wrap"><span id="f01-type-text"></span><span id="f01-type-cursor"></span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var DUR = 16.872;
+    var ACCENT = "56, 189, 248";
+
+    /* ---------- setup: Prim-Ticks ---------- */
+    var PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61];
+    // unregelmäßige Pop-Zeiten — das unruhige Timing IST das "wie Zufall"
+    var POP = [0.55, 0.66, 0.92, 1.02, 1.3, 1.42, 1.66, 1.73, 1.92, 2.14, 2.2, 2.38, 2.52, 2.58, 2.72, 2.86, 2.92, 3.02];
+    var ticksHost = document.getElementById("f01-ticks");
+    var tickEls = [];
+    PRIMES.forEach(function (p) {
+      var el = document.createElement("div");
+      el.className = "f01-tick";
+      el.style.left = (100 + ((p - 1) / 61) * 1700 - 14).toFixed(1) + "px";
+      el.innerHTML = '<div class="f01-tick-bar"></div><div class="f01-tick-num">' + p + "</div>";
+      ticksHost.appendChild(el);
+      tickEls.push(el);
+    });
+
+    /* ---------- setup: Wellen-Pfade (deterministisch generiert) ---------- */
+    function wavePath(amp, period, phase, yBase) {
+      var d = "";
+      for (var x = 0; x <= 1260; x += 14) {
+        var y = yBase + amp * Math.sin((x / period) * Math.PI * 2 + phase);
+        d += (x === 0 ? "M " : "L ") + x + " " + y.toFixed(1) + " ";
+      }
+      return d;
+    }
+    var waveCfg = [
+      { amp: 70, period: 420, phase: 0.0, yBase: 240 },
+      { amp: 46, period: 300, phase: 1.3, yBase: 300 },
+      { amp: 92, period: 560, phase: 2.4, yBase: 210 },
+    ];
+    var wavePaths = waveCfg.map(function (c, i) {
+      var p = document.getElementById("f01-wave-" + i);
+      p.setAttribute("d", wavePath(c.amp, c.period, c.phase, c.yBase));
+      return p;
+    });
+
+    /* ---------- setup: svg-path-draw (gemessene Längen) ---------- */
+    function primeDraw(p) {
+      var len = p.getTotalLength() * 1.02;
+      p.style.strokeDasharray = String(len);
+      p.style.strokeDashoffset = String(len);
+    }
+    primeDraw(document.getElementById("f01-axis"));
+    wavePaths.forEach(primeDraw);
+    primeDraw(document.getElementById("f01-crit"));
+
+    /* ---------- timeline ---------- */
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+    tl.to({}, { duration: DUR }, 0); // full-span anchor
+
+    /* Scene 1 (0.0–2.7s): Zahlenstrahl self-draw + unregelmäßige Prim-Pops */
+    tl.to("#f01-axis", { strokeDashoffset: 0, duration: 1.9, ease: "power2.out" }, 0.08);
+    tickEls.forEach(function (el, i) {
+      tl.fromTo(
+        el,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+        POP[i]
+      );
+    });
+
+    /* Scene 2 (2.7–8.5s): Fokuswechsel — Strahl gleitet nach unten, Wellen-Schicht darüber */
+    tl.to("#f01-strip", { y: 246, duration: 1.2, ease: "power2.inOut" }, 4.2);
+    [4.4, 4.75, 5.1].forEach(function (at, i) {
+      tl.to("#f01-wave-" + i, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out" }, at);
+    });
+    // Wellen-Knoten erscheinen …
+    for (var n = 0; n < 6; n++) {
+      tl.fromTo(
+        "#f01-node-" + n,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 0.55, duration: 0.4, ease: "power3.out" },
+        5.5 + n * 0.08
+      );
+    }
+    // … und verdichten sich zu Punkten (scale-swap-transition, klein)
+    for (var s = 0; s < 6; s++) {
+      var T = 6.0 + s * 0.2;
+      tl.to("#f01-node-" + s, { scale: 0.6, opacity: 0, duration: 0.3, ease: "power2.in" }, T);
+      tl.fromTo(
+        "#f01-core-" + s,
+        { scale: 0.6, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" },
+        T + 0.2
+      );
+    }
+
+    /* Scene 3 (8.5–12.6s): kritische Linie zeichnet sich, Punkte rasten ein */
+    tl.fromTo("#f01-stage", { scale: 1 }, { scale: 1.035, duration: 3.8, ease: "power1.inOut" }, 8.6);
+    tl.to("#f01-crit", { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 8.62);
+    tl.fromTo(
+      "#f01-relabel",
+      { opacity: 0, x: -14 },
+      { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" },
+      9.45
+    );
+
+    var NODE_POS = [
+      [360, 300], [540, 430], [720, 260], [900, 400], [1060, 300], [1220, 380],
+    ];
+    var LAND_Y = [252, 336, 420, 504, 588, 672];
+    var GLIDE_AT = [9.3, 9.72, 10.14, 10.56, 10.98, 11.42];
+    var GLIDE_DUR = 0.55;
+    NODE_POS.forEach(function (pos, i) {
+      var land = GLIDE_AT[i] + GLIDE_DUR;
+      tl.to(
+        "#f01-dot-" + i,
+        { x: 1452 - pos[0], y: LAND_Y[i] - pos[1], duration: GLIDE_DUR, ease: "power3.inOut" },
+        GLIDE_AT[i]
+      );
+      // Einrasten: Halo-Puls + kurzer Settle
+      tl.fromTo(
+        "#f01-halo-" + i,
+        { scale: 0.3, opacity: 0.85 },
+        { scale: 2.1, opacity: 0, duration: 0.45, ease: "power2.out" },
+        land - 0.05
+      );
+      if (i < 5) {
+        tl.fromTo(
+          "#f01-core-" + i,
+          { scale: 1.32 },
+          { scale: 1, duration: 0.3, ease: "power3.out" },
+          land - 0.02
+        );
+      }
+    });
+
+    // asr-keyword-glow auf dem letzten einrastenden Punkt ("einer einzigen Linie")
+    var ATTACK = 0.18, RELEASE = 0.45, REST = 0.25;
+    function envelope(time, start, end) {
+      if (time < start) return 0;
+      if (time < end) return Math.min((time - start) / ATTACK, 1);
+      var releaseEnd = end + RELEASE;
+      if (time < releaseEnd) return 1 - ((time - end) / RELEASE) * (1 - REST);
+      return REST;
+    }
+    var glowCore = document.getElementById("f01-core-5");
+    var glow = { t: 0 };
+    tl.to(
+      glow,
+      {
+        t: 1.5,
+        duration: 1.5,
+        ease: "none", // linear — t maps 1:1 auf Szenenzeit
+        onUpdate: function () {
+          var env = envelope(glow.t, 0.07, 0.95);
+          glowCore.style.boxShadow =
+            "0 0 " + (24 * env).toFixed(1) + "px " + (6 * env).toFixed(1) +
+            "px rgba(" + ACCENT + ", " + (0.25 + 0.55 * env).toFixed(3) + ")";
+          glowCore.style.transform = "scale(" + (1 + 0.16 * env).toFixed(4) + ")";
+        },
+      },
+      11.9
+    );
+
+    /* Scene 4 (12.6–16.9s): "SEIT 1859 · UNBEWIESEN" + Counter 0 → 165+ */
+    tl.fromTo("#f01-typeline", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 13.0);
+    // discrete-text-sequence: Keystrokes → Pause → Bulk
+    var SEQUENCE = [
+      { t: 0.0, text: "" },
+      { t: 0.08, text: "S" },
+      { t: 0.16, text: "SI" },
+      { t: 0.24, text: "SIN" },
+      { t: 0.3, text: "SINCE" },
+      { t: 0.62, text: "SINCE 1859" },
+      { t: 1.05, text: "SINCE 1859 ·" },
+      { t: 1.35, text: "SINCE 1859 · UNPROVEN" },
+    ];
+    function textAt(time) {
+      for (var i = SEQUENCE.length - 1; i >= 0; i--) {
+        if (time >= SEQUENCE[i].t) return SEQUENCE[i].text;
+      }
+      return "";
+    }
+    var typeText = document.getElementById("f01-type-text");
+    var typeDriver = { t: 0 };
+    var TYPE_TOTAL = DUR - 13.0;
+    tl.to(
+      typeDriver,
+      {
+        t: TYPE_TOTAL,
+        duration: TYPE_TOTAL,
+        ease: "none",
+        onUpdate: function () {
+          typeText.textContent = textAt(typeDriver.t);
+        },
+      },
+      13.0
+    );
+    // Cursor-Blink: deterministische Sin-Rechteckwelle auf der Timeline
+    var cursorEl = document.getElementById("f01-type-cursor");
+    var blink = { p: 0 };
+    tl.to(
+      blink,
+      {
+        p: Math.PI * 2 * 6,
+        duration: TYPE_TOTAL,
+        ease: "none",
+        onUpdate: function () {
+          cursorEl.style.opacity = Math.sin(blink.p) > 0 ? "1" : "0";
+        },
+      },
+      13.0
+    );
+
+    // counting-dynamic-scale: 0 → 165, Scale wächst mit, "+" landet danach
+    tl.fromTo("#f01-counter-block", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 14.35);
+    var counterEl = document.getElementById("f01-counter");
+    var state = { value: 0 };
+    var COUNT_DUR = 1.35;
+    tl.to(
+      state,
+      {
+        value: 165,
+        duration: COUNT_DUR,
+        ease: "power3.out",
+        onUpdate: function () {
+          counterEl.textContent = String(Math.round(state.value));
+        },
+      },
+      14.4
+    );
+    tl.fromTo(
+      counterEl,
+      { scale: 0.55 },
+      { scale: 1, duration: COUNT_DUR, ease: "power3.out" },
+      14.4
+    );
+    tl.fromTo(
+      "#f01-counter-label",
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      14.75
+    );
+    tl.fromTo(
+      "#f01-counter-suffix",
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" },
+      14.4 + COUNT_DUR
+    );
+    // Wellenfeld tritt zurück, damit der Counter trägt
+    tl.to("#f01-waves", { opacity: 0.4, duration: 0.8, ease: "power1.inOut" }, 14.3);
+
+    // gehaltener Read: nur die Nullstellen-Punkte tragen subtle jitter
+    // (sine-wave-loop, low amplitude, Attack-Ramp + Settle-Fade am Ende)
+    var cores = [];
+    for (var c = 0; c < 6; c++) cores.push(document.getElementById("f01-core-" + c));
+    var JIT_DUR = DUR - 13.6;
+    var CYCLES = 1.56; // Periode ≈ 2.1s
+    var jd = { p: 0 };
+    tl.to(
+      jd,
+      {
+        p: Math.PI * 2 * CYCLES,
+        duration: JIT_DUR,
+        ease: "none",
+        onUpdate: function () {
+          var t01 = jd.p / (Math.PI * 2 * CYCLES);
+          var attack = Math.min(t01 / 0.08, 1);
+          var fade = t01 < 0.78 ? 1 : Math.max((1 - t01) / 0.22, 0);
+          var env = attack * fade;
+          cores.forEach(function (core, i) {
+            var s = Math.sin(jd.p + i * 0.9) * env;
+            var base = i === 5 ? 1.04 : 1; // Rest-Level des Keyword-Glows bleibt erhalten
+            core.style.transform =
+              "translateY(" + (s * 2.2).toFixed(2) + "px) scale(" + base + ")";
+          });
+        },
+      },
+      13.6
+    );
+
+    window.__timelines["01-musik-der-primzahlen"] = tl;
+  })();
+</script>
+</template>

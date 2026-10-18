@@ -1,0 +1,108 @@
+# P9-FORECAST-GO v1 -- the two GO observing programmes, FROZEN 2026-08-04.
+#
+# WHY FROZEN NOW (news check 2026-08-04, experiments/news_check_2026-08-04.md):
+# Vela (PSR J0835-4510) has NOT glitched since 2024-04-29 (glitch #23,
+# dnu/nu = 2.4e-6; A&A 698 A72 (2025); ATel #16608/#16615, May 2024). At the
+# historical giant-glitch rate (~1 per 2.5 yr) the next-glitch WINDOW is
+# 2026/27 -- programme 1 is trigger-based and its forecast power is worthless
+# unless the protocol is frozen BEFORE the event. Programme 2 analyses data
+# that already exist; freezing it now protects the detector definition against
+# hindsight once any full-statistics spectrum becomes available.
+#
+# Derived from the strategy-council deliverable of the P9 slice
+# (results/results.json, seed 0; prereg p9_forecast_v1.yaml, frozen
+# 2026-08-03). Supersedes the v0 draft p9_go_programmes_prereg_draft.yaml
+# (sha256 a1c1d33c067027cd0b73f13336c37d7c0b5504788899f9347104c9860a96e1ea);
+# the only changes v0 -> v1 are the freeze itself, this provenance block and
+# the executor/self-check section -- every kernel number, cadence block,
+# named assumption and decision rule is byte-identical to the draft.
+#
+# FREEZE DISCIPLINE (sibling convention, ftransfer_clocks_v1 /
+# repeater_cascade_v1): editing ANY frozen value below after a campaign or
+# data pass has started invalidates this preregistration. The executing
+# analysis MUST record the sha256 of this byte-frozen file in its output
+# (sha256 self-reference: computed at execution time over this exact file).
+# Kernel numbers are EXACT consequences of the two TFPT axioms
+# (c3 = 1/(8*pi), g_car = 5) and must equal p9_forecast.constants
+# byte-for-byte (guarded by tests/test_kernel_frozen.py).
+version: 1
+frozen_on: 2026-08-04
+experiment: p9-forecast
+derived_from: p9_forecast_v1.yaml (results seed 0, 2026-08-03)
+supersedes:
+  file: p9_go_programmes_prereg_draft.yaml
+  sha256: a1c1d33c067027cd0b73f13336c37d7c0b5504788899f9347104c9860a96e1ea
+executor:
+  rule: >-
+    Each programme becomes a real experiment only via its own experiments/
+    folder (prereg + firewall + scorecard row on completion). The executing
+    analysis records the sha256 of THIS file in its results.json. No
+    scorecard row, no ledger row, no marker move from this file alone.
+gate: "P(detect | signal true, alpha = 0.05) >= 0.80"
+
+kernel:
+  omega: 2.5827069463082895      # 2*pi/ln((3/2)^6), exact from the axioms
+  eps: 0.01730246011431484       # exp(-pi^2/ln((3/2)^6))
+  reach_gate_periods: 2.8
+
+firewall: >-
+  Both programmes are surface / universal-DSI channels. Even a clean
+  detection at omega = 2.5827 is a universal discrete-scale-invariance
+  coincidence, NOT TFPT confirmation, until it recurs in >= 2 independent
+  worlds (the two programmes below are exactly such a pair). A clean
+  well-powered null KILLS the predicted-amplitude comb reading in that world.
+
+programme_1_vela_dense_cadence:
+  title: "Vela glitch trigger with dense radio cadence (nu-space comb search)"
+  forecast_power_at_predicted_eps: 0.954
+  status_of_power: "CONDITIONAL on the long-component transfer reading (see named_assumption)"
+  observing_plan:
+    target: "PSR J0835-4510 (Vela); trigger on the next giant glitch (rate ~1/2.5 yr; last: 2024-04-29 -> window 2026/27; plan 2 glitches / 5 yr)"
+    trigger_latency_d: 0.05
+    cadence: "8 TOAs/d for tau in [0.05, 3] d; 2/d in (3, 30]; 1/d in (30, 300]; 1 per 3 d in (300, 1000] -> ~581 TOAs/glitch"
+    ln_tau_reach_periods: 4.07   # vs the 2.8 gate; PG.08-Vela failed at 1.83 for RANGE, not amplitude
+    toa_quality_us: 50
+    facilities: "IAR/MeerKAT/Parkes-class daily single-dish campaign (PuMA-style)"
+  analysis:
+    product: "phase-connected ToA residuals -> adjacent-TOA nu(tau) estimates (PG.06b/PG.07 nu-space product), whitened, glitch-refit absorption basis {1, tau, tau^2, exp(-tau/tau_d_i)} projected out"
+    detector: "frozen off-kernel periodogram rank at omega = 2.5827069463082895 (detect_comb), within-segment shuffle, off-kernel lambda battery; campaign threshold calibrated on a null MC (the raw per-glitch p < 0.05 criterion is anti-conservative under red noise: raw fp up to 0.22 in the forecast bed)"
+  named_assumption:
+    long_component_transfer: >-
+      The forecast power 0.954 holds iff the multiplicative comb rides ALL
+      transient recovery components including the slow one (2021 PuMA model:
+      GLF0D_3 = 4.94 uHz at GLTD_3 = 502.6 d) -- the frozen sibling injection
+      semantics (PG.07/PG.08). Under the 2024 short-only envelope (transients
+      {0.150, 0.124, 0.185} uHz at {15.1, 2.45, 0.39} d) the SAME campaign has
+      power 0.063 at the predicted amplitude (0.46 at eps = 0.30).
+  decision_rule:
+    detect: "campaign statistic above the null-MC 95% threshold AND omega Bonferroni-smallest in the lambda battery AND shuffle-null consistent -> candidate; escalate only with the second world (programme 2)"
+    null_kill: "if the slow component is fitted at >= 3 uHz with the achieved cadence AND the campaign statistic stays below threshold -> the predicted-amplitude comb on the long-component reading is EXCLUDED at ~95% power (dated kill)"
+    envelope_ambiguity: "if the achieved glitch model carries no >= 1 uHz slow component, the campaign reverts to the SET-A regime: report data_limited (power 0.06), no kill claimed"
+
+programme_2_auger_full_statistics:
+  title: "Full-statistics Auger (+TA) log-periodic comb reanalysis in ln E"
+  forecast_power_at_predicted_eps: 0.896
+  status_of_power: "phase-marginalised; anchor (10% open-data sample, fixed phase) reproduces the published 0.233 at 0.225"
+  observing_plan:
+    data: "already collected -- Auger SD1500 + SD750 full dataset (open release = 10% sample; forecast N = 215,710 + 544,340) as a collaboration analysis proposal or from the published full-statistics binned spectrum; TA as northern cross-check"
+    new_hardware: none
+    availability_note_2026_08: "no Auger open-data release since March 2024 (release 3, doi:10.5281/zenodo.10488964); Phase II (AugerPrime, 2024-2034) running, Phase-II open data committed but not released -- the programme remains a collaboration-level proposal"
+  analysis:
+    detector: "uhecr-energy-dsi two-stage binned-Poisson fit unchanged: per-array piecewise-linear log-density with knots FROZEN at the published features (0.16 / 5.0 / 12.6 / 45.7 EeV), smooth refit per draw, one shared comb Lambda at the frozen omega; MC-calibrated 95% threshold; Z2 lambda battery with per-omega calibration"
+    model_adequacy_gate: >-
+      MANDATORY at x10 statistics: re-verify the frozen-knot smooth family on
+      the full spectrum (null Lambda distribution must stay chi2_2-like; if
+      real-spectrum curvature misfit inflates it, add preregistered knots
+      BEFORE the comb readout or the power claim is void.
+  decision_rule:
+    detect: "Lambda(omega) above the MC 95% threshold AND omega smallest-p in the per-omega-calibrated battery -> candidate; escalate only with programme 1"
+    null_kill: "clean null at full statistics -> the predicted 1.7% comb in the UHECR size-space channel is excluded at ~90% power (the open-data run already constrains at 23%)"
+
+combination:
+  note: >-
+    Hierarchical matched-sum combination of the realistic-5yr set (PSR SET-A
+    conservative leg + FRB baseband + GW O5 + UHECR full + CMB SO + LNFLUX
+    archive) reaches 0.955 vs 0.896 for the best single channel; no single
+    channel is indispensable (leave-one-out minimum 0.902). A joint detection
+    in BOTH GO programmes at the same omega is the replication the firewall
+    demands before any escalation.

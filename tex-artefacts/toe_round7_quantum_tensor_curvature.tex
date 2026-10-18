@@ -1,0 +1,482 @@
+% Source-preserving integrated proof body; input from toe_round7_proofs.tex.
+\subsubsection*{Round 6 prerequisite: a free quantum curvature field on the staggered tensor target}
+\label{sec:toe-r6-quantum}
+\noindent\emph{The displayed arguments below are the proof-bearing source.  The current
+repository regression is \veri{v1031\_\allowbreak quantum\_\allowbreak tensor\_\allowbreak curvature.py}; its finite checks audit the
+implementation and do not replace the universal steps in the proof.}
+
+\begingroup
+\def\TT{\mathrm{TT}}
+\def\Ran{\operatorname{Ran}}
+\def\Ker{\operatorname{Ker}}
+\def\Tr{\operatorname{Tr}}
+\def\ii{\mathrm{i}}
+\def\dd{\mathrm{d}}
+\def\cC{\mathcal C}
+\def\cS{\mathcal S}
+\def\cW{\mathcal W}
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{
+\textbf{Exact scope.}  This note quantizes only the free, quadratic, zero-mean
+curvature target whose classical constraint quotient was established at
+repository commit \texttt{4417f1ba8da3d5dc622c942efcbfc46ebaae546d}.
+It constructs neither a microscopic TFPT parent nor finite-dimensional quantum
+cells.  It proves no nonlinear constraint algebra, state selection mechanism,
+universal matter coupling, interacting graviton theory, T7 closure, TOE claim,
+or RH statement.  Strict lattice light-cone support remains false.  The
+microcausality theorem below is a distributional statement about the
+$a\to0$ limit of this free target.
+}}
+\end{center}
+
+\paragraph{Assumptions and preregistered obligations.}
+
+Let a periodic cubic lattice have $V=L^3$ cells and spacing $a>0$.  The six
+orthonormal symmetric-tensor coordinates are ordered as
+$(11,22,33,23,13,12)$, with the off-diagonal basis tensors normalized by
+$1/\sqrt2$.  Component $A$ lives at $x+a m_A/2$, where
+\[
+ m_A=(000,000,000,011,101,110).
+\]
+We use the physical-position Fourier phase
+$\exp[-\ii k\cdot(x+a m_A/2)]$.  The staggered derivative symbol is
+\[
+ \ii\kappa_i^{(a)}(k),\qquad
+ \kappa_i^{(a)}(k)=\frac{2}{a}\sin\frac{ak_i}{2},\qquad
+ r_a(k)=|\kappa^{(a)}(k)|.
+\]
+It vanishes only at the homogeneous momentum in the first Brillouin zone.
+The complete homogeneous canonical block is removed as an additional
+zero-mean prescription.  It is not declared gauge.
+
+The proof was preregistered against the following obligations.
+\begin{enumerate}[label=\textbf{O\arabic*.},leftmargin=2.5em]
+\item Prove, for every nonzero real momentum and not from samples, that the
+curvature commutator operator is $r^4P_{\TT}$, is positive, has rank two, and
+is transverse and traceless.
+\item Construct the Weyl quotient, prove the Heisenberg inequality by an
+explicit factorization, and identify the finite-volume GNS representation and
+ground state.  A finite matrix approximation to the CCR is inadmissible.
+\item Treat $k$ and $-k$, self-conjugate momenta, and half-grid Bloch signs
+without choosing a globally inconsistent polarization frame.
+\item Prove convergence of local states as $L\to\infty$ at fixed $a$.
+\item Either prove an $a\to0$ tempered-distribution limit and its curvature
+microcausality, or leave that claim open.  Finite grids may only be regression
+tests for the analytic proof.
+\end{enumerate}
+
+The input from the classical target is the canonical reduced Hamiltonian and
+the already-proved staggered identities.  In one momentum fibre set
+\[
+ Bq=q\kappa,\quad t=(1,1,1,0,0,0)^T,\quad
+ v=B^T\kappa,\quad s=v-r^2t,
+\]
+\[
+ K_p=I-\frac12tt^T,\qquad
+ K_q=r^2(I-tt^T)-2B^TB+tv^T+vt^T.                 \tag{1}
+\]
+The four local constraints are the scalar $s^Tq=0$ and the three momentum
+constraints $Bp=0$.  For $r>0$ they are independent and first class.  The
+curvature variables are
+\[
+ E=K_qq,\qquad F=K_qK_pp,                           \tag{2}
+\]
+and the classical result supplies
+\[
+ K_qB^T=0,\quad K_ps=B^T\kappa,\quad K_qt=s,
+\]
+\[
+ K_q^2=r^2K_q+ss^T,\qquad
+ K_qK_pK_q=r^2K_q+\frac12ss^T.                    \tag{3}
+\]
+All matrices in (1)--(3) are real in the physical-position trivialization.
+
+\paragraph{The exact spin-two commutator projector.}
+
+For $\kappa\ne0$, let $P=I_3-\kappa\kappa^T/r^2$.  The orthogonal
+spin-two projector on symmetric tensors is
+\[
+ (P_{\TT}h)_{ij}=P_{ia}P_{jb}h_{ab}
+ -\frac12P_{ij}P_{ab}h_{ab}.                       \tag{4}
+\]
+It has rank two, $P_{\TT}^2=P_{\TT}=P_{\TT}^T$, and its range is
+$\{h:h\kappa=0,\ \Tr h=0\}$.
+
+\begin{theorem}[Polynomial curvature projector]
+For every $\kappa\ne0$,
+\[
+ C:=K_qK_pK_q=r^4P_{\TT}.                          \tag{5}
+\]
+Consequently
+\[
+ C^T=C\ge0,\quad C^2=r^4C,\quad \Tr C=2r^4,
+\quad \operatorname{rank}C=2,
+\quad CB^T=0,\quad Ct=0.                           \tag{6}
+\]
+Although (4) has inverse powers of $r$, $C$ itself is a homogeneous
+degree-four polynomial in $\kappa$.
+\end{theorem}
+
+\begin{proof}
+The TT space is $\Ker B\cap t^\perp$.  If $h$ is TT, (1) gives
+$K_qh=r^2h$ and $K_ph=h$, hence $Ch=r^4h$.  Equations (3) give
+$CB^T=0$.  They also give
+$Ct=K_qK_ps=K_qB^T\kappa=0$.  The scalar and momentum constraints are
+independent at $r>0$, so
+$\Ran B^T+\operatorname{span}\{t\}$ is four-dimensional and is the
+orthogonal complement of the two-dimensional TT space.  Thus $C$ is $r^4$
+on TT and zero on its orthogonal complement, proving (5).  The properties in
+(6) follow immediately.  Finally, $C=K_qK_pK_q$ is polynomial; equivalently
+the two factors of $r^{-2}$ implicit in (4) cancel against $r^4$.  A direct
+component multiplication of (4) is included in the executable checker.
+\end{proof}
+
+This theorem sharpens the off-shell identity in (3): the term
+$r^2K_q+ss^T/2$ is exactly the polynomial numerator of the TT projector.  No
+nonlocal TT projector is inserted into the lattice observable.
+
+\paragraph{CCR quotient and finite-volume vacuum.}
+
+Let $\cS_L$ be the real finite-volume smearing space of curvature pairs
+$X=(f,g)$, with the homogeneous fibre absent and with the same reality/Bloch
+conditions as the fields.  Define
+\[
+ \Phi(f,g)=E(f)+F(g),\qquad
+ \sigma_L(X,Y)=\langle f,C h_g\rangle-
+                  \langle h_f,Cg\rangle,           \tag{7}
+\]
+where $Y=(h_f,h_g)$ and the brackets denote the real lattice inner product.
+Canonical quantization means
+\[
+ [\Phi(X),\Phi(Y)]=\ii\sigma_L(X,Y)I,\qquad
+ W(X)W(Y)=e^{-\ii\sigma_L(X,Y)/2}W(X+Y).           \tag{8}
+\]
+The null space of (7) is $\Ker C\oplus\Ker C$.  We therefore define the
+physical Weyl algebra on
+\[
+ \cS_L^{\rm phys}=\cS_L/(\Ker C\oplus\Ker C),      \tag{9}
+\]
+not on the unreduced six-component smearing space.  By (5), (9) retains
+exactly the two TT canonical pairs in each nonzero real momentum component.
+
+Let $R=(-\Delta_a)^{1/2}$.  It has fibre eigenvalue $r_a(k)$ and is strictly
+positive after removal of the homogeneous block.  It commutes with $C$.
+Define the real covariance
+\[
+ \mu_L(X,Y)=\frac12\langle f,CR^{-1}h_f\rangle
+            +\frac12\langle g,RC h_g\rangle.       \tag{10}
+\]
+Thus, fibre by fibre,
+\[
+ \frac12\langle\{E,E\}\rangle=\frac{C}{2r},\qquad
+ \frac12\langle\{F,F\}\rangle=\frac{rC}{2},\qquad
+ \frac12\langle\{E,F\}\rangle=0.                \tag{11}
+\]
+The unsymmetrized mixed covariances are $\langle EF\rangle=\ii C/2$ and
+$\langle FE\rangle=-\ii C/2$.
+
+\begin{theorem}[Proposition: Exact uncertainty factorization]
+The covariance (10) satisfies the CCR positivity condition, and it saturates
+it on every physical oscillator.  If $C^{1/2}=r^2P_{\TT}$ fibrewise, then
+\[
+ \mu_L+\frac{\ii}{2}\sigma_L
+ =\frac12
+ \begin{pmatrix}CR^{-1}&\ii C\\-\ii C&RC\end{pmatrix}
+ =\frac12
+ \begin{pmatrix}C^{1/2}R^{-1/2}\\-\ii C^{1/2}R^{1/2}\end{pmatrix}
+ \begin{pmatrix}R^{-1/2}C^{1/2}&\ii R^{1/2}C^{1/2}\end{pmatrix}
+ \ge0.                                               \tag{12}
+\]
+Equivalently,
+\[
+ J(f,g)=(-Rg,R^{-1}f),\qquad J^2=-I,\qquad
+ \mu_L(X,Y)=\frac12\sigma_L(X,JY).                 \tag{13}
+\]
+Hence $\omega_L(W(X))=\exp[-\mu_L(X,X)/2]$ is a pure regular quasifree
+state on the physical Weyl algebra.
+\end{theorem}
+
+\begin{proof}
+All factors in (12) commute in momentum space, and multiplication gives the
+middle matrix exactly.  This proves the uncertainty inequality rather than testing principal
+minors.  On the quotient, $J$ is well defined, compatible with $\sigma_L$,
+and satisfies (13).
+
+For existence and purity, no abstract reconstruction theorem is needed.
+Choose a real orthonormal spectral basis common to $R$ and $P_{\TT}$.  In the
+$\alpha$th physical plane represent $Q_\alpha$ by multiplication and
+$P_\alpha=-\ii\,\partial/\partial q_\alpha$ on
+$L^2(\mathbb R,\dd q_\alpha)$, and put
+\[
+ E_\alpha=r_\alpha^2Q_\alpha,\qquad
+ F_\alpha=r_\alpha^2P_\alpha,\qquad
+ \Omega_\alpha(q)=
+ \left(\frac{r_\alpha}{\pi}\right)^{1/4}
+ e^{-r_\alpha q^2/2}.                              \tag{13a}
+\]
+Direct Gaussian integration gives
+$\langle Q_\alpha^2\rangle=1/(2r_\alpha)$,
+$\langle P_\alpha^2\rangle=r_\alpha/2$, and
+$\langle\{Q_\alpha,P_\alpha\}\rangle/2=0$.  It also gives
+\[
+ \left\langle\Omega_\alpha,
+ e^{\ii(fE_\alpha+gF_\alpha)}\Omega_\alpha\right\rangle
+ =\exp\!\left[-\frac14
+   \left(r_\alpha^3f^2+r_\alpha^5g^2\right)\right],
+                                                               \tag{13b}
+\]
+which is exactly $\exp[-\mu_L(X,X)/2]$ on that plane.  The finite tensor
+product over all physical planes therefore constructs $\omega_L$ directly
+and makes regularity explicit.  Multiplications and translations on
+$L^2(\mathbb R^N)$ have only scalars in their joint commutant (use the Fourier
+transform for the translation part), so this Schr\"odinger representation is
+irreducible.  Its normalized Gaussian vector state is consequently pure.
+\end{proof}
+
+The state is the oscillator ground state, not just a formal Gaussian.  In a
+real spectral basis of $R$ and $P_{\TT}$ the reduced Hamiltonian is
+\[
+ H_L=\frac12\sum_\alpha(p_\alpha^2+r_\alpha^2q_\alpha^2),\qquad
+ a_\alpha=\frac{r_\alpha^{1/2}q_\alpha+\ii r_\alpha^{-1/2}p_\alpha}{\sqrt2}.
+                                                               \tag{14}
+\]
+Its GNS representation is the bosonic Fock representation, with unique vacuum
+$a_\alpha\Omega_L=0$.  Normal ordering gives
+$H_L^{\rm N}=\dd\Gamma(R)$; without normal ordering the finite vacuum energy
+is $\frac12\sum_\alpha r_\alpha$.  There are exactly $2(V-1)$ real
+oscillators.  Each oscillator requires an infinite-dimensional Hilbert space:
+no finite $d\times d$ matrices can satisfy $[Q,P]=\ii I_d$, because taking the
+trace would give $0=\ii d$.  Thus ``finite-volume'' never means a
+finite-dimensional CCR representation.
+
+Here uniqueness means uniqueness of the regular finite-volume oscillator
+ground state on the zero-mean physical Weyl algebra.  It is not a claim that
+all infinite-volume states or phases are unique.  In particular, the omitted
+$k=0$ fibre is not present in this algebra, so there is no zero-frequency
+coherent sector to translate.  Restoring that fibre would remove the positive
+frequency hypothesis used in (14) and would require an additional state
+choice; the present theorem says nothing about such an extension.
+
+The induced dynamics is
+\[
+ E(t)=\cos(Rt)E+R^{-1}\sin(Rt)F,\qquad
+ F(t)=-R\sin(Rt)E+\cos(Rt)F,                       \tag{15}
+\]
+so (10) is invariant and is a ground state for the positive frequencies.
+
+\paragraph{Reality and Bloch gluing.}
+
+Write $G_i=\operatorname{diag}((-1)^{(m_A)_i})$.  Physical-position Fourier
+coefficients obey
+\[
+ \widehat q(k+2\pi e_i/a)=G_i\widehat q(k),\qquad
+ \widehat q(-k)=\overline{\widehat q(k)},           \tag{16}
+\]
+and similarly for $p,E,F$.  Changing $k_i$ by $2\pi/a$ reverses
+$\kappa_i^{(a)}$ and gives
+\[
+ K_q(k+2\pi e_i/a)=G_iK_q(k)G_i,\qquad
+ C(k+2\pi e_i/a)=G_iC(k)G_i.                       \tag{17}
+\]
+Also $C(-k)=C(k)$.  Therefore (7), (10), and (15) descend to the Bloch bundle
+and respect the real involution.  No polarization vectors are chosen, so
+there is no hidden global-frame obstruction.
+
+For a non-self-conjugate pair $\{k,-k\}$, the two complex TT amplitudes at
+$k$ determine those at $-k$ and give four real oscillator coordinates.  At a
+self-conjugate boundary momentum, (16) becomes
+$z=G_n\overline z$; the fixed real form of the complex two-dimensional TT
+space has real dimension two.  If $N_{\rm sc}$ is the number of nonzero
+self-conjugate momenta, then
+\[
+ 2N_{\rm sc}+4\frac{V-1-N_{\rm sc}}2=2(V-1).       \tag{18}
+\]
+For odd $L$, $N_{\rm sc}=0$; for even $L$, $N_{\rm sc}=7$.  This establishes
+the real mode count including Brillouin-zone corners.
+
+\paragraph{Fixed-spacing thermodynamic state.}
+
+At fixed $a$, extend the covariance symbols by zero at $k=0$.  The estimates
+\[
+ \|C(k)\|=r_a(k)^4,\qquad
+ \|C(k)/(2r_a(k))\|=\tfrac12r_a(k)^3,\qquad
+ \|r_a(k)C(k)/2\|=\tfrac12r_a(k)^5               \tag{19}
+\]
+show that all symbols are continuous on the compact Brillouin torus.  A
+finite-support smearing has a trigonometric-polynomial Fourier transform.
+Consequently every entry of (7) and (10) is a Riemann sum of a continuous
+periodic function.  As $L\to\infty$ it converges to the corresponding
+Brillouin-zone integral.
+
+\begin{theorem}[Local thermodynamic state]
+For every finite collection of finite-support curvature smearings, the
+finite-volume Weyl expectations converge as $L\to\infty$ at fixed $a$.  The
+limits define a translation-invariant quasifree state $\omega_{\infty,a}$ on
+the inductive local curvature Weyl algebra over $\mathbb Z^3$.  Its equal-time
+CCR kernel is the same finite stencil $C$ as in finite volume, while its
+vacuum covariance generally has infinite spatial range.
+\end{theorem}
+
+\begin{proof}
+Riemann-sum convergence and (19) give convergence of $\sigma_L$ and $\mu_L$.
+The global summand contributes zero, so deleting it causes no residual
+$1/V$ term.  Pointwise limits of the positive characteristic functionals in
+(12) remain positive and normalized, and consistency under inclusion of
+supports gives a state on the inductive algebra.  Translation invariance is
+manifest in the Fourier multiplier.  Since $C$ is polynomial in shifts, its
+CCR kernel is finite range; the fractional powers in (10) need not be.
+\end{proof}
+
+The same argument applies to (15) for each fixed time.  It does not produce a
+strict lattice light cone.  The analytic tails of the lattice wave propagator
+found in the classical construction remain present in quantum commutators.
+
+\paragraph{Continuum distributions and microcausality.}
+
+Take the thermodynamic limit first.  For $p$ in
+$\mathrm{BZ}_a=[-\pi/a,\pi/a]^3$, let
+\[
+ \kappa_{a,i}(p)=\frac2a\sin\frac{ap_i}{2},\quad
+ \omega_a(p)=|\kappa_a(p)|,\quad C_a(p)=C(\kappa_a(p)).          \tag{20}
+\]
+The band-limited interpolation of a lattice kernel is the tempered
+distribution obtained by integrating its multiplier over $\mathrm{BZ}_a$.
+Equivalently, lattice fields with $[q_x,p_y]=\ii\delta_{xy}$ are scaled as
+$a^{-3/2}$ distributions, so their smearings are
+$a^{3/2}\sum_x f(x+a m_A/2)E_A(x)$.  For Schwartz test functions, Poisson
+summation shows that direct sampling and the band-limited interpolation have
+the same limit.  Here is the required uniform estimate.  With
+\[
+ \widehat f_{a,A}(p)
+ =a^3\sum_{x\in a\mathbb Z^3}
+ f_A(x+a m_A/2)e^{-\ii p\cdot(x+a m_A/2)},
+\]
+Poisson summation writes $\widehat f_{a,A}(p)$ as
+$\widehat f_A(p)$ plus the nonzero aliases
+$\widehat f_A(p+2\pi n/a)$, each multiplied by a stagger phase of modulus
+one.  For $p\in\mathrm{BZ}_a$ and $n\ne0$,
+\[
+ |p+2\pi n/a|\ge \pi |n|_\infty/a.
+\]
+Every Schwartz seminorm is finite, so for every $M>3$,
+\[
+ \sup_{p\in\mathrm{BZ}_a}
+ |\widehat f_{a,A}(p)-\widehat f_A(p)|
+ \le C_{f,M}a^M
+ \sum_{n\ne0}|n|_\infty^{-M}.                     \tag{20a}
+\]
+The largest covariance or commutator multiplier used below is
+$O(a^{-5})$, and $\operatorname{vol}(\mathrm{BZ}_a)=O(a^{-3})$.
+The difference between a sampled pairing and its band-limited pairing is
+therefore $O(a^{M-8})$; choosing any $M>8$ makes it vanish.  For spacetime
+Schwartz tests, the same estimate holds after spatial Fourier transformation
+with a coefficient rapidly decreasing in $t$, so its time integral obeys the
+same bound.  Thus no unproved no-alias assumption enters the continuum limit.
+
+Let $C_0(p)=C(p)=|p|^4P_{\TT}(p)$ for $p\ne0$, with its polynomial value
+$C_0(0)=0$.  Since $|\kappa_a(p)|\le |p|$ on $\mathrm{BZ}_a$, the covariance
+multipliers satisfy the $a$-independent polynomial bounds
+\[
+ \|C_a/(2\omega_a)\|\le\tfrac12|p|^3,\qquad
+ \|\omega_a C_a/2\|\le\tfrac12|p|^5.              \tag{21}
+\]
+They converge pointwise to $C_0/(2|p|)$ and $|p|C_0/2$.  Dominated
+convergence against the rapidly decreasing Fourier transform of any Schwartz
+test proves convergence in $\cS'(\mathbb R^3)$ of the equal-time vacuum
+covariances.  The limiting quasifree functional remains positive by (12).
+
+For the spacetime commutators define the scalar lattice Pauli--Jordan
+multiplier
+\[
+ d_a(t,p)=\frac{\sin(\omega_a(p)t)}{\omega_a(p)},\qquad d_a(t,0)=t.           \tag{22}
+\]
+Equation (15) gives
+\begin{align}
+ [E(t),E(0)]&=-\ii C_a d_a,&
+ [E(t),F(0)]&= \ii C_a\partial_t d_a,\nonumber\\
+ [F(t),E(0)]&=-\ii C_a\partial_t d_a,&
+ [F(t),F(0)]&= \ii C_a\partial_t^2 d_a.             \tag{23}
+\end{align}
+For spacetime Schwartz tests, $|d_a(t,p)|\le |t|$,
+$|\partial_td_a|\le1$, and
+$|\partial_t^2d_a|\le |t||p|^2$.  Together with
+$\|C_a\|\le|p|^4$, these are integrable polynomial dominators after spatial
+Fourier transformation.  Therefore (23) converges in
+$\cS'(\mathbb R^{1+3})$ to the same formulas with
+\[
+ d_0(t,p)=\frac{\sin(|p|t)}{|p|}.                  \tag{24}
+\]
+
+\begin{theorem}[Continuum curvature microcausality]
+The limiting free curvature commutators vanish for spacelike-separated test
+supports.  More precisely, all four matrix-valued distributions in (23) have
+support inside the Minkowski light cone.
+\end{theorem}
+
+\begin{proof}
+The inverse spatial Fourier transform of (24) is, up to the Fourier sign
+convention,
+\[
+ D_0(t,x)=\frac{1}{4\pi|x|}
+ \bigl(\delta(t-|x|)-\delta(t+|x|)\bigr),           \tag{25}
+\]
+so $\operatorname{supp}D_0\subseteq\{|x|=|t|\}$.  The polynomial
+$C_0(p)$ is a constant-coefficient fourth-order spatial differential operator
+$C_0(-\ii\nabla)$ in position space.  The other factors in (23) are time
+derivatives of $D_0$.  Distributional differentiation does not enlarge
+support, proving the claim.
+\end{proof}
+
+This closes O5 for the two-step limit $L\to\infty$ followed by $a\to0$.
+It does not retroactively give strict support to (22) at any $a>0$, and it does
+not prove that a TFPT microscopic dynamics has this scaling limit.
+
+\paragraph{Executable certificate, costs, and remaining limits.}
+
+The repository certificate \veri{v1031\_\allowbreak quantum\_\allowbreak tensor\_\allowbreak curvature.py} is standalone and
+imports no proof text.  It is a separate implementation check, not an
+external independent review.  Its roles were fixed before execution:
+\begin{itemize}[leftmargin=2em]
+\item exact SymPy polynomial algebra checks (3), (5), (6), and the separate
+index formula (4);
+\item exact rational-momentum fibres, characteristic polynomials, TT action,
+and the factorization (12);
+\item exact Bloch transformations, boundary real forms, real mode counts, and
+the finite-matrix CCR trace no-go;
+\item finite floating-point checks of complete small-volume fibre spectra and
+two convergence diagnostics.  These last checks are regressions only; they do
+not establish O1--O5.
+\end{itemize}
+The universal claims rest on the displayed polynomial identities, positivity
+factorization, Riemann-sum theorem, dominated-convergence bounds, and support
+argument.  A failed finite regression would reject the implementation; a
+passed regression cannot replace any of those arguments.
+
+The reported total of 69 checks is evidence-typed as follows: 53 are exact
+symbolic, rational, integer-counting, or finite-matrix no-go checks; 16 are
+floating-point regressions.  The latter comprise 12 complete small-volume
+fibre-spectrum/uncertainty/gap checks and four thermodynamic or continuum
+diagnostics.  No floating-point result is used in a theorem proof.
+
+The exact core uses fixed $6\times6$ matrices of polynomial degree at most
+eight.  Rational checks use four fibres.  Boundary checks use the seven even-$L$
+self-conjugate corners.  The numerical cost is $O(\sum L^3)$ over the listed
+small boxes plus at most a $96^3$ scalar Riemann grid; memory is $O(96^3)$
+floating-point numbers.  No repository suite is needed for this isolated
+artifact.
+
+The construction is ultraviolet-distributional.  The continuum covariance
+grows as $|p|^3$ and $|p|^5$, so point fields and coincident products require
+smearing and, for composite observables, renormalization not supplied here.
+The un-normal-ordered vacuum energy diverges in thermodynamic/continuum limits.
+The curvature state is not claimed to have finite correlation range.  The
+Hamiltonian written only in $(E,F)$ contains inverse powers of $R$ even though
+the CCR and equations are local.  None of these limitations alters the
+finite-volume Fock construction or the stated distributional limits, but each
+blocks a stronger physical interpretation.
+
+Finally, $(E,F)$ is the spatial curvature/curvature-velocity pair of the
+linear target.  This note does not reconstruct a complete Lorentz-covariant
+four-dimensional Riemann or Weyl tensor, construct boost generators, or prove
+that the regulator arises from a covariant microscopic theory.
+\endgroup

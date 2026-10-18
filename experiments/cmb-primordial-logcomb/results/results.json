@@ -22,5 +22,39 @@
   "clock_map": "MOTIVATED (inflation e-folds are a log-clock; the only such natural bed)",
   "transduction_B": "assumed, not derived (comb transfer into P(k) is a flagged bridge)",
   "verdict": "data_limited",
-  "note": "the frozen omega sits inside the published Planck search band with no reported feature; the predicted amplitude 0.0173 lies a factor 1.7 below today's 95% bound -> data_limited with a dated decider (CMB-S4-class combined bounds reach it; a future bound < 0.017 at omega = 2.583 with no detection kills the bridge reading)"
+  "note": "the frozen omega sits inside the published Planck search band with no reported feature; the predicted amplitude 0.0173 lies a factor 1.7 below today's 95% bound -> data_limited with a dated decider (CMB-S4-class combined bounds reach it; a future bound < 0.017 at omega = 2.583 with no detection kills the bridge reading)",
+  "faithful_class_omega_minus": {
+    "module": "faithful_class_omega_minus (post sheetflip-bridge)",
+    "frozen_tones_even_channel": {
+      "omega_minus": 0.9532,
+      "omega_minus_half": 0.4766,
+      "omega_plus_half": 1.291353
+    },
+    "published_coverage": {
+      "source": "arXiv:2507.17276 (Planck+ACT DR6+SPT-3G, 2025)",
+      "template": "P0 [1 + A_log cos(omega ln(k/k*) + phi)], k* = 0.05/Mpc (identical class)",
+      "omega_prior_flat": [
+        0.0,
+        100.0
+      ],
+      "A_log_95_global": 0.0286,
+      "A_log_95_perfreq_ceiling": 0.05,
+      "detection": "none (omega unconstrained)"
+    },
+    "amplitude_typing": {
+      "eps_candidate": 0.017302,
+      "status": "OPEN -- QT.02 eps was frozen for the omega_+ comb; carry-over to the even sector is not derived"
+    },
+    "checks": {
+      "omega_minus_inside_2025_flat_prior": true,
+      "reach_full_periods_omega_minus": 1.153,
+      "reach_optimistic_periods_omega_minus": 1.397,
+      "reach_full_periods_omega_plus_half": 1.562,
+      "gate_fails_everywhere": true,
+      "eps_candidate_below_global_bound": true,
+      "eps_candidate_below_perfreq_bound": true
+    },
+    "structural_note": "omega_- is now COVERED by a published scan (flat prior) but PERIOD-STARVED: 1.15 periods in the full Planck window, < 1.4 even in an optimistic [1e-4, 1] Mpc^-1 window -- the frozen 2.8-period gate cannot be reached by any realistic single k-window (needs ~8 decades in k). The faithful class's gate-passing channel is TB/EB at omega_+ = 2.5827, where NO published comb search exists (open target).",
+    "verdict": "data_limited"
+  }
 }

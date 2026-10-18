@@ -250,3 +250,74 @@ import TfptCarrier.SeamResidualAxiom
 #print axioms TfptCarrier.SeamResidualAxiom.residual_arithmetic
 #print axioms TfptCarrier.SeamResidualAxiom.two_sided_nonchiral
 #print axioms TfptCarrier.SeamResidualAxiom.seamResidualClosed
+
+-- Cofinal PREDEFINED/noninterference hardening (2026-08-13)
+-- The mathematical theorem has an explicit fixed `idx`; the hardened
+-- wrapper additionally requires the named external contract certificate.
+-- The negative and constantization theorems expose exactly why ordinary
+-- extensional types do not recover construction provenance.
+
+-- Euler–Pick forward direction (round 93 V0c, finite-sum core; 2026-08-15)
+-- Real ordinates ⇒ every finite Pick section is PSD: the per-zero rank-two
+-- Gram identity is exact in the kernel, the PSD conclusion holds at every
+-- witness and as Matrix.PosSemidef, and the Stieltjes–Vitali node
+-- instantiation is unconditional.  No hypothesis touches ζ.
+
+-- The δ₁ no-go (round 93 V0b; 2026-08-15)
+-- Pin finiteness/positivity coexists with singular, non-PD moment sections
+-- at every size ≥ 2 — the counterexample package, all components proven.
+
+-- The secular parity lemma (round 85 TPL T4 / S6; 2026-08-15)
+-- Blow-up laws and the same-sign existence direction are proven
+-- unconditionally; the assembled parity theorems carry the named
+-- SIMPLICITY hypothesis (alternating gap-sample signs) explicitly.
+
+-- The (SV) ⇒ RH skeleton (rounds 92–93 V0a/V0c backward chain; 2026-08-15)
+-- The V0a pin geometry is proven; the chain is a typed hypothesis package
+-- whose honesty lock proves no unconditional conclusion can be extracted.
+
+-- The radius-4 field algebra (round 117 / note CDXVII; 2026-08-16)
+-- The on-line quarter bound, the matched-pin strict violation, the
+-- determinant factor and the 2-to-1 partner rigidity are pure field
+-- identities over ℝ/ℂ, all proven unconditionally.
+
+-- The matched-pin algebra (round 125 / note CDXXVI; 2026-08-16)
+-- y* = (γ+iδ)/(2γ), weight exactly 1, v* = 1 + ε exactly real, the
+-- v = 4w dictionary lock and the on-line (0,1] rate contrast — all
+-- exact complex/real field lemmas, proven unconditionally.
+
+-- The NF-closure kernel (round 122 / note CDXXIII; 2026-08-16)
+-- The scalar/eigenvalue contraction into [0,1/4], the determinant
+-- factor, the trace-power inequality and the scalar log chain are
+-- proven; the operator statement and the Vitali/Hurwitz hull are a
+-- typed hypothesis package whose honesty lock proves no
+-- unconditional conclusion can be extracted.
+
+-- The spacing-product identity (round 135 D1; 2026-08-18)
+-- The general-K secular-derivative spacing form F′(y_j) =
+-- A₀·∏(y_j−y_i)/∏(y_j−b_k) at every numerator root off the lattice,
+-- via the per-pole Wronskian collapse — pure polynomial/field
+-- algebra over an arbitrary field, all proven unconditionally.
+
+-- The jet sum rules (rounds 135 D2 / 154 P5; 2026-08-18)
+-- All four reciprocal-derivative sum rules proven EXACTLY at K = 2
+-- (sympy-verified before formalization); the general-K residue
+-- forms are a typed hypothesis package whose honesty lock proves
+-- no unconditional conclusion can be extracted.
+
+-- The s×gap pinch (round 142 W1; 2026-08-18)
+-- The defect identity 1 − s·g = (g²/ρ²)Σẽᵢ²/(δᵢ(δᵢ−g)) and the
+-- two-sided pinch 1 − g/δ₁ ≤ s·g ≤ 1 on the abstract finite
+-- eigenstructure — all proven unconditionally.
+
+-- The spectral balance (round 157 SB1/SB2/SB3; 2026-08-18)
+-- The trace-loop tail closure 1 ≤ tf ≤ K−1, the loop identity
+-- τ·TrH = tf/FULLGAP, the χ-cap s·ρ²·δ₁ ≤ 1−ρ², and the secular
+-- enclosure ρ²·δ₁ ≤ g ≤ δ₁ — all proven unconditionally.
+
+-- The moment-Laurent law (round 156 L1/L2; 2026-08-18)
+-- The jet recursion, the secular dictionary, the finite Laurent
+-- expansion with EXACT partial-geometric remainder, the assembled
+-- moment-Laurent law, the quarter cap z(1−z) ≤ 1/4 and the
+-- top-root cap algebra — all proven unconditionally with explicit
+-- remainders (no limit taken).

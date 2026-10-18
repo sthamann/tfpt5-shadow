@@ -1,0 +1,105 @@
+# nu-scalaron-falsification -- preregistered hypothesis set v2
+# FROZEN 2026-08-28 BEFORE the spectral-matrix comparison pass
+# (review wave 3 repaired operator).  Zero free dials in the MAJORANA
+# operator; the Dirac 3x3 is NOT frozen (see dirac_texture) -- that is
+# a typed gap, not a hidden dial.
+#
+# Premise (verified by experiments/tfpt-discovery/nu_qplus_spectral_matrix_probe.py):
+#   PREMISE_FOUND.  Corpus Q_+ (v10/v50 generation basis, v69/v72 cusp
+#   eigenbasis) has Spec(Q_+) = {1,2,3} = A3 exponents.  Not reconstructed.
+#
+# Logic correction (v986 motivation, mechanism already [O]):
+#   Tr_{A3} I = 3 does NOT make 3 an eigenvalue of I (Spec(I) = {1,1,1}).
+#   The repaired operator uses the EIGENVALUE 3 of Q_+ via P_3.
+
+candidate:
+  name: qplus_spectral_majorana
+  premise_status: PREMISE_FOUND
+  Q_plus_generation_basis: [[3, 0, 0], [0, 2, 0], [0, 2, 1]]   # v50 / v10
+  Q_plus_eigenbasis: [1, 2, 3]                                  # v69 / v72
+  spectral_projectors:                     # Lagrange, distinct eigenvalues
+    P1: "(Qplus - 2 I)(Qplus - 3 I)/2"
+    P2: "-(Qplus - I)(Qplus - 3 I)"
+    P3: "(Qplus - I)(Qplus - 2 I)/2"
+  epsilon: "phi0_ret^2 / A_Lambda"         # A_Lambda = 2*g_car = 10
+  M_scal: "c3^(7/2) * Mbar"
+  M_R_formula: "M_scal * (epsilon P1 + 2*epsilon P2 + 3 P3)"
+  M_R_symmetric_eigenbasis: "M_scal * diag(epsilon, 2*epsilon, 3)"
+  majorana_note: >
+    The v50 generation-basis matrix of Q_+ is not symmetric (non-normal
+    coordinate representation).  A Majorana M_R must be symmetric: the
+    frozen operator is the unique symmetric matrix with those eigenvalues
+    on the Q_+ eigenlines, i.e. M_scal*diag(eps, 2 eps, 3) in the v69
+    eigenbasis.  Eigenvalues are basis-invariant either way.
+  eigenvalues:
+    M1: "epsilon * M_scal"                 # = v212 decuple, BY DEFINITION
+    M2: "2 * epsilon * M_scal"             # NEW prediction
+    M3: "3 * M_scal"                       # = v986 seesaw rung
+  ansatz_not_derived: >
+    The mixed insertion (epsilon on the {1,2}-subspace, unsuppressed 3 on
+    P3) is a reviewer ansatz.  Q_+ supplies Spec = {1,2,3}; it does not
+    decide which eigenvalues carry epsilon.  M1 == M_scal phi0^2/A_Lambda
+    is exact-by-construction once epsilon is so defined (reparametrization).
+    M3 == 3 M_scal is the v986 scale reused as one eigenvalue.  What is
+    new is M2.
+  c3: "1/(8*pi)"
+  Mbar_GeV: 2.435323203e18
+  A_Lambda: 10
+
+dirac_texture:
+  frozen_3x3: false
+  documentation: >
+    The corpus does NOT freeze a usable 3x3 Dirac Y_nu.  v481 freezes only
+    the third-generation carrier normalisation y_nu = y_t [P] at the matching
+    scale.  v9 is a LIGHT Majorana M_nu texture (mu-tau-symmetric), not a
+    Dirac Yukawa.  v263 shows the seesaw map can land in the v9 class; its
+    numerical m_D = diag(0.3, 1.0, 1.0) is an existence example, not a
+    frozen Yukawa.  This pass therefore does NOT invent a texture.  It
+    freezes y3 = y_t(M3) and reports the constraint oscillation + cosmology
+    impose on (y1, y2) in the Q_+ eigenbasis (aligned diagnostic), plus a
+    named kill of the untextured operator Y_nu = y_t I.
+  frozen_entries:
+    y3: "y_t(M_3) at 1-loop (v481 runner, verbatim frozen inputs)"
+    y1: UNFROZEN
+    y2: UNFROZEN
+  naive_diagnostic: "Y_nu = y_t(M_3) * I  (generation-blind; named kill)"
+  aligned_diagnostic: "diagonal Y_nu in the Q_+ eigenbasis, where M_R is diagonal"
+  rg_tool: "v481 1-loop SM runner, verbatim frozen inputs, per matching scale"
+  rg_inputs:
+    MZ_GeV: 91.1876
+    v_EW_GeV: 246.22
+    mt_MSbar_MZ_GeV: 162.5
+    lambda_MZ: 0.130
+    alpha_inv_MZ: [59.01, 29.59, 8.44]
+  seesaw: "M_nu = -(v^2/2) Y_nu^T M_R^{-1} Y_nu   (v = 246.22 GeV)"
+
+mass_chain:
+  ordering: "normal (NO) assumed for the constraint invert; m1 = 0 floor as in v1"
+  note: >
+    With hierarchical M_R (M1 << M3) the seesaw weights the LIGHT heavy
+    states unless the Dirac entries y1, y2 suppress it.  The naive
+    unsuppressed diagnostic is expected to overshoot; that is a kill of
+    Y proportional to I, not a silent texture edit.
+
+kill_conditions:
+  K1: "robust cosmological Sigma m_nu bound below the v1 M3-slice prediction (within 2% RG envelope) -- inherited, applies to the y3=yt / M3 eigenvalue slice"
+  K2: "a >5% shift of the required M3 under the same frozen y3=yt premise -- inherited"
+  K3: "established inverted ordering -- inherited"
+  K4: "m_bb measured above the frozen v1 NO interval -- inherited, only meaningful once a 3x3 Y_nu exists"
+  K5: "untextured Y_nu proportional to I produces light masses outside the NuFIT + KATRIN + DESI window (executed in this pass)"
+  K6: "a later frozen corpus 3x3 Y_nu, run through this M_R, misses NO data outside the v482 RG envelope -- not currently triggerable"
+
+data_snapshot:                                   # same dated comparators as v1
+  nufit_60_2024:
+    dm2_21_eV2: 7.49e-5
+    dm2_3l_eV2: 2.513e-3
+  desi_dr2_2025:
+    sigma_mnu_bound_eV: 0.0642
+    caveat: "model-dependent (LCDM); relaxed in extended models"
+  katrin_2024:
+    m_beta_bound_eV: 0.45
+  kamland_zen_2024:
+    m_bb_bound_eV_range: [0.028, 0.122]
+  holdout: "future releases only (DESI DR3+, KATRIN final, LEGEND-1000, JUNO ordering)"
+
+verdict_grammar: [consistent, tension, data_limited, killed, DATA_CONSTRAINS_TEXTURE]

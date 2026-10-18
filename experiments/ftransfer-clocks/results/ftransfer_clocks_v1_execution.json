@@ -1,0 +1,196 @@
+{
+  "contract": "FTRANSFER.CLOCKS.01",
+  "executed": "2026-08-05 12:22:03",
+  "execution_surface": "experiments-only (typed [X]; no vN module, no marker move)",
+  "prereg_yaml_sha256": "880224f76380c77dce2c1e3d7651bccc9e1619e74c60b7e15326ee0ee2bbf4d0",
+  "data_tables": {
+    "gstar_saikawa_shirai_2018.csv": "8ae2a4fec098fd68d3a469fbf2b7806ee1630f5595498a3e6cf2abca2d79b939",
+    "alphas_pdg2024_running.csv": "2ca6332dd1ee0caa089f64be58e90a8c916c94bbe612125eca41da50c33a2ac2"
+  },
+  "transported_schwarzians_sigma": {
+    "F_pole": "-18*log(3)**2 - 18*log(2)**2 + 36*log(2)*log(3)",
+    "F_Boltzmann": "-18*log(3/2)**2",
+    "F_QCD": "0",
+    "F_relic": "degenerate",
+    "numeric_seam": -2.959235170076978,
+    "numeric_qcd": 0.0
+  },
+  "ftc01": {
+    "K": {
+      "pass": true,
+      "q_exp": 1.9999933902079094,
+      "abs_dev": 6.60979209055057e-06,
+      "bar_3sigma_q": 4.57286197907969e-05,
+      "Q_run": 0.6679248345515004,
+      "scheme_ratio": 571.0472588123083
+    },
+    "B": {
+      "pass": true,
+      "M1_GeV": 4840151038.072241,
+      "window_GeV": [
+        484015103.8072241,
+        4840151038.072241
+      ],
+      "gstar_s": [
+        104.75827206839136,
+        104.84133635494443
+      ],
+      "chart_drift": 0.00011474055526828287,
+      "neff_pull_sigma": 0.31764705882352834
+    },
+    "Q": {
+      "pass": true,
+      "alpha_mt_1loop": 0.10807411687220313,
+      "max_rel_dev": 0.008310606262058682,
+      "at_Q_GeV": 1000.0,
+      "bar": 0.1
+    },
+    "R": {
+      "pass": true,
+      "T_osc_GeV": 76.67507281938354,
+      "m_a_ueV": 23.843376897238596,
+      "max_slope_dev": 0.060191705040148036,
+      "bar": 0.15,
+      "info_worst_anywhere": {
+        "dev": 0.3466707753333802,
+        "T_GeV": 0.15975158
+      }
+    }
+  },
+  "one_class": false,
+  "kills": {
+    "K1_fired": true,
+    "K2_fired": false,
+    "K3_fired": false,
+    "K1_duty_reparametrizations": {
+      "F_QCD->F_pole": "h(sigma) = Moebius(e^{+-Delta*sigma}), Delta = 6 log(3/2): {h,sigma} = -Delta^2/2 exactly; NON-affine (h'' != 0) -- the forbidden exponential clock change, exactly the v578 u = e^{Delta t}",
+      "F_QCD->F_Boltzmann": "h(sigma) = Moebius(e^{+-Delta*sigma}), Delta = 6 log(3/2): {h,sigma} = -Delta^2/2 exactly; NON-affine (h'' != 0) -- the forbidden exponential clock change, exactly the v578 u = e^{Delta t}"
+    }
+  },
+  "verdict": "NO-COMMON-CONNECTION",
+  "matches_frozen_prior": true,
+  "checks_total": 24,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "name": "G0.1 preregistration YAML byte-freeze verified (sha256 == frozen record)",
+      "ok": true,
+      "detail": "880224f76380c77dce2c1e3d7651bccc9e1619e74c60b7e15326ee0ee2bbf4d0"
+    },
+    {
+      "name": "G0.2 frozen data table gstar_saikawa_shirai_2018.csv hash verified",
+      "ok": true,
+      "detail": "8ae2a4fec098fd68d3a469fbf2b7806ee1630f5595498a3e6cf2abca2d79b939"
+    },
+    {
+      "name": "G0.2 frozen data table alphas_pdg2024_running.csv hash verified",
+      "ok": true,
+      "detail": "2ca6332dd1ee0caa089f64be58e90a8c916c94bbe612125eca41da50c33a2ac2"
+    },
+    {
+      "name": "FTC.01.K base point: q_exp = 1.9999933902, |q_exp - 2| = 6.610e-06 <= 3*sigma_q = 4.573e-05 (frozen tolerance); Q_exp = 0.6666644634 (frozen record 0.6666644634), pull = -0.434 sigma (frozen record -0.434)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.01.K scheme check: Q_run(M_Z) = 0.6679248, |Q_run - 2/3| = 1.258e-03 = 571 x |Q_pole - 2/3| > 10x (frozen bar) -- the on-shell/proper-time clock assignment is the right chart, the running chart fails it",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.01.B: washout window T in [4.840e+08, 4.840e+09] GeV (M_1 = 4.840e+09 GeV, affine offset only); g_*s = 104.7583..104.8413, |dln g_*s/dln T| = 3.44e-04, entropy-chart drift 1.15e-04 <= 0.15 (frozen slope-tolerance class); radiation certificate N_eff = 2.99 +- 0.17 vs SM 3.044: 0.32 sigma",
+      "ok": true,
+      "detail": "certificate frozen in YAML: N_eff = 2.99 +- 0.17 (Planck 2018) -- radiation-era chart valid"
+    },
+    {
+      "name": "FTC.01.Q frozen chain reproduced: alpha_s^(1l)(m_t) = 0.1080741169 (frozen 0.1080741169; b0 = 23/3 leg M_Z -> m_t)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.01.Q overlay: max |alpha_1loop - alpha_data|/alpha_data = 0.0083 at Q = 1000.0 GeV (1-loop 0.089204 vs 4-loop PDG 0.088468; 134 grid points on [172.57, 1000]) <= 0.10 (frozen tolerance, honestly covering the >= 2-loop truncation)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.01.R: onset 3H(T_osc) = m_a (m_a = 23.843 ueV from f_a = M_scal/128 = 2.3906e+11 GeV, v185) gives T_osc = 76.68 GeV; entropy-chart slope max |dsigma/dln a + 1| = 0.0602 over ln a in [onset - 0.5, onset + 0.5] <= 0.15 (frozen tolerance)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.02 seam transport exact: {q,sigma} = {y_B,sigma} = -Delta^2/2 = -18 log(3/2)^2 = -2.959235170076978 (slope^2 = 1, cocycle term 0 for affine h)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.02 QCD transport exact: {alpha_s,sigma} = 0 (identity dictionary; Moebius flow stays Moebius)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.02 FTC.P1 one-class prediction: transported Schwarzians all equal -- NO (symbolic difference QCD - seam = -36*log(2)*log(3) + 18*log(2)**2 + 18*log(3)**2 = 2.959235170076978, EXACTLY nonzero)",
+      "ok": true,
+      "detail": "the prediction FTC.P1 FAILS -- contract dies"
+    },
+    {
+      "name": "FTC.03 relic degeneracy: theta(ln a) = theta_i constant, y' = 0 identically -- jets degenerate, NO Schwarzian, channel scored on kills/dictionary only (frozen honesty clause)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.03 K3 watch F_pole: export references exactly one clock (['x1'])",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.03 K3 watch F_Boltzmann: export references exactly one clock (['x2'])",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.03 K3 watch F_QCD: export references exactly one clock (['t'])",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.03 K3 watch F_relic: export references exactly one clock (constant)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.C1 calibration: identity dictionaries reproduce the v578 native quadruple {-Delta^2/2, -Delta^2/2, 0, degenerate} EXACTLY",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.C2 swap control: QCD dictionary (identity, slope +1) on the Koide channel still leaves {q,sigma} = -Delta^2/2 != 0 = {alpha_s,sigma} -- the class split IS detected (the statistic cannot trivially pass)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FTC.C3 frame independence: post-composing every y with the frozen Moebius map (2y-1)/(y+3) changes NO transported Schwarzian (cocycle correctness)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "K1 duty: the reparametrization that WOULD be needed per failing pair is exhibited -- h = Moebius(e^{+-Delta*sigma}) with {h,sigma} = -Delta^2/2 (verified symbolically), and it is NON-AFFINE: the pass would require exactly the freedom the freeze forbids",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "K1 fired: NO-COMMON-CONNECTION -- with clocks and dictionaries exactly as frozen, the transported Schwarzians differ symbolically ({-Delta^2/2, -Delta^2/2, 0}); no tolerance involved, the kernel is exact",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "K2 guard: executed against the byte-frozen YAML (sha256 880224f76380...); NO post-freeze deviation of any gauge, dictionary, slope, xi, mu_0, scheme, window or frame was applied -- K2 does not fire (the exhibited h above is the deviation a pass WOULD need, i.e. any pass is K2-forbidden)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "K3 guard: every channel export is a function of exactly one clock (structural assertion above) -- K3 does not fire",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+ "contract": "TELB.BOUND.A.01",
+ "spec_sha": "671d2cdac3182c13e5df61b299f6b933720e64438be95a7a9d3cfaaaeb51b7ee",
+ "file_sha256": "8d6983f8e82d68543e6d11e1a3c3626e9923c586ad1e81e78b5dd67d85fcfc5a",
+ "verdict": "BOUND_A_CERTIFIED_NUMERICALLY",
+ "gates": {
+  "G01 jump removal and continuity": {
+   "passed": true,
+   "detail": "||dP_num+Q||=3.742e-07, ||F(e)-F(-e)||@1e-7=3.769e-07, slope=1.884320"
+  },
+  "G02 two-by-two crossing lemma": {
+   "passed": true,
+   "detail": "bulk coupling=4.115e-16, velocity residual=2.357e-09, odd residual=1.917e-20, reduced ||dF'||=8.236e-11"
+  },
+  "G03 first nonzero derivative jump": {
+   "passed": true,
+   "detail": "rank(dF')=0 ||dF'||=3.440e-10; rank(d2F)=4 ||d2F||=2.000000029; leading K3=||d2F||/(2pi)=0.318309891"
+  },
+  "G04 all-mode TV Fourier bound": {
+   "passed": true,
+   "detail": "TV_p_bound=15.928673596 TV_t_bound=628.838828114; K3_TV=2.535127140 >= K3_emp=0.319149962@16"
+  },
+  "G05 Fourier-grid alias diagnostic": {
+   "passed": true,
+   "detail": "max relative M-dependence=3.633e-07 (m=16..256)"
+  },
+  "G06 bound dominates measurements": {
+   "passed": true,
+   "detail": "minimum slack=8.508e-05"
+  },
+  "G07 bound-A target": {
+   "passed": true,
+   "detail": "max U_N=3.180016723527, U_inf=3.180007442309, target=3.4225, norm bound=1.783260139"
+  },
+  "G08 bulk spectral gap": {
+   "passed": true,
+   "detail": "non-edge gap=1.000000000000; edge |p|>=pi/2 gap=1.016884359518"
+  },
+  "G09 frozen verdict enum": {
+   "passed": true,
+   "detail": "BOUND_A_CERTIFIED_NUMERICALLY"
+  }
+ },
+ "continuity_refinement": [
+  {
+   "epsilon": 0.001,
+   "continuity_residual": 0.0037686369816316346
+  },
+  {
+   "epsilon": 0.0001,
+   "continuity_residual": 0.00037686393022793186
+  },
+  {
+   "epsilon": 1e-05,
+   "continuity_residual": 3.7686393254917594e-05
+  },
+  {
+   "epsilon": 1e-06,
+   "continuity_residual": 3.7686393256420697e-06
+  },
+  {
+   "epsilon": 1e-07,
+   "continuity_residual": 3.768639324301124e-07
+  }
+ ],
+ "derivative_refinement": [
+  {
+   "step": 0.01,
+   "derivative_jump_norm": 1.346952173812956e-06,
+   "second_derivative_jump_norm": 2.0003204895088937
+  },
+  {
+   "step": 0.005,
+   "derivative_jump_norm": 4.243739502238586e-08,
+   "second_derivative_jump_norm": 2.0000411680577392
+  },
+  {
+   "step": 0.002,
+   "derivative_jump_norm": 4.6439931402087874e-10,
+   "second_derivative_jump_norm": 2.000002674333369
+  },
+  {
+   "step": 0.001,
+   "derivative_jump_norm": 1.8788439972299203e-10,
+   "second_derivative_jump_norm": 2.000000341603148
+  },
+  {
+   "step": 0.0005,
+   "derivative_jump_norm": 3.44030204111967e-10,
+   "second_derivative_jump_norm": 2.0000000290574813
+  }
+ ],
+ "crossing_reduction_2x2": {
+  "basis_order": [
+   "top",
+   "bottom"
+  ],
+  "effective_velocity_real": [
+   [
+    -0.9999999999999997,
+    0.0
+   ],
+   [
+    0.0,
+    0.9999999999999998
+   ]
+  ],
+  "effective_curvature_real": [
+   [
+    1.346381026976201e-16,
+    0.0
+   ],
+   [
+    0.0,
+    -2.2371143170757382e-17
+   ]
+  ],
+  "bulk_coupling_norm": 4.115164265300047e-16,
+  "finite_difference_velocity_residual": 2.357022798976083e-09,
+  "odd_block_residual": 1.9166167708542177e-20,
+  "reduced_derivative_jump_norm": 8.235999060991116e-11
+ },
+ "derivative_jump_explanation": "In the (top,bottom) edge basis h'(0)=diag(-1,+1) and has zero bulk coupling, so the crossing vectors do not rotate at first order. The occupied edge contribution is only the fixed dP step; saw*dP removes it, and saw' is identical on both sides.",
+ "jumps": {
+  "derivative_rank_threshold_1e-6": 0,
+  "derivative_jump_norm": 3.44030204111967e-10,
+  "second_derivative_rank_threshold_1e-4": 4,
+  "second_derivative_jump_norm": 2.0000000290574813
+ },
+ "fourier": {
+  "convention": "C(m)=(1/2pi) integral exp(-imp)F(p)dp",
+  "K2_th_corpus": 5.4754107557333246e-11,
+  "K2_th_normalized_coordinate_literal": 8.71438687233489e-12,
+  "K3_th": 0.31830989080843247,
+  "K3_emp": 0.31914996197925705,
+  "K3_emp_at_m": 16,
+  "K3_TV_all_m": 2.5351271397298576,
+  "m0": 16,
+  "empirical_diagnostic_through_m": 8192,
+  "grid_alias_checks": [
+   {
+    "M_a": 16384,
+    "M_b": 32768,
+    "max_relative_difference": 3.632721519631706e-07
+   },
+   {
+    "M_a": 32768,
+    "M_b": 65536,
+    "max_relative_difference": 2.2662796397126928e-08
+   }
+  ]
+ },
+ "total_variation": {
+  "coordinate_note": "t=p/(2pi); TV_t(F_tt)=(2pi)^2 TV_p(F_pp), K3_TV=TV_t/(2pi)^3=TV_p/(2pi)",
+  "refinement": [
+   {
+    "grid_size": 2048,
+    "smooth_variation_p": 13.607947987484376,
+    "jump_variation_p": 2.0000000290574813,
+    "TV_p": 15.607948016541858,
+    "TV_t": 616.1770897441418,
+    "K3_grid": 2.4840820783539805
+   },
+   {
+    "grid_size": 4096,
+    "smooth_variation_p": 13.68943956236707,
+    "jump_variation_p": 2.0000000290574813,
+    "TV_p": 15.689439591424552,
+    "TV_t": 619.3942481685975,
+    "K3_grid": 2.4970518653169043
+   },
+   {
+    "grid_size": 8192,
+    "smooth_variation_p": 13.730201744963136,
+    "jump_variation_p": 2.0000000290574813,
+    "TV_p": 15.730201774020617,
+    "TV_t": 621.00347463559,
+    "K3_grid": 2.5035393681682825
+   }
+  ],
+  "TV_p_richardson": 15.770963956616683,
+  "safety_factor": 1.01,
+  "TV_p_bound": 15.92867359618285,
+  "TV_t_bound": 628.8388281136084,
+  "K3_TV_all_m": 2.5351271397298576
+ },
+ "table": [
+  {
+   "N": 64,
+   "neighbourhood": 3.179920694539347,
+   "measured_tail": 1.4024373375654186e-06,
+   "tail_bound": 9.602898740602433e-05,
+   "U_N": 3.180016723526753,
+   "measured_rsm2": 3.1799220969766835,
+   "measured_rsm_norm": 1.7832336069558254
+  },
+  {
+   "N": 128,
+   "neighbourhood": 3.1799209657957155,
+   "measured_tail": 1.377073224093089e-06,
+   "tail_bound": 8.798677561305441e-05,
+   "U_N": 3.1800089525713284,
+   "measured_rsm2": 3.179922342868939,
+   "measured_rsm_norm": 1.7832336759014336
+  },
+  {
+   "N": 256,
+   "neighbourhood": 3.1799209938559816,
+   "measured_tail": 1.369872660070724e-06,
+   "tail_bound": 8.667828401187706e-05,
+   "U_N": 3.1800076721399937,
+   "measured_rsm2": 3.1799223637286422,
+   "measured_rsm_norm": 1.7832336817502754
+  },
+  {
+   "N": 512,
+   "neighbourhood": 3.179920996895372,
+   "measured_tail": 1.3684961763771715e-06,
+   "tail_bound": 8.647805883365867e-05,
+   "U_N": 3.1800074749542055,
+   "measured_rsm2": 3.1799223653915494,
+   "measured_rsm_norm": 1.783233682216537
+  },
+  {
+   "N": 1024,
+   "neighbourhood": 3.179920997242082,
+   "measured_tail": 1.3682763753995114e-06,
+   "tail_bound": 8.644923474170974e-05,
+   "U_N": 3.1800074464768238,
+   "measured_rsm2": 3.1799223655184754,
+   "measured_rsm_norm": 1.7832336822521258
+  },
+  {
+   "N": 2048,
+   "neighbourhood": 3.1799209972832077,
+   "measured_tail": 1.3682446349697341e-06,
+   "tail_bound": 8.644528502601325e-05,
+   "U_N": 3.180007442568234,
+   "measured_rsm2": 3.1799223655277995,
+   "measured_rsm_norm": 1.78323368225474
+  },
+  {
+   "N": 4096,
+   "neighbourhood": 3.179920997288206,
+   "measured_tail": 1.3682403150907563e-06,
+   "tail_bound": 8.644476226014968e-05,
+   "U_N": 3.180007442050466,
+   "measured_rsm2": 3.1799223655284723,
+   "measured_rsm_norm": 1.7832336822549288
+  }
+ ],
+ "U_infinity_numeric": 3.18000744230935,
+ "bulk_gap_non_edge_bands": 0.9999999999999998,
+ "edge_gap_outside_neighbourhoods": {
+  "pi/16": 0.1950903220161283,
+  "pi/8": 0.3826834323650899,
+  "pi/4": 0.7071067829200687,
+  "pi/2": 1.0168843595179318
+ },
+ "bernoulli2": {
+  "used": false,
+  "reason": "not needed: derivative jump vanishes and m^-3 tail closes target",
+  "change_in_rsm2": 0.0
+ },
+ "analytic_steps": [
+  "BV integration by parts: ||C(m)||<=TV_t(F_tt)/(2pi|m|)^3 for all m!=0",
+  "Poisson alias bound for the M-point Fourier coefficient",
+  "four-fold-cover weighted HS identity",
+  "Hurwitz-zeta evaluation of the infinite alias sum"
+ ],
+ "honest_note": "float64, not interval arithmetic; finite cut is computed numerically; the all-m tail inequality is analytic conditional on the numerically Richardson-extrapolated TV constant; U_infinity is numerical stabilization",
+ "weakest_step": "the float64 finite-difference TV estimate and its 1-percent Richardson safety factor are not an interval-certified upper integral",
+ "runtime_s": 8.073005199432373
+}

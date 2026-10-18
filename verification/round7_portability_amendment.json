@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-09-06",
+  "source_base_commit": "02242c6ad5968d70c3e140a1e8a95c950d38285e",
+  "scope": "Post-integration QWZ zero-mode portability amendment. The complete 1028-module suite recorded in round7_integration_evidence.json predates this amendment and was not rerun in full after it.",
+  "root_cause": "The previous half_filled_data selected an arbitrary pure filling of two degenerate zero modes. Eigensolver basis choices changed a finite-grid smooth excess-energy coefficient across platforms.",
+  "regression_before_fix": {
+    "source_sha256": "f53859212c83afc20d27782e4c10691e763b3c2ebac7d324185caca376016c36",
+    "environment": "Clean archive of base commit, Linux aarch64, Python 3.12",
+    "result": "34/35 checks passed; smooth-scaling floating diagnostic failed",
+    "transcript_sha256": "a5fa7dc606b88f2da7d65dda1773b8a8b7a310c2129178a1eb0cfc9f4a625a39",
+    "github_run": "https://github.com/sthamann/tfpt/actions/runs/34016877481",
+    "clarification": "The hosted headline ./verify step passed; the subsequent integration regression step exposed the native v1033 failure."
+  },
+  "correction": {
+    "covariance": "Cbar = P_negative + (m/d) P_zero",
+    "meaning": "One-body covariance of a uniform fixed-particle ground-space mixture, not a pure Slater projector.",
+    "coverage": "Exact variational extrema from the compressed observable cover all rank-m pure zero-mode fillings; evaluated energy intervals remain finite-grid floating diagnostics.",
+    "source_sha256": {
+      "verification/v1033_charged_disorder.py": "01c64748c70784b17cf1c61b7bd2b4c51a69c19c4a2274f09028892eab5cb83f",
+      "verification/test_round7_integration.py": "3e0672d90bc99b8dfe0bae4210388867afee4c02ccdd64a54d79630840a706e3",
+      "tex-artefacts/toe_round7_charged_disorder.tex": "53bb0f2602c52caadbd14a0c2ed1dd3577c59656d3781acb3958b00d0d6609d0"
+    },
+    "checks": 35,
+    "exact": 12,
+    "source_contract": 7,
+    "floating": 16,
+    "tested_N": [
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "N64": {
+      "sharp_mean": 4.659977098187,
+      "sharp_all_pure_fillings": [
+        4.644352098186687,
+        4.675602098186687
+      ],
+      "smooth_scaled_mean": 6.904290465944,
+      "smooth_scaled_all_pure_fillings": [
+        5.333651840484521,
+        8.474929091417295
+      ]
+    },
+    "guard_changes": "Added rotated-zero-basis and filling-edge regressions, fail-closed cluster separation, and subprocess stdout in failures. Integration subprocess timeout increased from 80 to 180 seconds; exact identities were not weakened."
+  },
+  "post_amendment_validation": {
+    "tests_per_environment": 20,
+    "native_execution_coverage": {
+      "modules": [
+        "v1031",
+        "v1032",
+        "v1033",
+        "v1034",
+        "v1035"
+      ],
+      "checks": 233,
+      "exact": 183,
+      "source_contract": 13,
+      "floating": 37
+    },
+    "environments": [
+      {
+        "platform": "Linux aarch64",
+        "python": "3.11",
+        "tests_passed": 20,
+        "elapsed_seconds": 36.693,
+        "transcript_sha256": "b83b5e5ce96ffd7b826a98feebea2d1889b95f4bd48599c9d29647c30bedee92"
+      },
+      {
+        "platform": "Linux aarch64",
+        "python": "3.12",
+        "tests_passed": 20,
+        "elapsed_seconds": 34.404,
+        "transcript_sha256": "5385b6eee653b4d27771803265ac86c759393642d7d06336e76d5cc60ac0b290"
+      },
+      {
+        "platform": "macOS arm64",
+        "python": "3.14",
+        "tests_passed": 20,
+        "elapsed_seconds": 31.416,
+        "transcript_sha256": "4505388db5d147def105981d24568a6b44222a6acb3d3538626b0b0461729423"
+      }
+    ],
+    "linux_dependencies": {
+      "numpy": "2.4.6",
+      "sympy": "1.14.0",
+      "mpmath": "1.3.0",
+      "python-flint": "0.9.0"
+    },
+    "hosted_post_push_ci": "Not part of this pre-push validation receipt; consult checks on the containing commit.",
+    "reproduction_command": "python -m unittest -v verification/test_discipline_check_sites.py verification/test_v1006_round4_document_guard.py verification/test_v1016_round4_document_guard.py verification/test_round7_integration.py"
+  },
+  "boundaries": [
+    "No E/O ledger promotion.",
+    "No all-N smooth coefficient theorem.",
+    "No Wolfram license activation or new Wolfram execution claim.",
+    "No full TOE or RH claim."
+  ],
+  "historical_validation_record": "verification/round7_integration_evidence.json",
+  "release": {
+    "command": "bash build.sh release (repository Python and TeX on PATH)",
+    "exit_code": 0,
+    "transcript_sha256": "56c2b0d718cf1716d1d8d2627ec2be17ba63fc6c93c5b435bea01a6257f854ff",
+    "documents": {
+      "compiled": 13,
+      "failed": 0
+    },
+    "sync_audit": "AUDIT OK (1028 scripts; papers, ledger, changelog and website in sync)",
+    "existing_release_regressions": "Passed, including the unchanged RH workspace checks run by build.sh; no RH research content changed.",
+    "website_production_build": "PASS",
+    "website_preview": "Paper route /papers/research-contracts inspected in the in-app browser; dated QWZ amendment, finite-grid interval and new PDF checksum present.",
+    "pdf_sha256": {
+      "tfpt_research_contracts.pdf": "da7033291406ee08d2ae7afaee3a5e9cb663270048760d6de7b64103980c0633",
+      "introduction.pdf": "8c864d6719bcf1c8b2c23e71ff4c52f9b33b57f09b886ab4c8e4ba9877c5adaa",
+      "changelog.pdf": "cbc9a4bda704c19f80a8460971d4bc5de9faf95f4d92d5d0954b7fc6c824f188"
+    },
+    "pdf_visual_qa": "Rendered and visually inspected contracts pp. 199-201, introduction p. 290, changelog p. 1; amended formulas and scope legible with no clipping/overlap."
+  }
+}

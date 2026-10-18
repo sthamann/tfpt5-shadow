@@ -62,8 +62,14 @@ ROWS = [
      "search_target", "FAST 1652 + Blinkverse", "cascade wall + accelerating gaps replicated", "null"],
     # ---- CMB (experiments/cmb-birefringence-seed) ----
     ["CMB", "cosmic birefringence beta", "0.2424 deg",
-     "ACT DR6 0.215+/-0.074 deg", 0.37, "prediction", "CMB EB/TB calibration",
-     "prediction_of_record", "ACT DR6 (arXiv:2509.13654)",
+     "ACT DR6 0.215+/-0.074 deg (record leg, +0.37 sigma); 2026-08-04 news round: two new "
+     "independent supporting analyses -- Planck scale-dependence study (JCAP 09 (2025) 075): "
+     "beta = 0.30+/-0.05 deg with the CONSTANT-in-ell model Bayes-preferred, and PR4 "
+     "field-level inference (arXiv:2606.02897): beta = 0.32+/-0.12 deg -- constant + nonzero, "
+     "consistent with 0.2424 deg (within ~1.2 sigma of the sharpest new leg); the polarisation "
+     "calibration systematic remains the shared open caveat of every leg",
+     0.37, "prediction", "CMB EB/TB calibration",
+     "prediction_of_record", "ACT DR6 (arXiv:2509.13654); JCAP 09 (2025) 075; arXiv:2606.02897",
      "systematics-controlled beta excludes 0.2424 deg at >=3 sigma", "consistent"],
     ["CMB", "baryon fraction Omega_b", "0.04894",
      "BBN D/H 0.0489+/-0.0014 (CMB-independent)", 0.04, "prediction", "BBN / CMB Omega_b h2",
@@ -72,6 +78,28 @@ ROWS = [
      "13.1+/-4.5 (joint, cov unmodelled)", 0.35, "prediction", "shared seed phi0",
      "prediction_of_record", "ACT beta + Planck/BBN Omega_b",
      "line broken at >=3 sigma with modelled covariance", "consistent"],
+    # rotation fingerprint (2026-08-27): the FULL constant-rotation morphology of the
+    # frozen beta -- shares phi0_seed with the beta row (never an independent hit); the
+    # published null legs are kill-only (LCDM predicts the same nulls).
+    ["CMB", "cosmic birefringence rotation fingerprint (beta morphology + nulls)",
+     "constant rotation by beta=0.242435 deg fixes the whole morphology: TB/TE = tan(2b) = "
+     "0.00846278 and 2EB/(EE-BB) = tan(4b) = 0.01692677 (all ell, all frequencies); "
+     "frequency exponent n = 0; anisotropic C_L^aa = 0 (L>0); alpha x T/E/B = 0; "
+     "de-rotation residuals = 0",
+     "monopole: ACT DR6 +0.37 sigma / Planck PR4 -0.52 sigma, both sign +; frequency "
+     "exponent n = -0.35 +0.48/-0.47 (Planck PR4 all bands, arXiv:2201.13347) -> +0.73 "
+     "sigma vs 0; anisotropy A_CB < 0.09 deg^2 (95%) and alpha x T/E/B null to L=1500 "
+     "(arXiv:2401.11973) -- null legs are kill-only (LCDM identical); the sharp legs "
+     "(rotation quotients + de-rotation residuals) NOT yet tested: need per-frequency "
+     "PR4/NPIPE EB/TB spectra with masks/splits/dust nulls frozen before data contact; "
+     "NO joint significance (legs share Planck data + calibration systematic); Z2 -> E/B "
+     "transduction unproven (OBS.TRANSDUCTION.01)",
+     None, "search_target", "CMB EB/TB rotation morphology",
+     "search_target",
+     "cmb-birefringence-seed (rotation_fingerprint) + arXiv:2201.13347 + arXiv:2401.11973",
+     "any leg robustly violated kills the global-seed reading: n != 0, anisotropic C_L^aa "
+     "or alpha-cross detection, or TB/EB morphology incompatible with a constant rotation "
+     "at beta=0.2424 deg at >=3 sigma", "consistent"],
     # ---- EHT (experiments/eht-achromatic-residual) ----
     ["EHT", "achromatic dyonic intercept beta_BH(r)", "achromatic, 1/r^2, sign-flip",
      "REAL M87 2017 polarimetry ingested (4 days x 2 bands, RM~5e5); residual nulls need GRMHD imaging",
@@ -151,14 +179,31 @@ ROWS = [
      "strain_level_test", "Jodrell Bank Crab monthly ephemeris (479 nu/nudot points, 1988-2026)",
      "a log-periodic comb at omega=2.58 is special vs the off-kernel periodogram in a clean segment",
      "data_limited"],
-    ["pulsar", "real NICER Vela reduction pipeline (PG.06b)",
-     "download L2 events + PINT barycentre + H-test fold of the long-interval target (Vela)",
-     "PIPELINE PROVEN ON REAL DATA: 665 NICER Vela obs confirmed (HEASARC, ~7.9 yr); one obs "
-     "downloaded + PINT-barycentred (no HEASoft) -> Vela pulsation DETECTED at F0=11.193 Hz "
-     "(89.34 ms, H=18.4). Comb-quality nu(t) still needs phase-connected timing (~6.5 GB, multi-hour)", None,
-     "search_target", "boundary recovery kernel (dynamic, real-data pipeline)",
-     "strain_level_test", "HEASARC NICER Vela pulsar PSR B0833-45 (665 obs) + PINT",
-     "a phase-connected nu(t) over a >~2.8-period Vela inter-glitch recovery shows the omega=2.58 comb",
+    ["pulsar", "recovery comb on the full NICER Vela X-ray nu(t) (PG.06b FULL)",
+     "log-periodic comb at omega=2pi/ln((3/2)^6)=2.583 in the piecewise-coherent X-ray nu(t) recovery",
+     "FULL archive reduced (2026-07-21): 665/665 NICER Vela obs downloaded (2.6 GB, raw gitignored), "
+     "491 usable, 240 per-obs detections, 119 segment-coherent nu(t) points (108 fully coherent, "
+     "median sigma_nu ~0.6 uHz; barycentring PINT-validated to 3.4 us) = the FIRST X-ray nu(t) leg "
+     "of the search program. SANITY GATE PASS: dnu/nu 2019 = 2.39e-6 vs 2.5012e-6 published, 2021 = "
+     "1.272e-6 vs 1.26e-6 (2024 glitch not reducible: ~150-s snapshots, 9.7 ks, documented). Frozen "
+     "kernel comb (omega=2.5827069, eps_pred=0.0173): reach 2019 = 2.17 periods (< 2.8 gate; beats "
+     "PG.08's public Vela .tim reach 1.83), 2021 = 1.38; 2019 raw p=0.014 BUT Bonferroni x10 = 0.14 "
+     "+ shuffle p=0.395 -> chance-level by the preregistered escalation rule (audit flag, NOT a "
+     "candidate); 2021 p=0.731; ln-tau stack p=0.049/shuffle 0.307. Surrogate-calibrated injection "
+     "at real sampling+noise: eps_50~0.55 (2019 only), eps_90 never reached below eps=1, 0% power at "
+     "the predicted eps=0.0173 -> weaker amplitude probe than PG.08's radio residuals (eps_50~0.30 "
+     "class) but independently reproduces the PG.06 range-blindness on real data. Second off-kernel "
+     "flag: lambda=e in 2021 (raw p=0.002, Bonferroni 0.018; same non-kernel periodicity class as "
+     "PG.08 J0742-2822 -- flagged, not claimed). CORRECTION on record: the old PG.06b 'pipeline "
+     "proven' fold F0=11.19275 Hz (H=18.4) was a noise peak; the true Vela frequency is 11.1861692 "
+     "Hz (H=99.7, PuMA-ephemeris-consistent). Next decider: early-window (<3 d post-glitch) X-ray "
+     "observations of a future Vela glitch (eXTP class) -- the sub-day window that would clear the "
+     "2.8-period gate is absent from the archive (first usable obs 3.4 d / 7 d post-glitch)", None,
+     "search_target", "boundary recovery kernel (dynamic, X-ray nu(t))",
+     "strain_level_test", "HEASARC NICER Vela pulsar PSR B0833-45 full archive (665 obs) + PINT; "
+     "results/pg06b_full_vela.json",
+     "a log-periodic comb at omega=2.58 is special vs shuffle + off-kernel battery in a "
+     ">=2.8-period X-ray nu(t) Vela recovery",
      "data_limited"],
     ["pulsar", "dense J0537 stacked recovery comb + range finding (PG.06)",
      "same omega=2.583 comb, stacked over many J0537 glitches (NICER/RXTE, dense)",
@@ -300,6 +345,52 @@ ROWS = [
      "(CANFAR DOI 10.11570/25.0066); repeater-cascade RC.01-03",
      "the omega=2.583 comb survives surrogates + off-kernel rank + lambda battery in >=2 "
      "gate-passing sessions", "null"],
+    # frb-parity-comb (2026-07-15): the v486 parity selection rule on signed circular
+    # polarization (PC.01-03; deck/Z2 reading of handedness, coupling unforced like KC.02)
+    ["FRB", "v486 parity-resolved combs on signed circular polarization (PC.01-03)",
+     "v486 fixes the transfer eigenvectors: lambda2=(2/3)^6 on the Z2-EVEN pair vector, "
+     "lambda3=(1/3)^6 on the Z2-ODD -- so omega_1=2.5827 is FORBIDDEN in the odd (signed-V) "
+     "channel (PC.01 kill direction), omega_2=0.9532 lives ONLY there (PC.02), and omega_2 "
+     "must not be an even-channel line (PC.03); comb-2 amplitude fades 2^-6 per period "
+     "(S-b budget)",
+     "FAST FRB 20240114A pol v5 (6,134 bursts, 3,474 significant handedness, 80 sessions): "
+     "PC.01 NULL -- the selection rule HOLDS at detectable amplitude (2 gate-passing "
+     "sessions n=213/61, reach 3.06/3.35 periods; signed Rayleigh Fisher p=0.83, off-tone "
+     "ranks 0.55/0.99; sign-permutation null is envelope-immune by construction; injection "
+     "on real session times: 88% detection at eps=0.5, 40% at 0.3). PC.02 data_limited "
+     "(primary omega_2 gate needs 18.5 e-folds of ln tau -- unreachable in FAST sessions; "
+     "1 relaxed session p=0.29; injection only 22% at eps=0.5) -- exactly the S-b x64-fading "
+     "budget. PC.03 data_limited (no gated even-channel omega_2 session; consistent with the "
+     "frozen new-tone scan nulls). Calibration-bug record: first injection flipped observed "
+     "signs (phase-incoherent) -> fixed to handedness-follows-clock model, documented. IXPE "
+     "leg (v1.1 addendum, prereg before data pass): IXPE 03250499 = 1E 1841-045 post-outburst "
+     "ToO (225,226 photons 2-8 keV, 12.2 d) -- IXPE is LINEAR-only, the Z2-odd channel does "
+     "not exist in X-rays, so the leg tests the EVEN sector (omega_2 = forbidden line); the "
+     "envelope anchor gives 0.11 omega_1 periods (data_limited by construction); 2 bursts "
+     "found (Poisson tail 4e-18/6e-10), 1 usable cascade (333 photons, 1.0 omega_2 periods < "
+     "relaxed gate) -> IX.01 data_limited, IX.02 null-at-current-power (p=0.53), injection 2% "
+     "at eps=0.3 -> leg honestly underpowered; typed insight: post-outburst ToOs weeks after "
+     "onset carry no comb reach -- day-scale ToOs or NICER burst-storm data named as the next "
+     "leg. NICER leg (v1.2 addendum, prereg before data pass): NICER 3020560101 = the "
+     "2020-04-28 SGR 1935+2154 burst storm (Younes+2020; 306,090 photons 1-10 keV; cl-vs-ufa "
+     "fallback rule documented, not triggered) -- 375 bursts, ONE storm cluster of 372 bursts "
+     "over 1095 s (the hoped-for dense anchor); family A (storm cascade of burst peak times) "
+     "reaches 4.6 e-folds = 1.89 omega_1 / 0.70 omega_2 periods; NI.01 (omega_2 forbidden, "
+     "kill direction) data_limited -- even the best archived storm cannot reach the omega_2 "
+     "gate (needs 7.9 e-folds), so the forbidden test stays OPEN for lack of reach, not "
+     "violated; NI.02 (omega_1 allowed) null-at-current-power (Fisher p=0.165 over 110 "
+     "sessions); NI.03 honesty finding: the smooth log-density surrogate is strongly "
+     "anti-conservative on the CLUSTERED family-A burst-time session (98% FP at eps=0 -- the "
+     "single A:relaxed p=0.005 is typed as surrogate misfit, not signal), while family B "
+     "photon cascades are clean (0% FP at eps=0; powered from eps~0.3). Typed conclusion: the "
+     "omega_2 forbidden direction is NOT decidable with existing archives -- it needs "
+     "multi-day storm monitoring (onset + hours-to-days cadence)", None,
+     "search_target", "boundary recovery kernel (dynamic, parity-resolved comb)",
+     "search_target", "FAST FRB 20240114A pol catalog v5 (committed, frb-tfpt-signatures); "
+     "prereg hypotheses/parity_comb_v1.yaml 2026-07-15 before the data pass",
+     "an omega_1 signed-power excess (Fisher p<0.01, >=2 sessions, BH q<0.05) KILLS the "
+     "v486 parity assignment; an omega_2 odd-channel comb replicated in >=2 sessions "
+     "escalates only", "null"],
     # frb-ontology (2026-07-07): the FO ontology round (next.txt 2026-07-07 (I)) --
     # what FRBs could BE in TFPT. FO.01 (transduction-invisibility contract, 5/5 PASS)
     # lives in theory-contracts and NEVER enters this scorecard. FO.02/FO.03 are the
@@ -485,7 +576,16 @@ ROWS = [
      "combined Planck+SPT-3G+ACT -- a factor 1.7 ABOVE the predicted 0.0173. "
      "Reach: 3.12 comb periods over the full likelihood window (gate passed; "
      "the conservative 0.005-0.2 Mpc^-1 window alone is sub-gate at 1.52). "
-     "Zero-parameter target: the frequency has no tunable freedom", None,
+     "Zero-parameter target: the frequency has no tunable freedom. "
+     "FAITHFUL-CLASS UPDATE (2026-08-27, sheetflip-bridge chain): under a "
+     "covariant CPT-typed coupling the TT tone is omega_- = 0.9532, NOT "
+     "2.5827; the 2025 combined scan (arXiv:2507.17276, identical template, "
+     "FLAT prior omega in [0,100]) covers omega_- with A_log < 0.0286 "
+     "(95% global) and no detection -- but omega_- is PERIOD-STARVED "
+     "(1.15 periods in the full window, < 1.4 in any realistic window, "
+     "gate 2.8 unreachable) -> data_limited structurally; the faithful "
+     "class's gate-passing channel is TB/EB at omega_+ = 2.5827, where NO "
+     "published comb search exists (named open target)", None,
      "search_target", "boundary recovery kernel (dynamic, primordial ln k "
      "reading; motivated clock, assumed transfer bridge)",
      "search_target", "Planck 2018 X (A&A 641, A10) Sect. 7-8 + combined "
@@ -580,14 +680,58 @@ ROWS = [
      "NO integer harmonics",
      "4 pairs consistent with exact 3/2 (chi2 p=0.78) BUT J1859+226 breaks universality at "
      "9.2 sigma AND anchored selection null (Boutelier/Torok equal-rms window at the 3/2 "
-     "crossing) manufactures the 4-of-5 cluster in 18.5% of trials -> cluster cheap; NO "
-     "published x1.5 tooth search (teeth inside the searched RXTE band); only published "
-     "third-frequency structures are integer lines (92=184/2, 34/68) favouring the "
-     "GR-harmonic alternative; archival RXTE PCA reanalysis designed (prereg YAML), not run",
+     "crossing) manufactures the 4-of-5 cluster in 18.5% of trials -> cluster cheap; "
+     "preregistered archival RXTE PCA scan EXECUTED 2026-07-20 (H3 stage 2: 77 ObsIDs / "
+     "4.42 GB / 4 sources; sanity gate PASS 11/12 published pair lines reproduced, injection "
+     "calibration PASS in all 4 sources): NEITHER the geometric tooth 1.5*nu_u NOR the "
+     "integer control line 4*nu_0 detected anywhere (~0 sigma single-trial, trials-corrected "
+     "N=8 as preregistered); 3-sigma rms upper limits 3.06/1.61/0.53/1.26% (tooth, "
+     "J1655/J1550/GRS1915/H1743) -- in every source at or below the strength of the detected "
+     "upper pair line -> WELL-POWERED NULL with limits; ladder reading unsupported but not "
+     "killed (the harmonic_hit branch did not fire either; anti-kernel record 92=184/2, "
+     "34/68 stands; GR resonance stays favoured); caveats: GRS 1915 scanned in a proxy state "
+     "(113/168 epochs unpublished at ObsID level), H1743's weak 166 Hz sanity line missed "
+     "(1.7 sigma), GRO hard-band sensitivity 5.1% only excludes a tooth at its 450 Hz "
+     "line strength",
      None, "search_target", "relaxation-ladder step (non-canonical HFQPO mapping; coincidence-risk)",
-     "search_target", "published RXTE tables: RM06, Motta+2014a/2022, Belloni+2012 (hfqpo-ladder)",
-     "a >=4sigma third QPO at 1.5*nu_u with no integer line (ladder hit, [C]-tier) OR an "
-     "integer line with no tooth (kernel reading dead)", "data_limited"],
+     "search_target", "published RXTE tables: RM06, Motta+2014a/2022, Belloni+2012 + archival "
+     "scan experiments/hfqpo-ladder/results/archival/archival_scan_results.json (hfqpo-ladder)",
+     "the preregistered archival test HAS run (null); next decider is eXTP-class sensitivity "
+     "below the 0.5-3.1% rms limits: a >=4sigma third QPO at 1.5*nu_u with no integer line "
+     "(ladder hit, [C]-tier) OR an integer line with no tooth (kernel reading dead)", "null"],
+    # HFQPO ladder extension (experiments/hfqpo-ladder/extension-nicer-laxpc, 2026-07-22):
+    # SAME frozen kernel + decision rule on non-RXTE archives (single-QPO extension rule,
+    # preregistered before any photon download); a priori weaker than a pair test and
+    # never pooled with the parent RXTE results -- shared independence_group with the
+    # parent row (one tooth hypothesis, two instruments: no double-counting).
+    ["X-ray", "BH HFQPO third-tooth extension on non-RXTE archives "
+     "(NICER/MAXI J1820+070 + AstroSat/LAXPC; hfqpo-ladder ext)",
+     "single-QPO extension rule: geometric tooth at (3/2) x 55.12 = 82.68 Hz, NO integer "
+     "line at 2 x 55.12 = 110.24 Hz",
+     "NICER/MAXI J1820+070 EXECUTED 2026-07-22 (prereg hypotheses/hfqpo_ext_v1.yaml frozen "
+     "BEFORE download; 6 ObsIDs / 13.22 GB / 2013 x 16 s = 32.2 ks stack at 19.05 kc/s): "
+     "sanity gate PASS (published 55.12 Hz anchor reproduced at 55.03 Hz, 0.94% rms, "
+     "3.8 sigma, Q ~ 25); injection calibration PASS (>= 90% recovery at 0.93% rms "
+     "injected at the tooth); tooth at 82.68 Hz: 0.69 sigma single-trial (-0.46 after "
+     "trials), 3-sigma UL 0.75% rms BELOW the detected anchor strength -> "
+     "null_with_sensitivity (a tooth as strong as the known QPO is excluded); integer "
+     "line ~110.6 Hz at 3.82 sigma after trials -- BELOW the preregistered 4-sigma "
+     "threshold: reported as a sub-threshold excess consistent with the weak second "
+     "harmonic of ATel #11951 (direction-wise again the integer/GR side, like the parent "
+     "anti-kernel record), NOT a detection under the frozen rule; AstroSat/LAXPC "
+     "(GRS 1915+105 ~70 Hz states, scientifically the strongest channel) "
+     "infrastructure_blocked (ISSDC archive login-gated, no scriptable path, probed "
+     "2026-07-22); RXTE + NICER nulls now cover 5 sources on 2 instruments -> tooth "
+     "channel recommended DORMANT",
+     None, "search_target", "relaxation-ladder step (single-QPO extension rule: no 3:2 "
+     "pair anchors the ladder phase -- a priori weaker than a pair test, never pooled "
+     "with the parent)",
+     "search_target", "NICER HEASARC public archive (ObsIDs 1200120107-1200120119, ATel "
+     "#11951 anchor) + ISSDC feasibility probe "
+     "(hfqpo-ladder/extension-nicer-laxpc results_ext.json)",
+     "a >=4sigma third QPO at 1.5 x nu_anchor with no integer line (ladder hit, [C]-tier) "
+     "OR an integer line at >=4sigma with no tooth (kernel reading dead); next decider: "
+     "AstroSat/LAXPC GRS 1915+105 (blocked) or eXTP-class sensitivity", "null"],
     # strange-metal comb (experiments/strange-metal-comb): first laboratory bound on the comb
     ["condensed matter", "comb ripple on the strange-metal omega/T master curve (LSCO x=0.24)",
      "log-periodic ripple at omega=2.583, eps=0.0173 decorating the Planckian sigma1(omega/T) "
@@ -624,22 +768,33 @@ ROWS = [
     # comb-meta-limit (experiments/comb-meta-limit): first quantitative UL on the comb amplitude eps
     ["cross-domain", "meta-analytic UL on recovery-comb amplitude eps (omega=2.583)",
      "eps = exp(-pi^2/ln((3/2)^6)) = 0.0173 (~2%)",
-     "boundary/horizon-scoped: data_limited (NO horizon channel yields an absolute eps -- GW single-event bend degenerate, FRB raw tails absent/linear-intensity, A2 sub-SNR); all-channel universal-DSI 95% UL eps<0.120 (HKSJ over surface log-flux A1/A4/A5, ~6.9x the 2% prediction); injection self-consistent (inject 5% -> recover 4.8%, UL 5.5%; coverage 0.92)",
+     "boundary/horizon-scoped: data_limited (NO horizon channel yields an absolute eps -- GW single-event bend degenerate, FRB raw tails absent/linear-intensity, A2 sub-SNR); all-channel universal-DSI 95% UL eps<0.120 (HKSJ over surface log-flux A1/A4/A5, ~6.9x the 2% prediction; 10 channels enumerated / 3 usable); re-run 2026-07-21 with PG.06b FULL Vela ingested as a censored Tier-B channel (linear delta-nu observable, reach 2.17/1.38 < 2.8-period gate, injection eps_90 never reached below eps=1 -> no absolute eps; aggregate UL unchanged); injection self-consistent (inject 5% -> recover 4.8%, UL 5.5%; coverage 0.92)",
      None, "search_target", "boundary recovery kernel (meta-analytic UL)",
-     "search_target", "recovery-comb-domains A1/A4/A5 + pulsar PG.05 + GW/FRB (read-only); DL+Hartung-Knapp random-effects UL",
+     "search_target", "recovery-comb-domains A1/A4/A5 + pulsar PG.05 + PG.06b FULL Vela + GW/FRB (read-only); DL+Hartung-Knapp random-effects UL",
      "the boundary/horizon-scoped joint 95% UL on eps falls below 2% (soft constraint on the dynamic kernel)",
      "data_limited"],
     # ---- lab (experiments/lab-residuals) ----
     ["lab", "muon g-2 Delta a_mu (WP2020 dispersive)", "2.879e-9",
-     "residual 2.62e-9+/-0.45", 0.58, "bridge", "HVP (dispersive)",
-     "downstream_bridge", "Fermilab 2025 + WP2020", "residual incompatible with 2.879e-9", "consistent"],
+     "residual 2.62e-9+/-0.45 (0.58 sigma) -- HISTORICAL reading: the WP2020 data-driven HVP "
+     "baseline is withdrawn (WP25 adopts the lattice HVP as the SM baseline); kept on record "
+     "as the alternative-group leg the bridge was originally scored against",
+     0.58, "bridge", "HVP (dispersive)",
+     "downstream_bridge", "Fermilab 2025 + WP2020 (superseded by WP25)",
+     "residual incompatible with 2.879e-9", "parked"],
     ["lab", "muon g-2 Delta a_mu (WP2025 lattice)", "2.879e-9",
-     "residual 0.39e-9+/-0.64 (WP2025 sigma corrected to 62)", 3.92, "bridge", "HVP (lattice)",
-     "downstream_bridge", "Fermilab 2025 + arXiv:2505.21476",
-     "lattice HVP consolidates and residual stays ~0; dated 2026-07-02: a data-driven HVP "
-     "consensus consistent with lattice/WP25 (CMD-3-side) kills the bridge (+3.9 sigma "
-     "today); a KLOE-side dispersive consensus restores <1 sigma. Watch: MUonE (Phase-1 2025 "
-     "analysed), BaBar 2026 pipi (stays KLOE-side), TI WP-3 ~2027-28", "tension"],
+     "residual 0.39e-9+/-0.64 (WP2025 sigma corrected to 62) -> the fixed TFPT bridge value "
+     "sits +3.9 sigma high; 2026-08-04 news round: the dated kill condition HAS FIRED -- WP25 "
+     "(Phys. Rep., 2025) adopts the lattice HVP as the SM baseline and the BMW hybrid "
+     "evaluation (Nature, 2026) confirms it: Experiment - SM = 0.5 sigma, i.e. Delta a_mu "
+     "converged OUTSIDE 2.879e-9 +/- 0.5e-9. The seam-vertex identification is excluded in "
+     "its present form; the exact compiler number delta_2/(2 pi) and the core are untouched "
+     "-- the watchdog delivered exactly what it was built for",
+     3.92, "bridge", "HVP (lattice)",
+     "downstream_bridge", "Fermilab 2025 + arXiv:2505.21476 + WP25 (Phys. Rep. 2025) + BMW "
+     "hybrid (Nature 2026)",
+     "FIRED 2026-08-04 (dated 2026-07-02): the lattice-side HVP consensus consolidated "
+     "(WP25 + BMW 2026) with residual ~0 -- bridge dissolved; a future KLOE-side dispersive "
+     "consensus reversal would reopen it (not expected)", "kill_channel"],
     ["lab", "rare kaon BR(K+ -> pi+ nu nu)", "9.45e-11",
      "NA62 2016-2024 (9.6 +1.9 -1.8)e-11", -0.08, "bridge", "short-distance QCD",
      "downstream_bridge", "NA62 arXiv:2604.12649", "BR(K+) outside [7,12]e-11", "consistent"],
@@ -774,12 +929,33 @@ ROWS = [
      "PMNS theta13 as transfer-corrected; v4: >2 neighbour decoders beating the TFPT links "
      "or placebo percentile >10% would void the architecture reading", "consistent"],
     # ---- inflation (cmb-inflation-scalaron) ----
-    ["CMB", "inflation n_s (Starobinsky/scalaron)", "1-2/N_star = 0.9611 (N=51.4)",
-     "Planck 0.9649+/-0.0042", -0.91, "prediction", "N_star reheating input",
-     "prediction_of_record", "Planck 2018 / DESI", "n_s >= 0.967 robustly", "consistent"],
+    ["CMB", "inflation n_s (Starobinsky/scalaron)", "1-2/N_star = 0.9611 (N=51.4); record band [0.960, 0.967]",
+     "Planck 0.9649+/-0.0042 (-0.91 sigma vs the 51.4 branch); 2026-08-04 news round: CMB-SPA "
+     "(SPT-3G D1 + ACT + Planck, arXiv:2506.20707) 0.9679+/-0.0033 -- the sharpest combination; "
+     "central value ABOVE the 0.967 band edge for the FIRST time (edge at -0.27 sigma, branch "
+     "0.9611 at -2.06 sigma; profiled branch 0.9644 at -1.06 sigma). Not yet 'robustly >= 0.967' "
+     "(the dated kill), but an honest mild weakening -- watch-flagged", -2.06,
+     "prediction", "N_star reheating input",
+     "prediction_of_record", "Planck 2018 / DESI / CMB-SPA (SPT-3G D1, arXiv:2506.20707)",
+     "n_s >= 0.967 robustly", "tension"],
     ["CMB", "inflation r (tensor ratio)", "12/N_star^2 = 0.0045",
      "BICEP/Keck < 0.036; CMB-S4 sigma 5e-4", None, "prediction", "N_star reheating input",
      "prediction_of_record", "BICEP/Keck BK18; CMB-S4", "r excluded at CMB-S4 (>5 sigma)", "consistent"],
+    # alpha_s (2026-07-20): the LO Starobinsky running; exact SR at N=51.4 is -7.09e-4
+    # (LO identity alpha_s = -r/6 holds only to ~7%). NOT independent of n_s/r -- same
+    # N_star_reheating group (anti double-counting).
+    ["CMB", "inflation alpha_s (running of n_s)",
+     "-2/N_star^2 = -7.6e-4 (N=51.4); band [-8.0e-4,-5.6e-4]; beta_s = -4/N^3 = -2.9e-5",
+     "P-ACT-LB +0.0062+/-0.0052 (record leg; P-ACT +0.0060+/-0.0055 -> -1.22 sigma; "
+     "Planck18 -0.0045+/-0.0067 -> +0.57 sigma; beta_s run+runrun 0.010+/-0.013 -> -0.77 sigma); "
+     "forecast: LiteBIRD+CMB-S4 sigma(alpha_s)~4.9e-3 (0.14 sigma), CMB-S4+DESI+Euclid "
+     "statistical ~3.3e-4 (2.2 sigma, systematics-limited)", -1.33, "prediction",
+     "N_star reheating input",
+     "prediction_of_record",
+     "experiments/tfpt-discovery/alpha_s_running_probe.py + Calabrese+ 2025 JCAP (P-ACT-LB) "
+     "+ Planck 2018 X",
+     "robust alpha_s < -5e-3 or > +3e-3 at >=5 sigma; any robust POSITIVE running kills "
+     "the plateau branch", "consistent"],
     ["CMB", "inflation A_s (fixed N_star=51.4 point)", "1.76e-9 at N_star=51.4",
      "Planck 2.10e-9 (branch stress; record is the band, NOT the fixed point)", -11.3, "bridge",
      "N_star reheating branch", "downstream_bridge", "Planck 2018 + branch_resolver (lnB=+62)",
@@ -788,9 +964,52 @@ ROWS = [
      "Planck 2.10e-9 (consistent when profiled; this is the record reading)", -0.1, "bridge",
      "N_star reheating bridge", "downstream_bridge", "Planck 2018 + branch_resolver",
      "A_s incompatible across the whole [50,60] band", "consistent"],
+    # closure invariant (2026-08-27): N_star ELIMINATED from the scalaron read-offs --
+    # exact algebra, no new physics input. Mathematically the same information as the
+    # profiled-A_s reading (alternative_group Nstar_branch, anti double-counting);
+    # alpha_s = -r/6 is the LO identity only (exact SR differs by ~7%, see alpha_s row).
+    ["CMB", "inflation closure invariant C_inf (N_star-free)",
+     "exact N-elimination: A_s*r = c3^7/(2pi^2) = 7.998e-12, r = 3(1-n_s)^2, "
+     "alpha_s = -r/6 (LO), and the scalar-only closure C_inf = 6pi^2 A_s (1-n_s)^2 / c3^7 = 1",
+     "C_inf = 0.970+/-0.233 (Planck 2018 A_s+n_s leg, -0.13 sigma; cov(A_s,n_s) NOT "
+     "modelled) but 0.520+/-0.138 (-3.48 sigma) on the P-ACT-LB+DESI n_s leg -- the known "
+     "n_s tension inherited in N-free form (watch); N-free r(A_s) = 0.00381+/-0.00005 "
+     "(below BK18 < 0.036; CMB-S4 7.6 sigma decider); alpha_s = -6.35e-4 vs Planck "
+     "-0.0045+/-0.0067 (+0.58 sigma)", -0.13, "prediction",
+     "N_star eliminated (same scalaron curve, no reheating input)",
+     "prediction_of_record",
+     "cmb-inflation-scalaron (closure_invariant) + Planck 2018 + BK18",
+     "robust future bound r < 0.0037 kills this normalisation; C_inf off 1 at >=3 sigma "
+     "with modelled covariance; a detection r~0.0038 with alpha_s~-r/6 escalates",
+     "consistent"],
+    # mu-distortion (2026-07-20): Chluba window integral calibrated +20% to the full
+    # computation; a mu measurement DECIDES the A_s/N_star branch (the fixed-point tension
+    # row vs the profiled record row) -> same Nstar_branch alternative group. NOTE: the
+    # log-comb (omega=2.5827, eps=0.0173) is STRUCTURALLY BLIND in the mu window --
+    # window attenuation |F(omega)|=0.033, delta_mu=7.4e-12=0.007 sigma even at Voyage-2050
+    # sensitivity (S15 typing: the theory itself predicts where it is invisible) -- so NO
+    # separate comb-search row is opened here.
+    ["CMB", "inflation mu-distortion (A_s/N_star branch discriminator)",
+     "Chluba window integral, calibrated +20%: sharp branch N_star=51.4 (A_s=1.76e-9) "
+     "mu~1.6e-8; profiled record N_star=56.1 (A_s=2.10e-9) mu~2.0e-8; band 1.5-2.3e-8; "
+     "branch split 23% (Delta mu=3.0e-9) -> 3 sigma branch separation at sigma(mu)=1e-9 "
+     "(Voyage-2050 class); the frozen log-comb is structurally blind here "
+     "(|F(2.5827)|=0.033, delta_mu=7.4e-12=0.007 sigma even at Voyage 2050)",
+     "FIRAS 95% |mu| < 9e-5 (only bound in hand, 4 dex above); PIXIE baseline 95% "
+     "|mu| < 9e-8 does NOT reach the band (factor 4-7 above the prediction); branch "
+     "decision needs sigma(mu)~1e-9 (Voyage-2050 class)", None, "prediction",
+     "N_star reheating branch (Silk damping / Chluba mu window)",
+     "prediction_of_record",
+     "experiments/tfpt-discovery/mu_distortion_probe.py + COBE/FIRAS",
+     "robust mu < 0.9e-8 or > 4e-8", "data_limited"],
     # ---- neutrino mixing (neutrino-mixing) ----
-    ["neutrino", "sin^2 theta12", "1/3 - phi0/2 = 0.306747", "NuFIT 6.0 0.307+/-0.012", -0.02,
-     "prediction", "PMNS (TBM+seam)", "prediction_of_record", "NuFIT 6.0 / JUNO",
+    ["neutrino", "sin^2 theta12", "1/3 - phi0/2 = 0.306747",
+     "NuFIT 6.0 0.307+/-0.012 (-0.02 sigma); JUNO Neutrino-2026 update (207 days): "
+     "0.3036+/-0.0064 -> +0.49 sigma, the sharpest single measurement (supersedes the 59.1-day "
+     "0.3092+/-0.0087 / -0.28 sigma; the central value moved TOWARD the prediction); "
+     "Delta m^2_21 = 7.388+/-0.078e-5 eV^2; precision phase running", 0.49,
+     "prediction", "PMNS (TBM+seam)", "prediction_of_record",
+     "NuFIT 6.0 / JUNO (Neutrino 2026, 207-day dataset)",
      "theta12 off 0.3067 at >3 sigma", "consistent"],
     ["neutrino", "sin^2 theta13", "phi0 e^(-5/6) = 0.0231", "NuFIT 6.0 0.02195+/-0.00058", 2.0,
      "prediction", "PMNS (seed x carrier-trace)", "prediction_of_record", "NuFIT 6.0 / Daya Bay",
@@ -833,7 +1052,11 @@ ROWS = [
      "candidate], rho_L/Mbar^4=(3/4pi^2)e^-2ainv [frozen], Sigma m_nu=0.0588 eV [v468 "
      "route]} + flatness -> H0=67.15 km/s/Mpc, Omega_m=0.3133, Omega_L=0.6866, t0=13.86 Gyr",
      "H0: Planck18 -0.39 sigma, SH0ES22 -5.67 sigma (the parameter-free PLANCK side of the "
-     "Hubble tension), DESI DR2 BAO+CMB -2.16 sigma; Omega_m -0.27, Omega_L +0.26, "
+     "Hubble tension), DESI DR2 BAO+CMB -2.16 sigma; 2026-08-04 news round: CMB-SPA "
+     "(SPT-3G D1+ACT+Planck) 67.19+/-0.38 -> +0.11 sigma from the budget 67.15 -- the sharpest "
+     "CMB-side leg lands ON the parameter-free value, but it is CORRELATED with the "
+     "already-counted phi0/alpha legs (same phi0_seed group), never a new independent hit; "
+     "Omega_m -0.27, Omega_L +0.26, "
      "Omega_c/Omega_b +0.14; honest stress: omega_b -2.02 (BBN-only D/H -0.73 -- the "
      "stress is CMB-side), omega_c -1.19, derived t0 +2.9 -- one correlated low-h "
      "direction, not additive", None, "pattern_candidate",
@@ -870,7 +1093,10 @@ ROWS = [
      "cuts 4.2->3.2 sigma (calibration error in DES-SN5YR); Bayesian reanalysis "
      "(arXiv:2603.05472) eliminates the DESI+CMB-only preference (ln B=-0.57) -- the "
      "preference is dissolving as w=-1 requires; Union3 frequentist 3.8 sigma (2.23 Bayesian) "
-     "remains",
+     "remains; 2026-08-04 news round: sequentially-valid reanalysis (arXiv:2607.28918) "
+     "localises the DESI DR2 evolving-DE signal almost entirely in the LRG2 redshift bin -- "
+     "without LRG2 the evidence collapses (M=0.49, mildly pro-LCDM); the dissolution trend "
+     "continues",
      None, "prediction", "Lambda = constant vacuum", "prediction_of_record",
      "dark-energy-w-watchdog (DESI DR2, overlap-aware)",
      "w != -1 at >=5 sigma in a single systematics-controlled overlap-aware combination",
@@ -901,6 +1127,16 @@ ROWS = [
      "prediction", "PMNS / mass scale",
      "prediction_of_record", "DESI DR2 (arXiv:2503.14744) + CMB; KATRIN",
      "Sigma m_nu excluded or inverted ordering", "tension"],
+    ["neutrino", "M_R scalaron-trace rung (NUSF.01)",
+     "M_R = 3 c3^(7/2) Mbar = 9.18e13 GeV -> m3 = 0.0512 eV, Sigma m_nu = 0.0600 eV (NO, "
+     "zero dials; FLAV.NUSCALE.05 candidate, mechanism [O]; v986)",
+     "1-loop required M_R = 9.35e13 GeV (y_nu = y_t [P]): dev -1.8%; m3 vs NuFIT 6.0 +2.2% "
+     "(inside the >50% v482 RG envelope); DESI DR2 LCDM 95% UL 0.0642 eV (margin +0.004; the "
+     "LCDM posterior squeeze of the sum-m_nu row applies to this candidate too); "
+     "prereg pass experiments/nu-scalaron-falsification (SHA 4941b396729636de)", None,
+     "prediction", "seesaw / scalaron trace (generation-blind, distinct from the v488-killed 5/3 Clebsch)",
+     "prediction_of_record", "NuFIT 6.0 + DESI DR2 + KATRIN 2024 + KamLAND-Zen 2024 (frozen, dated)",
+     "Sigma m_nu bound < 0.0599 eV; required-M_R shift > 5%; inverted ordering", "consistent"],
     ["neutrino", "m_betabeta (0vbb)", "m_bb = 1.52e-3 eV (normal ordering)",
      "LEGEND/nEXO sensitivity ~10-20 meV (not yet reached)", None, "prediction", "Majorana mass",
      "prediction_of_record", "LEGEND-1000 / nEXO", "a 0vbb signal incompatible with 1.5 meV NO", "data_limited"],
@@ -915,10 +1151,14 @@ ROWS = [
      "N_fam = 3 exactly (no 4th light state)",
      "MicroBooNE two-beam (Nature 648, 64-69 (2025)) excludes single-sterile LSND/MiniBooNE "
      "at 95% CL and cuts into gallium/BEST space; gallium deficit persists unexplained (no "
-     "oscillation signature); JSNS2 running (no excess); SBND+ICARUS decide this decade",
+     "oscillation signature); JSNS2 running (no excess); 2026-08-04 news round: ICARUS first "
+     "standalone result (arXiv:2603.22557, 2026): NO nu_mu disappearance, new 3+1 exclusions "
+     "at 90% CL -- another null leg exactly as N_fam=3 requires; SBND+ICARUS joint pending, "
+     "decides this decade",
      None, "prediction", "E8 family counting (D5+A3+mu4; no spare slot)",
      "prediction_of_record",
-     "fixed-point-watchdog axis D (Nature 648 (2025); arXiv:2512.07159, 2602.06274; SBN 2026)",
+     "fixed-point-watchdog axis D (Nature 648 (2025); arXiv:2512.07159, 2602.06274; "
+     "ICARUS arXiv:2603.22557; SBN 2026)",
      "any confirmed sterile oscillation signal at >= 5 sigma (systematics-controlled; "
      "e.g. joint SBND+ICARUS or JSNS2-II)", "consistent"],
     # ---- fixed-point-watchdog axis E (2026-07-03): Cabibbo dissolution + the NEW
@@ -1139,6 +1379,116 @@ ROWS = [
      "no direct physical dataset", None, "parked", "analog only",
      "parked_analog", "quantum-recovery-analog (parked)",
      "engineered per-step recovery not at 64/729 (free-ratio control)", "parked"],
+    # ---- analog beds (2026-07-20): parked_analog = no physical dataset yet; honest
+    # typing -- these beds validate E8 edge/spectrum physics or the comb DETECTOR,
+    # never the TFPT axioms themselves. ----
+    ["condensed matter", "bosonic E8 phase thermal Hall (seam edge c_-=8)",
+     "kappa_xy/T = 8 * (pi^2 k_B^2 / 3h), no charge Hall (seam edge c_-=8, v450/v451/v489)",
+     "no engineered material yet; alpha-RuCl3 c_-=1/2 contested (ultraclean half-quantized "
+     "plateau, npj QM 2025, vs phonon-dominated kappa_xy, PRX 12, 021025)", None, "parked",
+     "analog only (confirms E8 edge physics, not TFPT axioms)",
+     "parked_analog", "seam-edge analog bed (parked; no material)",
+     "engineered chiral phase must show kappa_xy/T = 8 quanta (no charge Hall); charge Hall "
+     "or c != 8 kills the seam-edge analog reading", "parked"],
+    ["condensed matter", "E8 mass-ladder blind recovery bed (CoNb2O6 / BaCo2V2O8)",
+     "blind ladder recovery by the Cartan-PF pipeline on the published Zamolodchikov-E8 "
+     "spectra: 8/8 one-particle masses (m2/m1 = golden ratio) + rejection of scrambled "
+     "controls (detector validation; confirms Zamolodchikov E8, not TFPT axioms)",
+     "EXECUTED 2026-07-20, verdict validated (detector level): BaCo2V2O8 blind (Zou+ PRL "
+     "127, 077201; INS 4.7 T, Fig. 3a QA-validated extraction, 17 peaks) 8/8 rungs, "
+     "chi2/dof=0.35, MC p=0.0056 (5000 null ladders; singles-only p=0.0004; sigma-variant "
+     "robust); CoNb2O6 blind (Amelin+ PRB 102, 104431; verbatim THz values) 6/8 in-window "
+     "rungs, chi2/dof=0.52, p=0.0038 (m7/m8 outside the 0.6-THz window; the 0.43-THz "
+     "(m1+m2)-onset correctly left unassigned); control battery all rejected: scramble "
+     "0.5%/1.5%, offset 0/8, jitter <=5% at destructive 30%, harmonic/A3-PF/D8-PF/Airy "
+     "wrong ladders beaten, synthetic Airy bed 0 rungs; Cartan-PF self-test 1.5e-15; "
+     "2026-07-21 v2: CoNb2O6 6/8 unchanged; 2DCS extension killed at detector level "
+     "(scramble 27%, jitter 18% @30%); KA 8/8 incl. m7/m8 via F3, p=2e-4; no "
+     "experimental 2DCS data exists (arXiv:2512.16829 theory-only)",
+     None, "search_target",
+     "analog only (ladder-detector validation on published spectra; validates the "
+     "ladder-detector pipeline for TFPT searches, e.g. hfqpo-ladder)",
+     "not_applicable", "experiments/e8-ladder-bed/results/results.json (Zou+ PRL 127, "
+     "077201; Amelin+ PRB 102, 104431; Coldea+ 2010 anchor)",
+     "pipeline fails to recover 8/8 published masses or fails to reject scrambled "
+     "controls -> kills the ladder detector, not TFPT", "consistent"],
+    ["quantum", "Efimov DSI tuned to the kernel lambda=(3/2)^6 (heteronuclear mass ratio)",
+     "s0 = pi/(6 ln(3/2)) = 1.2914 <=> lambda = (3/2)^6 = 11.391; required M/m = 8.67 "
+     "(2 resonant pairs)",
+     "best candidate 52Cr2-6Li: M/m=8.635 -> s0=1.2890, lambda=11.44 (+0.44% vs (3/2)^6; "
+     "gap deviation +0.18%); alternatives 39K2/41K2-6Li (lambda=11.59/11.20, needs double "
+     "Feshbach control), 176Yb2-23Na (+5.9%); solver validated on Naidon-Endo anchors "
+     "(homonuclear 22.69, Cs2Li 4.877); no tuned experiment yet", None, "parked",
+     "analog only (first end-to-end HARDWARE injection of the comb detector at tunable "
+     "lambda~11.39)",
+     "parked_analog", "experiments/tfpt-discovery/efimov_s0_massratio_probe.py "
+     "(parked; needs experiment)",
+     "none on TFPT axioms -- detector validation only", "parked"],
+    # annulus recovery (2026-08-27): first exploratory pass of the Markov/
+    # annulus-recovery signature on the SAME local SMICA map; discovery-level
+    # (in-code freeze, not YAML-preregistered -- disclosed); the frozen rate
+    # ratio is the same v957/ccc kernel as the disc row (shared prediction,
+    # same map -> never pooled with the disc null as independent evidence).
+    ["CMB", "annulus-recovery two-rate CMI (OBS.ANNULUS.RECOVERY.01)",
+     "conditional mutual information I(A:C|B) over nested caps/annuli decays "
+     "with TWO rates at the frozen kernel ratio Delta_-/Delta_+ = 2.709511 "
+     "(ccc freeze v1, SHA 1df51166d0a2ef5b, frozen before any CMB contact)",
+     "SMICA exploratory run 2026-08-27 (seed 20260827, reruns bit-identical, "
+     "map SHA-256 60952c64... pinned): 103 centers |b|>=30deg, 4 ell-bands, "
+     "buffer scan 0.5-3.0 deg vs 60 Gaussian same-C_ell nulls: CMI excess "
+     "within +-0.82 sigma everywhere, dchi2(1->2 rates) p_two = 0.426 "
+     "(gate < 0.01), free rate ratio 1.08 (band [2.0, 3.5] missed), "
+     "two-exp amplitudes sign-indefinite -- no two-rate recovery structure; "
+     "fitter validated on synthetic two-rate curve (rate recovered 0.799/0.8)",
+     None, "search_target",
+     "boundary-recovery locality pattern ([C] reading; null harmless to the "
+     "compiler core; NOT direct Hawking emission)",
+     "search_target",
+     "experiments/tfpt-discovery/smica_annulus_recovery_probe.py on Planck "
+     "PR3 SMICA (NSIDE 128; exploratory single-map pass, not preregistered "
+     "YAML-grade -- disclosed)",
+     "future preregistered pass: two stable decay modes at ratio 2.7095 "
+     "replicated across component separations with p < 0.01 would escalate; "
+     "character-resolved semantics needs OBS.TRANSDUCTION.01 first",
+     "null"],
+    # EB log-comb (2026-08-27): FIRST comb search in the parity-odd channel --
+    # the faithful-class positive channel per the sheetflip-bridge chain; prereg
+    # frozen+hashed before data contact; data = the SAME PR4 EB spectra family
+    # the birefringence-beta legs use (noted; the comb statistic is a modulation,
+    # never pooled with the beta monopole as an independent hit).
+    ["CMB", "EB log-comb at the frozen omega_+ (faithful-class channel)",
+     "under the covariant CPT-typed coupling (sheetflip-bridge theorem) the odd "
+     "kernel tone omega_+ = 2.58270695 is FORBIDDEN in TT/TE/EE and lives in "
+     "TB/EB: EB_b = s0 T_b [1 + A cos(omega ln(ell/150) + phi)], phi PROFILED "
+     "(holonomy phase leg contract-locked), eps = 0.0173 candidate scale "
+     "(carry-over open); kill leg: a comb at omega_- = 0.9532 in EB kills the "
+     "character dictionary",
+     "Planck PR4/NPIPE HFI stacked EB (Eskilt+ 2023, arXiv:2303.15369; ell = "
+     "51-1471, prereg SHA e519ca9eb36dbb7a frozen BEFORE fetch, data SHA "
+     "ae5a6ca1... logged): dchi2(omega_+) = 0.43, p = 0.813 vs 2000 nulls -- "
+     "no comb; omega_- kill leg p = 0.737 -- NO dictionary violation (first "
+     "kill-leg exposure survived); LEE rank 56/60, p_global = 0.871; A_95 > "
+     "0.5 (multiplicative comb on a ~3-5 sigma baseline is intrinsically "
+     "weakly bounded); reach 1.39 periods < 2.8 gate DISCLOSED pre-freeze "
+     "(never a detection claim)",
+     None, "search_target",
+     "faithful-class parity transduction (TE covariance axiom + CPT pin; "
+     "[C]/[O] -- null harmless)",
+     "search_target",
+     "experiments/cmb-eb-logcomb (prereg eb_logcomb_v1.yaml) on the public "
+     "PR4 stacked EB spectrum",
+     "dated decider: LiteBIRD/SO-class EB (baseline S/N >~60) makes eps = "
+     "0.0173 testable -- comb at omega_+ AND none at omega_- = positive "
+     "faithful signature; comb at omega_- kills the dictionary; comb at "
+     "omega_+ in TT instead kills the faithful class", "null"],
+    # ---- CCC crossover-disc (experiments/ccc-crossover-disc) ----
+    ["CMB", "crossover-relic top-hat discs (CCC.DISC.SEARCH.01)",
+     "sharp causal disc theta_max = 1.16 deg, sign-paired (frozen v957 kernel; hypotheses frozen 2026-08-24 BEFORE data contact)",
+     "SMICA record run 2026-08-24 (seed 20260824, reruns bit-identical, map SHA-256 pinned in results.json): max|SNR| = 5.119 vs null mean 5.20 over 100 Gaussian LCDM sims, p_global = 0.673, p_counts = 0.446, BH-q_min = 0.673 -- the q < 0.01 threshold clearly missed; 171 candidates 83 pos / 88 neg (no sign excess); injection-recovery 100% at 200 muK; K1-K6 all NA; ledger D4 of CCC.SEAM.CROSSOVER.01 executed/null (contract stays [O] via D1-D3); first-run estimator bug and the unseeded preflight (p 0.683/0.287, same verdict) disclosed",
+     None, "search_target", "crossover-relic boundary pattern ([C] cyclic reading; null harmless to the compiler core)",
+     "search_target", "Planck PR3 SMICA, NSIDE 256, 100 Gaussian nulls (well-powered single-map null; replication legs available for future candidates)",
+     "K1-K6 frozen (hypotheses/ccc_disc_v1.yaml); support needs BH-q < 0.01 + half-mission + >= 2 component separations",
+     "null"],
 ]
 
 FIELDS = ["domain", "observable", "tfpt_value", "data_value", "pull_sigma",
@@ -1169,6 +1519,15 @@ _LONG = ("qnm", "m_betabeta", "page curve", "recovery kernel")
 # never silently double-counted).
 OVERRIDES: dict[str, dict] = {
     "achromatic dyonic intercept": {"independence_group": "c3_topform_horizon"},
+    # both rows run on the SAME Planck PR3 SMICA map -- one shared group,
+    # never two independent nulls/hits
+    "crossover-relic top-hat discs": {"independence_group": "smica_pr3_map"},
+    "annulus-recovery two-rate CMI": {"independence_group": "smica_pr3_map"},
+    # HFQPO tooth: parent RXTE pair scan + NICER/LAXPC single-QPO extension test ONE
+    # hypothesis (the geometric third tooth) on different instruments/sources -- one
+    # cluster, never two independent nulls/hits.
+    "BH HFQPO 3:2 pairs": {"independence_group": "hfqpo_ladder_tooth"},
+    "BH HFQPO third-tooth extension": {"independence_group": "hfqpo_ladder_tooth"},
     # frb-ontology diagnostics: standard magnetospheric physics (orthogonal modes +
     # propagation memory) / survey selection (Pleunis+2021 morphology split) predict
     # the same phenomenology -> weakly discriminating consistency typings, never hits.
@@ -1269,8 +1628,40 @@ OVERRIDES: dict[str, dict] = {
     # --- alternative interpretation bases (one theme, several readings) ---
     "inflation A_s (fixed N_star=51.4 point)": {"alternative_group": "Nstar_branch"},
     "inflation A_s (profiled N_star)": {"alternative_group": "Nstar_branch"},
+    # same A_s/n_s information as the profiled reading, repackaged N-free -> never
+    # an independent hit; watch-flagged for the ACT+DESI n_s leg (-3.48 sigma)
+    "inflation closure invariant": {"alternative_group": "Nstar_branch",
+                                    "watch_flag": True},
+    # mu-distortion decides the SAME A_s/N_star branch question as the two A_s rows
+    # (one question, several readings -> never a new independent hit); decisive
+    # instrument class is Voyage-2050 -> long_term.
+    "inflation mu-distortion": {"alternative_group": "Nstar_branch",
+                                "decision_horizon": "long_term"},
+    # 2026-07-20 analog beds: no engineered material / no tuned experiment yet.
+    "bosonic E8 phase thermal Hall": {"decision_horizon": "long_term"},
+    # e8-ladder-bed EXECUTED 2026-07-20 (verdict validated, detector level): known-answer
+    # positive control of the Cartan-PF ladder detector on published Zamolodchikov-E8
+    # spectra -- validates the ladder-detector pipeline; confirms Zamolodchikov E8, not
+    # TFPT axioms -- no [E], no veri. Same basket as qc-recovery-kernel / qgeo-eit-soff
+    # (never nature evidence). 2026-07-21: 2DCS extension (amendment v2/v2.1) killed at
+    # detector level (kill_2d, results2d.json); v1 verdict and this row's status/stage
+    # unchanged.
+    "E8 mass-ladder blind recovery bed":
+        {"validation_tier": "analog_positive_control",
+         "signature_code": "detector-control",
+         "leakage_class": "detector_control",
+         "clock_map": "not_required_for_static_spectrum",
+         "transduction_B": "published INS/THz spectra; detector reads peak positions only",
+         "projection_nonzero": "not_a_tfpt_projection",
+         "status_note": "validates the ladder-detector pipeline; confirms Zamolodchikov "
+                        "E8, not TFPT axioms -- no [E], no veri; amendment v2/v2.1 "
+                        "preregistered+disclosed; real-data leg blocked; v3 would need "
+                        "coincidence-based coverage, preregistered before data"},
     "muon g-2 Delta a_mu (WP2020 dispersive)": {"alternative_group": "HVP_baseline"},
     "muon g-2 Delta a_mu (WP2025 lattice)": {"alternative_group": "HVP_baseline"},
+    # 2026-08-04 news round: CMB-SPA central value crossed the 0.967 band edge -> the
+    # sharpest mild weakening among the non-red channels; dated kill stays "robustly >= 0.967".
+    "inflation n_s": {"watch_flag": True, "watch_level": "medium"},
     "axion haloscope marker": {"alternative_group": "axion_branch"},
     "AXION.HILLTOP": {"alternative_group": "axion_branch"},
     "AXION.SPINE": {"alternative_group": "axion_branch"},
@@ -1502,7 +1893,7 @@ def build() -> dict:
         "firewall": "search targets / downstream bridges, NOT load-bearing claims; "
                     "no row is upgraded to [E]",
         "domain_matrix": "9 active empirical search domains + sharp prediction-of-record "
-                         "channels + internal-consistency checks + 1 parked analog target",
+                         "channels + internal-consistency checks + 4 parked analog targets",
         "stage_enum": sorted(STAGE_ENUM),
         "status_enum": sorted(STATUS_ENUM),
         "evidence_class_enum": sorted(EVIDENCE_CLASS_ENUM),

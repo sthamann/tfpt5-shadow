@@ -24,7 +24,11 @@ manifest had not been regenerated after a final ledger edit.  RELEASE RULE:
 `make_manifest.py --check` must pass on the exported tree.
 """
 import hashlib
+from pathlib import Path
+from tex_sources import dependency_paths
+
 import os
+import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -46,17 +50,27 @@ def _lean_read_dir():
 LEAN_DIR = _lean_read_dir()                        # repo path (where the files actually live)
 
 TEX = [
-    "introduction.tex", "changelog.tex",
+    "introduction.tex", "changelog.tex", "verification_catalog.tex",
     # shared, imported fragments now live in tex-artefacts/
     # (the auto-generated tex-artefacts/version-auto.tex is gitignored and excluded)
     "tex-artefacts/tfpt_docset.tex", "tex-artefacts/tfpt_style.tex",
     "tex-artefacts/tfpt_status.tex", "tex-artefacts/tfpt_figures.tex",
     "tex-artefacts/verification.tex", "tex-artefacts/version.tex",
     "tex-artefacts/predictions.tex", "tex-artefacts/tfpt_references.tex",
+    "tex-artefacts/toe_round4_proofs.tex",
+    "tex-artefacts/toe_round7_proofs.tex",
+    "tex-artefacts/toe_round7_quantum_tensor_curvature.tex",
+    "tex-artefacts/toe_round7_covariant_curvature.tex",
+    "tex-artefacts/toe_round7_charged_disorder.tex",
+    "tex-artefacts/toe_round7_parent_mirror.tex",
+    "tex-artefacts/toe_round7_matter_coupling.tex",
+    "tex-artefacts/toe_round27_full_reference.tex",
+    "tex-artefacts/toe_research_20260909.tex",
     "tfpt_1_architecture_e8.tex", "tfpt_2_standard_model.tex",
     "tfpt_3_e8_audit_bootstrap.tex", "tfpt_4_frontier.tex", "tfpt_5_redteam.tex",
     "tfpt_horizon_readouts.tex", "tfpt_research_contracts.tex",
     "origin_theory.tex", "tfpt_safeguards.tex",
+    "note_e8_gaussian_code.tex",
 ]
 FIG = ["figures/action_tower.pdf", "figures/alpha_ablation.pdf",
        "figures/mass_ladder.pdf", "figures/status_heatmap.pdf",
@@ -76,13 +90,65 @@ FIG = ["figures/action_tower.pdf", "figures/alpha_ablation.pdf",
        "figures/safeguard_null_model.pdf"]
 
 
+def collect_research(root):
+    """Hash the shipped research archive, never ignored or unstaged local runs.
+
+    Stage new research files before generating a release manifest. An exported
+    non-Git bundle already contains only shipped files and can be walked directly.
+    """
+    suffixes = (".py", ".md", ".json", ".txt", ".cpp", ".hpp", ".sha256")
+    if os.path.exists(os.path.join(root, ".git")):
+        names = subprocess.check_output(
+            ["git", "ls-files", "-z", "--cached", "--", "experiments/theory-contracts"],
+            cwd=root).decode().split("\0")
+        return sorted(name for name in names if name.endswith(suffixes))
+    files = []
+    research = os.path.join(root, "experiments", "theory-contracts")
+    for current, dirs, names in os.walk(research):
+        dirs[:] = sorted(d for d in dirs if d not in {"__pycache__", ".venv"})
+        for name in sorted(names):
+            if name.endswith(suffixes):
+                files.append(os.path.relpath(os.path.join(current, name), root).replace(os.sep, "/"))
+    return files
+
+
+def collect_tex(root, entries=None):
+    """Return root TeX entries and their actual literal include dependencies.
+
+    The manifest hashes physical modules, not flattened copies. Missing included
+    files/cycles propagate as explicit errors from the shared source reader.
+    """
+    base = Path(root).resolve()
+    files = set(TEX if entries is None else entries)
+    for name in tuple(files):
+        entry = base / name
+        if not entry.is_file():
+            continue  # the existing manifest writer reports missing entry points
+        for dependency in dependency_paths(entry):
+            if dependency == base / "tex-artefacts/version-auto.tex":
+                continue  # optional generated revision cache is never shipped
+            try:
+                files.add(dependency.relative_to(base).as_posix())
+            except ValueError as exc:
+                raise ValueError(f"TeX bundle dependency is outside repository: {dependency}") from exc
+    return sorted(files)
+
+
 def collect():
-    files = list(TEX) + list(FIG)
+    files = collect_tex(ROOT) + list(FIG) + collect_research(ROOT)
+    if (Path(ROOT) / "docs/editions.json").is_file():
+        files.append("docs/editions.json")
     vdir = os.path.join(ROOT, "verification")
     for f in sorted(os.listdir(vdir)):
         # .json covers the frozen blind-prediction registry (REG.FREEZE.01)
         if f.endswith((".py", ".csv", ".md", ".json")):
             files.append("verification/" + f)
+    # Explicit historical replay inputs, separate from the active scientific suite.
+    historical = Path(vdir) / "historical_replay"
+    if historical.is_dir():
+        files.extend(str(p.relative_to(Path(ROOT))).replace(os.sep, "/")
+                     for p in sorted(historical.iterdir()) if p.is_file()
+                     and p.suffix in {".py", ".csv", ".json", ".md", ".txt"})
     # Wolfram independent path (.wl / .wls + its README)
     wdir = os.path.join(vdir, "wolfram")
     if os.path.isdir(wdir):
@@ -109,7 +175,11 @@ def collect_lean():
         return []
     keep_ext = (".lean",)
     keep_name = {"lakefile.lean", "lake-manifest.json", "lean-toolchain",
-                 "AUDIT_TRANSCRIPT.txt", "README.md", "REVIEWER_USAGE.md", "audit.sh"}
+                 "AUDIT_TRANSCRIPT.txt", "README.md", "REVIEWER_USAGE.md", "audit.sh",
+                 # the audit's build prerequisite: the generated wall-ladder rungs
+                 # exceed the lakefile's default memory ceiling by design, so
+                 # REVIEWER_USAGE.md sends reviewers through this builder first
+                 "build_wall_ladder.sh"}
     out = []
     for dirpath, dirnames, filenames in os.walk(base):
         dirnames[:] = [d for d in dirnames if d != ".lake"]   # skip build cache

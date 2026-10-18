@@ -1,0 +1,9 @@
+[project]
+name = "p9-forecast"
+version = "1.0.0"
+description = "P9-FORECAST: shared 5-year power forecast for the TFPT comb front (forecast only, no data analysed)"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "scipy>=1.11"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

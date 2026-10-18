@@ -1,0 +1,45 @@
+% ---------------------------------------------------------------------
+% Round 6/7 proof-bearing supplement.
+% Included by tfpt_research_contracts.tex after toe_round4_proofs.tex.
+% ---------------------------------------------------------------------
+\subsection*{Rounds 6 and 7: free quantum curvature, covariant extension,
+charged disorder, mirror parent, and first-order matter coupling}
+\label{sec:toe-round7-proofs}
+
+\begin{keybox}[Exact scope and evidence ledger]
+This supplement records five written proofs and their machine regressions:
+\[
+ 69+34+35+36+59=233
+\]
+passing checks.  The Round~6 prerequisite contributes \(69\) checks
+(\(53\) exact and \(16\) floating regressions)
+\veri{v1031\_\allowbreak quantum\_\allowbreak tensor\_\allowbreak curvature.py}.
+Round~7 contributes \(164\) checks: \(130\) exact, \(13\) source-contract,
+and \(21\) finite or floating regressions
+\veri{v1032\_\allowbreak covariant\_\allowbreak curvature.py}
+\veri{v1033\_\allowbreak charged\_\allowbreak disorder.py}
+\veri{v1034\_\allowbreak parent\_\allowbreak mirror.py}
+\veri{v1035\_\allowbreak matter\_\allowbreak coupling.py}.
+The finite and floating checks are implementation regressions, never
+substitutes for the quantified arguments below.
+
+\smallskip
+\noindent The Round~6/Round~7 Lorentz-covariant helicity-\(\pm2\) sector is a
+declared free regulator/Fock construction.  It is not an emergent TFPT parent,
+a nonlinear completion, or a proof of universal matter coupling.  The
+factorized DET result proves the gap of the momentum-cell parent actually
+specified there; it does not prove a gap for ordinary real-space hopping.
+The charged construction distinguishes the common quarter disorder
+\(h_{\rm deck}=1/4\) from the sourced field \(h_\lambda=1\).  The matter
+construction retains the full Fourier factors
+\(c_0=-s^Tq\), \(\boldsymbol c=\mathrm{i}Bp\) and the paired
+\(+k/-k\) real Hamiltonian; its sign is not stripped.  All physical
+completeness gates T1--T8 and \texttt{TFPT.TOE.COMPLETE.01} remain \mO.
+\textbf{NO RH CLAIM.}
+\end{keybox}
+
+\input{tex-artefacts/toe_round7_quantum_tensor_curvature}
+\input{tex-artefacts/toe_round7_covariant_curvature}
+\input{tex-artefacts/toe_round7_charged_disorder}
+\input{tex-artefacts/toe_round7_parent_mirror}
+\input{tex-artefacts/toe_round7_matter_coupling}

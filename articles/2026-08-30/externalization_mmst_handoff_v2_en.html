@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Externalization handoff v2 — two remaining estimates for the charged MMST scaling limit</title>
+</head>
+<body style="margin:0; padding:0; background:#f4f5f7;">
+<div style="max-width:760px; margin:0 auto; padding:32px 28px; background:#ffffff; font-family:Georgia, 'Times New Roman', serif; font-size:15px; line-height:1.58; color:#1a1a1a;">
+
+<p style="margin:0 0 4px 0; font-size:12px; color:#7a7a7a; letter-spacing:0.06em; text-transform:uppercase;">
+TFPT externalization handoff v2 · 30 August 2026 · 1+1-dimensional charged scaling-limit problem
+</p>
+<h1 style="font-size:21px; line-height:1.3; margin:6px 0 12px 0; font-weight:normal; color:#111;">
+Two estimates remain between a concrete lattice collar and the holomorphic (E<sub>8</sub>)<sub>1</sub> net
+</h1>
+<p style="margin:0 0 18px 0; padding:10px 12px; background:#f7f8fa; border-left:3px solid #6b7280; font-size:13px; color:#4a4a4a;">
+<b>Recipient context.</b> Specialists in conformal nets, subfactors, constructive algebraic quantum field theory,
+scaling algebras, and lattice-fermion scaling limits &mdash; the
+Longo&ndash;Kawahigashi&ndash;Tanimoto school, and the interface with
+Osborne&ndash;Stottmeister and Buchholz&ndash;Verch.
+</p>
+
+<p>Dear colleagues,</p>
+
+<p>
+This note updates a previous externalization (28 August 2026) of a
+concrete 1+1-dimensional charged scaling-limit problem.  The attached
+21-page memorandum of 30 August proves, unconditionally and for all
+volumes, the uniform Green-form domination, the dyadic charged-field
+graph defect, relative locality of the edge-projected charged field,
+outerness of the limiting <span style="white-space:nowrap;">Z<sub>4</sub></span>
+action, and the finite-group crossed-product/limit exchange.  What
+remains is exactly two estimates.  The first is a matrix-valued
+two-edge Hilbert&ndash;Schmidt bound (typed external after two distinct
+in-house attempts).  The second is the pair of Buchholz&ndash;Verch
+scaling-algebra estimates that identify the edge-mode limit with the
+microscopic local algebra.  Neither is a search over generators; the
+charged field, the Q-system and the identification chain after a local
+conformal limit exists are already written.
+</p>
+
+<p>
+The hypotheses and the conclusion are entirely 1+1-dimensional.  No bulk
+or 3+1-dimensional claim is part of this handoff.  Finite-volume
+measurements are reported as measurements; they are not promoted to
+all-<i>N</i> theorems.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+1 · Executive summary
+</h2>
+
+<p>
+The named remaining theorem is the charged MMST scaling-limit statement
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">SEAM.MMST.TYPEIII.CHARGED.01</span>:
+the order-four lattice vertex field
+&Psi;<sub>&lambda;,N</sub>(<i>f</i>)
+=&epsilon;<sub>&lambda;</sub>:exp(<i>i</i>&lambda;&middot;&phi;<sub>N</sub>):(<i>f</i>),
+with &lambda;=(&omega;<sub>s</sub>,&omega;<sub>f</sub>),
+||&lambda;||<sup>2</sup>=2 and <i>h</i><sub>&lambda;</sub>=1, has a
+scaling limit generating a local conformal extension of the neutral
+<span style="white-space:nowrap;">D<sub>5</sub>&oplus;A<sub>3</sub></span>
+current net, and that extension is the holomorphic
+(E<sub>8</sub>)<sub>1</sub> net.  The implication
+&ldquo;exhaustion &rArr; master theorem (L1)&ndash;(L4)&rdquo; is
+proved in the memorandum.  The antecedent is not.
+</p>
+
+<p style="margin-bottom:8px;"><b>Proved in-house, all volumes, not a fit.</b></p>
+<ul style="margin:4px 0 12px 0; padding-left:22px;">
+<li style="margin-bottom:6px;">
+<b>L3.</b> For an arbitrary finite group, equivariant injective inductive
+limits commute isometrically with crossed products.  Coefficient and
+fixed-point expectations commute with the limit; the Pimsner&ndash;Popa
+bound <i>E</i>(<i>x</i>)&ge;|<i>G</i>|<sup>&minus;1</sup><i>x</i> for
+<i>x</i>&ge;0 is uniform.  For
+<span style="white-space:nowrap;">G=Z<sub>4</sub></span> this is
+<i>E</i>(<i>x</i>)&ge;<sup>1</sup>&#8260;<sub>4</sub><i>x</i>.
+</li>
+<li style="margin-bottom:6px;">
+<b>UGF.</b> On the edge-projected frozen Qi&ndash;Wu&ndash;Zhang collar
+(<i>M</i>=1, <i>N</i><sub>y</sub>=8), every zero-mean eight-component
+charge satisfies
+0&le;<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>N</sub>(<i>q</i>)
+&le;(&pi;<sup>2</sup>/4)
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>ch</sub>(<i>q</i>),
+with <i>K</i><sub>G</sub>=&pi;<sup>2</sup>/4=2.467401100272&hellip;.
+The measured ratio max<sub>N,m</sub> 2|<i>m</i>|<i>g</i><sub>N</sub>(<i>m</i>)
+on the frozen exhaustion is 1.029399027646, well below the proved
+constant.  Local Sobolev convergence
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>N</sub>(<i>P</i><sub>N</sub><i>q</i>)
+&rarr;
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>ch</sub>(<i>q</i>)
+is included.  This closes the uniform energy bound (L1) for the
+edge-projected bosonization, with degree <i>p</i>=1.
+</li>
+<li style="margin-bottom:6px;">
+<b>TEL-a.</b> Explicit dyadic Fock isometries (Shannon embeddings of
+Fourier modes, second-quantized) give the charged-field graph defect of
+rate <i>N</i><sup>&minus;2</sup> for fields and adjoints, with graph
+weight (1+<i>L</i><sub>0,N</sub>)<sup>&minus;3</sup>.  The measured
+smooth-test Wick seminorm on the same exhaustion fits
+<i>N</i><sup>&minus;2.022861</sup>.  Telescoping implies strong
+convergence of the edge-projected fields on the finite-energy core.
+</li>
+<li style="margin-bottom:6px;">
+<b>Relative locality.</b> The eight simple-root pairings of &lambda;
+against <span style="white-space:nowrap;">D<sub>5</sub>&oplus;A<sub>3</sub></span>
+are the integers [0,0,0,0,1,1,0,0].  Finite vertex exchange phases are
+therefore 1; graph convergence of the charged field and
+Osborne&ndash;Stottmeister convergence of the neutral Weyl operators
+pass the commutator to the limit.
+</li>
+<li>
+<b>Z<sub>4</sub> outerness in the limit, with the finite-inner
+correction.</b> The connected multiplicity-free Q-system gives
+<span style="white-space:nowrap;">A(I)&prime;&cap;B<sup>gen</sup>(I)=C</span>.
+Every non-identity grade automorphism is therefore outer on the
+limiting local factor.  This is <i>not</i> inherited from finite
+matrix algebras: Aut(<i>M</i><sub>256</sub>) consists of inner
+automorphisms, and
+<i>U</i>=diag(1<sub>64</sub>, <i>i</i>1<sub>64</sub>, &minus;1<sub>64</sub>, &minus;<i>i</i>1<sub>64</sub>)
+is an explicit charge-zero implementing unitary at finite level.
+</li>
+</ul>
+
+<p style="margin-bottom:8px;"><b>Remaining &mdash; exactly two items.</b></p>
+<ul style="margin:4px 0 12px 0; padding-left:22px;">
+<li style="margin-bottom:6px;">
+<b>TEL-B.</b> An all-<i>N</i> bound
+<i>C</i><sub>R</sub>:=sup<sub>N&ge;16</sub>||<i>R</i><sub>N</sub>||<sub>HS</sub>&lt;&infin;
+for the two-edge full-CAR remainder after Brillouin-seam-aware
+(not constant-profile) matrix Hardy subtraction, together with conversion
+of that bound into graph-norm control of the microscopic versus
+edge-mode charged implementers.  Measured on
+<i>N</i>&isin;{16,24,32,48,64,96}: maximum 2.105079358, 1/<i>N</i>
+fitted limit 2.107565497.  The constant-profile Peller candidate on a
+4096-point symbol grid is 8.469196974; that route is closed.
+</li>
+<li>
+<b>ALG-EXH.</b> The two Buchholz&ndash;Verch estimates: uniform
+phase-space tightness of the microscopic unit ball after Euclidean
+energy damping, and finite-energy approximation of every bounded
+translation-continuous local scaling sequence (operator and adjoint),
+excluding ultraviolet cluster points outside the neutral currents and
+the four charged grades.
+</li>
+</ul>
+
+<p style="margin-top:14px;"><b>Update 2026-08-31.</b>
+TEL-B is narrowed: the certified-tail (third) route is blocked
+(UV-supported remainder; <i>N</i><sup>2</sup><i>D</i><sub>N</sub>
+grows 530&nbsp;&rarr;&nbsp;19032).  The external target is now the
+scalar dyadic increment
+|<i>&#8741;R</i><sub>2N</sub><i>&#8741;</i>&nbsp;&minus;&nbsp;<i>&#8741;R</i><sub>N</sub><i>&#8741;</i>|
+&le;&nbsp;<i>A</i><sub>R</sub>/<i>N</i>
+with <i>A</i><sub>R</sub>&nbsp;&lt;&nbsp;43 sufficient for
+<i>C</i><sub>R</sub>&nbsp;&lt;&nbsp;3
+(measured <i>N</i>&times;increments 0.120&ndash;0.123, factor
+~350 headroom).  <i>N</i>-uniform CAR nuclearity is provided as
+specialist input
+(&nu;<sub>N</sub>&nbsp;&le;&nbsp;exp(16&nbsp;<i>C</i><sub>&beta;</sub>);
+<i>C</i><sub>&beta;</sub>&nbsp;=&nbsp;(67.97,&nbsp;29.73,&nbsp;12.15)
+for &beta;&nbsp;=&nbsp;(0.5,&nbsp;1,&nbsp;2)); the ALG-EXH
+projector-identification line is unchanged.
+</p>
+
+<p>
+<b>Why the payoff is large.</b>  Once those two estimates hold, L1 and
+L2 are complete.  L3 is already unconditional.  The identification
+(L4) is then a cited chain: Kawahigashi&ndash;Longo&ndash;M&uuml;ger
+gives &mu;=16/4<sup>2</sup>=1 (holomorphy); the unique even unimodular
+lattice of rank eight, the Dong&ndash;Mason <i>c</i>=8 theorem and the
+Carpi&ndash;Kawahigashi&ndash;Longo&ndash;Weiner correspondence name the
+net as (E<sub>8</sub>)<sub>1</sub>.  Standard conformal-net factor
+theory then gives hyperfinite type III<sub>1</sub> local algebras.
+The holomorphic rotational KMS theorem (companion memorandum of
+29 August) then supplies uniqueness of the rotational
+&beta;-KMS state, necessarily the vacuum-sector Gibbs state, with
+canonical extension &omega;<sub>&beta;</sub>&#8728;<i>E</i>.  If in
+addition the modular response is identified with four transitively
+permuted channels at angular normalization
+&beta;<sub>angle</sub>=2&pi;, each channel carries weight
+<sup>1</sup>&#8260;<sub>4</sub> of 1/&beta;<sub>angle</sub>, hence the
+coefficient 1/(8&pi;).  That last reading is a separate operator
+identification; the master theorem closes the net/KMS rigidity
+premise, not the full variation formula.
+</p>
+
+<p>
+The useful external contribution is therefore two analytic estimates,
+not a reconstruction of the Q-system or a search for the generator.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+2 · Notation and frozen input
+</h2>
+
+<p>
+The following is the complete working vocabulary of the memorandum.
+No further corpus is required to start on either remaining estimate.
+</p>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:collapse; font-size:13px; line-height:1.45;">
+<tr>
+<th align="left" valign="top" style="width:22%; padding:8px; border:1px solid #d9d9d9; background:#f3f4f6;">Symbol</th>
+<th align="left" valign="top" style="padding:8px; border:1px solid #d9d9d9; background:#f3f4f6;">Meaning</th>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Frozen collar</b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Qi&ndash;Wu&ndash;Zhang strip of circumference <i>N</i> (even, &ge;16),
+open width <i>N</i><sub>y</sub>=8, mass <i>M</i>=1:
+<i>h</i>(<i>k</i><sub>x</sub>,<i>k</i><sub>y</sub>)=sin&thinsp;<i>k</i><sub>x</sub>&thinsp;&sigma;<sub>x</sub>
++sin&thinsp;<i>k</i><sub>y</sub>&thinsp;&sigma;<sub>y</sub>
++(1&minus;cos&thinsp;<i>k</i><sub>x</sub>&minus;cos&thinsp;<i>k</i><sub>y</sub>)&sigma;<sub>z</sub>.
+Sixteen Majorana copies; carrier central charge 8.  Exhaustion used
+for numerical audit: <i>N</i>&isin;{16,24,32,48,64,96}.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><i>r</i>&isin;Z<sub>4</sub>, <i>p</i><sub>n</sub><sup>(<i>r</i>)</sup></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Deck sector with boundary phase <i>i</i><sup>r</sup>; longitudinal
+momenta (2&pi;/<i>N</i>)(<i>n</i>+<i>r</i>/4).
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><i>C</i><sub>N</sub><sup>(<i>r</i>)</sup></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Particle&ndash;hole symmetric Fermi covariance of the one-particle
+matrix <i>H</i><sub>N</sub><sup>(<i>r</i>)</sup>:
+&chi;<sub>(&minus;&infin;,0)</sub>(<i>H</i>)+<sup>1</sup>&#8260;<sub>2</sub>&chi;<sub>{0}</sub>(<i>H</i>).
+The finite observable algebra is a matrix CAR algebra.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><i>Q</i><sub>N</sub>, &delta;<sub>bulk</sub></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Edge-band projection and bulk gap after removing it.  There is
+<i>no</i> uniform full gap: chiral edge spacing is
+<i>O</i>(<i>N</i><sup>&minus;1</sup>).  The usable hypothesis is
+spec((1&minus;<i>Q</i><sub>N</sub>)<i>H</i><sub>N</sub>(1&minus;<i>Q</i><sub>N</sub>))
+&cap;(&minus;&delta;<sub>bulk</sub>,&delta;<sub>bulk</sub>)=&empty;,
+with &delta;<sub>bulk</sub>=1 for this collar (spectrum {+1,&minus;1}
+of multiplicity seven at <i>p</i>=0, plus two analytic edge branches
+of slopes &plusmn;1).
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">&lambda;, &Psi;<sub>&lambda;,N</sub></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+&omega;<sub>s</sub>=(<sup>1</sup>&#8260;<sub>2</sub>)<sup>&times;5</sup>,
+&omega;<sub>f</sub>=(<sup>3</sup>&#8260;<sub>4</sub>,&minus;<sup>1</sup>&#8260;<sub>4</sub>,&minus;<sup>1</sup>&#8260;<sub>4</sub>,&minus;<sup>1</sup>&#8260;<sub>4</sub>),
+&lambda;=(&omega;<sub>s</sub>,&omega;<sub>f</sub>).
+Exact: ||&omega;<sub>s</sub>||<sup>2</sup>=5/4,
+||&omega;<sub>f</sub>||<sup>2</sup>=3/4,
+||&lambda;||<sup>2</sup>=2, <i>h</i><sub>&lambda;</sub>=1,
+[&lambda;]<sup>4</sup>=[0], [&lambda;]<sup>2</sup>=[<i>v</i>].
+Norm-two census on the four cosets of
+<span style="white-space:nowrap;">D<sub>5</sub>&oplus;A<sub>3</sub></span>:
+[52,64,60,64] (240 roots; odd grades supply the 128 spinor states).
+The finite field is the edge-projected Wick exponential
+&Psi;<sub>&lambda;,N</sub>(<i>f</i>)=&epsilon;<sub>&lambda;</sub>:exp(<i>i</i>&lambda;&middot;&phi;<sub>N</sub>):(<i>f</i>),
+normal-ordered against <i>C</i><sub>N</sub><sup>(0)</sup>.  It is
+<i>not</i> a fermion bilinear.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">&omega;<sub>N</sub>(<i>m</i>), <i>S</i><sub>N</sub>(<i>m</i>), <i>g</i><sub>N</sub>(<i>m</i>)</td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Lattice derivative
+&omega;<sub>N</sub>(<i>m</i>)=(<i>N</i>/&pi;)|sin(&pi;<i>m</i>/<i>N</i>)|
+for 0&lt;|<i>m</i>|&le;<i>N</i>/2, sharp comparison
+(2/&pi;)|<i>m</i>|&le;&omega;<sub>N</sub>(<i>m</i>)&le;|<i>m</i>|.
+Structure factor <i>S</i><sub>N</sub>(<i>m</i>) is the sum of
+|<i>u</i>(<i>p</i><sub>n+m</sub>),<i>u</i>(<i>p</i><sub>n</sub>)|<sup>2</sup>
+over the <i>m</i> Hardy particle&ndash;hole channels;
+<i>S</i><sub>N</sub>(<i>m</i>)&le;|<i>m</i>| (Schur).  Green multiplier
+<i>g</i><sub>N</sub>(<i>m</i>)=<i>S</i><sub>N</sub>(<i>m</i>)/(2&omega;<sub>N</sub>(<i>m</i>)<sup>2</sup>).
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>N</sub>, <span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>ch</sub>, <i>K</i><sub>G</sub></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Edge Green quadratic form
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>N</sub>(<i>q</i>)=&sum;<sub>a,m</sub>
+<i>g</i><sub>N</sub>(<i>m</i>)|<i>q&#770;</i><sub>a</sub>(<i>m</i>)|<sup>2</sup>;
+continuum chiral form uses 1/(2|<i>m</i>|).  Proved domination
+constant <i>K</i><sub>G</sub>=&pi;<sup>2</sup>/4.  Component count
+does not multiply <i>K</i><sub>G</sub>.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><i>j</i><sub>N,2N</sub>, <i>V</i><sub>N,2N</sub>, <i>r</i><sub>N</sub>(<i>m</i>)</td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Mode isometry: zero-extension of Fourier modes
+<i>m</i>&isin;M<sub>N</sub> into the refined lattice (Shannon embedding);
+<i>j</i><sub>2N,4N</sub><i>j</i><sub>N,2N</sub>=<i>j</i><sub>N,4N</sub>.
+Fock isometry
+<i>V</i><sub>N,2N</sub>=id<sub>&ell;<sup>2</sup>(<i>L</i><sub>charge</sub>)</sub>&otimes;&Gamma;<sub>s</sub>(<i>j</i><sub>N,2N</sub>),
+compatible and isometric in all four grades.  Vertex multiplier
+<i>r</i><sub>N</sub>(<i>m</i>)=&radic;(2<i>m</i>&thinsp;<i>g</i><sub>N</sub>(<i>m</i>))
+for <i>m</i>&le;<i>N</i>/2, else 0; UGF gives
+0&le;<i>r</i><sub>N</sub>(<i>m</i>)&le;&pi;/2.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><i>D</i><sub>N,top/bottom</sub><sup>(1/4)</sup>, <i>R</i><sub>N</sub>, <i>C</i><sub>R</sub></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Two-edge decomposition of the quarter-twist covariance difference:
+<i>C</i><sub>N</sub><sup>(0)</sup>&minus;<i>C</i><sub>N</sub><sup>(1)</sup>
+=<i>D</i><sub>N,top</sub><sup>(1/4)</sup>
+&oplus;<i>D</i><sub>N,bottom</sub><sup>(1/4)</sup>
++<i>R</i><sub>N</sub>.  The exact Hardy model contributes
+||<i>P</i><sub>0</sub>&minus;<i>P</i><sub>1/4</sub>||<sub>HS</sub><sup>2</sup>
+=(2/&pi;<sup>2</sup>)log&thinsp;<i>N</i>+<i>O</i>(1),
+2/&pi;<sup>2</sup>=0.202642367&hellip;.
+<i>C</i><sub>R</sub> is the putative all-<i>N</i> Hilbert&ndash;Schmidt
+bound on <i>R</i><sub>N</sub>.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><i>B</i>(<i>p</i>), <i>H</i><sub>N</sub>(<i>B</i>)</td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Regularized 16&times;16 Fermi symbol after subtracting the
+<i>p</i>=0 rank-one boundary profiles:
+<i>B</i>(<i>p</i>)=<i>C</i>(<i>p</i>)
+&minus;1<sub>(0,&pi;)</sub>(<i>p</i>)<i>P</i><sub>t</sub>
+&minus;1<sub>(&minus;&pi;,0)</sub>(<i>p</i>)<i>P</i><sub>b</sub>.
+<i>H</i><sub>N</sub>(<i>B</i>) is the finite Hankel corner.  Peller
+<i>B</i><sup>1/2</sup><sub>2,2</sub> gives
+||<i>H</i><sub>N</sub>(<i>B</i>)||<sub>HS</sub><sup>2</sup>
+&le;&sum;<sub>k&ne;0</sub>|<i>k</i>| ||<i>B</i><sub>k</sub>||<sub>F</sub><sup>2</sup>.
+This particular subtraction is the failed second in-house angle
+(Section 8).
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">A, B, A<sub>N</sub>, B<sub>N</sub><sup>gen</sup></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Neutral continuum net
+A=A<sub>D<sub>5</sub>,1</sub>&otimes;A<sub>A<sub>3</sub>,1</sub>
+(fermion-bilinear; covered by Osborne&ndash;Stottmeister).
+Central charge 5+3=8, &mu;<sub>A</sub>=4&middot;4=16.
+B<sup>gen</sup> is the local extension generated by A and the four
+charged grades.  Finite field-generated algebras
+B<sub>N</sub><sup>gen</sup>(<i>I</i>) are the von Neumann algebras
+generated by A<sub>N</sub>(<i>I</i>) and the four smeared charged
+fields supported in <i>I</i>.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">D<sub>fin</sub>, graph convergence</td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Finite-energy core
+&cup;<sub>E</sub>1<sub>[0,E]</sub>(<i>L</i><sub>0</sub>)H<sub>&infin;</sub>.
+A sequence <i>X</i><sub>N</sub> converges on the core if both
+<i>V</i><sub>N</sub><i>X</i><sub>N</sub><i>V</i><sub>N</sub><sup>*</sup>
+and the adjoints converge on every core vector.  The adjoint clause
+is required to determine local von Neumann algebras.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">Status markers</td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+<b>[E]</b> executed, exact or measured on the frozen collar.
+<b>[C]</b> cited theorem, hypotheses displayed.
+<b>[O]</b> open.  Finite shadows are not net-level statements.
+</td>
+</tr>
+</table>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+3 · The remaining gap, quoted from the memorandum
+</h2>
+
+<p style="margin:0 0 10px 0;">
+The following box is quoted verbatim from the attached 21-page
+memorandum
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">mmst_charged_scaling_limit_en.tex</span>,
+section &ldquo;The remaining analytic gap&rdquo;; only the TeX notation
+has been rendered as HTML.  Equation numbers refer to that document.
+</p>
+
+<div style="margin:12px 0 18px 0; padding:16px 18px; border:1px solid #a94442; border-left:4px solid #a94442; background:#fff8f8;">
+<p style="margin:0 0 10px 0;"><b>Single remaining gap box:
+microscopic exhaustion (with one external analytic input).</b></p>
+
+<p style="margin:0 0 10px 0;">
+The Green-form part and the edge-mode graph part are no longer
+assumptions: Theorems UGF and TEL-a prove them with
+<i>K</i><sub>G</sub>=&pi;<sup>2</sup>/4 and dyadic rate
+<i>N</i><sup>&minus;2</sup>.  What remains is to identify
+that edge-mode system with the sharply localized scaling algebra of the
+sixteen-Majorana <i>M</i>=1, <i>N</i><sub>y</sub>=8 microscopic collar.
+</p>
+
+<p style="margin:10px 0 6px 0;"><b>(TEL-B-EXTERNAL) Matrix-valued two-edge estimate.</b><br>
+An external specialist must prove for <i>all</i> <i>N</i>&ge;16</p>
+
+<div style="margin:12px 0; padding:10px 8px; text-align:center; background:#ffffff; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6; overflow-wrap:anywhere;">
+C<sub>N</sub><sup>(0)</sup> &minus; C<sub>N</sub><sup>(1)</sup>
+= D<sub>N,top</sub><sup>(1/4)</sup> &oplus; D<sub>N,bottom</sub><sup>(1/4)</sup> + R<sub>N</sub>,<br>
+C<sub>R</sub> := sup<sub>N&ge;16</sub> ||R<sub>N</sub>||<sub>HS</sub> &lt; &infin;,
+</div>
+
+<p style="margin:10px 0;">
+with an explicit <i>C</i><sub>R</sub> (the target 2.11 is optional for
+convergence), and show that this estimate controls the difference between
+the microscopic charged implementer and the edge-mode implementer in
+graph norm.  Equivalently, replace the constant-profile symbol
+<i>B</i>(<i>p</i>) by a matrix Hardy subtraction whose
+<i>B</i><sup>1/2</sup><sub>2,2</sub> norm is analytically enclosed without
+a Brillouin-seam jump.  The existing computation verifies the last
+inequality only at <i>N</i>=16,24,32,48,64,96, with maximum 2.105079358
+and fitted limit 2.107565497.
+</p>
+
+<p style="margin:10px 0 6px 0;"><b>(ALG-EXH) Buchholz&ndash;Verch upper inclusion.</b><br>
+Prove the two estimates (5.26); equivalently, construct a
+support-preserving microscopic realization of the dyadic embeddings and
+prove, for every interval <i>I</i>,</p>
+
+<div style="margin:12px 0; padding:10px 8px; text-align:center; background:#ffffff; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6; overflow-wrap:anywhere;">
+limsup<sub>N</sub> B<sub>N</sub>(I)
+&sub; W*( A(I), {&Psi;<sub>k&lambda;</sub>(f) : k&isin;Z<sub>4</sub>, supp f &sub; I} )
+&sub; liminf<sub>N</sub> B<sub>N</sub>(I).
+</div>
+
+<p style="margin:10px 0 0 0;">
+Equivalently, no bounded local ultraviolet sequence survives outside
+the neutral currents and the four charged grades.  Relative locality
+and outerness are already theorems; they are not part of this residue.
+</p>
+
+<p style="margin:14px 0 0 0;">
+For the edge-projected theorem, (ALG-EXH) is the sole remaining
+hypothesis.  For the original microscopic CAR formulation,
+(TEL-B-EXTERNAL) is a named analytic input to that exhaustion.
+Once (5.26) holds, L1/L2 are complete and L3 plus the cited
+L4 chain finish the theorem.
+</p>
+</div>
+
+<p>
+The two estimates (5.26) are written out in Section 6 below, so that
+the Buchholz&ndash;Verch task can be started from this note alone.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+4 · Per-item briefs of what is proved
+</h2>
+
+<p>
+Each brief is intended to be used without the rest of the corpus.
+Citations are to the attached memorandum unless named otherwise.
+</p>
+
+<h3 style="font-size:14px; margin:18px 0 8px 0;">4.1 · L3 &mdash; crossed product commutes with the limit &nbsp;<span style="font-size:12px; color:#555;">[E]</span></h3>
+
+<p>
+Let <i>G</i> be finite and
+<i>A</i><sub>1</sub>&rarr;<i>A</i><sub>2</sub>&rarr;&hellip;
+an inductive system of unital C*-algebras with injective maps, carrying
+equivariant actions &alpha;<sup>(N)</sup>:<i>G</i>&curvearrowright;<i>A</i><sub>N</sub>.
+Then
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+varinjlim (A<sub>N</sub> &#10745;<sub>&alpha;<sup>(N)</sup></sub> G) &nbsp;&#x2245;&nbsp; A &#10745;<sub>&alpha;</sub> G
+</div>
+<p>
+is a *-isomorphism.  The proof uses amenability of finite groups (full
+and reduced crossed products coincide) and that every algebraic
+crossed-product element lives at one finite stage.  The coefficient
+expectation <i>F</i>(<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">&sum;</span><sub>g</sub>
+<i>a</i><sub>g</sub><i>u</i><sub>g</sub>)=<i>a</i><sub>e</sub>
+and the group average
+<i>E</i>(<i>a</i>)=|<i>G</i>|<sup>&minus;1</sup><span style="font-family:Consolas, Menlo, monospace; font-size:12px;">&sum;</span><sub>g</sub>
+&alpha;<sub>g</sub>(<i>a</i>)
+descend to the limit, are faithful, and obey the uniform
+Pimsner&ndash;Popa bound
+<i>E</i>(<i>x</i>)&ge;|<i>G</i>|<sup>&minus;1</sup><i>x</i> for
+<i>x</i>&ge;0.  For
+<span style="white-space:nowrap;">G=Z<sub>4</sub></span>
+the homogeneous subspaces satisfy the fusion
+B<sub>k</sub> B<sub>&ell;</sub>&sub;B<sub>k+&ell;</sub>,
+so &Psi;<sub>&lambda;</sub><sup>4</sup> is neutral and
+&Psi;<sub>&lambda;</sub><sup>2</sup> has grade [<i>v</i>].
+</p>
+<p>
+Index <i>equality</i> with |<i>G</i>| requires outerness of the
+limiting local action, which is the separate theorem of &sect;4.5,
+not a formal consequence of the crossed-product exchange.  Compatible
+invariant states satisfy &phi;<sub>N</sub>&#8728;<i>E</i><sub>N</sub>=&phi;<sub>N</sub>
+and pass to the limit.
+</p>
+
+<h3 style="font-size:14px; margin:18px 0 8px 0;">4.2 · UGF &mdash; uniform Green-form domination &nbsp;<span style="font-size:12px; color:#555;">[E]</span></h3>
+
+<p>
+For the edge-projected frozen collar, the mode-wise bound
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+0 &le; g<sub>N</sub>(m) &le; (&pi;<sup>2</sup>/4) &middot; 1/(2|m|)
+</div>
+<p>
+follows from the exact Hardy particle&ndash;hole count
+<i>S</i><sub>N</sub>(<i>m</i>)&le;|<i>m</i>| and the sharp fundamental-domain
+sine inequality &omega;<sub>N</sub>(<i>m</i>)&ge;(2/&pi;)|<i>m</i>|.
+Summing eight independent components yields
+0&le;<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>N</sub>(<i>q</i>)
+&le;<i>K</i><sub>G</sub>
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">Q</span><sub>ch</sub>(<i>q</i>)
+with <i>K</i><sub>G</sub>=&pi;<sup>2</sup>/4, independently of
+<i>N</i>.  Pointwise <i>g</i><sub>N</sub>(<i>m</i>)&rarr;1/(2|<i>m</i>|)
+plus the uniform bound give local <i>H</i><sup>2</sup> quadratic-form
+convergence.
+</p>
+<p>
+The continuum field <i>Y</i>(<i>e</i><sup>&lambda;</sup>,<i>f</i>) is a
+weight-one affine current, hence has a linear energy bound.  Transferring
+the Gaussian contraction through UGF gives the lattice bound (L1) with
+<i>p</i>=1 and
+<i>C</i><sub>f</sub>&le;<i>C</i>(&pi;<sup>2</sup>/4,&lambda;) ||<i>f</i>||<sub>H<sup>2</sup></sub>,
+independent of <i>N</i>, assuming only that the cocycles and zero-mode
+charge shifts have norm one in all four grades.
+</p>
+<p>
+<b>Scope.</b> This is an all-<i>N</i> theorem for the edge-projected
+bosonization.  It does not prove that every microscopic full-CAR density
+belongs to that bosonic edge algebra &mdash; that is ALG-EXH.  A
+completely gapless transverse covariance would contribute
+<i>O</i>(<i>N</i>) particle&ndash;hole channels already at
+<i>m</i>=1 and would violate the bound; the isolated one-branch
+hypothesis is load-bearing.  A gapless transverse mutant, audited
+numerically, grows from 64.829 to 384.137 across the exhaustion.
+Measured max 2|<i>m</i>|<i>g</i><sub>N</sub>(<i>m</i>)=1.029399027646.
+</p>
+
+<h3 style="font-size:14px; margin:18px 0 8px 0;">4.3 · TEL-a &mdash; dyadic graph defect of rate <i>N</i><sup>&minus;2</sup> &nbsp;<span style="font-size:12px; color:#555;">[E]</span></h3>
+
+<p>
+The isometries <i>V</i><sub>N,2N</sub> of &sect;2 are explicit.  The
+vertex-multiplier defect satisfies
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+|r<sub>N</sub>(m) &minus; 1| &le; A<sub>0</sub> m<sup>2</sup>/N<sup>2</sup>,
+&nbsp;&nbsp; A<sub>0</sub> = 4096(1+&pi;/2),<br>
+|r<sub>2N</sub>(m) &minus; r<sub>N</sub>(m)| &le; A<sub>TEL</sub> m<sup>2</sup>/N<sup>2</sup>,
+&nbsp;&nbsp; A<sub>TEL</sub> = 5120(1+&pi;/2).
+</div>
+<p>
+A Lipschitz estimate for Wick exponentials of the norm-two charge,
+with undifferentiated contractions dominated by UGF, converts this
+into the graph-norm bound, for every <i>f</i>&isin;<i>C</i><sup>&infin;</sup>(<i>S</i><sup>1</sup>),
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+||(&Psi;<sub>&lambda;,2N</sub>(f) V<sub>N,2N</sub> &minus; V<sub>N,2N</sub> &Psi;<sub>&lambda;,N</sub>(f)) (1+L<sub>0,N</sub>)<sup>&minus;3</sup>||<br>
++ (adjoint with <span style="font-style:italic;">f&#772;</span>)
+&nbsp;&le;&nbsp; 2 C<sub>&lambda;</sub> A<sub>TEL</sub> ||f||<sub>H<sup>4</sup></sub> N<sup>&minus;2</sup>.
+</div>
+<p>
+Thus TEL-a holds with <i>p</i>=3 and &epsilon;=1.  The dyadic telescoping
+series is then geometric of ratio 1/4, so the transported fields and
+adjoints converge on D<sub>fin</sub>.  Finite audit: Gram and
+compatibility errors are exactly zero; measured coefficient envelope
+max <i>N</i><sup>2</sup>|<i>r</i><sub>2N</sub>(<i>m</i>)&minus;<i>r</i><sub>N</sub>(<i>m</i>)|/<i>m</i><sup>2</sup>
+=3.420384012310; smooth-test Wick seminorm fits
+<i>N</i><sup>&minus;2.022861</sup>.
+</p>
+<p>
+<b>Scope.</b> The Shannon embedding is exact in momentum and is
+<i>not</i> sharply support-preserving in position.  TEL-a therefore
+proves graph convergence of the edge-projected fields, not by itself
+convergence of sharply localized microscopic algebras.  That
+support/locality statement is ALG-EXH.
+</p>
+
+<h3 style="font-size:14px; margin:18px 0 8px 0;">4.4 · Relative locality &nbsp;<span style="font-size:12px; color:#555;">[E]</span></h3>
+
+<p>
+For every neutral root &alpha; one has
+&langle;&lambda;,&alpha;&rangle;&isin;Z.  On the simple-root basis of
+<span style="white-space:nowrap;">D<sub>5</sub>&oplus;A<sub>3</sub></span>
+the eight pairings are [0,0,0,0,1,1,0,0]; the full root lattice follows
+by linearity.  Finite vertex exchange phases are therefore 1, so
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+[&Psi;<sub>&lambda;,N</sub>(f), W<sub>&alpha;,N</sub>(g)] &xi; = 0
+</div>
+<p>
+on the finite-energy core whenever <i>f</i> and <i>g</i> have disjoint
+supports.  Transport by <i>V</i><sub>N,2N</sub>, TEL-a graph
+convergence (including adjoints), and Osborne&ndash;Stottmeister
+strong convergence of the bounded neutral Weyl operators pass the
+identity to the limit.  Closability extends it from the core.  The
+integer spin <i>h</i><sub>&lambda;</sub>=1 then makes the order-four
+Q-system commutative, hence the extension local.
+</p>
+
+<h3 style="font-size:14px; margin:18px 0 8px 0;">4.5 · Z<sub>4</sub> outerness in the limit &nbsp;<span style="font-size:12px; color:#555;">[E]</span></h3>
+
+<p>
+On every limiting local factor generated by the neutral algebra and the
+four charged grades, the canonical endomorphism of the inclusion
+is multiplicity-free,
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+&iota;&#772; &iota; &nbsp;&simeq;&nbsp; id &oplus; &rho;<sub>&lambda;</sub> &oplus; &rho;<sub>2&lambda;</sub> &oplus; &rho;<sub>3&lambda;</sub>,
+</div>
+<p>
+with four inequivalent sectors, only the first being the vacuum.
+Hence A(<i>I</i>)&prime;&cap;B<sup>gen</sup>(<i>I</i>)=C.  A unitary
+in B<sup>gen</sup>(<i>I</i>) implementing a non-identity grade
+automorphism would have to lie in that relative commutant, hence be
+scalar, contradicting the nontrivial character on
+&Psi;<sub>&lambda;</sub>.  Therefore every non-identity element of the
+<span style="white-space:nowrap;">Z<sub>4</sub></span> gauge action is
+outer.
+</p>
+<p>
+<b>Finite-inner correction, stated so that it is not used as a
+witness.</b> Every automorphism of <i>M</i><sub>256</sub> is inner.
+The diagonal unitary
+<i>U</i>=diag(1<sub>64</sub>, <i>i</i>1<sub>64</sub>, &minus;1<sub>64</sub>, &minus;<i>i</i>1<sub>64</sub>)
+is charge-zero and implements the finite clock action.  Outerness is
+a local-factor limit statement, not a finite-matrix statement.  L3
+remains valid in either case; index equality and Q-system
+irreducibility use the limit outerness.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+5 · Remaining item (TEL-B): the matrix-valued two-edge estimate
+</h2>
+
+<p>
+The exact Hardy model of a quarter twist on two chiral edges has
+Hilbert&ndash;Schmidt divergence
+||<i>P</i><sub>0</sub>&minus;<i>P</i><sub>1/4</sub>||<sub>HS</sub><sup>2</sup>
+=(2/&pi;<sup>2</sup>)log&thinsp;<i>N</i>+<i>O</i>(1).  On the frozen
+QWZ collar the analogous difference of covariances is the matrix
+identity
+</p>
+<div style="margin:8px 0 10px 0; padding:10px 8px; text-align:center; background:#f7f8fa; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+C<sub>N</sub><sup>(0)</sup> &minus; C<sub>N</sub><sup>(1)</sup>
+= D<sub>N,top</sub><sup>(1/4)</sup> &oplus; D<sub>N,bottom</sub><sup>(1/4)</sup> + R<sub>N</sub>.
+</div>
+<p>
+The task is to prove
+<i>C</i><sub>R</sub>:=sup<sub>N&ge;16</sub>||<i>R</i><sub>N</sub>||<sub>HS</sub>&lt;&infin;
+with an explicit constant, and to convert that bound into graph-norm
+control of the difference between the microscopic charged Bogoliubov
+implementer and the edge-mode implementer of &sect;4.3.  The target
+value 2.11 is optional for convergence; any finite <i>C</i><sub>R</sub>
+suffices for the Shale-class statement.
+</p>
+
+<p>
+<b>What is measured, and what it is not.</b>  On
+<i>N</i>&isin;{16,24,32,48,64,96} one has
+max ||<i>R</i><sub>N</sub>||<sub>HS</sub>=2.105079358&lt;2.11, with
+1/<i>N</i> extrapolated plateau 2.107565497 and maximum fit residual
+2.349&times;10<sup>&minus;5</sup>.  These numbers support boundedness.
+They do not prove it for all <i>N</i>.  Replacing the universal
+quantifier by the <i>N</i>&le;96 plateau is mathematically invalid.
+</p>
+
+<p>
+<b>A sufficient analytic criterion, if a better subtraction is found.</b>
+Let <i>C</i>(<i>p</i>) be the 16&times;16 frozen QWZ Fermi symbol of the
+strip Hamiltonian, and let <i>P</i><sub>t</sub>, <i>P</i><sub>b</sub>
+be the rank-one boundary projections at <i>p</i>=0.  For a
+matrix-valued regularizer <i>B</i>(<i>p</i>) whose Hankel corners
+reproduce <i>R</i><sub>N</sub>, Peller&rsquo;s
+<i>B</i><sup>1/2</sup><sub>2,2</sub> criterion gives
+||<i>H</i><sub>N</sub>(<i>B</i>)||<sub>HS</sub><sup>2</sup>
+&le;&sum;<sub>k&ne;0</sub>|<i>k</i>| ||<i>B</i><sub>k</sub>||<sub>F</sub><sup>2</sup>,
+and four corners/orientations produce the safe factor sixteen after
+squaring.  An all-<i>N</i> bound follows from an analytic enclosure of
+that Besov seminorm.  The constant-profile choice of <i>B</i> does
+<i>not</i> work; see Section 8.
+</p>
+
+<p>
+UGF cannot substitute for TEL-B: it controls the scalar edge branch,
+whereas the remainder is a matrix-valued transverse cancellation.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+6 · Remaining item (ALG-EXH): Buchholz&ndash;Verch exhaustion
+</h2>
+
+<p>
+Let
+<span style="white-space:nowrap;"><u>B</u><sup>gen</sup>(<i>I</i>)</span>
+denote the scaling subalgebra generated by the neutral Weyl operators
+and the four graph-convergent charged grades.  Equality with the full
+microscopic Buchholz&ndash;Verch scaling algebra of the collar follows
+if the following two estimates hold (memorandum (5.26)):
+</p>
+
+<div style="margin:8px 0 14px 0; padding:12px 15px; background:#f7f8fa; border-left:3px solid #6b7280;">
+<p style="margin:0 0 8px 0;"><b>(i) Phase-space tightness.</b> For every
+&beta;&gt;0,</p>
+<div style="margin:6px 0 12px 0; padding:8px; text-align:center; background:#ffffff; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+lim<sub>E&rarr;&infin;</sub> sup<sub>N&ge;16</sub>
+sup<sub>x&isin;B<sub>N</sub>(I), ||x||&le;1</sub>
+||(1 &minus; P<sup>gen</sup><sub>E,N</sub>) e<sup>&minus;&beta; L<sub>0,N</sub></sup> x &Omega;<sub>N</sub>||
+= 0.
+</div>
+<p style="margin:0 0 8px 0;"><b>(ii) Finite-energy approximation, and
+exclusion of ultraviolet cluster points.</b> For every finite <i>E</i>
+and every norm-bounded, translation-continuous local scaling sequence
+(<i>x</i><sub>N</sub>),</p>
+<div style="margin:6px 0 0 0; padding:8px; text-align:center; background:#ffffff; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+lim<sub>N&rarr;&infin;</sub> inf<sub>y<sub>N</sub>&isin;B<sub>N</sub><sup>gen</sup>(I)</sub>
+( ||(x<sub>N</sub> &minus; y<sub>N</sub>) P<sub>E,N</sub>||
++ ||(x<sub>N</sub>* &minus; y<sub>N</sub>*) P<sub>E,N</sub>|| )
+= 0.
+</div>
+</div>
+
+<p>
+Line (i) says that, after Euclidean energy damping, vectors created by
+the microscopic unit ball are uniformly approximated by the
+finite-energy neutral-plus-four-grade subspace.  Line (ii) says that no
+bounded operator sequence has additional matrix elements on any
+finite-energy sector, for the operator and its adjoint.  Together they
+give equality of strong lower limits on the common finite-energy core,
+and exclude a weak cluster point supported only at energies escaping to
+infinity.  This is the standard scaling-algebra compactness mechanism of
+Buchholz&ndash;Verch, written as the two concrete estimates the collar
+must satisfy.
+</p>
+
+<p>
+<b>What is already in hand, and what cannot substitute.</b>  The
+frozen lattice system has isotony, exact finite-range locality, uniform
+norm bounds for scaling families, discrete translation covariance, and a
+translation-covariant neutral scaling limit.  UGF, TEL-a and relative
+locality add uniform charged energy control, graph convergence, and
+the lower inclusion
+<span style="white-space:nowrap;"><u>B</u><sup>gen</sup>(<i>I</i>)&sub;<u>B</u>(<i>I</i>)</span>.
+What is not proved is the uniform microscopic phase-space estimate
+and the upper-inclusion line.  No arithmetic, finite sector census,
+vacuum-character match, or <i>N</i>&le;96 remainder plateau can
+establish them.
+</p>
+
+<p>
+An equivalent geometric form of the same residue is a
+support-preserving microscopic realization of the dyadic embeddings
+<i>V</i><sub>N,2N</sub> (the Shannon embeddings of TEL-a are not
+position-local).
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+7 · Corollary cascade, once the gap box is discharged
+</h2>
+
+<p>
+The following statements are proved in the memorandum as implications.
+They are not presently unconditional.
+</p>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:collapse; font-size:13px; line-height:1.45;">
+<tr>
+<th align="left" valign="top" style="width:28%; padding:8px; border:1px solid #d9d9d9; background:#f3f4f6;">Conclusion</th>
+<th align="left" valign="top" style="padding:8px; border:1px solid #d9d9d9; background:#f3f4f6;">Input, once L1/L2 exist</th>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Local conformal extension</b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+L1 energy bounds, TEL-a graph convergence, relative locality,
+integer spin, outer <span style="white-space:nowrap;">Z<sub>4</sub></span>
+action, ALG-EXH algebra convergence.  Neutral stress tensor by
+Osborne&ndash;Stottmeister (Theorems 4.11, 4.16, 5.1).
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Holomorphy, &mu;=1</b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+KLM: &mu;<sub>B</sub>=&mu;<sub>A</sub>/[B:A]<sup>2</sup>=16/16=1.
+The vacuum is the only irreducible DHR sector.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Name: (E<sub>8</sub>)<sub>1</sub></b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+The glued lattice
+<i>L</i>=&cup;<sub>k=0</sub><sup>3</sup>
+(<span style="white-space:nowrap;">D<sub>5</sub>&oplus;A<sub>3</sub></span>+<i>k</i>&lambda;)
+is even and unimodular of rank eight, hence <i>E</i><sub>8</sub>.
+Dong&ndash;Mason: the unique simple rational <i>C</i><sub>2</sub>-cofinite
+holomorphic unitary VOA of CFT type with <i>c</i>=8 is
+<i>V</i><sub>E<sub>8</sub></sub>.  CKLW identifies the generated net
+with the level-one <i>E</i><sub>8</sub> current net.  KLM alone gives
+holomorphy, not the name.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Type III<sub>1</sub></b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+The (E<sub>8</sub>)<sub>1</sub> current net is split, irreducible,
+strongly additive and conformal.  Nontrivial interval algebras are
+the hyperfinite type III<sub>1</sub> factor.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Unique rotational KMS</b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+Companion memorandum
+<span style="font-family:Consolas, Menlo, monospace; font-size:12px;">holomorphic_kms_extension_en.tex</span>
+(29 August).  Takesaki plus finite-index Radon&ndash;Nikodym: the
+group average <i>E</i> is the unique normal faithful conditional
+expectation, and &omega;<sub>&beta;</sub>&#8728;<i>E</i> is the
+unique <span style="white-space:nowrap;">Z<sub>4</sub></span>-invariant
+state extension.  KLM leaves only the vacuum DHR sector;
+Longo&ndash;Tanimoto leaves only its Gibbs state as rotational
+&beta;-KMS state.  &ldquo;Vacuum KMS&rdquo; means the vacuum-<i>sector
+Gibbs</i> state, not the vacuum vector state.
+</td>
+</tr>
+<tr>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;"><b>Coefficient 1/(8&pi;)</b></td>
+<td valign="top" style="padding:8px; border:1px solid #d9d9d9;">
+If the modular response is identified with an additive transitive
+four-channel response at &beta;<sub>angle</sub>=2&pi;, uniqueness
+forces equal weights 1/4, hence
+<i>c</i><sub>3</sub>=1/(4&beta;<sub>angle</sub>)=1/(8&pi;).
+This operator identification is <i>not</i> part of the master
+theorem; the theorem closes only the net/KMS rigidity premise
+(no independent sector-mixing state direction).
+</td>
+</tr>
+</table>
+
+<p style="margin-top:12px;">
+Finite shadows already recorded, and not to be confused with the
+above: order-four class, integer spin, census, determinant, character
+coefficients 1, 248, 4124, 34752, current level
+<i>k</i>=1.000000000000, measured central charge 8.004666.  These
+identify the lattice/VOA-arithmetic generator.  They do not prove
+conformal covariance or splitness of the collar limit.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+8 · What we tried in-house (TEL-B), so that it is not repeated
+</h2>
+
+<p>
+Two distinct attempts on TEL-B were made and stopped.  The item is
+now typed <span style="font-family:Consolas, Menlo, monospace; font-size:12px;">TEL-B-EXTERNAL</span>.
+No all-<i>N</i> constant is claimed.  The useful external contribution
+is a third angle: a matrix Hardy subtraction without the Brillouin-seam
+jump, plus conversion to charged-implementer graph convergence.
+</p>
+
+<div style="margin:12px 0 14px 0; padding:14px 16px; background:#f7f8fa; border-left:3px solid #6b7280;">
+<p style="margin:0 0 8px 0;"><b>Angle 1 &mdash; finite-exhaustion Hilbert&ndash;Schmidt remainder.</b></p>
+<p style="margin:0 0 8px 0;">
+The matrix identity
+&Delta;<sub>N</sub>=<i>D</i><sub>top</sub>&oplus;<i>D</i><sub>bottom</sub>+<i>R</i><sub>N</sub>
+was computed on the frozen exhaustion, using the exact Hardy kernels
+for the two opposite-chirality edges together with the
+<i>N</i><sub>y</sub>=8 transverse zero-energy profiles.  Result:
+max ||<i>R</i><sub>N</sub>||<sub>HS</sub>=2.105079358, 1/<i>N</i>
+plateau 2.107565497, residual 2.349&times;10<sup>&minus;5</sup>.
+The exact Hardy logarithm (2/&pi;<sup>2</sup>)log&thinsp;<i>N</i>
+is thereby subtracted, and the remainder appears to sit.  This does
+not prove sup<sub>N</sub>||<i>R</i><sub>N</sub>||<sub>HS</sub>&le;2.11,
+nor any other all-<i>N</i> constant.  A finite logarithmic fit does
+not prove an asymptotic law, and a six-point plateau does not prove
+a universal bound.  That promotion is the statement the memorandum
+explicitly refuses.
+</p>
+</div>
+
+<div style="margin:12px 0 14px 0; padding:14px 16px; background:#f7f8fa; border-left:3px solid #6b7280;">
+<p style="margin:0 0 8px 0;"><b>Angle 2 &mdash; constant-profile Hardy subtraction and Peller&rsquo;s Hankel criterion.</b></p>
+<p style="margin:0 0 8px 0;">
+Subtract from the 16&times;16 Fermi symbol the rank-one
+<i>p</i>=0 edge profiles, occupied for <i>p</i>&gt;0 (top, slope
+&minus;1) and <i>p</i>&lt;0 (bottom, slope +1).  The remainder
+<i>B</i>(<i>p</i>) has no infrared jump at <i>p</i>=0.  If its
+<i>B</i><sup>1/2</sup><sub>2,2</sub> seminorm were bounded by a
+usable constant, Peller would give TEL-B.  On a 4096-point symbol
+grid the companion computation finds
+</p>
+<div style="margin:8px 0; padding:8px; text-align:center; background:#ffffff; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.6;">
+&sum;<sub>k&ne;0</sub> |k| ||B<sub>k</sub>||<sub>F</sub><sup>2</sup> = 4.482956087,<br>
+4 ||B||<sub>Ḣ<sup>1/2</sup></sub> = 8.469196974 &gt; 3.
+</div>
+<p style="margin:8px 0 0 0;">
+The same grid gives a raw (unsubtracted) seminorm 2.570232705: the
+constant-profile subtraction <i>increases</i> the Besov norm, because
+it cancels the infrared jump and exposes a Brillouin-zone-edge
+ultraviolet discontinuity.  Neither a <i>C</i><sub>R</sub>=2.5 nor a
+<i>C</i><sub>R</sub>=3 proof follows, and the 8.47 figure is a finite-grid
+evaluation, not an all-mode enclosure.  The unregularized symbol,
+which retains the edge step, is likewise not a proof: its truncated
+<i>H</i><sup>1/2</sup> seminorm grows with Fourier resolution.  UGF
+cannot repair the matrix cancellation.  This was the second distinct
+attempt; the stop rule applies.
+</p>
+</div>
+
+<p>
+<b>What a third angle needs.</b> A matrix-valued Hardy (or other
+symbol) subtraction whose jump is supported only at the Fermi points
+and is smooth at the Brillouin seams &plusmn;&pi;, with an analytic
+enclosure of the resulting
+<i>B</i><sup>1/2</sup><sub>2,2</sub> (or equivalent Schatten) norm,
+together with a comparison of the associated Bogoliubov implementer
+to the edge-mode Fock implementer of TEL-a in graph norm on
+D<sub>fin</sub>.  Optimizing the failed constant-profile symbol, or
+re-fitting the six-point HS plateau, is not that angle.
+</p>
+
+<!-- ============================================================ -->
+<h2 style="font-size:16px; margin:28px 0 9px 0; border-bottom:1px solid #e2e2e2; padding-bottom:4px;">
+9 · Documents, finite models, and correspondence
+</h2>
+
+<p>
+The three documents that constitute the handoff, in the order they
+are meant to be read for this residue:
+</p>
+
+<ul style="margin:8px 0 14px 0; padding-left:22px; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.65;">
+<li>articles/2026-08-30/mmst_charged_scaling_limit_en.tex
+(and the companion PDF) &mdash; 21-page proof memorandum, source of
+the gap box and of every constant quoted above;</li>
+<li>articles/2026-08-29/holomorphic_kms_extension_en.tex
+&mdash; holomorphic rotational KMS extension: unique expectation,
+unique Z<sub>4</sub>-invariant extension &omega;<sub>&beta;</sub>&#8728;E,
+and uniqueness of the rotational &beta;-KMS state of a holomorphic
+net via KLM + Longo&ndash;Tanimoto;</li>
+<li>articles/2026-08-28/psi_lambda_convergence_theorem_en.tex
+&mdash; quasi-free boundary: finite-window Araki&ndash;Wyss
+implementers, inner Z<sub>4</sub> tower, and the exact two-edge
+Shale logarithm (2/&pi;<sup>2</sup>)log&thinsp;N, which agrees to
+0.18% with the measured QWZ-collar slope 0.203.  That memorandum
+isolated the net-level statement; the 30 August memorandum closes
+the edge-projected analytic half and the algebraic exchange, leaving
+the two estimates of the gap box.</li>
+</ul>
+
+<p>
+Directly relevant finite models (exploration-only unless named as
+verification).  Each runs from the repository root with Python:
+</p>
+
+<ul style="margin:8px 0 14px 0; padding-left:22px; font-family:Consolas, Menlo, monospace; font-size:12px; line-height:1.65;">
+<li>experiments/tfpt-discovery/mmst_ugf_bound_probe.py
+&mdash; UGF inequalities, &delta;<sub>bulk</sub>=1, gapless-transverse
+mutant, false symbol constant &omega;<sub>N</sub>(<i>m</i>)&ge;|<i>m</i>|;</li>
+<li>experiments/tfpt-discovery/mmst_tel_probe.py
+&mdash; TEL-a isometries and rate; the failed Hankel symbol of
+Angle 2; integral pairings; the finite-inner Z<sub>4</sub> unitary;</li>
+<li>experiments/tfpt-discovery/mmst_gap_closure_probe.py
+&mdash; two-edge HS remainder on the frozen exhaustion, and the
+E<sub>8</sub> character/modular shadow;</li>
+<li>experiments/tfpt-discovery/mmst_identification_criteria_probe.py
+&mdash; finite identification checklist (central charge, edge branch,
+character, current level, sector collapse).</li>
+</ul>
+
+<p>
+The Osborne&ndash;Stottmeister input used for the neutral bilinear
+currents and the stress tensor is
+<i>Conformal field theory from lattice fermions</i>,
+Commun.&nbsp;Math.&nbsp;Phys.&nbsp;398 (2023) 219&ndash;283,
+<a href="https://arxiv.org/abs/2107.13834" style="color:#315b7d;">arXiv:2107.13834</a>,
+Theorems 4.11, 4.16 and 5.1.  It does not cover the charged exponential.
+The Buchholz&ndash;Verch mechanism used in ALG-EXH is
+<i>Scaling algebras and renormalization group in algebraic quantum field theory</i>,
+Rev.&nbsp;Math.&nbsp;Phys.&nbsp;7 (1995) 1195&ndash;1239.
+</p>
+
+<p>
+For correspondence, questions about conventions, or a minimal source
+bundle, please reply to the sender.  The useful contribution is
+deliberately narrow: either of the two estimates in the gap box, or a
+negative theorem that one of them fails for this collar.  A negative
+theorem is a complete outcome.  Partial finite evidence is not.
+</p>
+
+<p style="margin-top:22px;">
+Regards,<br>
+Stefan Hamann
+</p>
+
+<p style="margin-top:26px; font-size:11px; color:#888; border-top:1px solid #eee; padding-top:10px;">
+Status note:
+<span style="font-family:Consolas, Menlo, monospace;">SEAM.MMST.TYPEIII.CHARGED.01</span>
+remains [O].  L3, UGF, TEL-a, relative locality and limit outerness are
+[E].  The holomorphic identification and the rotational KMS uniqueness
+are [C] after L1/L2.  TEL-B is typed
+<span style="font-family:Consolas, Menlo, monospace;">TEL-B-EXTERNAL</span>.
+ALG-EXH is [O].  No sentence in this handoff upgrades the net-level
+theorem, and the <i>N</i>&le;96 Hilbert&ndash;Schmidt plateau is not
+an all-<i>N</i> bound.
+</p>
+
+</div>
+</body>
+</html>

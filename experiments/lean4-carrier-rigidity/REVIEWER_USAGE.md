@@ -21,9 +21,12 @@ The important files are:
 - `lean-toolchain`: pins Lean to `leanprover/lean4:v4.29.1`;
 - `lakefile.lean`: declares the Lake package and pins Mathlib to `v4.29.1`;
 - `lake-manifest.json`: records exact dependency revisions;
-- `TfptCarrier.lean`: top-level import file;
+- `TfptCarrier.lean`: full top-level import file (includes wall rungs);
+- `TfptCarrier/CIRoot.lean`: CI / 16 GB import root (no wall rungs);
+- `TfptCarrier/WallLadderAudit.lean`: wall `#print axioms` / `#check` / signature locks (off-CI);
 - `TfptCarrier/*.lean`: Lean source modules;
-- `scripts/audit.sh`: the hard audit script;
+- `scripts/audit.sh`: the hard audit script (`--core` for CI, default for the full wall-inclusive audit);
+- `scripts/build_wall_ladder.sh`: the bounded-memory builder for the generated wall-ladder rungs (see §6.1);
 - `README.md`: project overview and theorem map.
 
 The archive intentionally excludes `.lake/`, compiled `.olean` files, local build caches, and generated LaTeX artifacts. These are recreated locally.
@@ -102,17 +105,45 @@ Expected final output:
 
 The audit script checks:
 
-1. `lake build` succeeds.
+1. `lake build` succeeds (full mode) / `lake build TfptCarrier.CIRoot` (`--core`).
 2. No `sorry` or `admit` occurs in `TfptCarrier/` or `TfptCarrier.lean`.
 3. No domain-specific `axiom` or `constant` declarations occur.
 4. No `unsafe`, `opaque`, or `partial` declarations occur.
-5. `#print axioms` reports only Lean's standard axioms `propext`, `Classical.choice`, and `Quot.sound`.
+5. `#print axioms` reports only Lean's standard axioms `propext`, `Classical.choice`, and `Quot.sound` (from `AxiomCheck.lean`; full mode also inspects `WallLadderAudit.lean`).
 6. `AuditCheck.lean` elaborates all headline theorem names.
 7. `AuditContract.lean` elaborates exact theorem signature locks.
+8. `CIRoot.lean` imports equal `TfptCarrier.lean` imports minus `{WallCertifiedHead, WallLadderAudit}`.
+
+CI (GitHub Actions workflow `lean.yml`) runs `./scripts/audit.sh --core` after serial pre-builds of the heavy non-wall modules. That is the 16 GB gate. The default `./scripts/audit.sh` is the full reproduction, including wall rungs.
+
+### 6.1 Prerequisite for full check (1): the generated wall-ladder rungs
+
+`TfptCarrier/WallLadder/RungKz*.lean` are generated certificate modules, each a single kernel `decide` over a packed Cholesky witness. They are the expensive part of *full* check (1), and `lakefile.lean` pins a low default per-process memory ceiling (`leanMemoryMb = 12288`, passed to Lean as `-M`) so that an uncapped Lake fan-out cannot exhaust physical RAM. Consequence: on a fresh checkout the rungs **fail at the default ceiling by design**, and a full `./scripts/audit.sh` cannot report `AUDIT: PASS` until their `.olean` files exist. `./scripts/audit.sh --core` does not need them: `WallCertifiedHead` and `WallLadderAudit` are excluded from `TfptCarrier.CIRoot`.
+
+Build them first, with a raised ceiling and bounded concurrency:
+
+```bash
+BATCH=2 MEM_MB=163840 ./scripts/build_wall_ladder.sh
+```
+
+`BATCH` is how many rungs one `lake build` invocation may run at once, `MEM_MB` is the per-process `-M` ceiling in MB, and already-built rungs are skipped, so an interrupted run can be restarted. Each batch prints its wall time and the peak summed RSS of all live `lean` processes.
+
+Budget honestly. Cost rises steeply with the size of the generated rung source — time roughly quadratically, memory faster than linearly. Measured on a 512 GB Apple-silicon machine: `RungKz12` (0.12 MB source) 189 s, `RungKz20` (0.15 MB) 253 s, `RungKz14` (0.17 MB) 363 s, `RungKz32` (0.32 MB) 1011 s at ~93 GB, the pair `RungKz39`+`RungKz46` (0.37 + 0.39 MB) 1598 s at 360.3 GB summed, and `RungKz27` (0.41 MB) 1700 s at **200.4 GB in a single process**. `RungKz14` fails outright at a 48 GB ceiling (`(kernel) excessive memory consumption detected` after 987 s), so a too-small ceiling looks like a build error rather than a resource warning.
+
+Size the run to your machine: `BATCH=2` with `MEM_MB=163840` is comfortable up to ~0.35 MB rungs on 512 GB, while from ~0.4 MB upward a single rung wants 200 GB or more and must be built with `BATCH=1` and a several-hundred-GB ceiling. On a workstation with 64 GB or less only the smaller rungs are reachable at all — in that case report the rungs you could not build rather than treating the full audit as passed, since full check (1) is then not satisfied. The CI core (`./scripts/audit.sh --core`) does not require rung oleans.
+
+Because `-M` is passed through `weakLeanArgs`, it is not part of Lake's build trace: an `.olean` produced under a raised ceiling is accepted unchanged by the subsequent default-ceiling `lake build` inside a full `./scripts/audit.sh`. Building the rungs this way is a memory-scheduling decision, not a change to what is checked.
 
 ## 7. Useful Focused Commands
 
-Build only the Lean library:
+Build the CI core (every non-wall module):
+
+```bash
+lake build TfptCarrier.CIRoot
+./scripts/audit.sh --core
+```
+
+Build the full Lean library (requires §6.1 rung oleans):
 
 ```bash
 lake build TfptCarrier
@@ -130,13 +161,13 @@ Check exact theorem signatures:
 lake build TfptCarrier.AuditContract
 ```
 
-Run static checks without rebuilding:
+Run static checks without rebuilding (includes check (8), the CIRoot import-set identity):
 
 ```bash
 ./scripts/audit.sh --quick
 ```
 
-`--quick` is only a convenience mode. The full audit is the authoritative reproduction command.
+`--quick` is only a convenience mode. `./scripts/audit.sh --core` is the GitHub Actions command. The full `./scripts/audit.sh` is the authoritative wall-inclusive reproduction command.
 
 ## 8. How to Read the Status
 

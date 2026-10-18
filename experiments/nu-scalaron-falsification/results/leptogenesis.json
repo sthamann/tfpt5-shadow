@@ -1,0 +1,39 @@
+{
+  "project": "nu-scalaron-falsification",
+  "pass": "leptogenesis (declared follow-up)",
+  "frozen": {
+    "M_R_GeV": 91799084998912.22,
+    "M_scal_GeV": 30599694999637.406,
+    "m3_eV": 0.05124,
+    "washout_m1_eV": 0.005124,
+    "K": 4.7444444444444445,
+    "kappa_f_ODE": 0.08861245858159733,
+    "delta_CP": "4pi/3 (|sin| = 0.866)"
+  },
+  "routes": {
+    "v212_decuple  M1 = M_scal phi0^2 / A_Lambda": {
+      "M1_GeV": 8651318653.362335,
+      "eps1": 7.567892671231366e-07,
+      "eta_B": 6.437851928442848e-10,
+      "eta_over_obs": 1.0553855620398112,
+      "inside_band_obs/3..3obs": true,
+      "verdict": "consistent"
+    },
+    "v184_scenario M1 = M_R phi0^4": {
+      "M1_GeV": 733784906.4466358,
+      "eps1": 6.418912119945364e-08,
+      "eta_B": 5.4604376099286874e-11,
+      "eta_over_obs": 0.08951537065456865,
+      "inside_band_obs/3..3obs": false,
+      "verdict": "tension"
+    }
+  },
+  "discriminator": {
+    "M1_ratio_decuple_over_scenario": 11.789992649557856,
+    "statement": "under the frozen candidate M_R = 3 M_scal the two corpus M1 conventions become zero-dial numbers; eta_B selects: decuple consistent, scenario tension"
+  },
+  "M1_reproducing_obs_GeV": 8197306240.044989,
+  "M1_hit_over_decuple": 0.9475210159851303,
+  "M1_hit_over_scenario": 11.171265813766277,
+  "honest_scope": "BDP network + DI epsilon + washout anchor are the frozen v372 [C] tools; single-flavor, hierarchical N1; no marker move. HONESTY: v372 already sat at factor 1.07 with its own frozen inputs -- the candidate chain PRESERVES that hit (1.06), it does not improve it; the NEW content is the discriminator: under the frozen M_R the v184 scenario relation M1 = M_R phi0^4 lands ~11x LOW (outside the band) while the v212 decuple route stays on target -- the candidate selects the decuple convention"
+}

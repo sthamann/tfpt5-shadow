@@ -5,10 +5,10 @@ This repository is a **one-way mirror** of the main TFPT repository, maintained 
 
 | Included | Excluded |
 |----------|----------|
-| Active `.tex` papers, `tex-artefacts/`, `figures/*.pdf` | `_archive/`, `website/` |
+| Modular `documents/`, entry `.tex`, `tex-artefacts/`, figures | `website/` |
 | `verification/` (Python suite, ledger, maps, redteam, wolfram) | `.cursor/`, `.github/` |
 | `experiments/` (Lean, discovery) | Compiled paper `*.pdf` (non-figure) |
-| `build.sh`, manifests, README | |
+| `_archive/` sources, central registry, build tools and manifests | |
 
 **Shadow-mode note.** This subset ships `figures/` (so `python3 verification/make_manifest.py --check`
 passes literally on the export) but **not** `website/`. The single-source generators
@@ -24,6 +24,6 @@ that says \"ALL CHECKS PASSED\" cannot ship unless it actually reproduces as exp
 
 **Do not edit here.** Changes flow: main repo → this mirror (GitHub Action) → Overleaf pull.
 
-Source: `sthamann/tfpt-theoryv4` @ `5f884c8e2d338ebf6a315c3fa59f8f03736694d4`
-Last export: 2026-07-12 08:33:22Z
-Files exported: 1359
+Source: `sthamann/tfpt` @ `df0c39b035885d7968294084df0f337226e3d1da`
+Last export: 2026-10-18 07:14:00Z
+Files exported: 9467

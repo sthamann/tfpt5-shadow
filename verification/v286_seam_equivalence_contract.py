@@ -65,7 +65,7 @@ OBJECTS = {
 ARROWS = [
     ("RawRPSeam", "FlatTauIPillowcaseDtN", "open", "Open Selection", "the geometry premise"),
     ("FlatTauIPillowcaseDtN", "omega o rho = omega", "closed", "Numerical+Formal Exact",
-     "Route i: v276/v280 + Lean FORM.QGEO.03; v284"),
+     "Route i: v276/v280 + Lean FORM.QGEO.04; v284"),
     ("RawRPSeam", "SREKitaevE8Phase", "open", "Open Selection", "the SRE premise"),
     ("SREKitaevE8Phase", "HolomorphicE8Net", "closed", "Conditional+Formal Exact",
      "Route ii: v235/v277/v281; v285"),

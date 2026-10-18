@@ -15,5 +15,9 @@
     {"experiment": "Planck 2018", "value": 2.10e-9, "sigma": 0.03e-9,
      "reference": "Planck 2018 VI; ln(10^10 A_s) = 3.044"}
   ],
-  "downloaded": "2026-06-15 (published summary values)"
+  "alpha_s": [
+    {"experiment": "Planck 2018 (TT,TE,EE+lowE+lensing)", "value": -0.0045, "sigma": 0.0067,
+     "reference": "Planck 2018 VI/X; running dn_s/dlnk, LCDM+running"}
+  ],
+  "downloaded": "2026-06-15 (published summary values); alpha_s added 2026-08-27"
 }

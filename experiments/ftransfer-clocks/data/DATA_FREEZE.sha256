@@ -1,0 +1,5 @@
+# FTRANSFER.CLOCKS.01 frozen data tables -- byte-frozen 2026-08-05,
+# BEFORE the executor first ran.  run_clocks_executor.py verifies these
+# hashes (and the preregistration YAML hash) at startup.
+8ae2a4fec098fd68d3a469fbf2b7806ee1630f5595498a3e6cf2abca2d79b939  gstar_saikawa_shirai_2018.csv
+2ca6332dd1ee0caa089f64be58e90a8c916c94bbe612125eca41da50c33a2ac2  alphas_pdg2024_running.csv

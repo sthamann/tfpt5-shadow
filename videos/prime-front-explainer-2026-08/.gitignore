@@ -1,0 +1,9 @@
+# local tooling + regenerable artifacts (the canonical MP4 ships in website/public/prime-front/)
+.venv-tts/
+node_modules/
+renders/
+snapshots/
+assets/voice/
+captions_build.log
+caption_groups.json
+.hyperframes/frame-packets/

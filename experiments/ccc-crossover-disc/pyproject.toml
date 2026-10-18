@@ -1,0 +1,11 @@
+[project]
+name = "ccc-disc-search"
+version = "0.1.0"
+description = "Preregistered CCC crossover-disc search (TFPT [C] cyclic reading; no data pass yet)"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+# needed only for the future data pass (NOT at the preregistered stage)
+data = ["healpy", "astropy"]
+test = ["pytest"]

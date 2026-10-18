@@ -1,0 +1,580 @@
+<template data-composition-id="06-ihara-blaupause" data-width="1920" data-height="1080" data-duration="19.844">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+<style>
+  /* Fonts shipped via Google-hosted woff2 (same CDN policy as the project's gsap load). */
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 600;
+    src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* serif Greek fallback — the zeta in "ζ-Fensterform" */
+  @font-face {
+    font-family: "STIX Two Text";
+    font-style: normal;
+    font-weight: 600;
+    src: url(https://fonts.gstatic.com/s/stixtwotext/v18/YA9Gr02F12Xkf5whdwKf11l0jbKkeidMTtZ5Yii-3hOcURBuMkWCkSpw4g.woff2) format("woff2");
+    unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 500;
+    src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxTOlOVk6OThhvA.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* math glyph fallback — covers "⪰" and "⟺" missing from the brand faces */
+  @font-face {
+    font-family: "Noto Sans Math";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/notosansmath/v19/7Aump_cpkSecTWaHRlH2hyV5UHkD-Vs48Q.woff2) format("woff2");
+  }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    font-family: "Inter", "Noto Sans Math", sans-serif;
+    color: #e2e8f0;
+  }
+
+  /* ── background: blueprint ground (full-bleed clip, never on #root) ── */
+  .ihara06-bg {
+    position: absolute;
+    inset: 0;
+    background-color: #020617;
+  }
+  .ihara06-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56, 189, 248, 0.045) 1px, transparent 1px),
+      linear-gradient(rgba(148, 163, 184, 0.075) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.075) 1px, transparent 1px);
+    background-size:
+      24px 24px,
+      24px 24px,
+      120px 120px,
+      120px 120px;
+    opacity: 0;
+  }
+  .ihara06-corner {
+    position: absolute;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: #475569;
+    opacity: 0;
+    white-space: nowrap;
+  }
+  .ihara06-corner .tick {
+    color: #38bdf8;
+    opacity: 0.55;
+  }
+  .ihara06-corner-tr { top: 44px; right: 48px; }
+  .ihara06-corner-br { bottom: 40px; right: 48px; }
+  .ihara06-corner-bl { bottom: 40px; left: 48px; }
+  .ihara06-hairline {
+    position: absolute;
+    left: 959px;
+    top: 150px;
+    width: 1px;
+    height: 680px;
+    background: #1e293b;
+    opacity: 0;
+  }
+  .ihara06-kicker-wrap {
+    position: absolute;
+    left: 106px;
+    top: 56px;
+  }
+  .ihara06-rule {
+    width: 36px;
+    height: 2px;
+    background: #38bdf8;
+    margin-bottom: 14px;
+    opacity: 0;
+  }
+  .ihara06-kicker {
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.14em;
+    color: #38bdf8;
+    opacity: 0;
+    white-space: nowrap;
+  }
+
+  /* ── stage: zoomable content ── */
+  .ihara06-stage {
+    position: absolute;
+    inset: 0;
+    overflow: hidden; /* required — zoomed content leaks otherwise */
+  }
+  .ihara06-zoom-outer {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+  .ihara06-zoom-inner {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+
+  .ihara06-machine {
+    position: absolute;
+    width: 620px;
+    height: 440px;
+  }
+  .ihara06-machine-l { left: 170px; top: 250px; }
+  .ihara06-machine-r { left: 1130px; top: 250px; opacity: 0; }
+  .ihara06-housing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .ihara06-housing path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ihara06-housing .casing {
+    stroke: #94a3b8;
+    stroke-width: 2.5;
+  }
+  .ihara06-housing .detail {
+    stroke: #475569;
+    stroke-width: 1.5;
+  }
+  .ihara06-housing .bay {
+    stroke: #475569;
+    stroke-width: 1.5;
+  }
+  .ihara06-slot-rect {
+    fill: none;
+    stroke: #475569;
+    stroke-width: 2;
+    stroke-dasharray: 12 10;
+    stroke-linecap: round;
+  }
+
+  /* mounted component block — stat-card register: top border only, sharp corners */
+  .ihara06-part {
+    position: absolute;
+    width: 216px;
+    height: 176px;
+    background: #0f172a;
+    border-top: 2px solid #38bdf8;
+    padding: 16px 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    opacity: 0;
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+  .ihara06-part-1 { left: 67px; top: 142px; }
+  .ihara06-part-2 { left: 337px; top: 142px; }
+  .ihara06-part .sym {
+    font-family: "Newsreader", "STIX Two Text", "Noto Sans Math", serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 1.05;
+    color: #e2e8f0;
+  }
+  .ihara06-part .sym sub {
+    font-size: 0.55em;
+  }
+  .ihara06-part .name {
+    font-size: 16.5px;
+    line-height: 1.35;
+    color: #94a3b8;
+  }
+  .ihara06-part .note {
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+    color: #38bdf8;
+  }
+
+  /* the empty motor slot (right machine, bay 2) */
+  .ihara06-slot {
+    position: absolute;
+    left: 325px;
+    top: 130px;
+    width: 240px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    text-align: center;
+    padding: 14px;
+  }
+  .ihara06-glow {
+    position: absolute;
+    inset: -120px;
+    z-index: 1;
+    background: radial-gradient(
+      closest-side,
+      rgba(56, 189, 248, 0.55) 0%,
+      rgba(56, 189, 248, 0.18) 45%,
+      transparent 72%
+    );
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .ihara06-z1 {
+    position: relative;
+    z-index: 2;
+    font-family: "Newsreader", "STIX Two Text", "Noto Sans Math", serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.1;
+    color: #38bdf8;
+    opacity: 0;
+    transform-origin: 50% 50%;
+    white-space: nowrap;
+  }
+  .ihara06-z1sub {
+    position: relative;
+    z-index: 2;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #94a3b8;
+    max-width: 212px;
+  }
+  .ihara06-z1sub .ihara06-w {
+    display: inline-block;
+    opacity: 0;
+    will-change: transform;
+  }
+
+  .ihara06-zeta {
+    position: absolute;
+    left: 1130px;
+    top: 198px;
+    font-family: "Newsreader", "STIX Two Text", "Noto Sans Math", serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #e2e8f0;
+    opacity: 0;
+  }
+
+  .ihara06-ghost {
+    position: absolute;
+    left: 1130px;
+    top: 250px;
+    width: 620px;
+    height: 440px;
+    border: 1px dashed #334155;
+    opacity: 0;
+  }
+
+  .ihara06-tag {
+    position: absolute;
+    left: 170px;
+    top: 654px;
+    display: inline-flex;
+    padding: 7px 14px;
+    border: 1px solid #1e293b;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+    opacity: 0;
+    white-space: nowrap;
+  }
+  .ihara06-tag em {
+    font-style: normal;
+    color: #38bdf8;
+  }
+
+  .ihara06-formula {
+    position: absolute;
+    left: 170px;
+    top: 712px;
+    display: flex;
+    align-items: baseline;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 26px;
+    color: #e2e8f0;
+    opacity: 0;
+  }
+  .ihara06-formula-text {
+    display: inline-flex;
+    align-items: baseline;
+    min-width: 610px; /* ≥ widest typed state — stops right-edge jitter */
+    white-space: nowrap;
+  }
+  .ihara06-cursor {
+    display: inline-block;
+    width: 14px;
+    margin-left: 2px;
+    color: #38bdf8;
+    opacity: 0;
+  }
+</style>
+
+<div
+  id="root"
+  data-composition-id="06-ihara-blaupause"
+  data-width="1920"
+  data-height="1080"
+>
+  <!-- track 0 — full-bleed blueprint ground + drawing chrome -->
+  <div class="clip ihara06-bg" data-start="0" data-duration="19.844" data-track-index="0">
+    <div class="ihara06-grid" id="ihara06-grid"></div>
+    <div class="ihara06-hairline ihara06-chrome" id="ihara06-hairline"></div>
+    <div class="ihara06-corner ihara06-corner-tr ihara06-chrome"><span class="tick">+</span>&nbsp; 1920 × 1080</div>
+    <div class="ihara06-corner ihara06-corner-br ihara06-chrome">SHEET 06 / 09 &nbsp;<span class="tick">+</span></div>
+    <div class="ihara06-corner ihara06-corner-bl ihara06-chrome"><span class="tick">+</span>&nbsp; SECTION A–A</div>
+    <div class="ihara06-kicker-wrap ihara06-chrome">
+      <div class="ihara06-rule" id="ihara06-rule"></div>
+      <div class="ihara06-kicker" id="ihara06-kicker">AUGUST 3 · THE IHARA LAB</div>
+    </div>
+  </div>
+
+  <!-- track 1 — the two machines, inside the target-zoom rig -->
+  <div class="clip ihara06-stage" id="ihara06-stage" data-start="0" data-duration="19.844" data-track-index="1">
+    <div class="ihara06-zoom-outer" id="ihara06-zoom-outer">
+      <div class="ihara06-zoom-inner" id="ihara06-zoom-inner">
+
+        <!-- left machine: the Ihara lab, fully assembled -->
+        <div class="ihara06-machine ihara06-machine-l" id="ihara06-machine-l">
+          <svg class="ihara06-housing" viewBox="0 0 620 440" xmlns="http://www.w3.org/2000/svg">
+            <path class="casing ihara06-draw" id="ihara06-l-casing"
+              d="M 30 380 L 30 240 L 12 240 L 12 200 L 30 200 L 30 90 L 200 90 L 200 60 L 420 60 L 420 90 L 590 90 L 590 380 Z" />
+            <path class="detail ihara06-draw" id="ihara06-l-detail"
+              d="M 240 70 H 400 M 240 78 H 400 M 70 380 L 70 402 M 550 380 L 550 402 M 40 402 H 580" />
+            <path class="bay ihara06-draw" id="ihara06-l-bay1" d="M 55 130 H 295 V 330 H 55 Z" />
+            <path class="bay ihara06-draw" id="ihara06-l-bay2" d="M 325 130 H 565 V 330 H 325 Z" />
+          </svg>
+          <div class="ihara06-part ihara06-part-1" id="ihara06-part-gc">
+            <div class="sym">G<sub>C</sub></div>
+            <div class="name">Chebyshev sum of squares</div>
+            <div class="note">always ⪰ 0 · mounted</div>
+          </div>
+          <div class="ihara06-part ihara06-part-2" id="ihara06-part-gs">
+            <div class="sym">G<sub>S</sub></div>
+            <div class="name">Defect</div>
+            <div class="note">⪰ 0 ⟺ Ramanujan · mounted</div>
+          </div>
+        </div>
+
+        <!-- footprint ghost — announces the mirrored copy -->
+        <div class="ihara06-ghost" id="ihara06-ghost"></div>
+
+        <!-- right machine: the ζ window form, one slot empty -->
+        <div class="ihara06-zeta" id="ihara06-zeta">ζ window form</div>
+        <div class="ihara06-machine ihara06-machine-r" id="ihara06-machine-r">
+          <svg class="ihara06-housing" viewBox="0 0 620 440" xmlns="http://www.w3.org/2000/svg">
+            <path class="casing" transform="translate(620 0) scale(-1 1)"
+              d="M 30 380 L 30 240 L 12 240 L 12 200 L 30 200 L 30 90 L 200 90 L 200 60 L 420 60 L 420 90 L 590 90 L 590 380 Z" />
+            <path class="detail"
+              d="M 240 70 H 400 M 240 78 H 400 M 70 380 L 70 402 M 550 380 L 550 402 M 40 402 H 580" />
+            <path class="bay" d="M 55 130 H 295 V 330 H 55 Z" />
+            <rect class="ihara06-slot-rect" id="ihara06-slot-rect" x="325" y="130" width="240" height="200" />
+          </svg>
+          <div class="ihara06-part ihara06-part-1" id="ihara06-part-gc-r">
+            <div class="sym">G<sub>C</sub></div>
+            <div class="name">Sum of squares</div>
+            <div class="note">mounted</div>
+          </div>
+          <div class="ihara06-slot" id="ihara06-slot">
+            <div class="ihara06-glow" id="ihara06-glow"></div>
+            <div class="ihara06-z1" id="ihara06-z1">Z1 — the engine</div>
+            <div class="ihara06-z1sub" id="ihara06-z1sub"><span class="ihara06-w">Hilbert–Pólya,</span> <span class="ihara06-w">in</span> <span class="ihara06-w">window</span> <span class="ihara06-w">coordinates</span> <span class="ihara06-w">·</span> <span class="ihara06-w">traces</span> <span class="ihara06-w">=</span> <span class="ihara06-w">window moments</span></div>
+          </div>
+        </div>
+
+        <!-- proof tag + typed decomposition, under the left machine -->
+        <div class="ihara06-tag" id="ihara06-tag">here the RH analogue is <em>PROVEN</em></div>
+        <div class="ihara06-formula" id="ihara06-formula">
+          <span class="ihara06-formula-text"><span id="ihara06-ftext"></span><span class="ihara06-cursor" id="ihara06-cursor">_</span></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var ID = "06-ihara-blaupause";
+    var DUR = 19.344;
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    /* svg-path-draw setup — measure real geometry, hide via dashoffset */
+    document.querySelectorAll(".ihara06-draw").forEach(function (p) {
+      var len = 1600;
+      try {
+        len = p.getTotalLength() * 1.02;
+      } catch (e) {}
+      p.style.strokeDasharray = String(len);
+      p.style.strokeDashoffset = String(len);
+    });
+
+    /* full-span anchor */
+    tl.to({}, { duration: DUR }, 0);
+
+    /* ── Scene 1 (0.0–2.1) — blueprint ground, chrome, split hairline ── */
+    tl.fromTo("#ihara06-grid", { opacity: 0 }, { opacity: 1, duration: 0.55, ease: "power1.out" }, 0);
+    tl.fromTo("#ihara06-kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.15);
+    tl.fromTo("#ihara06-rule", { opacity: 0, scaleX: 0, transformOrigin: "0% 50%" }, { opacity: 1, scaleX: 1, duration: 0.45, ease: "power3.out" }, 0.35);
+    gsap.utils.toArray(".ihara06-corner").forEach(function (el, i) {
+      tl.fromTo(el, { opacity: 0 }, { opacity: 0.85, duration: 0.4, ease: "power1.out" }, 0.45 + i * 0.14);
+    });
+    tl.fromTo("#ihara06-hairline", { opacity: 0, scaleY: 0, transformOrigin: "50% 0%" }, { opacity: 1, scaleY: 1, duration: 0.65, ease: "power2.inOut" }, 1.35);
+
+    /* ── Scene 2 (2.1–8.9) — lab machine draws, parts click in, formula types ── */
+    tl.to("#ihara06-l-casing", { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 2.1);
+    tl.to("#ihara06-l-detail", { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 2.75);
+    tl.to("#ihara06-l-bay1", { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.05);
+    tl.to("#ihara06-l-bay2", { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.4);
+
+    /* "das Analogon bewiesen ist" */
+    tl.fromTo("#ihara06-tag", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 4.25);
+
+    /* "existiert die Ziel-Zerlegung exakt" — spring-pop, smooth power3 settle */
+    tl.fromTo("#ihara06-part-gc", { scale: 0, opacity: 0, y: 14 }, { scale: 1, opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 5.15);
+    tl.fromTo("#ihara06-part-gs", { scale: 0, opacity: 0, y: 14 }, { scale: 1, opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 5.95);
+
+    /* "Quadratsumme plus Defekt" — discrete-text-sequence, bulk-assembled states */
+    var SEQ = [
+      { t: 0.0, text: "" },
+      { t: 0.1, text: "A" },
+      { t: 0.24, text: "A =" },
+      { t: 0.4, text: "A = G_C" },
+      { t: 0.62, text: "A = G_C + G_S" },
+      { t: 0.95, text: "A = G_C + G_S \u00b7 G_S \u2ab0 0" },
+      { t: 1.3, text: "A = G_C + G_S \u00b7 G_S \u2ab0 0 \u27fa Ramanujan" },
+    ];
+    function textAt(time) {
+      for (var i = SEQ.length - 1; i >= 0; i--) {
+        if (time >= SEQ[i].t) return SEQ[i].text;
+      }
+      return "";
+    }
+    var ftext = document.getElementById("ihara06-ftext");
+    var cursor = document.getElementById("ihara06-cursor");
+    tl.fromTo("#ihara06-formula", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, 7.2);
+    var driver = { t: 0 };
+    tl.to(
+      driver,
+      {
+        t: 1.6,
+        duration: 1.6,
+        ease: "none",
+        onUpdate: function () {
+          ftext.textContent = textAt(driver.t);
+        },
+      },
+      7.3
+    );
+    /* deterministic sin square-wave blink, killed after the type resolves */
+    var blink = { p: 0 };
+    tl.to(
+      blink,
+      {
+        p: Math.PI * 2 * 4,
+        duration: 2.4,
+        ease: "none",
+        onUpdate: function () {
+          cursor.style.opacity = Math.sin(blink.p) >= 0 ? "1" : "0";
+        },
+      },
+      7.3
+    );
+    tl.set("#ihara06-cursor", { opacity: 0 }, 9.75);
+
+    /* ── Scene 3 (8.9–12.4) — the machine mirrors right; one slot stays dashed ── */
+    tl.fromTo("#ihara06-ghost", { opacity: 0 }, { opacity: 0.45, duration: 0.4, ease: "power1.out" }, 9.7);
+    tl.to("#ihara06-ghost", { opacity: 0, duration: 0.35, ease: "power1.in" }, 10.9);
+    /* velocity-matched: both halves briefly in motion, same window + ease */
+    tl.fromTo("#ihara06-machine-r", { x: -340, opacity: 0 }, { x: 0, opacity: 1, duration: 0.85, ease: "power3.out" }, 10.9);
+    tl.to("#ihara06-machine-l", { x: -14, duration: 0.85, ease: "power3.out" }, 10.9);
+    tl.fromTo("#ihara06-zeta", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 11.45);
+    tl.fromTo("#ihara06-part-gc-r", { scale: 0, opacity: 0, y: 14 }, { scale: 1, opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 11.8);
+
+    /* dash-flow on the empty slot — one linear proxy, offset = 5 dash periods */
+    var slotRect = document.getElementById("ihara06-slot-rect");
+    var flow = { o: 0 };
+    tl.to(
+      flow,
+      {
+        o: -110,
+        duration: 8.34,
+        ease: "none",
+        onUpdate: function () {
+          slotRect.style.strokeDashoffset = String(flow.o);
+        },
+      },
+      11.0
+    );
+
+    /* ── Scene 4 (12.4–19.3) — coordinate-target-zoom onto the empty slot ── */
+    /* nested-wrapper formula: T = -offset. Layout is absolute px, so the
+       constants are exact; a live measurement overrides them when available. */
+    var offX = 615;
+    var offY = -60;
+    try {
+      var sr = document.getElementById("ihara06-stage").getBoundingClientRect();
+      var rr = document.getElementById("ihara06-slot").getBoundingClientRect();
+      if (sr.width > 0 && rr.width > 0) {
+        var k = sr.width / 1920;
+        offX = (rr.left + rr.width / 2 - (sr.left + sr.width / 2)) / k;
+        offY = (rr.top + rr.height / 2 - (sr.top + sr.height / 2)) / k;
+      }
+    } catch (e) {}
+    /* scale + counter-translate share position, duration, ease */
+    tl.to("#ihara06-zoom-outer", { scale: 2.4, duration: 1.5, ease: "power3.inOut" }, 13.2);
+    tl.to("#ihara06-zoom-inner", { x: -offX, y: -offY, duration: 1.5, ease: "power3.inOut" }, 13.2);
+    /* drawing chrome recedes while the camera commits */
+    tl.to(".ihara06-chrome", { opacity: 0.3, duration: 1.2, ease: "power2.inOut" }, 13.2);
+    tl.to("#ihara06-slot-rect", { stroke: "#38bdf8", duration: 0.6, ease: "power1.inOut" }, 13.9);
+
+    /* "der Motor" — the payoff label lands with the glow as ONE beat */
+    tl.fromTo("#ihara06-z1", { scale: 0, opacity: 0, y: 8 }, { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 14.3);
+    /* ambient-glow-bloom, pulse-on-arrival: one breath, then hold */
+    tl.fromTo("#ihara06-glow", { opacity: 0, scale: 0.82 }, { opacity: 0.34, scale: 1, duration: 0.75, ease: "power2.out" }, 14.3);
+    tl.to("#ihara06-glow", { opacity: 0.2, scale: 0.97, duration: 0.9, ease: "power2.inOut" }, 15.1);
+
+    /* "Hilbert–Pólya" — per-word reveal */
+    gsap.utils.toArray(".ihara06-w").forEach(function (el, i) {
+      tl.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 15.7 + i * 0.09);
+    });
+
+    window.__timelines[ID] = tl;
+  })();
+</script>
+</template>

@@ -1,0 +1,505 @@
+% Source-preserving integrated proof body; input from toe_round7_proofs.tex.
+\subsubsection*{Round 7: first-order matter coupling of the staggered tensor target}
+\label{sec:toe-r7-matter}
+\noindent\emph{The displayed arguments below are the proof-bearing source.  The current
+repository regression is \veri{v1035\_\allowbreak matter\_\allowbreak coupling.py}; its finite checks audit the
+implementation and do not replace the universal steps in the proof.}
+
+\begingroup
+\def\TT{\mathrm{TT}}
+\def\Tr{\operatorname{Tr}}
+\def\ii{\mathrm{i}}
+\def\dd{\mathrm{d}}
+\def\cO{\mathcal O}
+\def\cJ{\mathcal J}
+\begin{center}
+\fbox{\parbox{0.93\linewidth}{
+\textbf{Result and boundary.}  Conditional on the declared staggered Fourier
+dictionary, every nonzero momentum admits an exact affine coupling to a
+prescribed classical source obeying the two Ward equations.  Source energy and
+momentum must deform the scalar and vector constraints; with those terms, the
+fibre constraints propagate and the curvature has the classical retarded
+response displayed below.  The executable certificate does not import
+repository code, but it does instantiate the declared tensor/vector masks and
+checks their three reciprocal-axis Bloch transitions.  Dynamical
+matter is tested only in collinear one-dimensional sectors and only through
+first order in the coupling.  A free scalar and a fermion with a
+nearest-neighbour one-particle Hamiltonian pass those tests after their
+composite lattice vertices are repaired.  A naive scalar stress fails, and an
+onsite $\phi^4$ interaction has an explicit homogeneous momentum defect that no
+periodic stress divergence can remove.  The deleted homogeneous gravity block
+cannot absorb nonzero total matter energy or momentum.  No full three-dimensional
+matter coupling, quantum Kubo calculation, nonlinear constraint algebra,
+interacting quantum gravity, Lorentz-covariant lattice Riemann tensor, TFPT
+parent, T7 closure, TOE claim, or RH claim is proved.
+}}
+\end{center}
+
+\paragraph{Fixed regulator and conventions.}
+
+We state the spatial regulator of the preceding classical and quantum
+artifacts as the intended real-space interpretation.  The checker below
+instantiates these declared masks algebraically, but does not import a
+repository implementation.  On a periodic cubic lattice of spacing $a$, a component with mask
+$m\in\{0,1\}^3$ lives at $x+am/2$, and
+\[
+ D_i^{(m)}f(x)=\frac1a
+ \begin{cases}
+ f(x+ae_i)-f(x),&m_i=0,\\
+ f(x)-f(x-ae_i),&m_i=1.
+ \end{cases}                                      \tag{1}
+\]
+Thus $D_i^{(m\mathbin{\rm xor}e_i)}=-(D_i^{(m)})^T$ under the periodic
+lattice sum.  Physical-position Fourier phases give symbol
+$\ii\kappa_i$; the factor $\ii$ is retained below, where
+\[
+ \kappa_i=\frac2a\sin\frac{ak_i}{2},\qquad
+ r^2=\kappa^T\kappa.                              \tag{2}
+\]
+The diagonal tensor components have mask zero, $q_{ij}$ with $i\ne j$ has
+mask $e_i\mathbin{\rm xor}e_j$, and a vector component $j_i$ has mask $e_i$.
+Products below are placed on the indicated cells or links; no unmentioned
+continuum Leibniz rule is used.
+
+In the six orthonormal symmetric-tensor coordinates
+$(11,22,33,23,13,12)$ define the following real matrices; they do not include
+the Fourier factor $\ii$:
+\[
+ (Bh)_i=h_{ij}\kappa_j,\quad
+ t=(1,1,1,0,0,0)^T,\quad v=B^T\kappa,\quad
+ s=v-r^2t,                                         \tag{3}
+\]
+\[
+ K_p=I-\frac12tt^T,\qquad
+ K_q=r^2(I-tt^T)-2B^TB+tv^T+vt^T.                 \tag{4}
+\]
+With the common Fourier-volume normalization suppressed, the real canonical
+Hamiltonian sums the paired complex fibres; the vacuum constraints at each
+nonzero momentum are
+\[
+ \begin{gathered}
+ H_0=\frac12\sum_{k\ne0}
+ \bigl[p(-k)^TK_p(k)p(k)+q(-k)^TK_q(k)q(k)\bigr],\\
+ c_0=-s^Tq,\qquad \boldsymbol c=\ii Bp.
+ \end{gathered}                                      \tag{5}
+\]
+Relative to the Round-6 real matrices, these are only nonzero sign/phase
+changes of the vacuum constraints.  Their zero surface, rank, and the reduced
+$E,F$ observables are therefore unchanged.
+The inherited exact identities are
+\[
+ K_qB^T=0,\quad K_ps=B^T\kappa,\quad K_qt=s,
+\quad K_qK_pK_q=r^2K_q+\frac12ss^T=r^4P_{\TT}.    \tag{6}
+\]
+Here $c_0$ is the Fourier transform of
+$D_iD_jq_{ij}-\Delta\operatorname{tr}q$, and $c_i$ is the transform of
+$D_jp_{ij}$.  Thus
+$\dot c_0=\ii\kappa_i c_i=-\kappa^TBp$ and
+$\dot {\boldsymbol c}=0$.  Dropping $\ii$ and restoring it only after the algebra
+gives the wrong scalar sign, as the plane-wave mutant below demonstrates.
+
+\paragraph{The coupling that actually preserves the constraints.}
+
+Let $(\rho,j_i,\tau_{ij})$ be a symmetric c-number source on the scalar,
+vector, and tensor staggered cells.  Its two Ward equations are
+\[
+ \dot\rho+D_i j_i=0,\qquad
+ \dot j_i+D_j\tau_{ij}=0.                          \tag{7}
+\]
+At $k\ne0$, add the spatial metric coupling and deform both constraints:
+\[
+ H_g(t)=H_0+g\langle q,\tau(t)\rangle,\qquad
+ \Psi_0=-s^Tq+g\rho,\qquad
+ \boldsymbol\Psi=\ii Bp-g\boldsymbol j.                          \tag{8}
+\]
+The lapse and shift multipliers multiply $\Psi_0$ and $\boldsymbol\Psi$ in the total
+Hamiltonian.  Thus (8) is not merely the isolated $q_{ij}\tau_{ij}$ vertex:
+the $\rho$ and $j_i$ couplings are present as constraint terms.  Periodic
+summation by parts fixes all signs in (8).
+
+\begin{theorem}[Conditional affine source consistency in the complex Fourier fibre]
+Assume that (3)--(6) are the fibre dictionary of the intended staggered
+placement and that a prescribed c-number source satisfies (7).  Then the four
+constraints in (8) are first class within this fibre algebra and propagate as
+\[
+ \dot\Psi_0=D_i\Psi_i,\qquad \dot\Psi_i=0.        \tag{9}
+\]
+If one instead retains the vacuum vector constraint, its time derivative is
+\[
+ \dot c_i=-gD_j\tau_{ij}=g\dot j_i,                \tag{10}
+\]
+which is generically nonzero.  Consequently ``couple $q_{ij}$ to stress''
+without deforming the constraints is inconsistent already at order $g$.
+Moreover, within the linear ansatz
+\[
+ H_{\rm int}=\gamma g\langle q,\tau\rangle,
+ \quad\Psi_0=c_0+\alpha g\rho,
+ \quad\boldsymbol\Psi=\boldsymbol c+\beta g\boldsymbol j,
+\]
+Ward propagation uniquely fixes $\alpha=\gamma$ and $\beta=-\gamma$.
+Thus (8), up to the overall normalization of $g$, is the smallest affine
+constraint repair of the spatial stress vertex.
+\end{theorem}
+
+\begin{proof}
+Hamilton's equations give
+$\dot q=K_pp$ and $\dot p=-K_qq-g\tau$.  At fixed momentum, (7) reads
+$\dot\rho=-\ii\kappa^Tj$ and $\dot j=-\ii B\tau$.  Therefore
+\[
+ \dot\Psi_0=-\kappa^TBp-\ii g\kappa^Tj
+             =\ii\kappa^T(\ii Bp-gj)=\ii\kappa^T\boldsymbol\Psi,
+\]
+\[
+ \dot{\boldsymbol\Psi}=-\ii gB\tau-g\dot j=0.
+\]
+This is (9) with no stripped-$\ii$ intermediate convention.  Since the sources are c-numbers, their Poisson
+brackets vanish and the affine shifts do not change the vacuum first-class
+brackets.  Dropping $-g\boldsymbol j$ leaves (10).  For the general coefficients,
+the vector residual is $-\ii(\gamma+\beta)gB\tau$, while the scalar residual
+relative to $\ii\kappa^T\boldsymbol\Psi$ is
+$-\ii(\alpha+\beta)g\kappa^Tj$; both vanish only for the stated coefficients.
+\end{proof}
+
+The sign is falsifiable on one mode.  Take the plane wave
+$e^{-\ii t+\ii z}$ with $\kappa=e_3$ and amplitudes
+$\rho=j_3=\tau_{33}=g=1$.  Both Ward equations hold.  Choose
+$Bp=-\ii e_3$ and $s^Tq=1$, so the repaired constraints vanish.  Directly,
+$\dot\Psi_0=\dot{\boldsymbol\Psi}=0$.  If one instead keeps the old stripped-$\ii$
+choice $\Psi_0=+s^Tq+g\rho$ while restoring
+$\boldsymbol\Psi=\ii Bp-gj$, the propagation residual is
+$\dot\Psi_0-\ii\kappa^T\boldsymbol\Psi=-2\ii$.
+
+The source need not be positive, local in time, or generated by matter for
+this theorem.  Fourier reality is explicit:
+$B(-\kappa)=-B(\kappa)$ while $s,K_p,K_q$ are even.  Hence
+$\Psi_0(-k)=\overline{\Psi_0(k)}$ and
+$\boldsymbol\Psi(-k)=\overline{\boldsymbol\Psi(k)}$ whenever the fields at $-k$ are the
+conjugates of those at $k$ and $g$ is real.  For an unordered non-self-conjugate
+pair, the actual real Hamiltonian contribution is
+\[
+ H_{\{k,-k\}}=p(-k)^TK_p\,p(k)+q(-k)^TK_q\,q(k)
+ +g\bigl[q(-k)^T\tau(k)+q(k)^T\tau(-k)\bigr],
+\]
+up to the common Fourier-volume normalization.  It equals its complex
+conjugate.  To lift the result from the
+complex fibre calculation to the actual staggered lattice it must also obey
+the mask placements and Bloch gluing.
+
+That gluing is checked explicitly for the declared regulator.  Under the
+reciprocal shift $k\mapsto k+2\pi e_a/a$, let $R_V^{(a)}$ change the sign of
+vector component $a$, and let $G_T^{(a)}$ change the sign of an off-diagonal
+tensor component precisely when its mask contains $e_a$.  Diagonal tensor
+components are unchanged.  Then
+\[
+ \kappa'=R_V^{(a)}\kappa,\quad
+ B'G_T^{(a)}=R_V^{(a)}B,\quad s'=G_T^{(a)}s,
+ \quad K_q'=G_T^{(a)}K_qG_T^{(a)}.
+\]
+Since $K_p$ commutes with $G_T^{(a)}$, the source gluing
+$\tau'=G_T^{(a)}\tau$, $j'=R_V^{(a)}j$, and $\rho'=\rho$ gives
+\[
+ \cJ'=G_T^{(a)}\cJ,\qquad
+ \Psi_0'=\Psi_0,\qquad \boldsymbol\Psi'=R_V^{(a)}\boldsymbol\Psi,
+ \qquad (q')^T\tau'=q^T\tau .
+\]
+Here $\cJ$ is the response drive defined in (12).  The checker verifies all
+these matrix identities for $a=1,2,3$.  Reality is
+most cleanly imposed on extended-zone labels $(-k,k)$; if $-k$ is folded into
+the first Brillouin zone by a reciprocal vector, the displayed transition
+matrices supply the additional mask signs.  What remains unverified is that a
+particular repository implementation uses exactly these declared conventions.
+
+\paragraph{Gauge-invariant retarded curvature response.}
+
+The local curvature variables remain
+\[
+ E=K_qq,\qquad F=K_qK_pp.                         \tag{11}
+\]
+They commute strongly with the gravitational parts of all four constraints:
+$K_qB^T=0$ and $K_qK_ps=0$.  The c-number shifts in (8) have zero bracket
+with them, so $E,F$ remain gauge invariant.  They obey $\dot E=F$ and, on
+$\Psi_0=0$,
+\[
+ \ddot E+r^2E=-g\cJ,\qquad
+ \cJ:=K_qK_p\tau+\frac12s\rho.                  \tag{12}
+\]
+The retarded solution with vanishing past data is therefore
+\[
+ \boxed{\quad
+ \delta E(t,k)=-g\int_{-\infty}^{t}
+ \frac{\sin(r(t-t'))}{r}\,\cJ(t',k)\,\dd t',
+ \qquad \delta F=\partial_t\delta E .\quad}       \tag{13}
+\]
+This is the classical Hamiltonian source response in the complex Fourier
+dictionary, not a spectral-positivity surrogate.  Identifying it with a quantum
+Kubo response requires importing the Round-6 CCR/Fock representation and
+evaluating the corresponding commutator; that calculation is not executed in
+this artifact.
+
+\begin{theorem}[Proposition: Ward compatibility of the response]
+The source in (12) is transverse and has the trace required by the sourced
+scalar constraint:
+\[
+ B\cJ=0,\qquad t^T\cJ=-(\ddot\rho+r^2\rho).       \tag{14}
+\]
+Consequently (13), with constraint-compatible initial data, satisfies
+\[
+ BE=0,\qquad t^TE=g\rho,\qquad t^TF=g\dot\rho.  \tag{15}
+\]
+For a TT step source $\tau(t)=\Theta(t)e_+$ at
+$\kappa=(0,0,r)$ and $\rho=j=0$,
+\[
+ \delta E(t)=-g(1-\cos rt)e_+,\qquad t\ge0,       \tag{16}
+\]
+where $e_+=(1,-1,0,0,0,0)^T/\sqrt2$.
+\end{theorem}
+
+\begin{proof}
+Both $BK_q=0$ and $Bs=BK_qt=0$, proving transversality.  From (6),
+\[
+ t^TK_qK_p\tau=s^TK_p\tau=\kappa^TB\tau=-\ddot\rho,
+ \qquad t^Ts=-2r^2,
+\]
+where the second Ward equation followed by the time derivative of the first
+was used.  This proves (14).  Taking the trace of (12) shows that
+$t^TE-g\rho$ obeys the homogeneous wave equation and hence vanishes for
+compatible initial data.  Equation (16) follows from $K_qK_pe_+=r^2e_+$.
+\end{proof}
+
+Notice that sourced $E$ is not generally TT: it is transverse, while its trace
+is fixed by the energy density.  Only its radiative part is TT.  Calling all of
+$E$ a free graviton after matter is added would erase the scalar constraint.
+
+\paragraph{Dynamical matter: what is and is not proved.}
+
+Let matter have canonical variables $z$ and an uncoupled Hamiltonian $H_m$.
+If its zeroth-order densities obey (7), then
+\[
+ H=H_0+H_m+g\langle q,\tau^{(0)}(z)\rangle,\qquad
+ \Psi_0=-s^Tq+g\rho^{(0)}(z),\quad
+ \boldsymbol\Psi=\ii Bp-g\boldsymbol j^{(0)}(z)                 \tag{17}
+\]
+obeys (9) modulo $\cO(g^2)$.  This is the precise first-order feedback result.
+It is not exact nonlinear closure.  Indeed, even before computing the
+$g$-correction to the matter stress,
+\[
+ \{\Psi_0(x),\Psi_i(y)\}
+ =-g^2\{\rho^{(0)}(x),j_i^{(0)}(y)\}_m,           \tag{18}
+\]
+plus analogous current brackets.  These terms are generally nonzero and must
+be absorbed by second-order constraint and Hamiltonian corrections if a
+nonlinear theory exists.  The checker gives a canonical scalar datum for which
+the matter bracket on the right of (18) equals $1/2$ exactly.
+
+The distinction between a canonical/Noether stress and the metric-response
+stress matters here, especially for spinors.  Their equivalence requires
+hypotheses and, for spinors, a tetrad formulation; see Leclerc's primary
+analysis \cite{toe-r7-matter-Leclerc}.  We therefore test only explicit lattice Ward
+complexes below and do not rename them a full Hilbert stress tensor.
+
+\paragraph{Free scalar: a local repair, then a sharp $\phi^4$ obstruction.}
+
+It suffices to examine a collinear sector; failure there is failure of a
+purported universal cubic-lattice identity.  Set $a=1$ on a periodic
+one-dimensional row and write
+\[
+ g_x=\phi_{x+1}-\phi_x,\qquad
+ \Delta\phi_x=g_x-g_{x-1},\qquad
+ \dot\phi_x=\pi_x,\quad
+ \dot\pi_x=\Delta\phi_x-m^2\phi_x.                \tag{19}
+\]
+The site energy and link flux
+\[
+ \rho_x=\frac12\pi_x^2+\frac12m^2\phi_x^2
+ +\frac14(g_x^2+g_{x-1}^2),\qquad
+ j_x=-\frac12(\pi_x+\pi_{x+1})g_x                \tag{20}
+\]
+obey the exact energy equation
+\[
+ \dot\rho_x+j_x-j_{x-1}=0.                        \tag{21}
+\]
+The continuum-looking averaged-gradient stress
+\[
+ \tau_x^{\rm naive}=\frac12\pi_x^2
+ +\frac14(g_x^2+g_{x-1}^2)-\frac12m^2\phi_x^2    \tag{22}
+\]
+does not obey momentum continuity.  An exact same-range correction is
+\[
+ \boxed{\quad
+ \tau_x^{\rm free}=\frac12\pi_x^2+\frac12g_xg_{x-1}
+ -\frac12m^2\phi_x^2
+ =\tau_x^{\rm naive}-\frac14(\Delta\phi_x)^2 .\quad} \tag{23}
+\]
+Direct substitution gives
+\[
+ \dot j_x+\tau_{x+1}^{\rm free}-\tau_x^{\rm free}=0. \tag{24}
+\]
+The correction in (23) is exactly the finite-difference product-rule term;
+it vanishes at leading continuum order but is mandatory at finite spacing.
+
+For the rational four-site datum
+$(\phi_0,\phi_1,\phi_2,\phi_3)=(0,1,2,4)$, the four residuals obtained from
+(22) are
+\[
+ \left(-\frac{25}{4},\frac14,\frac{35}{4},-\frac{11}{4}\right),             \tag{25}
+\]
+so this is an analytic mutant, not a rounding effect.
+
+Now add $V_{\rm int}=\lambda\phi^4/24$ to $\rho_x$, the force
+$-\lambda\phi_x^3/6$, and the continuum-like pressure
+$-\lambda\phi_x^4/24$ to (23).  Energy continuity (21) remains exact, but
+the momentum residual is
+\[
+ R_x:=\dot j_x+\tau_{x+1}-\tau_x
+ =\frac{\lambda}{24}(\phi_x+\phi_{x+1})
+   (\phi_{x+1}-\phi_x)^3.                          \tag{26}
+\]
+For the same datum,
+\[
+ \sum_{x=0}^{3}R_x=-\frac{17}{2}\lambda\ne0.      \tag{27}
+\]
+Every periodic stress divergence sums to zero.  Therefore no redefinition of
+$\tau_x$ alone---local or nonlocal---can repair (26) on this matter phase
+space while leaving $j_x$ and its dynamics fixed.  This is the first precise
+interacting obstruction, and it appears in constraint propagation at order
+$g\lambda$, not only in a higher-order gravity bracket.
+
+There is a limited repair for the already-selected nonzero gravity modes.  Let
+$P_0$ be the spatial mean and let $D\tau=\tau_{x+1}-\tau_x$.  Then
+\[
+ \delta\tau=-D^+(I-P_0)R,\qquad
+ D\delta\tau=-(I-P_0)R,                            \tag{28}
+\]
+where $D^+$ is any zero-mean inverse of $D$.  This makes the nonzero-mode Ward
+identity exact and is constructed explicitly by cumulative summation in the
+checker.  It is nonlocal, leaves the homogeneous momentum defect $P_0R$, and
+does not constitute a local interacting matter coupling.  A full repair must
+instead alter the matter discretization/current or add degrees of freedom that
+carry the missing lattice momentum.  The broader lattice literature likewise
+defines and renormalizes energy-momentum tensors by enforcing Ward identities,
+rather than assuming the continuum expression survives unchanged
+\cite{toe-r7-matter-BuonannoCellaCurci,toe-r7-matter-GiustiPepe}.
+
+\paragraph{Free fermion: exact collinear divided-difference vertices.}
+
+A second collinear test uses a free chiral fermion whose \emph{one-particle
+Hamiltonian} is nearest-neighbour, with dispersion $\epsilon(p)=\sin p$.
+This is a finite-spacing Ward test, not a claim of a doubler-free $3+1$
+dimensional chiral theory.  For a
+bilinear transferring momentum $K$, set
+\[
+ \kappa(K)=2\sin\frac K2,\quad
+ \epsilon_- =\sin p,\quad \epsilon_+=\sin(p+K),\quad
+ \bar\epsilon=\frac12(\epsilon_++\epsilon_-).     \tag{29}
+\]
+The exact divided-difference identity is
+\[
+ \epsilon_+-\epsilon_-
+ =\kappa(K)\cos\left(p+\frac K2\right).            \tag{30}
+\]
+Consequently the energy, current, and stress vertices
+\[
+ \rho=\bar\epsilon,\quad
+ j=\cos\left(p+\frac K2\right)\bar\epsilon,\quad
+ \tau=\cos^2\left(p+\frac K2\right)\bar\epsilon  \tag{31}
+\]
+satisfy both one-particle Ward identities
+\[
+ (\epsilon_+-\epsilon_-)\rho=\kappa j,\qquad
+ (\epsilon_+-\epsilon_-)j=\kappa\tau.             \tag{32}
+\]
+In real space, $\rho$, $j$, and $\tau$ in (31) have maximal hopping ranges
+one, two, and three, respectively: only the one-particle Hamiltonian is
+nearest-neighbour.  The average factors are the fermionic analogue of the
+scalar repair in (23).
+Replacing $j$ by the continuum vertex $\rho$ fails: at
+$p=\pi/6$, $K=\pi/3$, one has
+$(\rho,j,\tau)=(3/4,3/8,3/16)$ and the first Ward residual is $-3/8$.
+Thus both bosonic and fermionic tests reject naive continuum vertices, while
+both free tests admit explicit finite-spacing corrections.
+
+\paragraph{The homogeneous obstruction.}
+
+The preceding free tensor construction removed the complete $k=0$ canonical
+block to eliminate its negative trace direction.  At $k=0$,
+$B=s=K_q=0$, so its vacuum local constraints vanish identically.  Equation
+(8) would reduce to
+\[
+ \Psi_0(0)=g\rho(0),\qquad \boldsymbol\Psi(0)=-g\boldsymbol j(0). \tag{33}
+\]
+A positive-energy matter state normally has $\rho(0)\ne0$, and a state may
+also have $\boldsymbol j(0)\ne0$.  For $g\ne0$, imposing (33) would delete either
+such component rather than source gravity.  The conditional coupling must
+therefore be read in one of two narrow ways:
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item couple only $(I-P_0)(\rho,j,\tau)$, equivalently fluctuations around a
+specified homogeneous background; or
+\item restore and consistently stabilize a homogeneous/global geometry sector.
+\end{enumerate}
+The first option is sufficient for (9)--(16) at nonzero momentum but does not
+describe the gravitational response to total energy.  The second is an open
+construction.  Simply calling the removed block ``gauge'' is not a repair.
+
+\paragraph{Quantum meaning and remaining obligation.}
+
+Equation (13) is an exact classical Green-function solution of the conditional
+staggered Fourier equations and is gauge invariant and Ward compatible there.  A
+smooth compact-time c-number source is expected to define linear forcing of
+the already-constructed oscillator Fock space, but the CCR import and Kubo
+commutator needed to prove that quantum statement are not executed here.  Thus
+the generic prescribed-source fibre algebra is closed; its full staggered
+real-space and quantum realization remain open checks.
+
+For dynamical scalar or fermion matter, (17) is an interacting Hamiltonian on
+the tensor--matter tensor product only as a formal first-order deformation.
+Equations (18), (26), and (33) are three distinct unclosed edges:
+\begin{itemize}[leftmargin=2em]
+\item $g^2$ current brackets require genuinely deformed constraints and
+gravity self-couplings;
+\item finite-spacing interacting matter may fail the spatial Ward identity
+already at order $g\lambda$;
+\item total energy has no receiving homogeneous gravity mode.
+\end{itemize}
+An exact graph energy current such as $J_{x\to y}=\ii[h_x,h_y]$ addresses
+energy continuity only.  It is not by itself a symmetric stress satisfying
+the vector Ward identity, and it does not close the Hamiltonian constraint
+algebra.  Conversely, positivity of a TT stress spectral measure says nothing
+about these three equations.
+
+\paragraph{Executable certificate and evidence typing.}
+
+The repository certificate \veri{v1035\_\allowbreak matter\_\allowbreak coupling.py} imports no proof text.
+It checks the generic prescribed-source polynomial identities with their full
+complex Fourier signs, a conserved plane-wave witness, the mandatory failure
+of the old restored-$\ii$ sign, paired Fourier reality, all three declared
+Bloch transitions, the classical retarded TT step solution, the two
+collinear Ward complexes and mutants, the $\phi^4$ obstruction and projected
+repair, the nonzero matter Poisson bracket, and the fermion divided differences.
+It does not instantiate a full three-dimensional matter complex or execute a
+quantum Kubo calculation.  Its successful run reports 55 exact
+symbolic/rational checks and four floating-point regressions.  The floating
+checks sample generic fibres and random scalar/fermion data; they establish no
+universal statement.
+
+The exact cost is fixed-size symbolic algebra plus a four-site matter system;
+the numerical cost is constant and negligible.  The certificate is read-only.
+
+\begingroup
+\renewcommand{\refname}{References for the matter-coupling proof}
+\begin{thebibliography}{9}
+\bibitem{toe-r7-matter-Leclerc}
+M.~Leclerc, ``Canonical and gravitational stress-energy tensors,''
+\href{https://arxiv.org/abs/gr-qc/0510044}{arXiv:gr-qc/0510044} (2006).
+
+\bibitem{toe-r7-matter-BuonannoCellaCurci}
+A.~Buonanno, G.~Cella, and G.~Curci, ``Lattice energy-momentum tensor with
+Symanzik improved actions,''
+\href{https://arxiv.org/abs/hep-lat/9506008}{arXiv:hep-lat/9506008} (1995).
+
+\bibitem{toe-r7-matter-GiustiPepe}
+L.~Giusti and M.~Pepe, ``Energy-momentum tensor on the lattice:
+non-perturbative renormalization in Yang--Mills theory,''
+\href{https://arxiv.org/abs/1503.07042}{arXiv:1503.07042} (2015).
+\end{thebibliography}
+\endgroup
+\endgroup

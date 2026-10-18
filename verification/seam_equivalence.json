@@ -21,7 +21,7 @@
       "to": "omega o rho = omega",
       "status": "closed",
       "label": "Numerical+Formal Exact",
-      "evidence": "Route i: v276/v280 + Lean FORM.QGEO.03; v284"
+      "evidence": "Route i: v276/v280 + Lean FORM.QGEO.04; v284"
     },
     {
       "from": "RawRPSeam",

@@ -1,0 +1,470 @@
+<template data-composition-id="05-zwei-saetze" data-width="1920" data-height="1080" data-duration="18.644">
+  <style>
+    /* Broadside dark register — fonts ship via Google Fonts (frame.md, Known Gaps) */
+    @font-face {
+      font-family: "Newsreader";
+      font-style: normal;
+      font-weight: 600 700;
+      font-display: block;
+      src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      font-style: normal;
+      font-weight: 500;
+      font-display: block;
+      src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxTOlOVk6OThhvA.woff2) format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      /* greek subset — the γ in the first-zero tick label */
+      font-family: "JetBrains Mono";
+      font-style: normal;
+      font-weight: 500;
+      font-display: block;
+      src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxTOVOVk6OThhvAWV8.woff2) format("woff2");
+      unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+    }
+    @font-face {
+      /* text slice — the ≤ glyph (U+2264) is outside the latin subset */
+      font-family: "JetBrains Mono";
+      font-style: normal;
+      font-weight: 500;
+      font-display: block;
+      src: url(https://fonts.gstatic.com/l/font?kit=tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjOFmUsaeLhznCg9cq&skey=48ad01c60053c2ae&v=v24) format("woff2");
+      unicode-range: U+2264;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+    }
+
+    .f05-bg {
+      position: absolute;
+      inset: 0;
+      background: #020617;
+    }
+
+    .f05-stage {
+      position: absolute;
+      inset: 0;
+    }
+    .f05-camera {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 42%;
+    }
+
+    /* ------- chrome ------- */
+    .f05-chrome-top {
+      position: absolute;
+      left: 5.5cqw;
+      right: 5.5cqw;
+      top: 5cqh;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .f05-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.88cqw;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #38bdf8;
+    }
+    .f05-num {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.78cqw;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #475569;
+    }
+    .f05-rule-top,
+    .f05-rule-bot {
+      position: absolute;
+      left: 5.5cqw;
+      right: 5.5cqw;
+      height: 1px;
+      background: #1e293b;
+    }
+    .f05-rule-top { top: 10.4cqh; }
+    .f05-rule-bot { top: 79.2cqh; }
+
+    /* ------- left column: stat card + frequency strip ------- */
+    .f05-col-l {
+      position: absolute;
+      left: 5.5cqw;
+      top: 18.5cqh;
+      width: 45cqw;
+    }
+    .f05-card-rule {
+      width: 100%;
+      height: 1px;
+      background: #475569;
+    }
+    .f05-det {
+      margin-top: 2.2cqh;
+      font-family: "Newsreader", serif;
+      font-weight: 700;
+      font-size: 6.5cqw;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #e2e8f0;
+    }
+    .f05-det-sub {
+      margin-top: 1.4cqh;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.85cqw;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    .f05-count-row {
+      margin-top: 3.2cqh;
+      display: flex;
+      align-items: baseline;
+    }
+    .f05-counter-wrap {
+      display: flex;
+      align-items: baseline;
+      width: 13.5cqw; /* fixed width — no layout shift as digits change */
+    }
+    .f05-counter {
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+      font-family: "Newsreader", serif;
+      font-weight: 700;
+      font-size: 7.2cqw;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #38bdf8;
+      transform-origin: left center;
+    }
+    .f05-suffix {
+      font-family: "Newsreader", serif;
+      font-weight: 600;
+      font-size: 3.2cqw;
+      line-height: 1;
+      color: #94a3b8;
+    }
+    .f05-count-label {
+      margin-left: 1.4cqw;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 1.05cqw;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #e2e8f0;
+    }
+    .f05-strip {
+      margin-top: 3.4cqh;
+      width: 45cqw;
+      display: block;
+    }
+    .f05-strip text {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+    .f05-hatch {
+      stroke: #475569;
+      stroke-width: 2;
+      opacity: 0.55;
+      fill: none;
+    }
+    .f05-zone-label {
+      margin-top: 1.3cqh;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.9cqw;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    .f05-zone-label .f05-glow {
+      color: #38bdf8;
+      text-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
+    }
+
+    /* ------- right column: 70-tile window wall ------- */
+    .f05-col-r {
+      position: absolute;
+      left: 56.5cqw;
+      top: 18.5cqh;
+      width: 36cqw;
+    }
+    .f05-marge-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .f05-marge-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.95cqw;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #e2e8f0;
+    }
+    .f05-marge-count {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 1.6cqw;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+    }
+    .f05-marge-rule {
+      margin-top: 0.9cqh;
+      width: 100%;
+      height: 1px;
+      background: #475569;
+    }
+    .f05-grid {
+      margin-top: 2.2cqh;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 0.42cqw;
+    }
+    .f05-tile {
+      position: relative;
+      aspect-ratio: 1;
+      border: 1px solid #1e293b;
+      overflow: hidden;
+    }
+    .f05-tile-fill {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #38bdf8;
+      opacity: 0.92;
+      transform-origin: bottom center;
+    }
+    .f05-rest-row {
+      margin-top: 1.6cqh;
+      display: flex;
+      align-items: center;
+      gap: 0.9cqw;
+      white-space: nowrap;
+    }
+    .f05-rest {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.82cqw;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    .f05-rest sup {
+      font-size: 0.6em;
+      letter-spacing: 0;
+    }
+    .f05-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.72cqw;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #475569;
+      border: 1px solid #1e293b;
+      padding: 0.35cqh 0.6cqw;
+    }
+  </style>
+
+  <div id="05-root" data-composition-id="05-zwei-saetze" data-start="0" data-duration="18.644" data-fps="30" data-width="1920" data-height="1080">
+
+  <div class="f05-bg clip" data-start="0" data-duration="18.644" data-track-index="0"></div>
+
+  <div class="f05-stage clip" data-start="0" data-duration="18.644" data-track-index="1">
+    <div class="f05-camera">
+      <!-- Scene 1 — chrome + kicker, stage otherwise empty -->
+      <div class="f05-chrome-top">
+        <div class="f05-kicker" id="f05-kicker">Two theorems · August 3</div>
+        <div class="f05-num" id="f05-num">No. 05</div>
+      </div>
+      <div class="f05-rule-top" id="f05-rule-top"></div>
+      <div class="f05-rule-bot" id="f05-rule-bot"></div>
+
+      <!-- Scene 2 + 3 — stat card, counter, frequency strip -->
+      <div class="f05-col-l">
+        <div class="f05-card-rule" id="f05-card-rule"></div>
+        <div class="f05-det" id="f05-det">det S &gt; 0</div>
+        <div class="f05-det-sub" id="f05-det-sub">unconditional · no RH input</div>
+        <div class="f05-count-row">
+          <div class="f05-counter-wrap">
+            <span class="f05-counter" id="f05-counter">0</span><span
+              class="f05-suffix"
+              id="f05-suffix"
+              >/67</span
+            >
+          </div>
+          <span class="f05-count-label" id="f05-count-label">Windows</span>
+        </div>
+
+        <svg class="f05-strip" viewBox="0 0 864 140" xmlns="http://www.w3.org/2000/svg">
+          <!-- axis 0 … 15.5 → x = v · 55.74 -->
+          <line id="f05-axis" class="f05-draw" x1="0" y1="96" x2="864" y2="96" stroke="#475569" stroke-width="2" fill="none" />
+          <line id="f05-tick0" class="f05-draw" x1="1" y1="90" x2="1" y2="103" stroke="#475569" stroke-width="2" fill="none" />
+          <!-- zero-free zone: top edge + hatch (lines generated at setup) -->
+          <line id="f05-zone-edge" class="f05-draw" x1="80" y1="62" x2="780" y2="62" stroke="#475569" stroke-width="1.5" opacity="0.7" fill="none" />
+          <g id="f05-hatch-g"></g>
+          <!-- carrier band 0,6–1,3 near zero -->
+          <rect id="f05-band" x="33.4" y="70" width="39.1" height="26" fill="#38bdf8" opacity="0.95" />
+          <text id="f05-band-label" x="8" y="126" font-size="14" fill="#e2e8f0" text-anchor="start">Support 0.6–1.3</text>
+          <!-- first zero tick, far right -->
+          <line id="f05-gamma-tick" class="f05-draw" x1="787.6" y1="56" x2="787.6" y2="96" stroke="#e2e8f0" stroke-width="2.5" fill="none" />
+          <text id="f05-gamma-label" x="800" y="42" font-size="15" fill="#e2e8f0" text-anchor="end">γ<tspan dy="4" font-size="11">1</tspan><tspan dy="-4"> = 14.13</tspan></text>
+        </svg>
+
+        <div class="f05-zone-label" id="f05-zone-label">
+          zero-free region · <span class="f05-glow">damping ×634</span>
+        </div>
+      </div>
+
+      <!-- Scene 4 — the 70-tile window wall, 60 fill -->
+      <div class="f05-col-r">
+        <div class="f05-marge-head" id="f05-marge-head">
+          <span class="f05-marge-kicker">Margin · window census</span>
+          <span class="f05-marge-count" id="f05-marge-count">60/70</span>
+        </div>
+        <div class="f05-marge-rule" id="f05-marge-rule"></div>
+        <div class="f05-grid" id="f05-grid"></div>
+        <div class="f05-rest-row">
+          <span class="f05-rest f05-rest-item">Remainder: exact list · T* ≤ 8.5·10<sup>14</sup></span>
+          <span class="f05-tag f05-rest-item">Platt–Trudgian</span>
+          <span class="f05-tag f05-rest-item">Ingham 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var SVG_NS = "http://www.w3.org/2000/svg";
+
+      /* ---- setup: 70 tiles, first 60 carry a fill layer (bottom row = the rest list) ---- */
+      var TILES = 70;
+      var FILLED = 60;
+      var grid = document.getElementById("f05-grid");
+      for (var i = 0; i < TILES; i++) {
+        var tile = document.createElement("div");
+        tile.className = "f05-tile";
+        if (i < FILLED) {
+          var fill = document.createElement("span");
+          fill.className = "f05-tile-fill";
+          tile.appendChild(fill);
+        }
+        grid.appendChild(tile);
+      }
+
+      /* ---- setup: hatch lines inside the zero-free zone ---- */
+      var hatchG = document.getElementById("f05-hatch-g");
+      for (var hx = 86; hx <= 758; hx += 34) {
+        var ln = document.createElementNS(SVG_NS, "line");
+        ln.setAttribute("x1", hx);
+        ln.setAttribute("y1", 96);
+        ln.setAttribute("x2", hx + 16);
+        ln.setAttribute("y2", 62);
+        ln.setAttribute("class", "f05-hatch f05-draw");
+        hatchG.appendChild(ln);
+      }
+
+      /* ---- setup: measure every stroke-draw path (svg-path-draw) ---- */
+      document.querySelectorAll(".f05-draw").forEach(function (p) {
+        var len = p.getTotalLength() * 1.02;
+        p.style.strokeDasharray = String(len);
+        p.style.strokeDashoffset = String(len);
+      });
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* macro move — slow push-in under the whole shot (grid-card-assemble hold) */
+      tl.fromTo(".f05-camera", { scale: 1 }, { scale: 1.028, duration: 18.1, ease: "none" }, 0);
+
+      /* ================= Scene 1 (0.0–3.1s) — kicker + hairline chrome ================= */
+      tl.fromTo("#f05-rule-top", { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.8, ease: "power2.out" }, 0.1);
+      tl.fromTo("#f05-rule-bot", { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.8, ease: "power2.out" }, 0.28);
+      tl.fromTo("#f05-kicker",
+        { clipPath: "inset(0 100% 0 0)", opacity: 0, y: 10 },
+        { clipPath: "inset(0 0% 0 0)", opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.25);
+      tl.fromTo("#f05-num", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 0.7);
+
+      /* ================= Scene 2 (3.1–8.2s) — stat card + 67/67 counter ================= */
+      tl.fromTo("#f05-card-rule", { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.55, ease: "power2.out" }, 3.4);
+      tl.fromTo("#f05-det", { opacity: 0, y: 26 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 3.5);
+      tl.fromTo("#f05-det-sub", { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 4.15);
+
+      /* counting-dynamic-scale — value + scale share start, duration, ease */
+      var COUNT_AT = 6.7;
+      var COUNT_DUR = 1.6;
+      var counter = document.getElementById("f05-counter");
+      var state = { value: 0 };
+      tl.fromTo(counter, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, COUNT_AT);
+      tl.to(state, {
+        value: 67,
+        duration: COUNT_DUR,
+        ease: "power3.out",
+        onUpdate: function () {
+          counter.textContent = String(Math.round(state.value));
+        },
+      }, COUNT_AT);
+      tl.fromTo(counter, { scale: 0.5 }, { scale: 1, duration: COUNT_DUR, ease: "power3.out" }, COUNT_AT);
+      tl.fromTo("#f05-count-label", { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.3);
+      tl.fromTo("#f05-suffix", { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" }, COUNT_AT + COUNT_DUR);
+
+      /* ================= Scene 3 (8.2–12.8s) — frequency strip draws ================= */
+      tl.to("#f05-axis", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 8.45);
+      tl.to("#f05-tick0", { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, 8.8);
+      tl.fromTo("#f05-band", { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.5, ease: "power2.out" }, 8.75);
+      tl.fromTo("#f05-band-label", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power1.out" }, 9.0);
+      tl.to("#f05-zone-edge", { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 9.1);
+      tl.to("#f05-hatch-g line", { strokeDashoffset: 0, duration: 0.3, ease: "power2.out", stagger: 0.055 }, 9.15);
+      tl.to("#f05-gamma-tick", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 10.5);
+      tl.fromTo("#f05-gamma-label", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power1.out" }, 10.7);
+      tl.fromTo("#f05-zone-label", { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 11.3);
+
+      /* ================= Scene 4 (12.8–18.1s) — window wall cascade + fill wave ================= */
+      tl.fromTo("#f05-marge-head .f05-marge-kicker", { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 13.1);
+      tl.fromTo("#f05-marge-rule", { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.5, ease: "power2.out" }, 13.15);
+      /* grid-card-assemble signature — staggered cascade directly into slots */
+      tl.fromTo(".f05-tile",
+        { opacity: 0, y: 12, scale: 0.85 },
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.32, ease: "power2.out",
+          stagger: { each: 0.018, grid: [7, 10], from: 0 },
+        }, 13.1);
+      /* stat-bars-and-fills — sequential wave, 60 fills, transform-origin bottom */
+      tl.fromTo(".f05-tile-fill",
+        { scaleY: 0 },
+        { scaleY: 1, duration: 0.45, ease: "power2.out", stagger: 0.032 }, 13.7);
+      tl.fromTo("#f05-marge-count", { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 15.9);
+      tl.fromTo('[data-composition-id="05-zwei-saetze"] .f05-rest-item', { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.12 }, 16.2);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["05-zwei-saetze"] = tl;
+    })();
+  </script>
+</div>
+</template>

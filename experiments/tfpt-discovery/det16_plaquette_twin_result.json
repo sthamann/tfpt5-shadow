@@ -1,0 +1,634 @@
+{
+  "falsification_controls": {
+    "cutoff_relative_changes_K2_to_K3": {
+      "2x2": 1.1562325066439422e-12,
+      "3x2": 1.791500440498776e-12
+    },
+    "cutoff_scan": [
+      {
+        "block_dimension": 48,
+        "cutoff": 1,
+        "gap": 1.9229115815354736,
+        "lx": 2,
+        "ly": 2
+      },
+      {
+        "block_dimension": 80,
+        "cutoff": 2,
+        "gap": 1.9229113663049577,
+        "lx": 2,
+        "ly": 2
+      },
+      {
+        "block_dimension": 112,
+        "cutoff": 3,
+        "gap": 1.9229113663027344,
+        "lx": 2,
+        "ly": 2
+      },
+      {
+        "block_dimension": 324,
+        "cutoff": 1,
+        "gap": 1.903398703845374,
+        "lx": 3,
+        "ly": 2
+      },
+      {
+        "block_dimension": 900,
+        "cutoff": 2,
+        "gap": 1.9033983585794962,
+        "lx": 3,
+        "ly": 2
+      },
+      {
+        "block_dimension": 1764,
+        "cutoff": 3,
+        "gap": 1.9033983585760863,
+        "lx": 3,
+        "ly": 2
+      }
+    ],
+    "kinematic_scale_estimate": 0.05000000000000001,
+    "large_one_pair_lattices": [
+      {
+        "block_dimension": 1476225,
+        "circulation_count": 6561,
+        "diagonal_bytes": 11809800,
+        "gap": 1.8668565391003917,
+        "lx": 5,
+        "ly": 3,
+        "plaquette_count": 8,
+        "runtime_seconds": 102.23377841617912,
+        "sector_dimension_all_16_channels": 23619600,
+        "source": "stored exact v4 Lanczos result",
+        "status": "reached",
+        "transition_count": 1320
+      },
+      {
+        "block_dimension": 5038848,
+        "circulation_count": 19683,
+        "diagonal_bytes": 40310784,
+        "gap": 1.8618695563669947,
+        "lx": 4,
+        "ly": 4,
+        "plaquette_count": 9,
+        "runtime_seconds": 262.4034915836528,
+        "sector_dimension_all_16_channels": 80621568,
+        "source": "stored exact v4 Lanczos result",
+        "status": "reached",
+        "transition_count": 1536
+      },
+      {
+        "block_dimension": 212576400,
+        "circulation_count": 531441,
+        "lx": 5,
+        "ly": 4,
+        "plaquette_count": 12,
+        "runtime_seconds": 0.0001327497884631157,
+        "sector_dimension_all_16_channels": 3401222400,
+        "source": "stored exact v4 Lanczos result",
+        "status": "skipped_dimension_guard"
+      }
+    ],
+    "many_body_stability": {
+      "binding_energy": -0.030057019207317737,
+      "binding_fraction": 0.015630993903170895,
+      "binding_threshold": 0.4807278953838692,
+      "blocks": [
+        {
+          "actual_csr_bytes": 16036,
+          "actual_nnz": 780,
+          "dimension": 108,
+          "eigenvalues": [
+            3.8853739996054393,
+            3.9229210457129797,
+            3.958719012507426,
+            3.9598913555499853,
+            3.959901553844242,
+            3.998750390381048
+          ],
+          "estimated_csr_bytes": 17432,
+          "estimated_nnz": 828,
+          "flavor_multiplicity": 128,
+          "hole_spatial_dimension": 6,
+          "name": "Qpm_SS",
+          "particle_spatial_dimension": 6,
+          "raw_sector_states_represented": 13824,
+          "status": "built",
+          "total_charge_block": 2
+        },
+        {
+          "actual_csr_bytes": 49796,
+          "actual_nnz": 2432,
+          "dimension": 288,
+          "eigenvalues": [
+            3.884047424643437,
+            3.8840584442092343,
+            3.885373999605512,
+            3.9210299933375325,
+            3.922921045713001,
+            3.922921045713043
+          ],
+          "estimated_csr_bytes": 54152,
+          "estimated_nnz": 2592,
+          "flavor_multiplicity": 448,
+          "hole_spatial_dimension": 16,
+          "name": "Qpm_SD",
+          "particle_spatial_dimension": 6,
+          "raw_sector_states_represented": 129024,
+          "status": "built",
+          "total_charge_block": 2
+        },
+        {
+          "actual_csr_bytes": 49796,
+          "actual_nnz": 2432,
+          "dimension": 288,
+          "eigenvalues": [
+            3.8840474246434087,
+            3.884058444209242,
+            3.8853739996054695,
+            3.9210299933374917,
+            3.922921045712995,
+            3.958719012507454
+          ],
+          "estimated_csr_bytes": 54152,
+          "estimated_nnz": 2592,
+          "flavor_multiplicity": 448,
+          "hole_spatial_dimension": 6,
+          "name": "Qpm_DS",
+          "particle_spatial_dimension": 16,
+          "raw_sector_states_represented": 129024,
+          "status": "built",
+          "total_charge_block": 2
+        },
+        {
+          "actual_csr_bytes": 151556,
+          "actual_nnz": 7424,
+          "dimension": 768,
+          "eigenvalues": [
+            3.815766143863643,
+            3.8523571872640665,
+            3.8527977744184936,
+            3.884047424643517,
+            3.8840584442093338,
+            3.885373999605509
+          ],
+          "estimated_csr_bytes": 164872,
+          "estimated_nnz": 7936,
+          "flavor_multiplicity": 1568,
+          "hole_spatial_dimension": 16,
+          "name": "Qpm_DD",
+          "particle_spatial_dimension": 16,
+          "raw_sector_states_represented": 1204224,
+          "status": "built",
+          "total_charge_block": 2
+        },
+        {
+          "actual_csr_bytes": 151556,
+          "actual_nnz": 7424,
+          "dimension": 768,
+          "eigenvalues": [
+            3.8157661438636357,
+            3.8523571872640696,
+            3.852797774418487,
+            3.884047424643459,
+            3.8840584442092987,
+            3.885373999605531
+          ],
+          "estimated_csr_bytes": 164872,
+          "estimated_nnz": 7936,
+          "flavor_multiplicity": 4096,
+          "hole_spatial_dimension": 16,
+          "name": "Q0_DD",
+          "particle_spatial_dimension": 16,
+          "raw_sector_states_represented": 3145728,
+          "status": "built",
+          "total_charge_block": 0
+        }
+      ],
+      "degeneracy_explained": true,
+      "degeneracy_formula": "2*C(8,2)^2 + (8*8)^2",
+      "first_excited_energy": 3.8523571872640665,
+      "ground_blocks": [
+        "Q0_DD",
+        "Qpm_DD"
+      ],
+      "ground_energy": 3.8157661438636357,
+      "ground_multiplicity": 5664,
+      "ground_unique": false,
+      "no_state_below_one_pair_gap": true,
+      "one_pair_gap": 1.9229115815354767,
+      "passed": true,
+      "predicted_free_degeneracy": 5664,
+      "raw_sector_dimension": 4621824,
+      "splitting": 0.036591043400430845,
+      "status": "reached"
+    },
+    "no_det": [
+      {
+        "block_dimension": 48,
+        "collapse_ratio": 51.99900845970876,
+        "det_gap": 1.9229115815354767,
+        "ground_energy": -0.07708841846452748,
+        "kinematic_scale_estimate": 0.05000000000000001,
+        "lx": 2,
+        "ly": 2,
+        "splitting": 0.03697977400906476
+      },
+      {
+        "block_dimension": 324,
+        "collapse_ratio": 52.39180755856576,
+        "det_gap": 1.9033987038453815,
+        "ground_energy": -0.09660129615462845,
+        "kinematic_scale_estimate": 0.05000000000000001,
+        "lx": 3,
+        "ly": 2,
+        "splitting": 0.03633008274657603
+      }
+    ],
+    "no_det_collapse_ratio_min": 10.0,
+    "one_pair_level_census": {
+      "formula_g1": "2 charge signs * 8 particle flavors * 8 hole flavors",
+      "ground_degeneracy_g1": 128,
+      "levels": [
+        {
+          "energy": 1.9229115815354738,
+          "full_multiplicity": 128,
+          "spatial_multiplicity": 1
+        },
+        {
+          "energy": 1.959891355544534,
+          "full_multiplicity": 256,
+          "spatial_multiplicity": 2
+        },
+        {
+          "energy": 1.9987503903810497,
+          "full_multiplicity": 128,
+          "spatial_multiplicity": 1
+        },
+        {
+          "energy": 2.962703671418424,
+          "full_multiplicity": 128,
+          "spatial_multiplicity": 1
+        },
+        {
+          "energy": 2.976545845522172,
+          "full_multiplicity": 256,
+          "spatial_multiplicity": 2
+        },
+        {
+          "energy": 2.9983344890399364,
+          "full_multiplicity": 256,
+          "spatial_multiplicity": 2
+        },
+        {
+          "energy": 3.0189239663657372,
+          "full_multiplicity": 256,
+          "spatial_multiplicity": 2
+        },
+        {
+          "energy": 3.0292968963844826,
+          "full_multiplicity": 128,
+          "spatial_multiplicity": 1
+        }
+      ],
+      "neutral_flavor_channels": 128
+    },
+    "richardson_2x2_cutoff_infinity": 1.9229113663027344
+  },
+  "file_sha256": "13650b0b1d99a0dff81ee50b8ce121f60258a9fd942a0cd0f97c45e5db1282ef",
+  "finite_size_fit": {
+    "enlarged_area_intercept": 1.8454911803146297,
+    "enlarged_length_intercept": 1.8031354553777064,
+    "enlarged_length_intercept_change": -0.0006363944676137656,
+    "enlarged_points": 6,
+    "fit_variable": "1/sqrt(site_count)",
+    "intercept": 1.8037718498453201,
+    "minimum_gap": 1.872958773150825,
+    "old_four_point_area_intercept": 1.8496340500392332,
+    "slope": 0.23984433714579168,
+    "slope_vs_volume": -0.006210589882590551,
+    "trend_vs_volume": "decreasing"
+  },
+  "gate_summary": {
+    "passed": 15,
+    "total": 15
+  },
+  "gates": [
+    {
+      "detail": "",
+      "name": "G2 three exact 1D/four-mode reduction pins",
+      "passed": true
+    },
+    {
+      "detail": "2^16=65536 max_Gauss_error=0.0e+00",
+      "name": "G1 full DET16 fibre definitions + exact Gauss law",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "G3 all four plaquette geometries reached",
+      "passed": true
+    },
+    {
+      "detail": "min=1.872958773 intercept=1.803771850 trend=decreasing",
+      "name": "G4 preregistered finite-size gap rule",
+      "passed": true
+    },
+    {
+      "detail": "min normalized slope=1.000000000",
+      "name": "G5 physical-edge chirality preserved",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "G6 no sub-gap composite pole/propagator zero",
+      "passed": true
+    },
+    {
+      "detail": "max |H-Hdag|=0.0e+00 min_weight=4.9e-33",
+      "name": "G7 Hamiltonian Hermiticity + Lehmann positivity",
+      "passed": true
+    },
+    {
+      "detail": "max=0.002806 < 0.10",
+      "name": "G8 circulation-window boundary weight",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "G9 JSON hash contract + exploration firewall",
+      "passed": true
+    },
+    {
+      "detail": "rel(2x2)=1.156e-12 rel(3x2)=1.792e-12 Richardson_2x2=1.922911366",
+      "name": "G10 cutoff stability K=2 to K=3",
+      "passed": true
+    },
+    {
+      "detail": "E2=3.815766144 Delta1=1.922911582",
+      "name": "G11a no two-pair state below one-pair gap",
+      "passed": true
+    },
+    {
+      "detail": "binding=-0.030057019 threshold=0.480727895 fraction=0.015631",
+      "name": "G11b two-pair binding <= 0.25 Delta1",
+      "passed": true
+    },
+    {
+      "detail": "predicted=5664 measured=5664 formula=2*C(8,2)^2 + (8*8)^2",
+      "name": "G11c free-pair combinatorics explains degeneracy",
+      "passed": true
+    },
+    {
+      "detail": "min_ratio=51.999 residual_max=0.036979774 scale_est=0.050000000",
+      "name": "G12 DET/no-DET collapse ratio >= 10",
+      "passed": true
+    },
+    {
+      "detail": "n=6 1/A=1.845491180 1/L=1.803135455 old_1/L=1.803771850",
+      "name": "G13 enlarged-lattice intercept above kinematic scale",
+      "passed": true
+    }
+  ],
+  "generated_utc": "2026-09-04",
+  "geometries": [
+    {
+      "block_dimension": 48,
+      "boundary_probability": 0.0006946654814011127,
+      "chirality_witness": 0.9999999999833332,
+      "composite_operator_audit": {
+        "onsite_bilinear": {
+          "captured_weight_low24": 0.9996977737322799,
+          "first_pole": 1.9229115815354767,
+          "minimum_lehmann_weight": 4.935948305307646e-33,
+          "operator": "B_singlet",
+          "propagator_min_modulus_below_0p95_gap": 0.5069487601167155,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "rotor_link_trilinear": {
+          "captured_weight_low24": 0.9999235028244386,
+          "first_pole": 1.9229115815354767,
+          "minimum_lehmann_weight": 2.7044824666507217e-31,
+          "operator": "T_link",
+          "propagator_min_modulus_below_0p95_gap": 0.33910755753171873,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "traceless_bilinear": {
+          "captured_weight_low24": 0.9996977737322799,
+          "first_pole": 1.9229115815354767,
+          "minimum_lehmann_weight": 4.935948305307646e-33,
+          "operator": "B_traceless",
+          "propagator_min_modulus_below_0p95_gap": 0.5069487601167155,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        }
+      },
+      "gauss_error": 0.0,
+      "geometry": [
+        2,
+        2
+      ],
+      "hermiticity_error": 0.0,
+      "mirror_gap": 1.9229115815354767,
+      "sector_dimension_all_16_channels": 768
+    },
+    {
+      "block_dimension": 324,
+      "boundary_probability": 0.0011899890042654253,
+      "chirality_witness": 0.9999999999833332,
+      "composite_operator_audit": {
+        "onsite_bilinear": {
+          "captured_weight_low24": 0.9978729243494848,
+          "first_pole": 1.9033987038453815,
+          "minimum_lehmann_weight": 2.427153212415108e-31,
+          "operator": "B_singlet",
+          "propagator_min_modulus_below_0p95_gap": 0.5079030242639269,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "rotor_link_trilinear": {
+          "captured_weight_low24": 0.9351156439928741,
+          "first_pole": 1.9033987038453815,
+          "minimum_lehmann_weight": 2.3303752327110206e-30,
+          "operator": "T_link",
+          "propagator_min_modulus_below_0p95_gap": 0.3244106972936195,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "traceless_bilinear": {
+          "captured_weight_low24": 0.9978729243494848,
+          "first_pole": 1.9033987038453815,
+          "minimum_lehmann_weight": 2.427153212415108e-31,
+          "operator": "B_traceless",
+          "propagator_min_modulus_below_0p95_gap": 0.5079030242639269,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        }
+      },
+      "gauss_error": 0.0,
+      "geometry": [
+        3,
+        2
+      ],
+      "hermiticity_error": 0.0,
+      "mirror_gap": 1.9033987038453815,
+      "sector_dimension_all_16_channels": 5184
+    },
+    {
+      "block_dimension": 6561,
+      "boundary_probability": 0.0020851696578090945,
+      "chirality_witness": 0.9999999999833332,
+      "composite_operator_audit": {
+        "onsite_bilinear": {
+          "captured_weight_low24": 0.9124166432473344,
+          "first_pole": 1.8828417587289967,
+          "minimum_lehmann_weight": 6.282406543183565e-33,
+          "operator": "B_singlet",
+          "propagator_min_modulus_below_0p95_gap": 0.48138440506786184,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "rotor_link_trilinear": {
+          "captured_weight_low24": 0.0895836904150254,
+          "first_pole": 1.8828417587289967,
+          "minimum_lehmann_weight": 1.6433513554948298e-32,
+          "operator": "T_link",
+          "propagator_min_modulus_below_0p95_gap": 0.04748950863653974,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "traceless_bilinear": {
+          "captured_weight_low24": 0.9124166432473344,
+          "first_pole": 1.8828417587289967,
+          "minimum_lehmann_weight": 6.282406543183565e-33,
+          "operator": "B_traceless",
+          "propagator_min_modulus_below_0p95_gap": 0.48138440506786184,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        }
+      },
+      "gauss_error": 0.0,
+      "geometry": [
+        3,
+        3
+      ],
+      "hermiticity_error": 0.0,
+      "mirror_gap": 1.8828417587289967,
+      "sector_dimension_all_16_channels": 104976
+    },
+    {
+      "block_dimension": 104976,
+      "boundary_probability": 0.0028055036887633324,
+      "chirality_witness": 0.9999999999833332,
+      "composite_operator_audit": {
+        "onsite_bilinear": {
+          "captured_weight_low24": 0.9072245335804308,
+          "first_pole": 1.872958773150825,
+          "minimum_lehmann_weight": 1.669965291280706e-30,
+          "operator": "B_singlet",
+          "propagator_min_modulus_below_0p95_gap": 0.4807930596271955,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "rotor_link_trilinear": {
+          "captured_weight_low24": 0.09382075710067521,
+          "first_pole": 1.872958773150825,
+          "minimum_lehmann_weight": 2.530792317546352e-31,
+          "operator": "T_link",
+          "propagator_min_modulus_below_0p95_gap": 0.04996276459293269,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        },
+        "traceless_bilinear": {
+          "captured_weight_low24": 0.9072245335804308,
+          "first_pole": 1.872958773150825,
+          "minimum_lehmann_weight": 1.669965291280706e-30,
+          "operator": "B_traceless",
+          "propagator_min_modulus_below_0p95_gap": 0.4807930596271955,
+          "subgap_weight": 0.0,
+          "zero_below_gap": false
+        }
+      },
+      "gauss_error": 0.0,
+      "geometry": [
+        4,
+        3
+      ],
+      "hermiticity_error": 0.0,
+      "mirror_gap": 1.872958773150825,
+      "sector_dimension_all_16_channels": 1679616
+    }
+  ],
+  "honest_note": "finite open plaquettes; float64/complex128; exact only in the stated neutral one-particle/one-hole sector and |k_p|<=3 control window; no 4D or thermodynamic theorem; finite 2x2 two-pair sector only; CHIRAL4D.NOMIRROR.01 stays [O] and this decides nothing about T4",
+  "parameters": {
+    "charges": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "eigenpair_count": 24,
+    "electric_strength": 1.0,
+    "flux_cutoff": 1,
+    "geometries": [
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        3
+      ]
+    ],
+    "hopping": 0.1,
+    "local_fock_dimension": 65536,
+    "magnetic_strength": 0.1,
+    "mode_count": 16
+  },
+  "probe": "det16_plaquette_twin_probe.py",
+  "reduction_pins": {
+    "L2_hE0.5_t0.20_gap": {
+      "absolute_error": 1.4679857329724655e-10,
+      "frozen": 0.934804245,
+      "observed": 0.9348042451467986
+    },
+    "L2_hE1.0_t0.05_noDET_splitting": {
+      "absolute_error": 2.3708248905740525e-10,
+      "frozen": 0.019316829,
+      "observed": 0.01931682876291751
+    },
+    "L3_hE1.0_t0.20_gap": {
+      "absolute_error": 8.941081208746482e-11,
+      "frozen": 0.930450852,
+      "observed": 0.9304508520894108
+    }
+  },
+  "runtime_seconds": 28.85451141698286,
+  "spec_sha256": "5056989329fde1f5a58bcc1e1ab093bed2bc7f9acfbce9ac5e1c3707742e224d",
+  "spec_version": "v5",
+  "verdict": "PLAQUETTE_GAP_OPEN_CHIRALITY_KEPT",
+  "weakest_step": "The genuine antisymmetrized audit reaches only the finite 2x2 two-pair sector and omits higher pair-number sectors and interactions that break the exact flavor symmetry; the chirality witness remains a separate kinematic edge branch."
+}

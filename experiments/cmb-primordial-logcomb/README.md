@@ -42,6 +42,52 @@ frozen ω (phase-coherent across TT/TE/EE) escalates. Either way this is one of
 the few dated, external, zero-parameter decision points of the program (the
 frequency has no tunable freedom).
 
+## Bridge-class note (2026-08-27, typed — no change to the freeze)
+
+The internal character theorem (`experiments/tfpt-discovery/
+doubletone_character_transduction_probe.py`, 10/10) proves that the
+`ω = 2.5827` tone is the **odd** character of the transfer operator while
+the monopole and the `ω₋ = 0.9532` tone share the **even** character.
+Under a *character-faithful* transduction (internal parity → E/B parity,
+pinned even→even by the monopole), the TT channel would carry
+`{0.9532, 0.4766, 1.2914}` and `2.5827` would be **forbidden** in TT —
+the frozen search above then belongs to the *character-blind* (S15
+multiplicative) bridge class. Both classes stay open until
+OBS.TRANSDUCTION.01 is proven; the freeze is **not** retracted.
+Update 2026-08-27: the bridge is now *reduced* — `sheetflip_skyparity_bridge_probe.py`
+(13/13) proves that geometric covariance of the coupling + the CPT typing of the
+sheet flip **imply** the faithful dictionary (equivariance theorem, sky-parity law
+machine-verified); the sole remaining premise is the covariance axiom TE, which for
+the CPT representative is CPT invariance — a theorem inside any local 4D QFT, i.e.
+TE rides on the existing QFT4D.OS.RECON.01 contract rather than a new assumption.
+
+## Faithful-class ω₋ typing (`omega_minus.py`, 2026-08-27) — **data_limited**
+
+The 2025 combined scan (Planck + ACT DR6 + SPT-3G, arXiv:2507.17276) uses the
+**identical template** with a **flat prior ω ∈ [0, 100]** — unlike Planck 2018 X,
+this *covers* ω₋ = 0.953: `A_log < 0.0286` (95%, global), per-frequency 2σ limits
+≲ 0.05, no detection. Machine-checked typing:
+
+| check | value |
+|---|---|
+| ω₋ inside the 2025 flat prior | yes |
+| reach at ω₋, full Planck window | **1.15 periods** (< 2.8 gate) |
+| reach at ω₋, optimistic [10⁻⁴, 1] Mpc⁻¹ | 1.40 (still sub-gate) |
+| reach at ω₊/2 = 1.291 (2Δ₊ tone) | 1.56 (sub-gate) |
+| ε candidate 0.0173 vs bounds | below both (global 0.0286 / per-freq 0.05) |
+
+→ **`data_limited`, structurally**: ω₋ is frequency-covered but *period-starved* —
+no realistic single k-window reaches the frozen 2.8-period gate (that needs ~8
+decades in k). The amplitude carry-over of ε to the even sector is typed OPEN.
+Consequence of the bridge theorem: under the faithful class, **no** even-channel
+TFPT tone is gate-testable in TT today; the gate-passing home of the faithful
+class is **TB/EB at ω₊ = 2.5827 — where no published comb search exists** (the
+open target this experiment now names). New dated
+decision structure: a TT detection at 2.5827 refutes the faithful class;
+a TT detection at 0.9532/1.2914 supports it (note: log₁₀(0.9532) = −0.021
+sits just *below* the published Planck search prior [0, 2.1]); TB/EB
+structure at 2.5827 is the faithful class's own positive channel.
+
 ## Reproduce
 
 ```bash

@@ -2,7 +2,7 @@
 constructive-QFT lemma, with a proof-tree completeness check showing exactly ONE
 analytic node remains open.  This is the formal write-up of the one human math
 obligation; the all-orders reduction step it relies on is now machine-proved in Lean
-(FORM.QGEO.03, TfptCarrier/SeamDeckClosure.flat_all_orders_clock).
+(FORM.QGEO.04, TfptCarrier/SeamDeckClosure.flat_all_orders_clock).
 
 ----------------------------------------------------------------------------------
 LEMMA (QGEO.SYM.01, constructive-QFT form).
@@ -30,7 +30,7 @@ LEMMA (QGEO.SYM.01, constructive-QFT form).
         free RP/OS seam (v155/v175) -> 4 marks forced (v195/v216) -> conformal class
         = pillowcase, order-4 => tau=i (v214/v267) -> flat representative
         Troyanov-unique -> [given flat] [rho,H]=0 to ALL orders (v276, Lean
-        FORM.QGEO.03) -> omega o rho = omega (v198/v199/v201/SeamDeckClosure) ->
+        FORM.QGEO.04) -> omega o rho = omega (v198/v199/v201/SeamDeckClosure) ->
         mark-locality -> E8.  The single open leaf: 'the raw seam state IS the flat
         g_flat state' (Lambda_Sigma = sqrt(-Delta_{g_flat})).
   [E] 2. THE GEOMETRIC SIDE IS FIXED (not the open part).  the flat-metric DtN
@@ -49,7 +49,7 @@ LEMMA (QGEO.SYM.01, constructive-QFT form).
   [F] 4. LEAN-BACKED.  the all-orders closure step (premise => commutator to all
         orders) is now a Lean theorem with only the standard axioms
         (propext, Classical.choice, Quot.sound), no sorry: any spectral function of
-        the diagonal flat Laplacian commutes with the clock (FORM.QGEO.03).
+        the diagonal flat Laplacian commutes with the clock (FORM.QGEO.04).
   [O] 5. RESIDUAL.  exactly one constructive-QFT statement -- the open leaf of (1),
         proved via route (i) or (ii) -- closes QGEO.SYM.01.  Until then it is the one
         honest axiom (the role 'c = const' plays in relativity).  This script does NOT
@@ -69,7 +69,7 @@ REDUCTION_DAG = {
     "four_marks_forced":         ("closed", "v195/v216"),
     "conformal_class_pillowcase":("closed", "v214/v267 (order-4 => tau=i, j=1728)"),
     "flat_representative_unique": ("closed", "Troyanov (cone angles pi)"),
-    "commutator_all_orders":     ("closed", "v276 + Lean FORM.QGEO.03"),
+    "commutator_all_orders":     ("closed", "v276 + Lean FORM.QGEO.04"),
     "state_clock_invariant":     ("closed", "v198/v199/v201/SeamDeckClosure"),
     "mark_locality":             ("closed", "v210/v264"),
     "E8_metric_inclusion":       ("closed", "v154/v277"),

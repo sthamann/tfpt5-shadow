@@ -8,6 +8,7 @@ from pathlib import Path
 
 from . import constants
 from .birefringence_meta import SYS_FLOOR_DEG, birefringence_meta
+from .rotation_fingerprint import run_fingerprint
 from .seed_line import run_seed_line
 from .shared_seed import run_shared_seed
 
@@ -83,8 +84,35 @@ def main(argv: list[str] | None = None) -> int:
         print(f"    CMB-INDEPENDENT cross-check (BBN Omega_b -> beta): {mt.bbn_cross_z:+.2f} sigma")
     print(f"    -> {mt.verdict}")
 
+    # ---- full rotation fingerprint: morphology + null/sign properties --------
+    fp = run_fingerprint()
+    print("\n[rotation_fingerprint]  the full constant-rotation morphology of beta_TFPT")
+    print(f"    frozen: TB/TE = tan(2b) = {fp.frozen['tan_2beta']:.8f} ; "
+          f"2EB/(EE-BB) = tan(4b) = {fp.frozen['tan_4beta']:.8f} ; n = 0 ; C_L^aa = 0")
+    for g in fp.legs:
+        if g["property"] == "monopole":
+            print(f"    monopole   {g['measured']:.3f}+/-{g['sigma']:.3f} deg vs "
+                  f"{g['predicted']:.4f} -> {g['z']:+.2f} sigma, sign "
+                  f"{'+' if g['sign_matches'] else 'MISMATCH'}  [{g['status']}]  "
+                  f"({g['experiment']})")
+        elif g["property"] == "frequency_exponent":
+            print(f"    freq exp   n = {g['measured']:+.2f} +{g['sigma_plus']:.2f}/-"
+                  f"{g['sigma_minus']:.2f} vs 0 -> {g['z']:+.2f} sigma  [{g['status']}]  "
+                  f"({g['experiment']})")
+        elif g["property"] == "anisotropy_null":
+            print(f"    anisotropy A_CB < {g['limit_95CL_deg2']} deg^2 (95%), pred 0  "
+                  f"[{g['status']}]  ({g['experiment']})")
+        elif g["property"] == "cross_correlation_null":
+            print(f"    alpha x T/E/B null up to L={g['L_max']}, pred 0  [{g['status']}]  "
+                  f"({g['experiment']})")
+        else:
+            print(f"    {g['property']:24s} [{g['status']}]  {g['note']}")
+    print(f"    -> {fp.verdict}")
+
     RESULTS.mkdir(exist_ok=True)
     out = {"constants": c, "modes": r.modes, "verdict": r.verdict,
+           "rotation_fingerprint": {"frozen": fp.frozen, "legs": fp.legs,
+                                    "verdict": fp.verdict},
            "shared_seed": {"phi0_frozen": s.phi0_frozen, "combined_chi2": s.combined_chi2,
                            "dof": s.dof, "max_z": s.spread_max_z,
                            "consistent": s.combined_consistent, "verdict": s.verdict,

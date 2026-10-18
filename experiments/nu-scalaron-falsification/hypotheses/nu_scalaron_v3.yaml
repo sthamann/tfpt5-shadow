@@ -1,0 +1,85 @@
+# nu-scalaron-falsification -- exploration hypothesis set v3
+# FROZEN by nu_pentagon_phase_probe.py after its pre-declared protocol passed.
+# This is a data-consistent structural candidate, not a verification claim.
+
+candidate:
+  name: qplus_pentagon_misalignment
+  status: FROZEN_EXPLORATION
+  mixing_construction: "U = U_v9 * R13(theta, phase)"
+  theta:
+    formula: "2*pi/35 = (2*pi/5)/7"
+    degrees: 10.28571428571429
+    provenance: "carrier exterior angle divided by scalaron exponent numerator 7"
+  phase:
+    formula: "4*(2*pi/5) = 8*pi/5"
+    degrees: 288
+    conjugate_degrees: 72
+    provenance: "g_car=5 pentagon angle class; v429/v211"
+  typing: >
+    The phase and theta are a pre-declared exploration-level structural
+    identification tested against already-known NuFIT data.  They are not a
+    blind prediction and do not move a ledger marker.
+
+majorana_operator:
+  basis: "Q_plus eigenbasis (v69)"
+  epsilon: "phi0^2/(2*g_car)"
+  M_scal: "c3^(7/2)*Mbar"
+  M_R: "M_scal*diag(epsilon, 2*epsilon, 3)"
+  eigenvalues_GeV:
+    M1: 8651318653.362334
+    M2: 17302637306.72467
+    M3: 91799084998912.2
+  ansatz_note: >
+    Inherited from v2: the mixed epsilon insertion is an ansatz; M1 and M3
+    package existing scales and M2 is the new interpolation prediction.
+
+dirac_texture:
+  formula: "Y_nu = diag(0, y2, y3) * U^dagger"
+  y1_over_y3: 0
+  y3: "y_t(M3) [P], using the frozen v481 one-loop runner"
+  y2_over_y3: 0.0055725984138614
+  y2_source: "DATA_CALIBRATED from NuFIT dm2_21=7.49e-5 eV^2"
+  unselected_companion_2phi0sq: 0.005654512996593496
+  companion_typing: "PRIOR_CENSUS_LEE_NULL; reported, not selected"
+
+observable_vector:
+  masses:
+    m1_eV: 0.0
+    m2_eV: 0.008654478609367522
+    m3_eV: 0.05124031017908813
+    mass_typing: "m1 NO floor; m2 data-calibrated; m3 y3=y_t/M3 prediction"
+  mixing:
+    sin2_theta12: 0.3136805352991467
+    sin2_theta13: 0.02210267222231116
+    sin2_theta23: 0.4692517668739404
+    delta_cp_degrees: 287.6625515669562
+    mixing_typing: "structural candidate fixed by theta=2*pi/35 and phase=288 deg"
+  derived:
+    Sigma_mnu_eV: 0.05989478878845565
+    m_beta_eV: 0.009000415358245775
+    m_bb_interval_eV:
+      min: 0.001522190661298157
+      max: 0.003787286222214035
+    m_bb_note: "exact interval over unconstrained Majorana phases"
+
+data_snapshot:
+  nufit_60:
+    sin2_theta12: [0.307, 0.012]
+    sin2_theta13: [0.02195, 0.00058]
+    sin2_theta23: [0.470, 0.017]
+    dm2_21_eV2: 7.49e-5
+  holdout: "future NuFIT/JUNO/DUNE/Hyper-K and DESI-class releases only"
+
+kill_conditions:
+  K1_PHASE: "updated measured-target frozen-phase refit has any angle beyond 3 sigma"
+  K2_THETA: "theta=2*pi/35 lies beyond Delta-chi2=9 in an updated one-parameter profile"
+  K3_ORDERING: "established inverted ordering"
+  K4_MASS_SUM: "robust Sigma_mnu upper bound below the frozen vector after stated RG uncertainty"
+  K5_REACTOR: "updated sin2_theta13 differs from the frozen vector by at least 3 sigma"
+  K6_ATMOSPHERIC: "updated sin2_theta23 differs from the frozen vector by at least 3 sigma"
+  K7_TEXTURE: "a derived corpus Y_nu in the Q_plus basis is incompatible with diag(0,y2,y3) U^dagger"
+
+verdict_grammar:
+  phase: "PENTAGON_PHASE_CONSISTENT"
+  theta: "THETA_LADDER_HIT(PENTAGON_OVER_7, LEE)"
+  freeze: "V3_FROZEN"

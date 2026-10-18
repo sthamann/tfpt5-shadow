@@ -1,0 +1,390 @@
+{
+ "experiment": "p9-forecast",
+ "prereg": "hypotheses/p9_forecast_v1.yaml",
+ "seed": 0,
+ "fast": false,
+ "kernel": {
+  "c3": 0.039788735772973836,
+  "g_car": 5.0,
+  "N_fam": 3.0,
+  "lambda=(3/2)^6": 11.390625,
+  "omega=2pi/ln(lambda)": 2.5827069463082895,
+  "eps_predicted": 0.01730246011431484,
+  "gw_echo_ceiling=(2/3)^6": 0.08779149519890257,
+  "reach_gate_periods": 2.8,
+  "eps_reference": 0.3,
+  "detection_alpha": 0.05,
+  "power_gate": 0.8
+ },
+ "anchors": {
+  "PSR": {
+   "rw_step_power_matched_us": 0.0,
+   "rw_step_rms_matched_j1740_us": 199.8,
+   "rw_step_rms_matched_vela_us": 105.8,
+   "model_power_at_0.30_power_matched": 0.45,
+   "model_power_at_0.30_rms_matched": 0.4,
+   "false_positive_rate": 0.105,
+   "published": {
+    "eps": 0.3,
+    "power": 0.5,
+    "source": "pulsar-glitch-recovery PG.08 J1740-3015 injection (ref_rate 0.50)"
+   },
+   "pass": true
+  },
+  "PSR_NU": {
+   "slow_amp_uhz_inverted": 1.581,
+   "model_power_at_eps50": 0.458,
+   "published": {
+    "eps": 0.55,
+    "power": 0.458,
+    "source": "pulsar-glitch-recovery PG.06b FULL 2019 leg injection (eps_50 = 0.55; rate 0.458 at eps = 0.5 grid point)"
+   },
+   "pass": true
+  },
+  "FRB": {
+   "model_power_at_0.30_phi0": 0.958,
+   "model_power_at_predicted_phi0": 0.046,
+   "false_positive_rate": 0.05,
+   "published": {
+    "eps": 0.3,
+    "power": 0.9375,
+    "source": "repeater-cascade validation.json (comb_ref_rate 0.9375, phi=0)"
+   },
+   "pass": true
+  },
+  "GW": {
+   "model_recovery_at_eps90": 0.907,
+   "published": {
+    "eps": "eps90",
+    "power": 0.9,
+    "source": "gw-ringdown-echo Stage 1h recovery criterion (90% at eps90)"
+   },
+   "pass": true
+  },
+  "UHECR": {
+   "model_power_at_predicted": 0.225,
+   "false_positive_rate": 0.05,
+   "published": {
+    "eps": 0.01730246011431484,
+    "power": 0.233,
+    "source": "uhecr-energy-dsi results.json (injection_power_at_95pct)"
+   },
+   "pass": true
+  }
+ },
+ "programmes": [
+  {
+   "channel": "PSR",
+   "programme": "PSR-5Y-RADIO-PHASE(SET-A)",
+   "horizon_5yr": true,
+   "description": "Vela glitch trigger, dense radio cadence (n_TOA=581/glitch, tau 0.05..1000 d = 3.62 periods, sigma_TOA=50us, rw=106us/sqrt(d) Vela-rms-matched, 2 glitches/5yr), transients SET-A (2024 short-only), phase-space detector, null-MC-calibrated threshold",
+   "power_at_predicted": 0.075,
+   "false_positive": 0.05,
+   "false_positive_raw": 0.2225,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.075,
+    0.06,
+    0.04,
+    0.08
+   ],
+   "eps80": null
+  },
+  {
+   "channel": "PSR",
+   "programme": "PSR-5Y-RADIO-NU(SET-A)",
+   "horizon_5yr": true,
+   "description": "Vela glitch trigger, dense radio cadence (n_TOA=581/glitch, tau 0.05..1000 d = 3.62 periods, sigma_TOA=50us, rw=106us/sqrt(d) Vela-rms-matched, 2 glitches/5yr), transients SET-A (2024 short-only), nu-space detector, null-MC-calibrated threshold",
+   "power_at_predicted": 0.0625,
+   "false_positive": 0.05,
+   "false_positive_raw": 0.1275,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.0625,
+    0.04,
+    0.11,
+    0.46
+   ],
+   "eps80": null
+  },
+  {
+   "channel": "PSR",
+   "programme": "PSR-5Y-RADIO-PHASE(SET-B)",
+   "horizon_5yr": true,
+   "description": "Vela glitch trigger, dense radio cadence (n_TOA=581/glitch, tau 0.05..1000 d = 3.62 periods, sigma_TOA=50us, rw=106us/sqrt(d) Vela-rms-matched, 2 glitches/5yr), transients SET-B (2021 PuMA incl. 4.94uHz@502d), phase-space detector, null-MC-calibrated threshold",
+   "power_at_predicted": 0.4083333333333333,
+   "false_positive": 0.05,
+   "false_positive_raw": 0.045,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.4083333333333333,
+    0.37,
+    0.37,
+    0.36
+   ],
+   "eps80": null
+  },
+  {
+   "channel": "PSR",
+   "programme": "PSR-5Y-RADIO-NU(SET-B)",
+   "horizon_5yr": true,
+   "description": "Vela glitch trigger, dense radio cadence (n_TOA=581/glitch, tau 0.05..1000 d = 3.62 periods, sigma_TOA=50us, rw=106us/sqrt(d) Vela-rms-matched, 2 glitches/5yr), transients SET-B (2021 PuMA incl. 4.94uHz@502d), nu-space detector, null-MC-calibrated threshold",
+   "power_at_predicted": 0.9541666666666667,
+   "false_positive": 0.05,
+   "false_positive_raw": 0.085,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.9541666666666667,
+    0.93,
+    0.91,
+    0.91
+   ],
+   "eps80": 0.01730246011431484
+  },
+  {
+   "channel": "PSR",
+   "programme": "PSR-5Y-XRAY(SET-B)",
+   "horizon_5yr": true,
+   "description": "NICER/eXTP-class X-ray trigger, sigma_nu=0.6uHz (PG.06b measured), n_seg=600, 2 glitches, reach 3.79 periods, 2021 PuMA transients, null-MC-calibrated threshold",
+   "power_at_predicted": 0.1125,
+   "false_positive": 0.05,
+   "false_positive_raw": 0.08,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.1125,
+    0.36,
+    0.64,
+    0.67
+   ],
+   "eps80": null
+  },
+  {
+   "channel": "FRB",
+   "programme": "FRB-5Y-BASEBAND",
+   "horizon_5yr": true,
+   "description": "200 sessions x ~150 bursts (M~30000), tau 1s..4h (3.94 periods/session), FAST-class baseband, random session phase",
+   "power_at_predicted": 0.09583333333333334,
+   "power_fisher_at_predicted": 0.09583333333333334,
+   "power_sumz_at_predicted": 0.06666666666666667,
+   "power_upgrade_at_predicted": 0.08333333333333333,
+   "false_positive": 0.05,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.09583333333333334,
+    0.3,
+    0.84,
+    1.0
+   ],
+   "eps80": 0.0962962962962963,
+   "single_session_n80_upgraded_detector": 67199
+  },
+  {
+   "channel": "FRB",
+   "programme": "FRB-5Y-EXTREME",
+   "horizon_5yr": true,
+   "description": "100 sessions x ~1000 bursts (M~100000), tau 1s..4h (3.94 periods/session), FAST-class baseband, random session phase",
+   "power_at_predicted": 0.06666666666666667,
+   "power_fisher_at_predicted": 0.06666666666666667,
+   "power_sumz_at_predicted": 0.058333333333333334,
+   "power_upgrade_at_predicted": 0.16666666666666666,
+   "false_positive": 0.05,
+   "eps_grid": [
+    0.01730246011431484,
+    0.05,
+    0.1,
+    0.3
+   ],
+   "power_grid": [
+    0.06666666666666667,
+    0.57,
+    1.0,
+    1.0
+   ],
+   "eps80": 0.07674418604651165,
+   "single_session_n80_upgraded_detector": 67199
+  },
+  {
+   "channel": "GW",
+   "programme": "GW-5Y-O5",
+   "horizon_5yr": true,
+   "description": "O5/A+ 5yr: 6 GW150914-class loud ringdowns (eps90=0.42) + 20 loud (1.3) | signal = ceiling (2/3)^6 = 0.0878 (power is an UPPER bound)",
+   "power_at_predicted": 0.425,
+   "false_positive": 0.01,
+   "stack_snr": 2.145,
+   "events_required_at_eps90_0.42": 18
+  },
+  {
+   "channel": "GW",
+   "programme": "GW-3G",
+   "horizon_5yr": false,
+   "description": "ET/CE-class: 40 loud ringdowns at x10 sensitivity (eps90=0.063) | signal = ceiling (2/3)^6 = 0.0878 (power is an UPPER bound)",
+   "power_at_predicted": 1.0,
+   "false_positive": 0.01,
+   "stack_snr": 31.798,
+   "events_required_at_eps90_0.42": 18
+  },
+  {
+   "channel": "UHECR",
+   "programme": "UHECR-5Y-FULL",
+   "horizon_5yr": true,
+   "description": "full-statistics Auger reanalysis (open data = 10% sample; N = 215710 SD1500 + 544340 SD750; random phase); data already collected -- an analysis proposal, not a new observatory. Caveat: assumes the frozen-knot smooth family stays adequate at x10 statistics.",
+   "power_at_predicted": 0.8958333333333334,
+   "false_positive": 0.05
+  },
+  {
+   "channel": "CMB",
+   "programme": "CMB-5Y-SO",
+   "horizon_5yr": true,
+   "description": "published-bound Gaussian bed: bound95=0.023 -> sigma=0.01398",
+   "power_at_predicted": 0.3418,
+   "false_positive": 0.05,
+   "bound95_required_for_80pct": 0.0114
+  },
+  {
+   "channel": "CMB",
+   "programme": "CMB-S4",
+   "horizon_5yr": false,
+   "description": "published-bound Gaussian bed: bound95=0.017 -> sigma=0.01034",
+   "power_at_predicted": 0.5117,
+   "false_positive": 0.05,
+   "bound95_required_for_80pct": 0.0114
+  },
+  {
+   "channel": "LNFLUX",
+   "programme": "LNFLUX-5Y-X3",
+   "horizon_5yr": true,
+   "description": "meta-limit stack sigma 0.037658 / sqrt(3) = 0.02174 (A1 magnetar + A4 GRB + A5 TDE ln-flux curves)",
+   "power_at_predicted": 0.1979,
+   "false_positive": 0.05,
+   "curve_multiplier_required_for_80pct": 29.3
+  },
+  {
+   "channel": "LNFLUX",
+   "programme": "LNFLUX-ARCHIVE-X10",
+   "horizon_5yr": true,
+   "description": "meta-limit stack sigma 0.037658 / sqrt(10) = 0.01191 (A1 magnetar + A4 GRB + A5 TDE ln-flux curves)",
+   "power_at_predicted": 0.4239,
+   "false_positive": 0.05,
+   "curve_multiplier_required_for_80pct": 29.3
+  },
+  {
+   "channel": "CRUST",
+   "programme": "CRUST-5Y",
+   "horizon_5yr": true,
+   "description": "interpolated sibling injection curve, +2 episodes (x1.25 stats)",
+   "power_at_predicted": 0.0234,
+   "false_positive": 0.05
+  }
+ ],
+ "combination": {
+  "channels": [
+   "PSR",
+   "FRB",
+   "GW",
+   "UHECR",
+   "CMB",
+   "LNFLUX"
+  ],
+  "weights": {
+   "PSR": 0.0167,
+   "FRB": 0.0123,
+   "GW": 0.1789,
+   "UHECR": 0.5737,
+   "CMB": 0.1099,
+   "LNFLUX": 0.1084
+  },
+  "power_matched_sum": 0.9546666666666667,
+  "power_fisher": 0.9636666666666667,
+  "fp_matched_sum": 0.05,
+  "best_single": 0.8958333333333334,
+  "singles": {
+   "PSR": 0.0625,
+   "FRB": 0.0667,
+   "GW": 0.6825,
+   "UHECR": 0.8958,
+   "CMB": 0.3625,
+   "LNFLUX": 0.3542
+  }
+ },
+ "combination_loo": {
+  "full": {
+   "power_matched_sum": 0.9546666666666667,
+   "best_single": 0.8958333333333334
+  },
+  "without_PSR": {
+   "power_matched_sum": 0.9585,
+   "best_single": 0.8958333333333334
+  },
+  "without_FRB": {
+   "power_matched_sum": 0.9591666666666666,
+   "best_single": 0.8958333333333334
+  },
+  "without_GW": {
+   "power_matched_sum": 0.9188333333333333,
+   "best_single": 0.8958333333333334
+  },
+  "without_UHECR": {
+   "power_matched_sum": 0.9016666666666666,
+   "best_single": 0.6825
+  },
+  "without_CMB": {
+   "power_matched_sum": 0.9405,
+   "best_single": 0.8958333333333334
+  },
+  "without_LNFLUX": {
+   "power_matched_sum": 0.9421666666666667,
+   "best_single": 0.8958333333333334
+  }
+ },
+ "pass_fail": {
+  "C1_kernel_frozen": true,
+  "C2_false_positive": true,
+  "C3_anchors": {
+   "PSR": true,
+   "PSR_NU": true,
+   "FRB": true,
+   "GW": true,
+   "UHECR": true
+  },
+  "C3_all": true,
+  "C4_loo": true,
+  "gate_reached": true
+ },
+ "verdict": "P9-FORECAST-GO",
+ "verdict_channels": [
+  "PSR/PSR-5Y-RADIO-NU(SET-B) (power 0.95)",
+  "UHECR/UHECR-5Y-FULL (power 0.90)"
+ ],
+ "verdict_note": "",
+ "runtime_s": 102.2
+}

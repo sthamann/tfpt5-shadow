@@ -1,0 +1,451 @@
+<template data-composition-id="10-regionales-theorem" data-width="1920" data-height="1080" data-duration="26.0">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+<style>
+  /* Fonts shipped via Google-hosted woff2 (same CDN policy as the project's gsap load). */
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 600;
+    src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* digits — outside the latin subset above (same trick as frame 9) */
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 600;
+    src: url(https://fonts.gstatic.com/l/font?kit=cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wpojACexEPjGogGqu7RZ0ANAeA4YKDSLOcQ&skey=e69ba3232be0ce27&v=v26) format("woff2");
+    unicode-range: U+30-39, U+2248;
+  }
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 500;
+    src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxTOlOVk6OThhvA.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* math glyph fallback — covers "≻", "σ", "→", "∞" missing from the brand faces */
+  @font-face {
+    font-family: "Noto Sans Math";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/notosansmath/v19/7Aump_cpkSecTWaHRlH2hyV5UHkD-Vs48Q.woff2) format("woff2");
+  }
+
+  #root {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* full-bleed ground — flat ink-black plane (broadside: no gradient, no texture) */
+  #rt10-bg {
+    position: absolute;
+    inset: 0;
+    background: #020617;
+  }
+
+  #rt10-content {
+    position: absolute;
+    inset: 0;
+    container-type: size;
+  }
+  #rt10-stage {
+    position: absolute;
+    inset: 0;
+    color: #e2e8f0;
+  }
+
+  /* — mono kicker — */
+  #rt10-kicker {
+    position: absolute;
+    top: 84px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 1.0cqw;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    will-change: transform, opacity;
+  }
+
+  /* — the diagram (region K + cells + corridor arrow + axis) — */
+  #rt10-diagram {
+    position: absolute;
+    inset: 0;
+    will-change: opacity;
+  }
+  #rt10-region-outline {
+    stroke: #38bdf8;
+    stroke-width: 2.5;
+    fill: rgba(56, 189, 248, 0.04);
+    stroke-linecap: round;
+  }
+  .rt10-cell {
+    fill: #38bdf8;
+    opacity: 0;
+  }
+  #rt10-axis {
+    stroke: #1e293b;
+    stroke-width: 2;
+  }
+  #rt10-arrow-dash {
+    stroke: #38bdf8;
+    stroke-width: 3;
+    fill: none;
+    stroke-dasharray: 14 10;
+    stroke-linecap: round;
+  }
+  #rt10-arrow-reveal {
+    stroke: #ffffff;
+    stroke-width: 10;
+    fill: none;
+    stroke-linecap: round;
+  }
+  #rt10-arrow-head {
+    stroke: #38bdf8;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #rt10-klabel {
+    position: absolute;
+    top: 652px;
+    left: 380px;
+    width: 560px;
+    text-align: center;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 1.05cqw;
+    letter-spacing: 0.14em;
+    color: #94a3b8;
+    will-change: transform, opacity;
+  }
+
+  /* — right column: the theorem statement — */
+  #rt10-mpos {
+    position: absolute;
+    top: 258px;
+    left: 1010px;
+    width: 800px;
+    text-align: center;
+    font-family: "Newsreader", "Noto Sans Math", serif;
+    font-weight: 700;
+    font-size: 6.2cqw;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #e2e8f0;
+    will-change: transform, opacity, filter;
+  }
+  #rt10-mpos-sub {
+    position: absolute;
+    top: 420px;
+    left: 1010px;
+    width: 800px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1.55cqw;
+    line-height: 1.45;
+    color: #94a3b8;
+    will-change: transform, opacity;
+  }
+  #rt10-chip {
+    position: absolute;
+    top: 520px;
+    left: 1090px;
+    width: 640px;
+    padding: 16px 26px;
+    border: 1px solid #1e293b;
+    text-align: center;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 0.95cqw;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    color: #e2e8f0;
+    will-change: transform, opacity;
+  }
+  .rt10-chip-num {
+    color: #38bdf8;
+  }
+
+  /* — corridor axis label + open question line — */
+  #rt10-hlabel {
+    position: absolute;
+    top: 758px;
+    left: 1580px;
+    width: 280px;
+    font-family: "JetBrains Mono", "Noto Sans Math", monospace;
+    font-weight: 500;
+    font-size: 1.1cqw;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    will-change: transform, opacity;
+  }
+  #rt10-question {
+    position: absolute;
+    top: 822px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1.55cqw;
+    line-height: 1.35;
+    color: #e2e8f0;
+  }
+  .rt10-qword {
+    display: inline-block;
+    margin: 0 0.14em;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  #rt10-cofinal {
+    color: #e2e8f0;
+  }
+
+  /* — closing statement beats (Scene 4, layers over the dimmed diagram) — */
+  #rt10-beats {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 896px; /* caption keep-out: band starts at y=900 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .rt10-beatline {
+    font-family: "Newsreader", serif;
+    font-weight: 600;
+    font-size: 4.4cqw;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: #e2e8f0;
+    max-width: 1560px;
+  }
+  #rt10-beat2 {
+    margin-top: 22px;
+  }
+  .rt10-word {
+    display: inline-block;
+    margin: 0 0.13em;
+    will-change: transform, opacity, filter;
+  }
+  #rt10-beat2 .rt10-word {
+    opacity: 0; /* hard-cut word reveal — instants set on the timeline */
+  }
+  #rt10-audit {
+    color: #38bdf8;
+  }
+</style>
+
+<div id="root" data-composition-id="10-regionales-theorem" data-start="0" data-duration="26.0" data-fps="30" data-width="1920" data-height="1080">
+  <div id="rt10-bg" class="clip" data-start="0" data-duration="26.0" data-track-index="0"></div>
+
+  <div id="rt10-content" class="clip" data-start="0" data-duration="26.0" data-track-index="1">
+    <div id="rt10-stage">
+
+      <div id="rt10-kicker">Since then &middot; the <span style="text-transform: none;">&sigma;</span> chain</div>
+
+      <!-- Scenes 1–3: region K, certified cells, corridor arrow
+           (the closing beats deliberately layer over the dimmed diagram) -->
+      <div id="rt10-diagram" data-layout-allow-overlap>
+        <svg width="1920" height="896" viewBox="0 0 1920 896" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <clipPath id="rt10-region-clip">
+              <path d="M 560 250 C 660 205 800 210 870 275 C 935 335 940 445 885 525 C 825 610 680 640 575 600 C 470 560 420 470 435 380 C 447 305 495 279 560 250 Z"></path>
+            </clipPath>
+            <mask id="rt10-arrow-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="896">
+              <path id="rt10-arrow-reveal" d="M 700 470 C 850 560 950 690 1090 745 C 1230 795 1360 782 1500 780"></path>
+            </mask>
+          </defs>
+
+          <!-- certified cells, clipped to K -->
+          <g clip-path="url(#rt10-region-clip)">
+            <g id="rt10-cells"></g>
+          </g>
+
+          <!-- region K outline (self-draws on "regional theorem") -->
+          <path id="rt10-region-outline" d="M 560 250 C 660 205 800 210 870 275 C 935 335 940 445 885 525 C 825 610 680 640 575 600 C 470 560 420 470 435 380 C 447 305 495 279 560 250 Z"></path>
+
+          <!-- depth axis + the cofinal corridor arrow (dashed — the open construction) -->
+          <line id="rt10-axis" x1="360" y1="780" x2="1560" y2="780"></line>
+          <path id="rt10-arrow-dash" d="M 700 470 C 850 560 950 690 1090 745 C 1230 795 1360 782 1500 780" mask="url(#rt10-arrow-mask)"></path>
+          <polyline id="rt10-arrow-head" points="1472,762 1504,780 1472,798"></polyline>
+        </svg>
+      </div>
+
+      <div id="rt10-klabel" data-layout-allow-overlap>K &mdash; certified region</div>
+
+      <div id="rt10-mpos" data-layout-allow-overlap>M &#x227B; 0</div>
+      <div id="rt10-mpos-sub" data-layout-allow-overlap>every matrix whose entry data lie in K &mdash; positive definite</div>
+      <div id="rt10-chip" data-layout-allow-overlap><span class="rt10-chip-num">151/151</span> cells &middot; SOS proof object<br>202-line stdlib checker &middot; re-proves in <span class="rt10-chip-num">2</span>&nbsp;s</div>
+
+      <div id="rt10-hlabel" data-layout-allow-overlap>h &rarr; &infin;</div>
+      <div id="rt10-question" data-layout-allow-overlap><span class="rt10-qword">a</span><span class="rt10-qword">predefined</span><span class="rt10-qword">window</span><span class="rt10-qword">sequence</span><span class="rt10-qword">&mdash;</span><span class="rt10-qword" id="rt10-cofinal">cofinal,</span><span class="rt10-qword">staying</span><span class="rt10-qword">inside</span><span class="rt10-qword">K?</span></div>
+
+      <!-- Scene 4: the dry closing beats -->
+      <div id="rt10-beats" data-layout-allow-overlap>
+        <div class="rt10-beatline" id="rt10-beat1"><span class="rt10-word">The</span><span class="rt10-word">proof</span><span class="rt10-word">object</span><span class="rt10-word">is</span><span class="rt10-word">ready</span><span class="rt10-word">for</span><span class="rt10-word" id="rt10-audit">audit.</span></div>
+        <div class="rt10-beatline" id="rt10-beat2"><span class="rt10-word">&mdash;&nbsp;the</span><span class="rt10-word">RH</span><span class="rt10-word">quantifier</span><span class="rt10-word">is</span><span class="rt10-word">not.</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var ID = "10-regionales-theorem";
+    var ACCENT = "#38bdf8";
+    function $(s) { return document.getElementById("rt10-" + s); }
+
+    /* — build the certified-cell grid (deterministic, no randomness) — */
+    var cellsG = $("cells");
+    var SVGNS = "http://www.w3.org/2000/svg";
+    var cells = [];
+    for (var row = 0; row < 9; row++) {
+      for (var col = 0; col < 11; col++) {
+        var x = 428 + col * 48, y = 220 + row * 48;
+        var r = document.createElementNS(SVGNS, "rect");
+        r.setAttribute("x", x); r.setAttribute("y", y);
+        r.setAttribute("width", 36); r.setAttribute("height", 36);
+        r.setAttribute("class", "rt10-cell");
+        cellsG.appendChild(r);
+        cells.push({ el: r, wave: col + row });
+      }
+    }
+
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    /* ============ Scene 1 (0.0–6.0s): kicker, then K draws on "regional theorem" ============ */
+    tl.fromTo($("kicker"), { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.30);
+
+    var outline = $("region-outline");
+    var oLen = outline.getTotalLength();
+    outline.style.strokeDasharray = String(oLen);
+    outline.style.strokeDashoffset = String(oLen);
+    gsap.set(outline, { fillOpacity: 0 });
+    tl.to(outline, { strokeDashoffset: 0, duration: 1.9, ease: "power2.inOut" }, 3.80);
+    tl.to(outline, { fillOpacity: 1, duration: 0.8, ease: "power1.out" }, 5.30);
+
+    /* ============ Scene 2 (6.0–13.0s): cells certify, M ≻ 0, checker chip ============ */
+    // label on "certified region" (VO 7.44s)
+    tl.fromTo($("klabel"), { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.44);
+
+    // wave fill across K (stat-bars-and-fills stagger, wave = col + row)
+    cells.forEach(function (c) {
+      tl.fromTo(c.el, { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" },
+        { opacity: 0.45, scale: 1, duration: 0.4, ease: "power2.out" },
+        7.50 + c.wave * 0.085);
+    });
+
+    // "M ≻ 0" lands on "positive definite" (VO 8.72s)
+    tl.fromTo($("mpos"), { opacity: 0, y: 22, filter: "blur(8px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.65, ease: "power3.out" }, 8.85);
+    // sub-line on "a proof object" (VO 10.18s)
+    tl.fromTo($("mpos-sub"), { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.20);
+    // checker chip on "checkable by a tiny program" (VO 11.29s)
+    tl.fromTo($("chip"), { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 11.35);
+
+    /* ============ Scene 3 (13.0–18.5s): the corridor arrow — the open construction ============ */
+    // axis fades in as the act opens
+    tl.fromTo($("axis"), { opacity: 0 },
+      { opacity: 1, duration: 0.6, ease: "power1.out" }, 14.20);
+
+    // dashed corridor path draws via its reveal mask on "One construction problem remains"
+    var reveal = $("arrow-reveal");
+    var rLen = reveal.getTotalLength();
+    reveal.style.strokeDasharray = String(rLen);
+    reveal.style.strokeDashoffset = String(rLen);
+    tl.to(reveal, { strokeDashoffset: 0, duration: 2.0, ease: "power2.inOut" }, 14.50);
+
+    // open arrowhead lands as the draw finishes
+    tl.fromTo($("arrow-head"), { opacity: 0 },
+      { opacity: 1, duration: 0.35, ease: "power1.out" }, 16.30);
+
+    // depth label after "window sequence" (VO 17.71s)
+    tl.fromTo($("hlabel"), { opacity: 0, x: -14 },
+      { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 17.75);
+
+    // question line reveals per word on the VO
+    var qWords = Array.prototype.slice.call(document.querySelectorAll(".rt10-qword"));
+    var qAt = [16.68, 16.80, 17.39, 17.71, 18.20, 18.56, 19.48, 19.89, 20.44];
+    qWords.forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, qAt[i]);
+    });
+
+    // keyword glow on "cofinal," (VO 18.56s)
+    tl.to($("cofinal"), { color: ACCENT, duration: 0.35, ease: "power2.out" }, 18.60);
+    tl.fromTo($("cofinal"),
+      { textShadow: "0 0 0px rgba(56,189,248,0)" },
+      { textShadow: "0 0 22px rgba(56,189,248,0.45)", duration: 0.35, ease: "power1.out" }, 18.60);
+
+    // the dashed corridor keeps flowing — the one living element during holds
+    tl.to($("arrow-dash"), { strokeDashoffset: -96, duration: 9.2, ease: "none" }, 16.80);
+
+    /* ============ Scene 4 (18.5–26.0s): dim, then the dry closing beats ============ */
+    var dimEls = [$("diagram"), $("kicker"), $("klabel"), $("mpos"), $("mpos-sub"),
+                  $("chip"), $("hlabel"), $("question")];
+    tl.to(dimEls, { opacity: 0.14, duration: 0.8, ease: "power1.inOut" }, 20.95);
+
+    // beat 1: "The proof object is ready for audit." per-word on the VO
+    var b1Words = Array.prototype.slice.call($("beat1").querySelectorAll(".rt10-word"));
+    gsap.set(b1Words, { opacity: 0 });
+    var b1At = [21.26, 21.34, 21.62, 22.09, 22.23, 22.45, 22.68];
+    b1Words.forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, y: 14, filter: "blur(6px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, b1At[i]);
+    });
+
+    // keyword glow on "audit." (accent ink lives in the CSS; bloom on its cue)
+    tl.fromTo($("audit"),
+      { textShadow: "0 0 0px rgba(56,189,248,0)" },
+      { textShadow: "0 0 24px rgba(56,189,248,0.4)", duration: 0.4, ease: "power1.out" }, 22.70);
+
+    // beat 2: "— the RH quantifier is not." hard-cut word reveal, lands dry
+    var b2Words = Array.prototype.slice.call($("beat2").querySelectorAll(".rt10-word"));
+    var b2At = [23.31, 23.43, 23.77, 24.36, 24.48];
+    b2Words.forEach(function (w, i) {
+      tl.set(w, { opacity: 1 }, b2At[i]);
+    });
+
+    // full-span anchor — timeline covers the whole 26.0s frame
+    tl.to({}, { duration: 26.0 }, 0);
+
+    window.__timelines[ID] = tl;
+  })();
+</script>
+</template>

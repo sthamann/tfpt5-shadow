@@ -1,0 +1,14 @@
+# TFPT Python verification suite — runtime dependencies.
+#   pip install -r requirements.txt
+#   ./verify           # 30-second headline check
+#   ./verify --full    # the whole suite (verification/run_all.py)
+#
+# The suite is otherwise stdlib-only; these cover every vN_*.py module
+# (pyyaml: v777 reads its preregistration YAML).
+mpmath>=1.3.0
+numpy>=1.24
+sympy>=1.12
+python-flint==0.9.0  # pinned native Arb/Acb certificates in v1022/v1025/v1026 (not available in Pyodide)
+scipy>=1.10,!=1.17.0  # 1.17.0 has an upstream complex-symmetric solve() wrong-result bug (fixed in 1.17.1); see v772 amendment
+matplotlib>=3.7
+pyyaml>=6.0

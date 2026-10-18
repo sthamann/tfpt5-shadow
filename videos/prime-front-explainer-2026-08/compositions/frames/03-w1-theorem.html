@@ -1,0 +1,486 @@
+<template data-composition-id="03-w1-theorem" data-width="1920" data-height="1080" data-duration="15.788">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    /* latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxTOlOVk6OThhvA.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Newsreader';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Newsreader';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/newsreader/v26/cY9VfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBAbNJYQ5ayZC.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Inter', sans-serif;
+      color: #e2e8f0;
+    }
+
+    /* ── background clip ─────────────────────────── */
+    .f03-bg {
+      position: absolute;
+      inset: 0;
+      background: #020617;
+    }
+    .f03-hairline-v {
+      position: absolute;
+      left: 959px;
+      top: 140px;
+      width: 1px;
+      height: 720px;
+      background: #1e293b;
+      will-change: transform;
+    }
+
+    /* ── stage clip ──────────────────────────────── */
+    .f03-stage {
+      position: absolute;
+      inset: 0;
+    }
+
+    .f03-kicker {
+      position: absolute;
+      left: 106px;
+      top: 72px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      will-change: transform, opacity;
+    }
+    .f03-framenum {
+      position: absolute;
+      right: 106px;
+      top: 72px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      color: #475569;
+      will-change: opacity;
+    }
+
+    .f03-camera {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+
+    /* comparison split — perspective on the scene wrapper (REQUIRED for rotateY) */
+    .f03-scene {
+      position: absolute;
+      inset: 0;
+      perspective: 1600px;
+    }
+    .f03-pair {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 190px;
+      display: flex;
+      justify-content: center;
+      gap: 150px;
+      transform-style: preserve-3d;
+    }
+    .f03-card {
+      width: 620px;
+      height: 450px;
+      padding: 26px 28px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      display: flex;
+      flex-direction: column;
+    }
+    .f03-card-title {
+      font-family: 'Newsreader', serif;
+      font-weight: 600;
+      font-size: 42px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #e2e8f0;
+      will-change: transform, opacity;
+    }
+    .f03-card-visual {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px 0 12px;
+      position: relative;
+    }
+    .f03-card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      will-change: transform, opacity;
+    }
+    .f03-card-tag sub {
+      font-size: 0.75em;
+      vertical-align: sub;
+      text-transform: none;
+    }
+
+    /* left visual — cell heatmap */
+    .f03-heatmap {
+      display: grid;
+      grid-template-columns: repeat(10, 26px);
+      grid-auto-rows: 26px;
+      gap: 4px;
+    }
+    .f03-cell {
+      width: 26px;
+      height: 26px;
+      background: #38bdf8;
+      will-change: transform, opacity;
+    }
+
+    /* right visual — kernel curve */
+    .f03-kernel {
+      width: 564px;
+      height: 296px;
+    }
+    .f03-kernel-label {
+      position: absolute;
+      right: 34px;
+      top: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      will-change: opacity;
+    }
+
+    /* "=" badge — on the parent seam, never inside a tilted card */
+    .f03-badge {
+      position: absolute;
+      left: 50%;
+      margin-left: -48px;
+      top: 367px;
+      width: 96px;
+      height: 96px;
+      background: #38bdf8;
+      color: #020617;
+      font-family: 'Newsreader', serif;
+      font-weight: 700;
+      font-size: 58px;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      will-change: transform, opacity;
+    }
+
+    .f03-stamp {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 668px;
+      margin: 0 auto;
+      width: max-content;
+      padding: 11px 22px;
+      border: 1px solid #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 17px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      will-change: transform, opacity;
+    }
+
+    /* erratum chip — discrete-text-sequence terminal */
+    .f03-chip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 776px;
+      margin: 0 auto;
+      width: 780px;
+      padding: 14px 20px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      display: flex;
+      align-items: baseline;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 15px;
+      color: #94a3b8;
+      will-change: transform, opacity;
+    }
+    .f03-chip-prompt {
+      color: #38bdf8;
+      margin-right: 10px;
+    }
+    .f03-chip-wrap {
+      display: inline-flex;
+      align-items: baseline;
+      min-width: 700px;
+      white-space: nowrap;
+    }
+    .f03-chip-cursor {
+      display: inline-block;
+      width: 9px;
+      color: #38bdf8;
+    }
+  </style>
+
+  <div id="03-root" data-composition-id="03-w1-theorem" data-start="0" data-duration="15.788" data-fps="30" data-width="1920" data-height="1080">
+
+  <div class="f03-bg clip" data-start="0" data-duration="15.788" data-track-index="0">
+    <div class="f03-hairline-v" id="f03-hairline"></div>
+  </div>
+
+  <div class="f03-stage clip" data-start="0" data-duration="15.788" data-track-index="1">
+    <div class="f03-kicker" id="f03-kicker">Two sides &middot; one object</div>
+    <div class="f03-framenum" id="f03-framenum">No. 03</div>
+
+    <div class="f03-camera" id="f03-camera">
+      <div class="f03-scene">
+        <div class="f03-pair">
+          <div class="f03-card" id="f03-card-left">
+            <div class="f03-card-title" id="f03-title-left">TFPT — window matrix</div>
+            <div class="f03-card-visual">
+              <div class="f03-heatmap" id="f03-heatmap"></div>
+            </div>
+            <div class="f03-card-tag" id="f03-tag-left">from the E<sub>8</sub> bookkeeping</div>
+          </div>
+          <div class="f03-card" id="f03-card-right">
+            <div class="f03-card-title" id="f03-title-right">Suzuki — Weil operator</div>
+            <div class="f03-card-visual">
+              <svg class="f03-kernel" id="f03-kernel" viewBox="0 0 564 296" fill="none">
+                <line x1="10" y1="148" x2="554" y2="148" stroke="#1e293b" stroke-width="1" />
+                <path id="f03-curve" d="" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+                <circle class="f03-dot" id="f03-dot-0" cx="0" cy="0" r="0" fill="#38bdf8" />
+                <circle class="f03-dot" id="f03-dot-1" cx="0" cy="0" r="0" fill="#38bdf8" />
+                <circle class="f03-dot" id="f03-dot-2" cx="0" cy="0" r="0" fill="#38bdf8" />
+              </svg>
+              <div class="f03-kernel-label" id="f03-kernel-label">g&Prime;(t)</div>
+            </div>
+            <div class="f03-card-tag" id="f03-tag-right">classical number theory &middot; 2026</div>
+          </div>
+        </div>
+
+        <div class="f03-badge" id="f03-badge">=</div>
+        <div class="f03-stamp" id="f03-stamp">W1 &middot; Theorem &middot; v643</div>
+
+        <div class="f03-chip" id="f03-chip">
+          <span class="f03-chip-prompt">/</span>
+          <span class="f03-chip-wrap"><span id="f03-chip-text"></span><span class="f03-chip-cursor" id="f03-chip-cursor">_</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const DUR = 15.288;
+      const ACCENT = "#38bdf8";
+      const ACCENT_BRIGHT = "#bae6fd";
+
+      /* ── build heatmap cells (deterministic pattern) ── */
+      const N = 10;
+      const heat = document.getElementById("f03-heatmap");
+      const cells = [];
+      for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+          const el = document.createElement("div");
+          el.className = "f03-cell";
+          const v = 0.1 + 0.75 * Math.abs(Math.sin(r * 1.7 + c * 2.3 + r * c * 0.35));
+          el.dataset.op = v.toFixed(3);
+          heat.appendChild(el);
+          cells.push({ el, r, c, op: v });
+        }
+      }
+      const pairCells = [cells[3 * N + 6].el, cells[5 * N + 3].el, cells[7 * N + 7].el];
+
+      /* ── build kernel curve: Ricker wavelet (g″ of a Gaussian) ── */
+      const curve = document.getElementById("f03-curve");
+      const pts = [];
+      const px = (t) => 20 + ((t + 4) / 8) * 524;
+      const py = (t) => 148 - (1 - t * t) * Math.exp((-t * t) / 2) * 100;
+      for (let t = -4; t <= 4.001; t += 0.08) pts.push(px(t).toFixed(1) + " " + py(t).toFixed(1));
+      curve.setAttribute("d", "M" + pts.join(" L"));
+      const L = curve.getTotalLength();
+      curve.setAttribute("stroke-dasharray", L);
+
+      const dotTs = [-1.7, 0, 1.7];
+      const dots = dotTs.map((t, i) => {
+        const d = document.getElementById("f03-dot-" + i);
+        d.setAttribute("cx", px(t).toFixed(1));
+        d.setAttribute("cy", py(t).toFixed(1));
+        return d;
+      });
+
+      /* ── timeline ── */
+      const tl = gsap.timeline({ paused: true });
+
+      /* macro camera drift under the whole shot */
+      tl.fromTo("#f03-camera", { scale: 1 }, { scale: 1.035, duration: DUR, ease: "none", transformOrigin: "50% 45%" }, 0);
+
+      /* opening chrome — something lands well before 0.5s */
+      tl.fromTo("#f03-kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.12);
+      tl.fromTo("#f03-framenum", { opacity: 0 }, { opacity: 0.85, duration: 0.45, ease: "power2.out" }, 0.3);
+      tl.fromTo("#f03-hairline", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out", transformOrigin: "top center" }, 0.25);
+
+      /* ── Scene 1 (0.0–3.8s): LEFT panel books open on "Fenstermatrix" (1.9s) ── */
+      tl.fromTo(
+        "#f03-card-left",
+        { x: -320, rotationY: 22, opacity: 0 },
+        { x: 0, rotationY: 14, opacity: 1, duration: 0.9, ease: "power3.out" },
+        1.9,
+      );
+      tl.fromTo(
+        ["#f03-title-left", "#f03-tag-left"],
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: 0.12 },
+        2.15,
+      );
+      /* heatmap cells light row by row */
+      cells.forEach(({ el, r, c, op }) => {
+        tl.fromTo(
+          el,
+          { opacity: 0, scale: 0.4 },
+          { opacity: op, scale: 1, duration: 0.35, ease: "power2.out" },
+          2.45 + r * 0.09 + c * 0.012,
+        );
+      });
+
+      /* ── Scene 2 (3.8–9.0s): RIGHT panel mirrors in on "etwas Klassisches" (5.1s) ── */
+      tl.fromTo(
+        "#f03-card-right",
+        { x: 320, rotationY: -22, opacity: 0 },
+        { x: 0, rotationY: -14, opacity: 1, duration: 0.9, ease: "power3.out" },
+        5.1,
+      );
+      tl.fromTo(
+        ["#f03-title-right", "#f03-tag-right"],
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", stagger: 0.12 },
+        5.35,
+      );
+      /* kernel curve self-draw */
+      tl.fromTo(curve, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.95, ease: "power2.inOut" }, 5.45);
+      tl.fromTo("#f03-kernel-label", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 6.05);
+      dots.forEach((d, i) => {
+        tl.fromTo(d, { attr: { r: 0 } }, { attr: { r: 6 }, duration: 0.3, ease: "power3.out" }, 6.1 + i * 0.1);
+      });
+
+      /* "Wort für Wort" (6.2s) — cell↔curve-point pairs blink in sync */
+      const glowTimes = [6.35, 7.05, 7.75];
+      glowTimes.forEach((T, i) => {
+        const cell = pairCells[i];
+        const dot = dots[i];
+        tl.to(cell, { backgroundColor: ACCENT_BRIGHT, scale: 1.45, opacity: 1, duration: 0.16, ease: "power2.out" }, T);
+        tl.to(cell, { backgroundColor: ACCENT, scale: 1, opacity: cell.dataset.op, duration: 0.36, ease: "power2.inOut" }, T + 0.18);
+        tl.to(dot, { attr: { r: 10 }, fill: ACCENT_BRIGHT, duration: 0.16, ease: "power2.out" }, T);
+        tl.to(dot, { attr: { r: 6 }, fill: ACCENT, duration: 0.36, ease: "power2.inOut" }, T + 0.18);
+      });
+
+      /* counter-phase idle bob (chained legs — no yoyo/repeat) */
+      for (let i = 0; i < 8; i++) {
+        const t = 6.6 + i * 0.7;
+        const upLeg = i % 2 === 0;
+        tl.to("#f03-card-left", { y: upLeg ? -5 : 0, duration: 0.7, ease: "sine.inOut" }, t);
+        tl.to("#f03-card-right", { y: upLeg ? 5 : 0, duration: 0.7, ease: "sine.inOut" }, t);
+      }
+
+      /* ── Scene 3 (9.0–12.2s): "=" badge spring-pops on "W-eins-Theorem" (9.8s) ── */
+      tl.fromTo("#f03-badge", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" }, 9.8);
+      /* stamp — hard-cut reveal */
+      tl.fromTo("#f03-stamp", { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, 10.15);
+      tl.fromTo("#f03-stamp", { scale: 1.12 }, { scale: 1, duration: 0.18, ease: "power3.out" }, 10.15);
+      /* keyword glow on "maschinell verifiziert" (10.7s) */
+      tl.to("#f03-stamp", { color: ACCENT_BRIGHT, borderColor: ACCENT_BRIGHT, duration: 0.18, ease: "power2.out" }, 10.7);
+      tl.to("#f03-stamp", { color: ACCENT, borderColor: ACCENT, duration: 0.42, ease: "power2.inOut" }, 10.92);
+
+      /* ── Scene 4 (12.2–15.3s): erratum chip, discrete text sequence (13.8s) ── */
+      tl.fromTo("#f03-chip", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 13.62);
+
+      const FULL = "Erratum: self-found, corrected the same day — documented";
+      const SEQ = [
+        { t: 0, text: "" },
+        { t: 13.82, text: "Err" },
+        { t: 13.94, text: "Erratum:" },
+        { t: 14.08, text: "Erratum: self-found," },
+        { t: 14.26, text: "Erratum: self-found, corrected" },
+        { t: 14.4, text: "Erratum: self-found, corrected the same" },
+        { t: 14.58, text: "Erratum: self-found, corrected the same day" },
+        { t: 14.82, text: FULL },
+      ];
+      const textAt = (time) => {
+        for (let i = SEQ.length - 1; i >= 0; i--) if (time >= SEQ[i].t) return SEQ[i].text;
+        return "";
+      };
+      const chipText = document.getElementById("f03-chip-text");
+      const chipCursor = document.getElementById("f03-chip-cursor");
+      const driver = { t: 0 };
+      tl.to(
+        driver,
+        {
+          t: DUR,
+          duration: DUR,
+          ease: "none",
+          onUpdate: () => {
+            chipText.textContent = textAt(driver.t);
+            /* deterministic block-cursor blink, sin square wave, ~0.6s cycle */
+            chipCursor.style.opacity = Math.sin(driver.t * ((Math.PI * 2) / 0.6)) > 0 ? "1" : "0";
+          },
+        },
+        0,
+      );
+      /* nothing moves after ~15.0 — held read into the outgoing transition */
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["03-w1-theorem"] = tl;
+    })();
+  </script>
+</div>
+</template>

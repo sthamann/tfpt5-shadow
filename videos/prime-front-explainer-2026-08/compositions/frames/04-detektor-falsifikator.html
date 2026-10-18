@@ -1,0 +1,683 @@
+<template>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=block");
+
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      color: #e2e8f0;
+    }
+
+    /* ---------- background / chrome (track 0) ---------- */
+    .f04-bg {
+      position: absolute;
+      inset: 0;
+      background: #020617;
+    }
+    .f04-chrome {
+      position: absolute;
+      inset: 0;
+    }
+    .f04-chrome-bar {
+      position: absolute;
+      left: 106px;
+      right: 106px;
+      top: 92px;
+      height: 1px;
+      background: #1e293b;
+    }
+    .f04-zero-ambient {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 470px;
+      height: 1px;
+      background: #1e293b;
+      opacity: 0.35;
+    }
+    .f04-mono {
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+    }
+    .f04-chrome-label {
+      position: absolute;
+      left: 106px;
+      top: 62px;
+      font-size: 14px;
+      color: #475569;
+    }
+    .f04-chrome-num {
+      position: absolute;
+      right: 106px;
+      top: 62px;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    /* ---------- stage: instrument + checklist (track 1) ---------- */
+    .f04-stage {
+      position: absolute;
+      inset: 0;
+    }
+
+    .f04-inst {
+      position: absolute;
+      left: 120px;
+      top: 190px;
+      width: 780px;
+      border: 1px solid #1e293b;
+      background: #0f172a;
+      padding: 30px 38px 26px;
+    }
+    .f04-kicker {
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600;
+      font-size: 14px;
+      color: #38bdf8;
+    }
+    .f04-inst-label {
+      margin-top: 10px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 21px;
+      letter-spacing: 0.04em;
+      color: #e2e8f0;
+      text-shadow: 0 0 0px rgba(56, 189, 248, 0);
+    }
+    .f04-gauge {
+      display: block;
+      width: 704px;
+      height: 380px;
+      margin-top: 6px;
+    }
+    .f04-readout {
+      position: relative;
+      margin-top: 2px;
+      width: 250px;
+      height: 42px;
+      border: 1px solid #1e293b;
+    }
+    .f04-readout span {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+    .f04-readout-pos {
+      color: #38bdf8;
+    }
+    .f04-readout-neg {
+      color: #e2e8f0;
+      opacity: 0;
+    }
+
+    .f04-checks {
+      position: absolute;
+      left: 1020px;
+      top: 210px;
+      width: 780px;
+    }
+    .f04-row {
+      position: relative;
+      border-top: 1px solid #334155;
+      padding: 20px 0 24px;
+      margin-bottom: 30px;
+    }
+    .f04-row-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .f04-row-idx {
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 13px;
+      font-weight: 500;
+      color: #475569;
+    }
+    .f04-row-title {
+      font-family: "Newsreader", serif;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #e2e8f0;
+      margin-top: 6px;
+    }
+    .f04-row-sub {
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-top: 10px;
+    }
+    .f04-badge {
+      position: relative;
+      flex: 0 0 auto;
+      width: 56px;
+      height: 56px;
+      border: 1px solid #334155;
+      margin-top: 8px;
+    }
+    .f04-badge span {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .f04-badge-pending {
+      color: #475569;
+    }
+    .f04-badge-done {
+      opacity: 0;
+    }
+    .f04-badge-ok {
+      color: #38bdf8;
+    }
+    .f04-badge-fail {
+      color: #e2e8f0;
+    }
+    .f04-track {
+      width: 100%;
+      height: 3px;
+      background: #1e293b;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    /* width:100% required — a zero-width fill scaled by any factor stays invisible */
+    .f04-fill {
+      width: 100%;
+      height: 100%;
+      background: #38bdf8;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .f04-callout {
+      width: 700px;
+      border: 1px solid #1e293b;
+      border-left: 2px solid #38bdf8;
+      background: #0f172a;
+      padding: 16px 24px;
+      white-space: nowrap;
+      opacity: 0;
+    }
+    .f04-callout-text {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+      color: #e2e8f0;
+      min-width: 620px;
+      display: inline-block;
+    }
+
+    /* ---------- matched-filter card ---------- */
+    .f04-mf {
+      position: absolute;
+      left: 340px;
+      top: 260px;
+      width: 1240px;
+      border: 1px solid #1e293b;
+      background: #0f172a;
+      padding: 40px 56px 44px;
+    }
+    .f04-mf-rule {
+      width: 36px;
+      height: 2px;
+      background: #38bdf8;
+      margin-top: 14px;
+    }
+    .f04-formula-wrap {
+      display: flex;
+      align-items: baseline;
+      margin-top: 34px;
+      white-space: nowrap;
+      min-height: 58px;
+    }
+    .f04-formula {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 42px;
+      color: #e2e8f0;
+    }
+    .f04-cursor {
+      display: inline-block;
+      width: 14px;
+      margin-left: 4px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 42px;
+      color: #38bdf8;
+    }
+    .f04-mf-hairline {
+      height: 1px;
+      background: #1e293b;
+      margin-top: 32px;
+    }
+    .f04-witness {
+      margin-top: 26px;
+      font-family: "Inter", sans-serif;
+      font-size: 27px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #94a3b8;
+      min-height: 42px;
+    }
+    .f04-w {
+      opacity: 0;
+    }
+    .f04-w-accent {
+      color: #38bdf8;
+      font-weight: 500;
+    }
+
+    /* ---------- closing statement ---------- */
+    .f04-statement {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 580px;
+      text-align: center;
+      font-family: "Newsreader", serif;
+      font-weight: 600;
+      font-size: 84px;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: #e2e8f0;
+      opacity: 0;
+    }
+    .f04-statement-key {
+      color: #e2e8f0;
+      text-shadow: 0 0 0px rgba(56, 189, 248, 0);
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="04-detektor-falsifikator"
+    data-width="1920"
+    data-height="1080"
+    data-duration="24.86"
+  >
+    <!-- full-bleed ground + hairline chrome (background role) -->
+    <div class="clip f04-bg" data-start="0" data-duration="24.86" data-track-index="0">
+      <div class="f04-zero-ambient"></div>
+      <div class="f04-chrome" id="f04-chrome">
+        <div class="f04-chrome-bar"></div>
+        <div class="f04-mono f04-chrome-label">Test bench — Detector</div>
+        <div class="f04-mono f04-chrome-num">No. 04</div>
+      </div>
+    </div>
+
+    <!-- content (track 1) -->
+    <div class="clip" data-start="0" data-duration="24.86" data-track-index="1" style="position: absolute; inset: 0">
+      <!-- Scene 1–3: instrument + checklist stage -->
+      <div class="f04-stage" id="f04-stage">
+        <!-- instrument card: needle over the zero hairline (focal) -->
+        <div class="f04-inst" id="f04-inst">
+          <div class="f04-kicker">Detector</div>
+          <div class="f04-inst-label" id="f04-inst-label">λ_min — positivity margin</div>
+          <svg class="f04-gauge" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- zero hairline -->
+            <line x1="90" y1="200" x2="640" y2="200" stroke="#334155" stroke-width="1" />
+            <text x="654" y="206" font-family="JetBrains Mono, monospace" font-size="20" fill="#475569">0</text>
+            <!-- arc ticks around the pivot -->
+            <g stroke="#334155" stroke-width="2">
+              <line x1="522.8" y1="25.1" x2="543.0" y2="16.2" />
+              <line x1="543.3" y1="81.5" x2="564.5" y2="75.4" />
+              <line x1="555.8" y1="140.2" x2="577.6" y2="137.1" />
+              <line x1="560" y1="200" x2="582" y2="200" stroke="#e2e8f0" />
+              <line x1="555.8" y1="259.8" x2="577.6" y2="262.9" />
+              <line x1="543.3" y1="318.5" x2="564.5" y2="324.6" />
+              <line x1="522.8" y1="374.9" x2="543.0" y2="383.8" />
+            </g>
+            <text x="596" y="152" font-family="JetBrains Mono, monospace" font-size="22" fill="#475569">+</text>
+            <text x="598" y="266" font-family="JetBrains Mono, monospace" font-size="22" fill="#475569">−</text>
+            <!-- needle (rotates around the pivot via SVG transform attribute) -->
+            <g id="f04-needle">
+              <line x1="130" y1="200" x2="548" y2="200" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" />
+            </g>
+            <circle cx="130" cy="200" r="9" fill="#e2e8f0" />
+          </svg>
+          <div class="f04-readout">
+            <span class="f04-readout-pos" id="f04-readout-pos">λ_min &gt; 0</span>
+            <span class="f04-readout-neg" id="f04-readout-neg">λ_min &lt; 0</span>
+          </div>
+        </div>
+
+        <!-- checklist (supporting, becomes focus row by row) -->
+        <div class="f04-checks">
+          <div class="f04-row" id="f04-row1">
+            <div class="f04-row-head">
+              <div>
+                <div class="f04-row-idx">Check 01</div>
+                <div class="f04-row-title">Ramanujan trio</div>
+                <div class="f04-row-sub">RH analogue proven</div>
+              </div>
+              <div class="f04-badge" id="f04-badge1">
+                <span class="f04-badge-pending" id="f04-badge1-pending">·</span>
+                <span class="f04-badge-done f04-badge-ok" id="f04-badge1-done">✓</span>
+              </div>
+            </div>
+            <div class="f04-track"><div class="f04-fill" id="f04-fill1"></div></div>
+          </div>
+
+          <div class="f04-row" id="f04-row2">
+            <div class="f04-row-head">
+              <div>
+                <div class="f04-row-idx">Check 02</div>
+                <div class="f04-row-title">Epstein ζ</div>
+                <div class="f04-row-sub">Genuine off-line zeros</div>
+              </div>
+              <div class="f04-badge" id="f04-badge2">
+                <span class="f04-badge-pending" id="f04-badge2-pending">·</span>
+                <span class="f04-badge-done f04-badge-fail" id="f04-badge2-done">✕</span>
+              </div>
+            </div>
+            <div class="f04-track"><div class="f04-fill" id="f04-fill2"></div></div>
+          </div>
+
+          <div class="f04-callout" id="f04-callout">
+            <span class="f04-callout-text" id="f04-callout-text"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4: matched-filter card (foreground subject of the fourth act) -->
+      <div class="f04-mf" id="f04-mf">
+        <div class="f04-kicker">Matched Filter</div>
+        <div class="f04-mf-rule"></div>
+        <div class="f04-formula-wrap">
+          <span class="f04-formula" id="f04-formula"></span><span class="f04-cursor" id="f04-cursor">█</span>
+        </div>
+        <div class="f04-mf-hairline"></div>
+        <div class="f04-witness" id="f04-witness">
+          <span class="f04-w">any</span>
+          <span class="f04-w">off-line</span>
+          <span class="f04-w">zero</span>
+          <span class="f04-w">⇒</span>
+          <span class="f04-w">constructible</span>
+          <span class="f04-w">negative</span>
+          <span class="f04-w">test vector</span>
+          <span class="f04-w">·</span>
+          <span class="f04-w">from</span>
+          <span class="f04-w f04-w-accent">2αδ ≥ 1.97</span>
+        </div>
+      </div>
+
+      <!-- Scene 5: closing statement -->
+      <div class="f04-statement" id="f04-statement">
+        The object is <span class="f04-statement-key" id="f04-statement-key">falsifiable</span>.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const ID = "04-detektor-falsifikator";
+      const DUR = 24.36;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines[ID] = tl;
+
+      /* ---------- initial offsets (build-time, deterministic) ---------- */
+      // instrument card starts centered (final left position + 450px offset)
+      gsap.set("#f04-inst", { x: 450 });
+      // matched-filter card waits fully below the frame (top 260 + 840 = 1100 > 1080)
+      gsap.set("#f04-mf", { y: 840 });
+
+      /* ---------- needle: base angle + living micro-jitter (svg-icon-enrichment) ---------- */
+      const needle = document.getElementById("f04-needle");
+      const needleState = { deg: -9 }; // negative = tip above the zero hairline
+      const jitter = { p: 0 };
+      const JITTER_AMP = 0.7;
+      const renderNeedle = () => {
+        const wobble =
+          Math.sin(jitter.p) * JITTER_AMP + Math.sin(jitter.p * 2.63 + 1.3) * 0.28;
+        needle.setAttribute("transform", `rotate(${needleState.deg + wobble} 130 200)`);
+      };
+      renderNeedle();
+      // continuous jitter phase across the whole shot — the instrument lives
+      tl.to(
+        jitter,
+        { p: Math.PI * 2 * 26, duration: DUR, ease: "none", onUpdate: renderNeedle },
+        0,
+      );
+
+      /* ---------- global clock driver: callout chip discrete states ---------- */
+      const CALLOUT_SEQ = [
+        { t: 0.0, text: "" },
+        { t: 13.0, text: "Census: 12 off-line zeros" },
+        { t: 13.7, text: "Census: 12 off-line zeros · λ ratio 0.803 predicted" },
+      ];
+      const calloutEl = document.getElementById("f04-callout-text");
+      let lastCallout = null;
+      const clock = { t: 0 };
+      tl.to(
+        clock,
+        {
+          t: DUR,
+          duration: DUR,
+          ease: "none",
+          onUpdate: () => {
+            let txt = "";
+            for (let i = CALLOUT_SEQ.length - 1; i >= 0; i--) {
+              if (clock.t >= CALLOUT_SEQ[i].t) {
+                txt = CALLOUT_SEQ[i].text;
+                break;
+              }
+            }
+            if (txt !== lastCallout) {
+              calloutEl.textContent = txt;
+              lastCallout = txt;
+            }
+          },
+        },
+        0,
+      );
+
+      /* ================= Scene 1 (0.0–2.8s): instrument centered ================= */
+      tl.fromTo(
+        "#f04-inst",
+        { opacity: 0, y: 36, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" },
+        0.05,
+      );
+      tl.fromTo(
+        "#f04-chrome",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.7, ease: "power2.out" },
+        0.3,
+      );
+      // keyword glow on the label at "Detektor" (1.2s)
+      tl.to(
+        "#f04-inst-label",
+        {
+          color: "#38bdf8",
+          textShadow: "0 0 26px rgba(56,189,248,0.55)",
+          duration: 0.4,
+          ease: "power2.out",
+        },
+        1.2,
+      );
+      tl.to(
+        "#f04-inst-label",
+        { textShadow: "0 0 12px rgba(56,189,248,0.18)", duration: 0.8, ease: "power2.inOut" },
+        1.7,
+      );
+
+      /* ================= Scene 2 (2.8–9.2s): 60/40 split, Ramanujan passes ================= */
+      tl.to("#f04-inst", { x: 0, duration: 0.9, ease: "power3.inOut" }, 2.8);
+      // row 1 slides in on "Ramanujan-Graphen" (4.6s)
+      tl.fromTo(
+        "#f04-row1",
+        { opacity: 0, x: 70 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" },
+        4.6,
+      );
+      // progress stroke runs through (stat-bars-and-fills)
+      tl.fromTo(
+        "#f04-fill1",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 2.5, ease: "power1.inOut" },
+        4.9,
+      );
+      // badge hard-flips to ✓ on "bestehen den Test" (7.6s); needle stays calm positive
+      tl.set("#f04-badge1-pending", { opacity: 0 }, 7.6);
+      tl.set("#f04-badge1-done", { opacity: 1 }, 7.6);
+      tl.set("#f04-badge1", { borderColor: "#38bdf8" }, 7.6);
+      tl.fromTo(
+        "#f04-badge1-done",
+        { scale: 1.35 },
+        { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false },
+        7.6,
+      );
+
+      /* ================= Scene 3 (9.2–14.6s): Epstein breaks ================= */
+      tl.fromTo(
+        "#f04-row2",
+        { opacity: 0, x: 70 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" },
+        9.4,
+      );
+      tl.fromTo(
+        "#f04-fill2",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 2.15, ease: "power1.inOut" },
+        9.7,
+      );
+      // "bricht" (11.9s): needle tips below the zero hairline — fast but damped
+      tl.to(
+        needleState,
+        { deg: 13, duration: 0.95, ease: "back.out(1.8)", onUpdate: renderNeedle },
+        11.9,
+      );
+      tl.set("#f04-badge2-pending", { opacity: 0 }, 11.9);
+      tl.set("#f04-badge2-done", { opacity: 1 }, 11.9);
+      tl.set("#f04-badge2", { borderColor: "#e2e8f0" }, 11.9);
+      tl.fromTo(
+        "#f04-badge2-done",
+        { scale: 1.35 },
+        { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false },
+        11.9,
+      );
+      // readout hard-swaps to the negative state
+      tl.set("#f04-readout-pos", { opacity: 0 }, 12.0);
+      tl.set("#f04-readout-neg", { opacity: 1 }, 12.0);
+      // "vorhergesagt" (13.0s): callout chip hard-cut reveal (text via discrete states above)
+      tl.fromTo(
+        "#f04-callout",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.05, ease: "none" },
+        13.0,
+      );
+
+      /* ============ Scene 4 (14.6–21.4s): cut-the-curve to the matched-filter card ============ */
+      // velocity-matched: checklist stage shoves up while the card rises from below
+      tl.to("#f04-stage", { y: -620, opacity: 0.16, duration: 0.95, ease: "power2.inOut" }, 14.55);
+      tl.to("#f04-mf", { y: 0, duration: 0.95, ease: "power2.inOut" }, 14.55);
+
+      // formula types character-wise from "Matched Filter" (15.0s) — smooth slice
+      const FORMULA = "x_mf[j] = cos(ω_j γ₀) · sinh(ω_j δ)";
+      const formulaEl = document.getElementById("f04-formula");
+      const typed = { v: 0 };
+      tl.to(
+        typed,
+        {
+          v: FORMULA.length,
+          duration: 2.3,
+          ease: "power1.inOut",
+          onUpdate: () => {
+            formulaEl.textContent = FORMULA.substring(0, Math.floor(typed.v));
+          },
+        },
+        15.0,
+      );
+      // block cursor blink — deterministic sin square wave
+      const cursorEl = document.getElementById("f04-cursor");
+      const blink = { p: 0 };
+      tl.to(
+        blink,
+        {
+          p: Math.PI * 2 * 13,
+          duration: DUR - 14.6,
+          ease: "none",
+          onUpdate: () => {
+            cursorEl.style.opacity = Math.sin(blink.p) > 0 ? "1" : "0";
+          },
+        },
+        14.6,
+      );
+
+      // witness line per-word on "nachrechenbaren Zeugen" (18.8s) — content-aware schedule
+      const words = Array.from(document.querySelectorAll(".f04-w"));
+      const W_BASE = 0.1;
+      const W_SEC_PER_CHAR = 0.012;
+      let cum = 0;
+      const wordStarts = words.map((w) => {
+        const start = cum;
+        cum += W_BASE + w.textContent.trim().length * W_SEC_PER_CHAR;
+        return start;
+      });
+      const witness = { t: 0 };
+      tl.to(
+        witness,
+        {
+          t: cum,
+          duration: cum,
+          ease: "none",
+          onUpdate: () => {
+            for (let i = 0; i < words.length; i++) {
+              words[i].style.opacity = witness.t >= wordStarts[i] ? "1" : "0";
+            }
+          },
+        },
+        18.8,
+      );
+
+      /* ================= Scene 5 (21.4–24.36s): the statement lands ================= */
+      // background cards dim (opacity only, no blur rig)
+      tl.to("#f04-mf", { y: -150, opacity: 0.22, duration: 0.8, ease: "power2.inOut" }, 21.9);
+      tl.to("#f04-stage", { opacity: 0.08, duration: 0.8, ease: "power2.inOut" }, 21.9);
+      tl.to("#f04-chrome", { opacity: 0.4, duration: 0.8, ease: "power2.inOut" }, 21.9);
+      // "falsifizierbar" (22.4s)
+      tl.fromTo(
+        "#f04-statement",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        22.4,
+      );
+      tl.to(
+        "#f04-statement-key",
+        {
+          color: "#38bdf8",
+          textShadow: "0 0 30px rgba(56,189,248,0.5)",
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        22.9,
+      );
+    })();
+  </script>
+</template>

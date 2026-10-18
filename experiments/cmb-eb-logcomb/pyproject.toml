@@ -1,0 +1,9 @@
+[project]
+name = "eb-comb"
+version = "0.1.0"
+description = "EB log-comb search at the frozen TFPT kernel frequency (prereg v1)"
+requires-python = ">=3.11"
+dependencies = ["numpy", "camb"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

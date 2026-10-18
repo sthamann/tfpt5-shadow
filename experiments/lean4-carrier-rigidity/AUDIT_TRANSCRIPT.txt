@@ -1,12 +1,18 @@
+Run: 2026-08-13, ./scripts/audit.sh (full mode)
+Toolchain: leanprover/lean4:v4.29.1 + mathlib v4.29.1 (cache)
+Build: lake build -- "Build completed successfully (3441 jobs)."
+Wall-ladder prerequisite: all 18 generated TfptCarrier/WallLadder/RungKz*.lean
+rungs built via scripts/build_wall_ladder.sh (see README "Rebuild the generated
+wall-ladder rungs"); heaviest rung RungKz59 at 3961 s and 382.6 GB peak RSS.
 
 === Build ===
   [PASS] lake build succeeded
 
 === sorry / admit ===
-  [PASS] no sorry or admit found
+  [PASS] no sorry or admit found (comments ignored)
 
 === axiom / constant declarations ===
-  [PASS] no axiom or constant declarations
+  [PASS] no axiom/constant declarations outside the named seam-residual modules (39 documented cited-theorem axioms, kept kernel-honest by the #print axioms audit)
 
 === unsafe / opaque / partial declarations ===
   [PASS] no unsafe / opaque / partial declarations

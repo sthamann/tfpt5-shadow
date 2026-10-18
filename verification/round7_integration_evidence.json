@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "record_scope": "Historical validation of integration commit 02242c6a; the subsequent QWZ zero-space portability amendment is recorded separately in round7_portability_amendment.json. These original transcript/source hashes are intentionally preserved.",
+  "integration": "Non-RH round 7 with round-6 quantum prerequisite",
+  "validation_record_date": "2026-09-06",
+  "source_base_commit": "4417f1ba8da3d5dc622c942efcbfc46ebaae546d",
+  "normalization": {
+    "status": "EOF_ONLY_AFTER_SUITE",
+    "description": "Removed one trailing blank line from each verification/v1031..v1035 module and its identical website/public mirror after the recorded suite passed; no mathematical or executable content changed.",
+    "validated_source_sha256_before_normalization": {
+      "verification/v1031_quantum_tensor_curvature.py": "72989a3a050caabb12308def531ab13656cf643788ac5e3a14ded9ed44d80692",
+      "verification/v1032_covariant_curvature.py": "422bf46b17b774f9848a715a5ea17a40c134fa4ff4341ad0216d2ba9ea30881a",
+      "verification/v1033_charged_disorder.py": "2d700e52f19624c3cb79b583a9c74fc929faa3ed637bdf9c3518bedc5434dd60",
+      "verification/v1034_parent_mirror.py": "b6c64bd60a323d8a5409d7dc7621b66f530ec9f227be0f6bd2e6195a3810894b",
+      "verification/v1035_matter_coupling.py": "b860e8296e12bf7019d6ce8576a6f4a6f578ae184f15466ed8588177d6aeeede"
+    }
+  },
+  "modules": [
+    {
+      "module": "v1031_quantum_tensor_curvature",
+      "checks": 69,
+      "exact": 53,
+      "source_contract": 0,
+      "floating": 16,
+      "sha256": "8a6a7d3768fbd893fb0567f6d11a47d86bc4af1f63d9e7bbfe471a1486f3cedd"
+    },
+    {
+      "module": "v1032_covariant_curvature",
+      "checks": 34,
+      "exact": 34,
+      "source_contract": 0,
+      "floating": 0,
+      "sha256": "2ba2ff1636eb1f712705d1b50b9e1be703597271d40209e6fb7ecf1ad099aefb"
+    },
+    {
+      "module": "v1033_charged_disorder",
+      "checks": 35,
+      "exact": 12,
+      "source_contract": 7,
+      "floating": 16,
+      "sha256": "f53859212c83afc20d27782e4c10691e763b3c2ebac7d324185caca376016c36"
+    },
+    {
+      "module": "v1034_parent_mirror",
+      "checks": 36,
+      "exact": 29,
+      "source_contract": 6,
+      "floating": 1,
+      "sha256": "a4f7d7712f1d0525ab496e4430a28bda7a51eb3c5ae909c949c4374b9c3107e2"
+    },
+    {
+      "module": "v1035_matter_coupling",
+      "checks": 59,
+      "exact": 55,
+      "source_contract": 0,
+      "floating": 4,
+      "sha256": "ca574ba9d25952b3f004381d67091423c22234a256772902d900e46bceb20e56"
+    }
+  ],
+  "totals": {
+    "checks": 233,
+    "exact": 183,
+    "source_contract": 13,
+    "floating": 37
+  },
+  "proof_sha256": {
+    "tex-artefacts/toe_round7_charged_disorder.tex": "df47962843e659ace57240cab8b26d5d9905fa1f912c331632cc2829f0b0c34a",
+    "tex-artefacts/toe_round7_covariant_curvature.tex": "76beadfd44c4de94b516b5ee46bbdf0f04c7b139c4c1e1b4ffa5f9782c2702e2",
+    "tex-artefacts/toe_round7_matter_coupling.tex": "ee6ffffd298f37e50cc9e4ed2590bb0dc7927aa29a655e770763f9f2be7875c8",
+    "tex-artefacts/toe_round7_parent_mirror.tex": "6298b81cce080b2208a88fc252789c40c87171beee29d190292dac3153157a5c",
+    "tex-artefacts/toe_round7_proofs.tex": "e74c2ac409cc6cf94885d2ad7084bb3ff24b7038883a0f8c787ec40ea293cb29",
+    "tex-artefacts/toe_round7_quantum_tensor_curvature.tex": "2427c7bec1c1fb5f38a579d2871c6174f03956bfbba07bdfbb0c77e8e151bc15"
+  },
+  "python_suite": {
+    "total_modules": 1028,
+    "shards": [
+      {
+        "shard": "1/4",
+        "modules": 257,
+        "result": "ALL CHECKS PASSED (shard 1/4: 257 of 1028 modules, v1_e8_glue .. v1032_covariant_curvature)",
+        "transcript_sha256": "a3c2729b4f724a4b018a6df9036976f0edd2468b19c42254f0048ed89904568d"
+      },
+      {
+        "shard": "2/4",
+        "modules": 257,
+        "result": "ALL CHECKS PASSED (shard 2/4: 257 of 1028 modules, v2_carrier_pascal .. v1033_charged_disorder)",
+        "transcript_sha256": "e5ac5c995f2571402ff59b2331b317d6f23188c2724334b834141eb2322d53c0"
+      },
+      {
+        "shard": "3/4",
+        "modules": 257,
+        "result": "ALL CHECKS PASSED (shard 3/4: 257 of 1028 modules, v3_em_alpha .. v1034_parent_mirror)",
+        "transcript_sha256": "15f6739be41014e7d8fd2ed7894fe65edf0350bdcdbd8b9888d33960b4d13a20"
+      },
+      {
+        "shard": "4/4",
+        "modules": 257,
+        "result": "ALL CHECKS PASSED (shard 4/4: 257 of 1028 modules, v4_flavor_matrix .. v1035_matter_coupling)",
+        "transcript_sha256": "bf3228d20d4aa286912cd32ca838836a1fcefb82b1b52464d792456b2f7be220"
+      }
+    ],
+    "reproduce": "cd verification && python run_all.py --shard K/4 # K=1,2,3,4"
+  },
+  "integration_tests": {
+    "tests": 19,
+    "status": "PASS",
+    "transcript_sha256": "eb002c62d8b617dea51c1bc88e606773cd7d1aae9ff4a82b56c5ee05f0c66a4c",
+    "reproduce": "python -m unittest discover -s verification -p 'test_*.py' -v"
+  },
+  "release": {
+    "status": "PASS",
+    "audit": "AUDIT OK (1028 scripts; papers, ledger, changelog and website in sync)",
+    "root_documents_compiled": 13,
+    "website_build": "PASS",
+    "transcript_sha256": "1168b4acdb41b3cf93a2dc4c365f85684e8df56afb34141347cb902035bf5648",
+    "reproduce": "bash build.sh release"
+  },
+  "wolfram": {
+    "representative_blocks_authored": 14,
+    "execution": "UNVERIFIED_LICENSE_INACTIVE",
+    "last_verified_base_checks": 116
+  },
+  "scope": [
+    "Declared free target and explicitly enlarged/conditional models only.",
+    "All T1-T8 and TFPT.TOE.COMPLETE.01 remain open.",
+    "No shared microscopic parent or universal nonlinear gravity is derived.",
+    "The factorized mirror bound is not an interacting hopping-gap theorem.",
+    "No RH research or RH claim. Existing release/suite regressions were run unchanged."
+  ],
+  "transcript_note": "Transcript hashes identify this local run; logs are not bundled. Reproduction executes the committed source, not this receipt."
+}

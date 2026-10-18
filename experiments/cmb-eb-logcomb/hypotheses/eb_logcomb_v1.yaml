@@ -1,0 +1,58 @@
+# EB log-comb search v1 -- FROZEN 2026-08-27 BEFORE first data contact
+# (the freeze-time status field is part of the hash trail)
+status: frozen_pre_data
+experiment: cmb-eb-logcomb
+target: >
+  Multiplicative log-comb at the FROZEN kernel frequency omega_+ =
+  2.58270695 in the parity-odd EB channel -- the faithful-class positive
+  channel per the sheetflip-bridge chain (DLXIII): under a covariant
+  CPT-typed coupling the odd tone omega_+ is FORBIDDEN in TT/TE/EE and
+  lives in TB/EB.  No published comb search exists in this channel.
+frozen_numbers:
+  omega_plus: 2.58270695          # 2*pi / ln((3/2)^6), zero freedom
+  omega_minus_control: 0.95320029 # even tone; FORBIDDEN in EB (kill leg)
+  ell_star: 150.0                 # pivot convention (phase profiled)
+  amplitude_candidate_eps: 0.017302  # QT.02 scale; carry-over OPEN, not frozen
+model: >
+  EB_b = s0 * T_b * [1 + A * cos(omega * ln(ell_c/ell_star) + phi)] with
+  T_b = binned LCDM (C^EE - C^BB) from CAMB (Planck 2018 parameters as in
+  the data-release tutorial: tau=0.0544, ns=0.9649, H0=67.36,
+  ombh2=0.02237, omch2=0.12, As=2.1e-9; raw_cl, muK^2); s0 free (absorbs
+  the total rotation angle alpha+beta); A in [0, 0.5]; phi PROFILED over
+  [0, 2pi) -- the holonomy phase leg stays contract-locked until the
+  intertwiner theorem (DLXII), no phase value is claimed or consumed.
+  Linearisation: y = u*T + a*T*cos(omega ln x) + b*T*sin(omega ln x),
+  A = sqrt(a^2+b^2)/|u|.
+statistic: >
+  Gaussian diagonal likelihood with the published per-bin sigma;
+  dchi2 = chi2(A=0) - chi2(A free) at the frozen omega (2 extra dof).
+calibration:
+  null_sims: 2000                 # Gaussian around the A=0 best fit
+  seed: 20260827
+  p_hint: 0.01
+  p_escalate: 0.001
+  bound_rule: profile-likelihood A_95 (one-sided, dchi2 = 2.71, phi profiled)
+controls:
+  lee_scan: 60 log-spaced omega in [0.6, 12]; global p from the null
+    distribution of max-dchi2 over the same grid
+  forbidden_tone: identical fit at omega_minus -- a significant comb
+    (p < 0.01) in EB at the EVEN tone KILLS the faithful dictionary
+  scramble: one bin-permutation control at the frozen omega (seed pinned)
+reach_disclosure: >
+  ln(1490/51) * omega_+ / (2pi) = 1.385 comb periods < the 2.8-period
+  project gate -- NO detection claim is possible at this reach; the
+  deliverable is the FIRST EB-comb amplitude bound on record plus typed
+  outcomes: null / hint / dictionary_kill_flag / escalation_candidate
+  (p < 0.001 AND LEE rank 1 -- candidate only, requires replication on
+  independent splits/component separations before any escalation).
+data_plan: >
+  Single file HFI_f_sky_092_EB_o.npy (Eskilt et al. 2023,
+  arXiv:2303.15369): beam-deconvolved stacked observed EB of Planck
+  PR4/NPIPE HFI, f_sky = 0.92, PolSpice; bins ell = 51..1471 step 20
+  (labels = bin starts, centers = label + 9.5), units muK^2 (raw C_ell).
+  SHA-256 logged at fetch in the README.  Disclosed limitation: only the
+  published DIAGONAL errors are available (no bin-bin covariance).
+firewall: >
+  Search target of the faithful-class reading -- not a claim; a null is
+  a well-powered honest outcome and damages nothing ([C] reading); no
+  marker moves; promotion only via promote-to-verification.

@@ -153,7 +153,7 @@ def main():
             )
             one = (reg[s].get("what_web") or "").strip()
             one = one.split(" — ", 1)[-1] if " — " in one else one
-            one = re.sub(r"\s+", " ", one)[:180]
+            one = re.sub(r"\s+", " ", one)[:180].rstrip()
             cids = ", ".join(claims) if claims else "(no ledger claim)"
             A(f"- **{s.replace('.py','')}** {mk} `{cids}` — {one}")
             deps = deps_as_scripts(claims)

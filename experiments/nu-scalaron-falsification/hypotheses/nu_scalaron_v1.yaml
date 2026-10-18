@@ -1,0 +1,64 @@
+# nu-scalaron-falsification -- preregistered hypothesis set v1
+# FROZEN 2026-08-28 BEFORE the comparison pass (first data contact logged
+# in README.md).  Everything below is fixed by the compiler axioms
+# {c3 = 1/(8 pi), g_car = 5} plus the frozen corpus channels; ZERO free
+# dials.  The candidate under test is the FLAV.NUSCALE.05 scalaron-trace
+# rung (v986, [C]/[N]; mechanism [O]).
+
+candidate:
+  name: scalaron_trace_rung
+  M_R_formula: "3 * c3^(7/2) * Mbar"          # N_fam * M_scal
+  c3: "1/(8*pi)"
+  Mbar_GeV: 2.435323203e18                     # tfpt_constants (frozen)
+  premise: "y_nu = y_t at the matching scale (v481 [P], named, not proven)"
+  rg_tool: "v481 1-loop SM runner, verbatim frozen inputs"
+  rg_inputs:
+    MZ_GeV: 91.1876
+    v_EW_GeV: 246.22
+    mt_MSbar_MZ_GeV: 162.5
+    lambda_MZ: 0.130
+    alpha_inv_MZ: [59.01, 29.59, 8.44]
+
+mass_chain:
+  ordering: "normal (NO); m1 = 0 floor"
+  m3: "seesaw output at the frozen M_R (forward, no inversion)"
+  m2_variants:
+    a_tfpt_internal: "m2 = m3 * sqrt(|J_PMNS|)   (v468 candidate ratio)"
+    b_hybrid: "m2 = sqrt(dm2_21_meas)            (external input, labeled)"
+  pmns_frozen:                                   # v270 channels
+    sin2_th12: "1/3 - phi0/2"
+    sin2_th23: "1/2"
+    sin2_th13: "phi0 * exp(-5/6)"
+    delta: "4*pi/3"
+    majorana_phases: "unconstrained -> m_bb reported as exact interval"
+
+leptogenesis_leg:
+  M1: "M_R * phi0^4        (v184 relation, [C] scenario)"
+  washout_m1: "m3 / A_Lambda, A_Lambda = 10 (v184 atom)"
+  note: "reported, not re-solved; the Boltzmann re-run is a follow-up"
+
+kill_conditions:
+  K1: "a robust cosmological bound Sigma m_nu < the frozen prediction
+       (within its stated 2% RG envelope) kills the candidate"
+  K2: "a >5% shift of the required M_R under the same frozen premise
+       chain (better RG inputs) kills the candidate"
+  K3: "established inverted ordering kills the chain (NO assumed)"
+  K4: "m_bb measured above the frozen NO interval kills the phase-free
+       interval statement"
+
+data_snapshot:                                   # frozen comparators, dated
+  nufit_60_2024:
+    dm2_21_eV2: 7.49e-5
+    dm2_3l_eV2: 2.513e-3
+  desi_dr2_2025:
+    sigma_mnu_bound_eV: 0.0642                   # 95% CL, LCDM+Sum m_nu
+    caveat: "model-dependent (LCDM); relaxed in extended models"
+  katrin_2024:
+    m_beta_bound_eV: 0.45                        # 90% CL
+  kamland_zen_2024:
+    m_bb_bound_eV_range: [0.028, 0.122]          # NME spread
+  holdout: "future releases only (DESI DR3+, KATRIN final, LEGEND-1000,
+            JUNO ordering) count as new evidence; this pass is a
+            consistency check, not blind confirmation"
+
+verdict_grammar: [consistent, tension, data_limited, killed]

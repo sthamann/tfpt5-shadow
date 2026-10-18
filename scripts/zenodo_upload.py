@@ -38,7 +38,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RECORD_ID = "21128999"  # 5.4 (rev 344), published 2026-07-02; DOI 10.5281/zenodo.21128999
 ZENODO_API = "https://zenodo.org/api"
-REPO_URL = "https://github.com/sthamann/tfpt-theoryv4"
+REPO_URL = "https://github.com/sthamann/tfpt"
 
 PDF_FILES = (
     "introduction.pdf",
@@ -51,6 +51,8 @@ PDF_FILES = (
     "tfpt_horizon_readouts.pdf",
     "tfpt_research_contracts.pdf",
     "tfpt_safeguards.pdf",
+    "note_e8_gaussian_code.pdf",
+    "note_hilbert_polya_truncations.pdf",
     "changelog.pdf",
 )
 

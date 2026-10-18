@@ -48,6 +48,8 @@ def analyze() -> dict:
         "predicted_below_bound": EPS_PRED < tightest,
     }
 
+    from .omega_minus import analyze_omega_minus
+
     verdict = "data_limited" if (in_band and EPS_PRED < tightest) else "tension"
     out = {
         "experiment": "cmb-primordial-logcomb",
@@ -65,6 +67,7 @@ def analyze() -> dict:
                  f"{margin:.1f} below today's 95% bound -> data_limited with a dated "
                  "decider (CMB-S4-class combined bounds reach it; a future bound "
                  "< 0.017 at omega = 2.583 with no detection kills the bridge reading)"),
+        "faithful_class_omega_minus": analyze_omega_minus(),
     }
     RESULTS.parent.mkdir(exist_ok=True)
     RESULTS.write_text(json.dumps(out, indent=2))

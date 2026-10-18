@@ -1,0 +1,11 @@
+{
+  "name": "prime-front-explainer-2026-08",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.7.90 preview",
+    "check": "npx --yes hyperframes@0.7.90 check",
+    "render": "npx --yes hyperframes@0.7.90 render",
+    "publish": "npx --yes hyperframes@0.7.90 publish"
+  }
+}

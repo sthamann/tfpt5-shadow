@@ -1,0 +1,226 @@
+# Preregistration of the P9-FORECAST slice (v1). FROZEN protocol.
+#
+# Written BEFORE any forecast Monte Carlo was run. This experiment analyses NO
+# new data. It is the strategy-council power forecast for the empirical comb
+# front: given the SHARED TFPT signal (omega = 2.5827, eps = 0.0173) and the
+# noise models CALIBRATED by the existing searches (their published
+# injection-recovery anchors), which realistic 5-year observing programme --
+# if any -- reaches >= 80% detection power? Every kernel number below is an
+# EXACT consequence of the two TFPT axioms (c3 = 1/(8*pi), g_car = 5) and must
+# equal p9_forecast.constants byte-for-byte (guarded by tests/). Editing the
+# programme definitions, thresholds or anchors AFTER the Monte Carlo runs
+# invalidates this file.
+version: 1
+frozen_on: 2026-08-03
+experiment: p9-forecast
+axes: [P9.INV, P9.PWR, P9.COMB, P9.GATE, P9.LOO]
+
+firewall: >-
+  Forecast only. No new data are analysed; nothing here is evidence for or
+  against TFPT. All channel semantics inherit the sibling firewalls
+  (surface / horizon-residual / universal-DSI / bridge): even a future
+  detection in a single surface or spectrum channel would be a universal-DSI
+  coincidence, not TFPT confirmation, until it recurs in >= 2 independent
+  worlds. Nothing is promoted to [E]/veri from a forecast.
+
+kernel:
+  omega: "2*pi/ln((3/2)^6) = 2.58270694630828..."
+  lambda: "(3/2)^6 = 11.390625"
+  amplitude_eps: "exp(-pi^2/ln((3/2)^6)) = 0.01730246011431484"
+  gw_echo_ceiling: "(2/3)^6 = 0.08779149519890261 (the GW transfer target is the echo-amplitude CEILING, not the comb eps -- Stage-2 proved the comb is structurally unmeasurable within one monotone ringdown)"
+  reach_gate_periods: 2.8
+  eps_reference: 0.30
+
+# ----------------------------------------------------------------- P9.INV
+channel_inventory:
+  rule: >-
+    A channel enters the forecast ONLY if its comb amplitude is dimensionless
+    and calibratable in absolute terms (a fractional modulation of the
+    observable, so the fitted amplitude IS the eps the theory predicts), AND
+    an existing sibling search provides a surrogate-calibrated noise model /
+    injection anchor to build on. Everything else is enumerated with the
+    honest exclusion reason.
+  included:
+    - key: PSR
+      observable: "post-glitch nu(t) transient recovery; eps = fractional modulation of the transient component (PG.07/PG.08 injection semantics)"
+      firewall: surface
+      anchor: "PG.08 J1740-3015: power 0.50 at eps=0.30, 0.00 at eps=0.0173 (137 TOAs, reach 2.81 periods, rms 684 us)"
+    - key: FRB
+      observable: "repeater burst-time cascade; eps = fractional rate modulation (RC.02 semantics, Rayleigh + rate-preserving surrogates)"
+      firewall: horizon-residual (bridge; a hit is universal-DSI until replicated)
+      anchor: "repeater-cascade validation: power 0.9375 at eps=0.30, 0.00 at eps=0.0173 (synthetic session N~1000 on the real sampling construction)"
+    - key: GW
+      observable: "ringdown first-echo amplitude relative to A220; TFPT transfer target = ceiling (2/3)^6 = 0.0878 (NOT the 0.0173 comb)"
+      firewall: horizon (the one TFPT-decisive channel)
+      anchor: "Stage 1h: event-level eps90 = 0.63 (GW200129) / 0.69 (GW150914) at p_raw = 0.01 with 90% recovery"
+    - key: UHECR
+      observable: "multiplicative log-periodic modulation of the differential energy spectrum in ln E (dimensionless by construction)"
+      firewall: universal-DSI (size-space S7; never TFPT confirmation alone)
+      anchor: "uhecr-energy-dsi: power 0.233 at eps=0.0173 with N=(21571 SD1500 + 54434 SD750) open-data events (a 10% sample of the full Auger dataset)"
+    - key: CMB
+      observable: "log-oscillation amplitude in primordial P(k) (dimensionless delta P/P); external Gaussian likelihood on published bounds"
+      firewall: bridge (transduction B assumed, S15-flagged)
+      anchor: "cmb-primordial-logcomb: 95% bound 0.029 (combined 2024+), Planck 0.030; sibling's dated decider: S4-class bound < 0.017"
+    - key: LNFLUX
+      observable: "ln(flux) recovery-curve comb (magnetar A1 / GRB A4 / TDE A5); fitted amplitude IS fractional eps (comb-meta-limit Tier A)"
+      firewall: surface
+      anchor: "comb-meta-limit all-channel stack: sigma_amp = 0.037658 (k=3 channels, HKSJ), eps95 = 0.1195"
+    - key: CRUST
+      observable: "crust-cooling kT(t) fractional comb; injection-calibrated on the real sampling"
+      firewall: surface
+      anchor: "crust-cooling-comb injection: power 0.025 at eps=0.02, 0.525 at eps=0.05, 1.00 at eps=0.15 (8 episodes, 67 epochs)"
+  excluded:
+    - {key: A3/A3b FRB intensity tails, reason: "linear-intensity observable + raw waterfalls/baseband not on disk -> no absolute dimensionless eps (comb-meta-limit Tier B)"}
+    - {key: PG.05 Crab nudot, reason: "linear detrended nudot, monthly cadence undersamples the transient -> normalised amplitude only"}
+    - {key: PG.06b Vela X-ray delta-nu, reason: "linear delta-nu observable; injection eps_90 censored below eps=1 in both legs -> no absolute eps (kept as an X-RAY PROGRAMME variant of the PSR channel instead, with the measured sigma_nu = 0.6 uHz)"}
+    - {key: A2 BH late-time tail, reason: "below current single-event SNR; no comb eps exists"}
+    - {key: QPE recurrence, reason: "range-blind (best 0.80 < 2.8 periods); QPE ticks alternate by construction"}
+    - {key: strange-metal sigma1(omega/T), reason: "lab master-curve channel; dimensionless but no boundary semantics and no astronomical 5-year programme -- out of forecast scope, already bounded (0-25% power at predicted eps)"}
+    - {key: HFQPO / e8-ladder-bed / qc-recovery-kernel, reason: "ladder/analog channels, not the shared-comb observable"}
+
+# ----------------------------------------------------------------- P9.PWR
+# Realistic 5-year programmes. horizon_5yr = false marks programmes that are
+# physically well-defined but NOT deliverable within 5 years (3G detectors,
+# CMB-S4 deep survey) -- they are computed for the "what must change" table
+# but do NOT count towards the gate.
+programmes:
+  detection_alpha: 0.05          # per-channel detection threshold (sibling P_THRESHOLD)
+  n_mc_null: 400
+  n_mc_signal: 240
+  PSR:
+    noise_model: >-
+      TOA residuals = white sigma_TOA + phase random walk (red). The
+      random-walk step is CALIBRATED (automated bisection, part of the null
+      model construction, not of the gate) so that the PG.08 J1740-3015
+      configuration reproduces its published anchor power 0.50 +/- 0.15 at
+      eps = 0.30. Detector = PG.08 pipeline: refit projection
+      {1, tau, tau^2, exp(-tau/tau_d_i)} then off-kernel periodogram rank
+      (detect_comb), p < 0.05.
+    anchor_config: {psr: J1740-3015, f0_hz: 1.6471971475, glf0d_hz: [2.4090445e-08], gltd_d: [124.29436], n_toa: 137, tau_min_d: 0.4050599, tau_max_d: 379.39616, sigma_toa_us: 100.0}
+    PSR-5Y-RADIO:
+      horizon_5yr: true
+      description: "Vela glitch trigger, dense radio cadence (MeerKAT/Parkes/IAR-class dedicated campaign)"
+      n_glitches: 2              # Vela giant-glitch rate ~1/2.5 yr
+      vela: {f0_hz: 11.1861692, dnu_over_nu: 2.377332e-06, glf0d_hz: [1.5014095e-07, 1.2377972e-07, 1.8532683e-07], gltd_d: [15.115506, 2.4466279, 0.39430499]}
+      cadence_blocks_d: [[0.05, 3.0, 8.0], [3.0, 30.0, 2.0], [30.0, 300.0, 1.0], [300.0, 1000.0, 0.3333]]   # [tau_lo, tau_hi, TOAs/day]
+      sigma_toa_us: 50.0
+      red_noise_multipliers: [1.0, 3.0]   # Vela timing noise band (>= J1740-calibrated; x3 conservative)
+      aggregation: "Fisher over glitches"
+    PSR-5Y-XRAY:
+      horizon_5yr: true
+      description: "NICER/eXTP-class X-ray trigger campaign; direct nu(t) segments (PG.06b semantics)"
+      n_glitches: 2
+      sigma_nu_uhz: 0.6          # PG.06b FULL measured median
+      segment_spacing_d: 0.3
+      tau_min_d: 0.03
+      tau_max_d: 300.0
+  FRB:
+    noise_model: >-
+      Inhomogeneous-Poisson sessions with a smooth power-law rate envelope in
+      tau (RC construction); signal = accept/reject thinning with
+      (1 + eps cos(omega ln tau + phi_session)), phase free per session.
+      Detector = Rayleigh z at the frozen omega, calibrated against the
+      session's own smooth-envelope null (the rate-preserving surrogate bank,
+      amortised per programme); per-session p, then (a) Fisher and (b) the
+      hierarchical sum-z statistic over sessions (both MC-calibrated).
+    anchor_config: {n_sessions: 1, n_bursts: 1000, tau_min_s: 1.0, tau_max_s: 14400.0, envelope_powerlaw_index: 0.3}
+    FRB-5Y-BASEBAND:
+      horizon_5yr: true
+      description: "dedicated FAST-class baseband campaign on one active repeater, 5 yr"
+      n_sessions: 200
+      mean_bursts_per_session: 150    # ~30/h x 4-5 h tracking; M ~ 30,000 bursts
+      tau_min_s: 1.0
+      tau_max_s: 14400.0
+    FRB-5Y-EXTREME:
+      horizon_5yr: true
+      description: "upper envelope of realism: storm-rate campaign (FRB20201124A-class storms), M ~ 100,000 bursts"
+      n_sessions: 100
+      mean_bursts_per_session: 1000
+      tau_min_s: 1.0
+      tau_max_s: 14400.0
+  GW:
+    noise_model: >-
+      Per-event echo SNR = (eps_true / eps90_event) * SNR90 with
+      SNR90 = z(0.99) + z(0.90) = 3.608 (the Gaussian matched-filter SNR at
+      which the Stage-1h criterion p_raw = 0.01 is recovered 90% of the
+      time); N-event coherent stack SNR = sqrt(sum SNR_i^2); detection when
+      N(SNR_stack, 1) exceeds z(0.99) = 2.326. Anchor: recovery at
+      eps = eps90 must be 0.90 +/- 0.07 by construction.
+    signal: "eps_true = (2/3)^6 = 0.0878 -- the CEILING; computed power is an UPPER bound on true power (TFPT predicts <= ceiling)"
+    GW-5Y-O5:
+      horizon_5yr: true
+      description: "LVK O5/A+ 5-yr: 6 GW150914-class loud ringdowns (eps90 = 0.63/1.5 = 0.42) + 20 ordinary loud events (eps90 = 1.3)"
+      events: [[6, 0.42], [20, 1.3]]
+    GW-3G:
+      horizon_5yr: false
+      description: "ET/CE-class: 40 loud ringdowns at x10 sensitivity (eps90 = 0.063)"
+      events: [[40, 0.063]]
+  UHECR:
+    noise_model: >-
+      Binned-Poisson two-stage fit exactly mirroring uhecr-energy-dsi
+      (piecewise-linear log-density, knots frozen at the published features
+      0.16/5.0/12.6/45.7 EeV, smooth refit per draw, shared comb Lambda at
+      the frozen omega, detection at the 95th percentile of the null
+      Lambda). Synthetic spectrum matched to the Auger open-data shape and
+      counts; the ANCHOR must reproduce the published power 0.233 +/- 0.15
+      at eps = 0.0173 with the open-data N.
+    anchor_config: {n_sd1500: 21571, n_sd750: 54434}
+    UHECR-5Y-FULL:
+      horizon_5yr: true
+      description: "full-statistics Auger reanalysis (open data = 10% sample; full dataset already collected) -- a collaboration analysis proposal, no new observatory needed"
+      n_scale: 10.0
+  CMB:
+    noise_model: "one-sided Gaussian amplitude channel: power = Phi(eps/sigma - z95), sigma = bound95/1.645"
+    CMB-5Y-SO:
+      horizon_5yr: true
+      description: "Simons-Observatory-class combined log-osc bound within 5 yr"
+      bound95: 0.023
+    CMB-S4:
+      horizon_5yr: false
+      description: "CMB-S4-class bound (the sibling's dated decider)"
+      bound95: 0.017
+  LNFLUX:
+    noise_model: "Gaussian amplitude channel anchored on the comb-meta-limit HKSJ stack sigma_amp = 0.037658; sigma scales as 1/sqrt(n_curves multiplier)"
+    LNFLUX-5Y-X3:
+      horizon_5yr: true
+      description: "5 more years of Swift magnetar/GRB/ZTF TDE curves (~x3 gated curves)"
+      n_scale: 3.0
+    LNFLUX-ARCHIVE-X10:
+      horizon_5yr: true
+      description: "full-archive Swift-XRT plateau reanalysis (~x10 gated curves)"
+      n_scale: 10.0
+  CRUST:
+    noise_model: "interpolation of the sibling's measured injection power curve {0.02: 0.025, 0.05: 0.525, 0.15: 1.0}; a 5-yr programme adds ~2 episodes (x1.25 statistics)"
+    CRUST-5Y:
+      horizon_5yr: true
+      description: "2 more cooling episodes monitored (Chandra/XMM ToO)"
+      n_scale: 1.25
+
+# ----------------------------------------------------------------- P9.COMB
+combination:
+  method: >-
+    Hierarchical joint likelihood over channels (NOT p-value combination):
+    per channel a standardised detection statistic z_c is drawn from the
+    channel's own MC distributions (null / signal-at-programme); the joint
+    statistic T = sum_c w_c z_c with matched weights w_c proportional to the
+    channel's expected signal shift; the T threshold is MC-calibrated at
+    alpha = 0.05 on the joint null. Reported against (a) the best single
+    channel and (b) Fisher p-value combination, for the realistic-5yr
+    programme set, with and without the dominant channel.
+  channels_realistic: [PSR-5Y-RADIO, FRB-5Y-BASEBAND, GW-5Y-O5, UHECR-5Y-FULL, CMB-5Y-SO, LNFLUX-ARCHIVE-X10]
+
+# ----------------------------------------------------------------- P9.GATE / P9.LOO
+pass_fail:
+  C1_kernel_frozen: "omega/eps/lambda byte-match verification-suite values (tests/)"
+  C2_false_positive: "per-channel MC false-positive rate at eps = 0 in [0.005, 0.12]"
+  C3_anchors: "each published anchor reproduced within +/- 0.20 absolute power (GW: recovery at eps90 within [0.80, 0.97]); a failed anchor disqualifies that channel's forecast rows from the gate"
+  C4_loo: "leave-one-channel-out: removing any channel never increases combined power by more than 2 MC sigma; combined false-positive rate at eps = 0 within [0.02, 0.10]"
+  gate: "P9-FORECAST-GO iff ANY horizon_5yr=true programme (with C2+C3 passed for its channel) reaches power >= 0.80 at the channel's transfer target (0.0173; GW: ceiling 0.0878). Otherwise P9-FORECAST-PARK with the exact required-change numbers per channel."
+
+language:
+  forbidden:
+    - "channel X will detect the TFPT comb"
+    - "the forecast supports TFPT"
+  allowed:
+    - "under the calibrated noise model of search Y, programme Z reaches P% power at the predicted amplitude"
+    - "no realistic 5-year programme reaches the 80% gate; the exact walls are ..."

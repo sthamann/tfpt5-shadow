@@ -195,3 +195,4 @@ import TfptCarrier.CoxeterPrime2
 #check @TFPT.Carrier.CoxeterPrime2.no_prime2_only_attractor
 #check @TFPT.Carrier.CoxeterPrime2.parity_eigenvalue_remembers_start
 #check @TFPT.Carrier.CoxeterPrime2.seam_rate_has_attractor
+

@@ -1,0 +1,304 @@
+% Source-preserving integrated proof body; input from toe_round7_proofs.tex.
+\subsubsection*{Round 7: a Lorentz-covariant free curvature field on the Round 6 Hilbert space}
+\label{sec:toe-r7-covariant}
+\noindent\emph{The displayed arguments below are the proof-bearing source.  The current
+repository regression is \veri{v1032\_\allowbreak covariant\_\allowbreak curvature.py}; its finite checks audit the
+implementation and do not replace the universal steps in the proof.}
+
+\begingroup
+\def\TT{\mathrm{TT}}
+\def\cH{\mathcal H}
+\begin{keybox}[Scope and exact claim boundary]
+The Round 6 target gave positive quantum electric-curvature variables
+$E,F$ and a microcausal continuum limit, but did not construct the full
+four-dimensional Riemann field or its Lorentz boosts. We close that specific
+free-field gap. A polynomial covariant curvature kernel equals a positive
+two-polarization kernel on the null cone. It defines a positive Gaussian
+Wightman field, the vacuum linearized Riemann (equivalently Weyl) tensor,
+with a strongly continuous positive-energy Poincare representation and
+helicities $+2,-2$. Its electric part is exactly $E/2$ and its time derivative
+is $F/2$; it adds no one-particle states. The construction is a free continuum
+extension of the target, not the missing derivation from the TFPT parent.
+It proves neither nonlinear gravity, local-net equality with the smaller
+$E,F$ system, a local lattice realization of every curvature component,
+nor a complete T7 or TOE. No RH statement is involved.
+\end{keybox}
+
+\paragraph{Conventions and the algebraic bridge.}
+Use $\eta=\operatorname{diag}(-1,1,1,1)$ and a covariant null momentum
+\[
+ k_\mu=(-r,p_1,p_2,p_3),\qquad r=|p|>0,
+ \qquad e^{ik_\mu x^\mu}=e^{-irt+ip\cdot\mathbf x}.
+\]
+All tensor components in this note carry lower indices. For a symmetric
+metric amplitude $h$, define the linear curvature map
+\begin{equation}
+ (A(k)h)_{\mu\nu\rho\sigma}
+ =\frac12\left(k_\sigma k_\nu h_{\mu\rho}
+ +k_\rho k_\mu h_{\nu\sigma}
+ -k_\rho k_\nu h_{\mu\sigma}
+ -k_\sigma k_\mu h_{\nu\rho}\right).
+ \label{eq:toe-r7-covariant-A}
+\end{equation}
+It is the Fourier transform of
+\[
+ R_{\mu\nu\rho\sigma}
+ =\tfrac12(\partial_\rho\partial_\nu h_{\mu\sigma}
+ +\partial_\sigma\partial_\mu h_{\nu\rho}
+ -\partial_\sigma\partial_\nu h_{\mu\rho}
+ -\partial_\rho\partial_\mu h_{\nu\sigma}).
+\]
+No positive covariant quantum metric potential is assumed. Instead introduce
+the numerical tensor
+\begin{equation}
+ \Pi_{\mu\nu,\alpha\beta}
+ =\tfrac12(\eta_{\mu\alpha}\eta_{\nu\beta}
+ +\eta_{\mu\beta}\eta_{\nu\alpha}
+ -\eta_{\mu\nu}\eta_{\alpha\beta}),
+ \qquad K(k)=A(k)\Pi A(k)^T.
+ \label{eq:toe-r7-covariant-K}
+\end{equation}
+In a Euclidean orthonormal basis of symmetric $4\times4$ matrices, $\Pi$
+has six positive and four negative eigenvalues. It is not a physical
+Hilbert-space covariance by itself.
+
+Let $S$ embed a spatial symmetric matrix in the $ij$ block of a spacetime
+matrix, with $h_{0\mu}=0$. The orthogonal spatial transverse-traceless
+projector is
+\begin{align}
+ P_{ij}&=\delta_{ij}-p_ip_j/r^2,\\
+ (P_\TT h)_{ij}&=P_{ia}P_{jb}h_{ab}
+       -\tfrac12 P_{ij}P_{ab}h_{ab}.
+ \label{eq:toe-r7-covariant-PTT}
+\end{align}
+It is an orthogonal rank-two projector on $\operatorname{Sym}^2(\mathbb R^3)$.
+
+\begin{lemma}[Null-cone positive factorization]
+For every nonzero null $k=(-r,p)$,
+\begin{equation}
+ K(k)=A(k)S P_\TT(p)S^TA(k)^T
+       =L(k)L(k)^T,\qquad L(k)=A(k)S P_\TT(p).
+ \label{eq:toe-r7-covariant-positive}
+\end{equation}
+Consequently $K(k)$ is positive semidefinite of rank exactly two.
+It is nevertheless a polynomial of degree four in all four components of $k$.
+\end{lemma}
+\begin{proof}
+Substitution in~\eqref{eq:toe-r7-covariant-A} gives $A(k)(k\xi^T+\xi k^T)=0$ for every
+$\xi$. The identity~\eqref{eq:toe-r7-covariant-positive} can be checked with $p=(0,0,r)$:
+the two surviving transverse orthonormal matrices are
+\[
+ h_+=\operatorname{diag}(1,-1,0)/\sqrt2,\qquad
+ h_\times=(e_1e_2^T+e_2e_1^T)/\sqrt2,
+\]
+and direct contraction gives
+$A\Pi A^T=(ASh_+)(ASh_+)^T+(ASh_\times)(ASh_\times)^T$.
+Spatial rotational covariance and degree-four homogeneity give the result
+for every nonzero $p$. The map is injective on the two-dimensional TT
+space because $(A(k)Sh)_{0i0j}=r^2h_{ij}/2$. This proves rank two.
+Polynomiality follows directly from~\eqref{eq:toe-r7-covariant-K}; no division by $r$
+occurs there.
+
+For an independent algebraic certificate, the checker uses ten orthonormal
+metric components and 21 pair-symmetric bivector components. Write
+$\omega$ as an independent variable and $C(p)=r^4P_\TT(p)$, the polynomial
+Round 6 bracket. It divides each of the 441 entries of
+\[
+ A(-\omega,p)\bigl(r^4\Pi-SC(p)S^T\bigr)A(-\omega,p)^T
+\]
+by $\omega^2-r^2$ and verifies an identically zero polynomial remainder.
+The off-shell identity and the identity without the trace-reversal term
+are separately required to fail. These are algebraic checks, not sampling
+of momentum directions or a numerical positivity test.
+\end{proof}
+
+The same map obeys both pair antisymmetries, pair interchange, the algebraic
+Bianchi identity $R_{\mu[\nu\rho\sigma]}=0$, and the differential Bianchi
+identity $k_{[\tau}R_{|\mu\nu|\rho\sigma]}=0$.
+On the TT null range the Ricci contraction vanishes,
+$\eta^{\mu\rho}R_{\mu\nu\rho\sigma}=0$. For example, insert $h_{0\mu}=0$,
+$p_ih_{ij}=0$, $h_{ii}=0$, and $k^2=0$ into~\eqref{eq:toe-r7-covariant-A}; every contraction
+contains one of those four zero factors. Thus the constructed vacuum
+curvature is also its linearized Weyl tensor. These identities hold as
+operator-valued distributional identities after the null quotient below.
+
+\paragraph{Positive field, local commutator, and boosts.}
+Index the independent pair-symmetric bivector entries by $I,J$.
+Define the two-point distribution
+\begin{equation}
+ W_{IJ}(x-y)=\int_{\mathbb R^3}
+ \frac{d^3p}{(2\pi)^3\,2r}\,
+ e^{-ir(t_x-t_y)+ip\cdot(\mathbf x-\mathbf y)}K_{IJ}(-r,p).
+ \label{eq:toe-r7-covariant-W}
+\end{equation}
+The Bianchi identities make one of the 21 algebraic components redundant;
+retaining it with its null relation avoids an arbitrary choice of twenty
+coordinates.
+
+\begin{theorem}[Free covariant curvature field]
+Equation~\eqref{eq:toe-r7-covariant-W}, with Wick's rule for higher vacuum correlations,
+defines a positive free bosonic operator-valued tempered distribution on
+a symmetric Fock space. Its commutators vanish at spacelike separation.
+There is a strongly continuous unitary representation of the proper
+orthochronous Poincare group, with invariant cyclic Fock vacuum, spectrum
+in the closed forward cone, and covariant rank-four curvature transformation.
+Its only one-particle helicities are $+2$ and $-2$.
+\end{theorem}
+\begin{proof}
+For Schwartz test tensors $f$, factorization~\eqref{eq:toe-r7-covariant-positive} gives
+\begin{equation}
+ \|f\|_1^2=\int\frac{d^3p}{(2\pi)^3\,2r}
+ \widehat f(k)^*K(k)\widehat f(k)
+ =\int\frac{d^3p}{(2\pi)^3\,2r}
+ \|L(k)^T\widehat f(k)\|^2\geq0.
+ \label{eq:toe-r7-covariant-norm}
+\end{equation}
+Quotient the zero-norm tensors and complete to $\cH_1$.
+Write $u_f$ for the one-particle image of the test tensor. With $a(u)$
+antilinear in $u$, set $R(f)=a^\dagger(u_f)+a(u_{\bar f})$ on the
+finite-particle domain of $\Gamma_s(\cH_1)$, using the Fourier convention
+implicit in~\eqref{eq:toe-r7-covariant-W}. This is complex linear in $f$ and obeys
+$R(f)^*=R(\bar f)$ on that domain. It gives~\eqref{eq:toe-r7-covariant-W}. The usual creation
+estimate $\|a^\dagger(u)\psi_n\|\leq\sqrt{n+1}\|u\|\|\psi_n\|$
+and continuity of~\eqref{eq:toe-r7-covariant-norm} make this an operator-valued tempered
+distribution. Wick positivity follows from this explicit Fock
+construction, not from assuming $\Pi$ is positive.
+
+Infrared convergence and temperedness are immediate: $K=O(r^4)$,
+so $K/(2r)=O(r^3)$ at zero and has only polynomial growth at infinity.
+Together with the $d^3p$ measure the radial integrand is $O(r^5)$ near zero.
+Schwartz test functions control every ultraviolet moment.
+
+Let
+\[
+ D_0(x)=\int\frac{d^3p}{(2\pi)^3\,2r}
+ (e^{-irt+ip\cdot\mathbf x}-e^{irt-ip\cdot\mathbf x})
+\]
+be the scalar massless commutator distribution. Since $K(-k)=K(k)$,
+the curvature commutator is the constant-coefficient differential operator
+$K_{IJ}(-i\partial)D_0(x-y)$. The scalar commutator has light-cone support,
+and differentiation does not enlarge support. This proves locality of the
+curvature fields, despite the nonlocal spatial TT projector used to exhibit
+positivity.
+
+All indices in~\eqref{eq:toe-r7-covariant-A}--\eqref{eq:toe-r7-covariant-K} are tensorial and $\Pi$ is built
+only from $\eta$. Therefore
+\begin{equation}
+ K(\Lambda k)=D^{(4)}(\Lambda)K(k)D^{(4)}(\Lambda)^T
+ \label{eq:toe-r7-covariant-boost}
+\end{equation}
+for the covector action of every proper orthochronous Lorentz matrix.
+The positive-null-cone measure is invariant. The induced contragredient
+test-tensor transformation, together with translations, consequently
+preserves~\eqref{eq:toe-r7-covariant-norm} and its null space. It gives a unitary
+one-particle representation. The test-tensor action is continuous in the
+Schwartz topology, so the norm estimate gives strong continuity on a
+dense set and then on the completion. Second quantization gives the claimed
+Fock representation. Translations act by positive-energy null momenta;
+finite sums and closure keep the many-particle spectrum in the forward cone.
+The null cone tip has zero one-particle measure. Thus every nonvacuum
+$n$-particle wave function has strictly positive total energy almost
+everywhere, and the only zero-energy vector in this constructed Fock
+representation is the vacuum. This is not a theorem of uniqueness across
+all representations or all possible TFPT states.
+
+For helicity, at $k=(-1,0,0,1)$ rotations about the third axis act on
+$(h_+,h_\times)$ by
+\[
+ \begin{pmatrix}\cos2\theta&-\sin2\theta\\
+                 \sin2\theta&\cos2\theta\end{pmatrix}.
+\]
+Hence $h_+\pm i h_\times$ have phases $e^{\mp2i\theta}$.
+The translation part of the null little group is trivial on the curvature:
+put $q=(u^2+v^2)/2$ and
+\[
+ \Lambda(u,v)=
+ \begin{pmatrix}
+ 1+q&-u&-v&q\\
+ -u&1&0&-u\\
+ -v&0&1&-v\\
+ -q&u&v&1-q
+ \end{pmatrix}.
+\]
+It preserves $\eta$ and $k$, and sends the transverse covectors
+$e_1\mapsto e_1+u k$, $e_2\mapsto e_2+v k$. Each polarization change is
+therefore $k\xi^T+\xi k^T$, which $A(k)$ annihilates.
+This proves the two helicities without assuming away the noncompact
+little-group translations. The checker verifies these identities for
+symbolic $u,v$ and all rotation angles through a rational parametrization.
+\end{proof}
+
+\paragraph{It is the same free target, with a larger covariant field family.}
+The Round 6 continuum construction has, on the physical TT range,
+\[
+ E=r^2q_\TT,\qquad F=r^2p_\TT,\qquad
+ \dot q_\TT=p_\TT,\qquad\dot p_\TT=-r^2q_\TT,
+\]
+with $C=r^4P_\TT$. In radiation gauge~\eqref{eq:toe-r7-covariant-A} gives exactly
+\begin{equation}
+ R_{0i0j}=\frac{r^2}{2}q_{ij}=\frac12E_{ij},
+ \qquad\partial_tR_{0i0j}=\frac12F_{ij}.
+ \label{eq:toe-r7-covariant-same}
+\end{equation}
+Consequently the spectral electric-electric covariance is
+$C/(8r)$, electric-time-derivative covariance is $iC/8$ at equal time
+in the order $\langle R\dot R\rangle$, and derivative-derivative covariance
+is $rC/8$. These are precisely one quarter of the Round 6 $EE,EF,FF$
+covariances, respectively, including the nonsymmetrized commutator part.
+
+For completeness this matching is more than equality of a few entries.
+Both one-particle spaces identify with the completion of spatial TT
+amplitudes in $L^2(d^3p/((2\pi)^3 2r))$. The map from curvature tests is
+$f\mapsto P_\TT S^TA^T\widehat f$. Electric tests alone have dense image:
+on every annulus $0<\epsilon<r<R$ their map is multiplication by the
+invertible scalar $r^2/2$ followed by $P_\TT$. Every smooth compactly
+supported TT amplitude on such an annulus can be extended to a spacetime
+Schwartz test in a tubular neighbourhood of the positive null cone.
+Cutting off at zero and infinity is dense in the one-particle norm.
+Thus~\eqref{eq:toe-r7-covariant-same} identifies the completed one-particle spaces, and
+the associated Fock spaces, with no extra physical oscillator or spectator.
+
+There is an important locality qualification. At a fixed time,
+\[
+ R_{0ijk}=\tfrac12(\partial_k p_{ij}-\partial_j p_{ik})
+          =\frac1{2r^2}(\partial_kF_{ij}-\partial_jF_{ik})
+\]
+in Fourier notation; the spatial components similarly contain two spatial
+derivatives of $q=E/r^2$. Inverse powers of $r^2$ cancel in the covariant
+commutator kernel, but are still present in this reconstruction from $E,F$.
+The global Hilbert-space identification does not by itself prove equality
+of local observable nets, nor that every $R$ component has a bounded-range
+lattice approximant in the previous $E,F$ algebra. No such claim is used
+in the positivity, covariance, or locality theorem above.
+
+\paragraph{Validation, provenance, and the remaining obligation.}
+The repository certificate \veri{v1032\_\allowbreak covariant\_\allowbreak curvature.py} is standalone
+SymPy code. Its 34 exact checks include the all-momentum polynomial identity,
+gauge and Bianchi identities, null Ricci contraction, positivity
+factorizations, a nontrivial rational Lorentz boost, the full null little
+group, and the exact electric and mixed time-derivative covariance normalization. Four rational
+fibres supplement, but do not replace, the universal proof. No floating-point
+eigenvalue scan is used. The distributional/Fock completion rests on the
+written norm, continuity, density and support arguments, not on a finite
+matrix test pretending to construct an infinite-dimensional field.
+
+The inputs are the declared Round 6 free target and ordinary linearized
+curvature algebra. No microscopic TFPT Hamiltonian is imported or derived
+by this checker; only the repository's reporting harness is shared.
+In particular this note does not manufacture the required
+shared parent: it does not prove that the microscopic seam, charged matter,
+mirror sector and gravity jointly flow to this field or to its nonlinear
+completion. A finite-spacing Lorentz-breaking regulator is not asserted
+to be exactly boost invariant. The vacuum homogeneous-block choice and
+the interacting constraint/renormalization problems remain separate.
+
+For historical context, massless-spin field representations and the role
+of the non-semisimple little group are discussed in Weinberg's primary
+paper\footnote{S. Weinberg, ``Feynman Rules for Any Spin. II. Massless
+Particles'', Phys. Rev. 134, B882 (1964),
+\url{https://doi.org/10.1103/PhysRev.134.B882}. The accessible abstract was
+used for context; no inaccessible theorem is imported as a proof.}.
+The result here is an explicit match of that free-field structure to the
+existing target, not a claim that free helicity-two fields are a new
+physical theory. T1--T8 retain their existing open status.
+\endgroup

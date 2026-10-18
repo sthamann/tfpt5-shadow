@@ -102,11 +102,43 @@ shared calibration systematic dominates, so the family-aware (not the naive) err
 one, and a real frequency/foreground null needs the raw per-frequency EB spectra (not recomputed
 here; the per-experiment frequency-robustness is taken from the cited papers).
 
+## Rotation fingerprint — the full constant-rotation morphology (`rotation_fingerprint.py`)
+
+A uniform, frequency-independent rotation by the frozen `β` fixes the *entire* spectral
+morphology, not just one angle (assuming vanishing primordial TB/EB):
+
+```
+C_ℓ^TB / C_ℓ^TE              = tan(2β) = 0.00846278     (all ℓ, all frequencies)
+2 C_ℓ^EB / (C_ℓ^EE − C_ℓ^BB) = tan(4β) = 0.01692677     (all ℓ, all frequencies)
+```
+
+plus five frozen null/sign properties: positive monopole of exactly 0.242435°,
+frequency exponent `n = 0`, no anisotropic rotation (`C_L^αα = 0`, L>0), null
+α×T/E/B cross-correlations, and vanishing de-rotation residuals
+(`C_ℓ^TB − tan(2β) C_ℓ^TE = 0`; `2C_ℓ^EB − tan(4β)(C_ℓ^EE−C_ℓ^BB) = 0` — the leg
+that separates a late uniform rotation from genuinely parity-odd primordial physics).
+
+| leg | published | verdict |
+|---|---|---|
+| monopole (magnitude+sign) | ACT DR6 / Planck PR4 | +0.37σ / −0.52σ, both sign + |
+| frequency exponent | n = −0.35 +0.48/−0.47 (arXiv:2201.13347) | +0.73σ vs 0 — consistent |
+| anisotropy `C_L^αα` | A_CB < 0.09 deg² 95% (arXiv:2401.11973) | consistent null (kill-only) |
+| α×T/E/B cross | null to L=1500 (arXiv:2401.11973) | consistent null (kill-only) |
+| rotation quotients | — | **not_yet_tested** (needs per-frequency PR4/NPIPE EB/TB spectra) |
+| de-rotation residuals | — | **not_yet_tested** (same data requirements) |
+
+→ **5 legs consistent, 2 not yet tested, 0 in tension** — a typing, not a detection.
+The null legs are kill-only (ΛCDM predicts the same nulls); the published legs share
+Planck data + the calibration systematic, so **no joint significance** is formed. The
+sharp morphology legs require PR4/NPIPE frequency maps with masks, splits and dust
+null-models frozen *before* data contact. The internal-Z₂ → E/B parity transduction is
+unproven (OBS.TRANSDUCTION.01) — everything stays exploratory.
+
 ## Reproduce
 
 ```bash
 python -m venv .venv && . .venv/bin/activate && pip install -e .
-tfpt-cmb analyze            # seed-line + shared-seed + beta meta-analysis -> results/results.json
+tfpt-cmb analyze            # seed-line + shared-seed + beta meta + rotation fingerprint -> results/results.json
 # or: PYTHONPATH=src python -m tfpt_cmb.cli analyze
 ```
 
@@ -117,6 +149,7 @@ src/tfpt_cmb/constants.py        # φ0, β, Ω_b, the 4π−1 line — all from 
 src/tfpt_cmb/seed_line.py        # per-observable + single-seed-coherence + line tests
 src/tfpt_cmb/shared_seed.py      # one φ0 -> β + Ω_b + θ13 + Cabibbo meta-test
 src/tfpt_cmb/birefringence_meta.py  # β meta-analysis (naive vs family-aware, BBN cross-check)
+src/tfpt_cmb/rotation_fingerprint.py # full constant-rotation morphology + null/sign legs
 src/tfpt_cmb/cli.py              # `tfpt-cmb analyze`
-data/measurements.json           # published β (ACT/Planck PR4/PR3, with data_family) + Ω_b + refs
+data/measurements.json           # published β (ACT/Planck PR4/PR3, with data_family) + Ω_b + freq-exponent/anisotropy nulls + refs
 ```

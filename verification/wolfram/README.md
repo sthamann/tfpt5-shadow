@@ -9,6 +9,26 @@ reproduces the same headline numbers, so a reviewer can cross-check the
 
 ## Run
 
+Round 7 (2026-09-05) adds **14 representative exact checks** in
+`tfpt_round7.wl`, loaded before the base summary: free curvature projector and
+null-cone positivity, the quarter-twist weight mismatch, the factorized mirror
+minimum and physical-Fourier Ward identities. These are **not engine-verified**.
+The local executable could not auto-locate its kernel; selecting the installed
+kernel explicitly reached a license-activation error. No credentials were changed.
+The verified base count remains **116/116**, not 130 or a count of authored blocks.
+The full Fock/distribution proofs and Python numerical/source regressions are not
+claimed to be independently verified by this representative Wolfram file.
+
+Round 4 (2026-09-05) adds **11 representative exact checks** in
+`tfpt_round4.wl`, loaded by the base runner before its summary. They cover
+the signed wall, the full one-site mod-five Gauss character, the selected
+D4 cap, local tensor identities and sector connectivity. These new checks
+are **not execution-verified here**: `wolframscript` exits 255 because a
+WolframKernel location cannot be determined. The last verified base count
+remains **116/116**; no successful engine run or increase is claimed.
+The v1026 native Arb/Acb proof and the Python-only regressions/cube contraction
+are not represented as independently validated Wolfram certificates.
+
 ```bash
 wolframscript -file tfpt_readouts.wl
 ```
@@ -18,20 +38,22 @@ wolframscript -file tfpt_readouts.wl
 
 ### Local engine status (this machine)
 
-`wolframscript` is installed (`brew install --cask wolfram-engine`, 14.3.0.0),
-the kernel path is configured, and the free Wolfram Engine license is
-**activated**. `wolframscript -file tfpt_readouts.wl` runs clean:
+`wolframscript` is installed (`brew install --cask wolfram-engine`, 14.3.0.0)
+and the kernel path is configured. Last **verified** run (license active)
+was 2026-07-21:
 
 ```
 --- Wolfram readouts: 116 passed, 0 failed ---
 ALL WOLFRAM CHECKS PASSED
 ```
 
-So the independent Wolfram path is **verified to reproduce** the Python suite's
-headline readouts (`α⁻¹`, E8 glue, `M=41`, K/Q ladder `1920=|W(D5)|`, lepton
-`c=(16/7,4/3,7/6)`, solar `sin²θ12=1/3−φ0/2`, the G2 heat-kernel coefficients,
-the anchor-plane Plücker apparatus, and the `(U_wall)` selectors) on a different
-engine.
+On 2026-08-28 the same binary is present but the free Wolfram Engine
+license is **not activated** (`wolframscript -file tfpt_readouts.wl`
+exits immediately with a license-related error). The 2026-08-28
+v974–v997 exact catch-up (20 `checkExact` blocks in `tfpt_readouts.wl`)
+is therefore **DEFERRED_NO_ENGINE**: implemented and syntax-reviewed,
+not counted in the verified 116/116 until the next activated engine run
+(same convention as the 2026-07-20 unactivated-license deferral).
 
 To reproduce on another machine: get a free license at
 <https://www.wolfram.com/engine/free-license>, run `wolframscript -activate`
@@ -78,10 +100,78 @@ once (Wolfram ID + password), then `wolframscript -file tfpt_readouts.wl`.
 | residual resolved: Seeley-DeWitt `a₂=−d/(192π²)R`, `1/G` UV-sensitive ⟹ `k=c3/2` is normalization | symbolic | `v68_seeley_dewitt_residual.py` |
 | D4-equivariant Q: Z4 eigenphases, `Q₊=3w+1=diag(1,2,3)`, `Q₋` E-coupling `√3` ⟹ `t(t²−3)` | exact | `v69_d4_q_geometry.py` |
 | Q integer-lift: `R` unimodular (`{-1,i,-i}`), `det Q=3=N_fam`, SNF `diag(1,1,3)` | exact | `v70_q_integer_lift.py` |
+| glue vector `λ=(ω_s,ω_f)`: norms `5/4+3/4=2`, order 4, isotropy, census `{52,64,60,64}` | exact (20 checks ADDED 2026-08-28; engine run DEFERRED_NO_ENGINE) | `v983_simple_current_generator.py` |
+| μ4 circulant spectra `{0,2,4,2}`/`{4,-2,0,-2}`, deck-swap, graded `log(ln2/4)`, ratio `4/ln2` | exact | `v985_quillen_channel_swap.py` |
+| `B=P1+(2/3)P2+(1/3)P3`, `H=-log B` eigs, Wick `U(-in)=B^n`, congruence positivity | exact | `v987_os_dilation_package.py` |
+| SNF ADE disc groups, unique rank-8 `(D5,A3)` glue, `[λ]^2=[v]`, CE dims `0` / kernel `36/720` | exact | `v993_minimal_defect_selector.py` |
+| `Θ_{E8}/η^8` coeffs `{1,248,4124,34752}` from Jacobi `EllipticTheta` / `DedekindEta` | exact | `v994_mmst_criteria_battery.py` |
+| Barnes–Rivers projector ranks `(5,3,1,1)` on `Sym²(ℝ⁴)` | exact | `v997_spin2_smg_witnesses.py` |
 
 The numerical `(U_wall)` results (kill-switch sampling `v38`, harmonic-metric
 unitarisation `v40`, leg test `v41`) rest on `scipy` ODE/linear-algebra and are
 the Python path; the Wolfram path mirrors their **algebraic** content (`v39`).
+
+### 2026-08-28 catch-up (v974–v997 exact debt)
+
+The v974–v997 waves deferred all Wolfram mirroring (`Python-only per
+recent-wave convention`). The **exact** subset is now in
+`tfpt_readouts.wl` (dated 2026-08-28 section, 20 `checkExact` blocks).
+Verified GATE.WOLFRAM.01 count stays **116/116** until an activated engine
+run reports `136 passed` (116+20).
+
+**Mirrored (exact):**
+
+- `v983` — norms `5/4+3/4=2`, `h=1`, order 4, isotropy, unimodular `det=1`,
+  coset census `{52,64,60,64}` (same search windows as Python), odd-power
+  `128`, kill norms `7/4` and `9/4`, `det Cartan(D8)=4`.
+- `v985` — fully mirrored (spectra, deck swap + odd-swap must-fail,
+  graded `log(ln2/4)`, uniform `4/ln2`).
+- `v987` — spectral decomposition, `H=-log B` eigenvalues, Wick
+  `n=1..6`, congruence positivity + negative-kernel `det<0`.
+- `v993` — SNF textbook disc groups, unique ADE rank-8 census `(D5,A3)`,
+  mutant kills, `[λ]^2=[v]`, unique-CE dimension counts `n_free=0` and
+  kernels `36/720`.
+- `v994` — `Θ_{E8}/η^8` coefficients `{1,248,4124,34752}` from the Jacobi
+  `EllipticTheta` lattice series (cross-check vs `E4=1+240∑σ₃`).
+- `v997` — Barnes–Rivers block ranks `(5,3,1,1)` at `p=(0,0,0,1)`.
+
+**Python-only (numerical / search / structural, not mirrored):**
+
+- `v974–v982`, `v984`, `v986`, `v988–v992`, `v995`, `v996` — ODE / QCA /
+  entropy / HS / KMS / gauge-grammar / likelihood, no compact exact
+  identity for a second engine.
+- `v987` legs B–D (size-uniform D2/LR numeric, interacting gap plateau,
+  quantum SWAP).
+- `v993` random CE axiom sampling on `M_d^{Z4}` / crossed product.
+- `v994` C1 entropy, C2 QWZ spectrum, C4 two-point numeric, C5 beyond
+  `det`, C6 cited, C7 open.
+- `v997` Weyl² ghost residues, random-`p` numeric, SMG N=8 Fidkowski–Kitaev
+  toy.
+
+**2026-08-30 late-evening harvest (v1013–v1014).** Still
+`DEFERRED_NO_ENGINE` (license check failed; zero files executed).  v1013 is
+numerical (Lieb–Robinson cone / nested-volume twin) plus an analytic
+memorandum; v1014 mixes a numerical QWZ detline with exact sympy W-bridge
+identities.  No Wolfram exact-check count change; GATE.WOLFRAM.01 stays
+116/116 pending an activated engine run.
+
+**2026-08-31 Monday-morning harvest (v1015–v1016).** Still
+`DEFERRED_NO_ENGINE`.  v1015 is sympy-exact (character-blind response +
+mutants) but the engine is deferred; v1016 is numerical (euclidean cap /
+TEL-B remainder / CAR nuclearity / DFP series roots).  No Wolfram
+exact-check count change; GATE.WOLFRAM.01 stays 116/116.
+
+**2026-09-01 kernel-Loewner positivity (v1017).** Still
+`DEFERRED_NO_ENGINE`.  v1017 is numerical (Legendre finite-section +
+Bernstein HS enclosure of a Weil/Loewner quadratic form at a single
+support $L=0.3$); no exact algebraic identity for the Wolfram path.
+No Wolfram exact-check count change; GATE.WOLFRAM.01 stays 116/116.
+
+**2026-09-02 directed readout + Coxeter--Euler completion (v1018/v1019).** Still
+`DEFERRED_NO_ENGINE`.  v1018 is sympy-exact (seven $E_8$ readout identities over
+$\mathbb Z/\mathbb Q$; C7 stays open) and would be Wolfram-eligible when the engine
+returns; v1019 mixes exact cyclotomic identities with mpmath Euler-product numerics
+at cutoff $X=10^5$.  No Wolfram exact-check count change; GATE.WOLFRAM.01 stays 116/116.
 
 ## Provenance note
 
@@ -102,10 +192,184 @@ time `v99`, horizon anchor `v101`, seam orientation `v102`, trisection normal fo
 
 **Status: verified.** First engine run 2026-06-11 (Wolfram Engine 14.3): the
 v84–v93 block passed **45/45** on first run; the v94–v140 blocks were added
-the same day, the v141–v144 block on 2026-06-12. Current state:
+the same day, the v141–v144 block on 2026-06-12. Current state (verified
+engine run 2026-07-23, Wolfram Engine 14.3 — the 16
+mirrors deferred since 2026-07-14 counted with the 2026-07-21 reactivation run, 378 →
+394: v479 (2) + v491 (3) + v493 (4) + v495 (3) + v496 (4); the same-day
+`v497` WP5a round adds 4 more exact mirrors, verified directly with the
+active engine, 394 → 398; the same-day `v498` WP5b round adds 5 more exact
+mirrors, verified directly with the active engine, 398 → 403; the same-day
+`v499` P2 weight-typing round adds 5 more exact mirrors, verified directly
+with the active engine, 403 → 408; the same-day `v500` WP5c round adds 4
+more exact mirrors and the same-day `v501` WP5d-alpha round adds 4 more,
+both verified directly with the active engine, 408 → 416; the same-day
+`v502` WP5e-alpha round adds 4 more exact mirrors and the same-day `v503`
+QGEO-emergence-light round adds 4 more, both verified directly with the
+active engine, 416 → 424; the same-day `v504` WP5d-beta round adds 5 more
+exact mirrors, verified directly with the active engine, 424 → 429; the
+same-day `v505` WP5e-beta round adds 5 more exact mirrors and the same-day
+`v506` clock-rigidity round adds 4 more, both verified directly with the
+active engine, 429 → 438; the same-day `v507` bit-origin round adds 6 more
+exact mirrors, verified directly with the active engine, 438 → 444; the
+same-day `v508` WP5e-gamma round adds 6 more exact mirrors, verified
+directly with the active engine, 444 → 450; the same-day `v509`
+WP5e-epsilon-2 round adds 7 more exact mirrors, verified directly with the
+active engine, 450 → 457; the same-day `v510` seam-bit-freedom round adds
+6 more exact mirrors, verified directly with the active engine, 457 → 463;
+the same-day `v511` WP5e-delta-2 full-tensor-ledger round adds 7 more
+exact mirrors, verified directly with the active engine, 463 → 470; the
+2026-07-22 `v512` flag-transitivity round adds 6 more exact mirrors and
+the same-day `v513` c_d-nonderivation round adds 6 more, both verified
+directly with the active engine, 470 → 482; the same-day `v514`
+WP5e-epsilon-1 bulk-axion-slot round adds 8 more exact mirrors, verified
+directly with the active engine, 482 → 490; the same-day `v515`
+WP5e-M1 back-reacted-Omega_N round adds 8 more exact mirrors, verified
+directly with the active engine, 490 → 498; the same-day `v516`
+WP5e-M2 twisted-KS-measure round adds 6 more exact mirrors and the
+same-day `v517` WP5e-M3 a0-uplift round adds 6 more, both verified
+directly with the active engine, 498 → 510; the same-day `v518`
+delta-1-derived-kill round adds 6 more exact mirrors (the 16-component
+Weil system, the two Lagrangians, the koboundary test, the Gamma_1(4)
+character formula, the T-fix mechanism, the misassignment controls),
+verified directly with the active engine, 510 → 516; the same-day `v519`
+WOIT-alpha round adds 6 more exact mirrors (the two-family Theta
+classification, mark pinning + the mu4 torsor, the C^4 rho_tw-vs-sigma_std
+level, the Z8 tower conjugation, the Cl(16) dichotomy 2^7 vs (-1)^F on
+Jordan-Wigner gammas incl. U_r V U_r V = 2^19 and Utilde V = V Utilde,
+and the free-RP preconditions + site-cut degeneration + Cauchy-Stieltjes
+continuum control — the 40-digit PD inertia certificates of the bond-cut
+Grams stay Python-only), verified directly with the active engine,
+516 → 522; the same-day `v520` WP5e-measure-decision round adds 6 more
+exact mirrors (the 16-component Weil data with both Lagrangian gluings,
+the invariant-subspace forcing dim 2 = span{e_H, e_H'}, the character
+arithmetic of the two constructive sources |chi_4|^2 = 1 vs chi_4^2 =
+e(2/3), the A-core + Z2/EH-anchor targets with the scale teeth, the
+level-1 Okubo identity of BOTH gluings, and the so16/shuffle/diag(i,i)
+controls — the Harvey-Moore integrals, SVD memberships and J-weighted
+closures stay Python-only), the same-day `v521` seam-bit-RP-blindness
+round adds 6 more (the anti-linear census solvesets incl. the
+counterwitness, the V4 → D4 closure / face #13, the cut incidence + the
+lattice frame, the continuum axis elimination 1/sin((s+t)/2) +
+Cauchy-Stieltjes minors, the clock-tower clause + hex/silver controls,
+and the delta-blind side conditions — the 40-digit lattice inertia
+spectra stay Python-only), and the same-day `v522` WOIT-beta1 round adds
+6 more (the Z8/NS tower + Ramond witness 1/(4 sin(5 pi/16)), the
+invariant-dimension chain 120 > 64 > 32 via exact ranks, the time-like
+reflection census, the exact Hermiticity witness -i/(8 sin(5 pi/16))
+with the full 745/96/0 census, the GSO 2-torsion census, and the
+family-A tower-normalisation failure — the GSO-fixed RP inertia
+certificates stay Python-only), all verified directly with the active
+engine, 522 → 540; the 2026-07-23 `v523` constructive-w_m round adds 5
+more (the equivariant mode ledger = closed form at every order n ≤ 40
+with Abel value (1/2, 1/4, 1/2) = 1/det_j, Dedekind sum 5/4 and product
+16; the zeta/Quillen route with the symbolic reflection formula, det Δ =
+det_j² = (4, 16, 4), the unique real positive section and the diag(i,i)
+control (2i, 4, −2i); the derived-weight contact vectors + per-sector
+Okubo squares + total 45⟨x,x⟩² + ψ ±64 + the Z2/EH anchor on the 240
+glue roots; the consistency chain w = 4h with the T3 budget c = 4 and
+both wrong-weight controls; the k = 3, 5 cyclotomic wandering controls —
+the Cesàro means, Hurwitz/Lerch certificates and stripped block limits
+stay Python-only), the same-day `v524` WOIT-beta2 round adds 4 more (the
+α₁^N = (−1)^F wrap arithmetic + the exact certificate sin²(3π/8) −
+sin(π/8) sin(5π/8) = 1/2; the Klein–Landau one-particle transfer forms
+exactly Hermitian with odd-k zero diagonal and the even-k square
+identity; the exact N = 8 clock spectrum {1, √2−1} = {1, 1/δ_S} + the
+transparency π/16 product formula certified symbolically; the KMS silver
+witnesses C(1)/C(3) = 1+√2 and det(G − τ₄) < 0 — the H_phys Grams,
+40-digit inertia spectra, spectral projections and the reconstructed
+rotation group stay Python-only), and the same-day `v525` twist-state
+round adds 3 more (the N = 32 integer incidence frame + the σ∘r = ±σ
+congruence mechanism on both axis types; the π/2 existence solveset +
+the (3+4i)/5 root-of-unity census; the δ ↔ π−δ mirror equivariance
+behind the Casimir symmetry — the Pfaffian insertion spectra, the
+Bogoliubov 2-of-16 pattern census and the defect energy stay
+Python-only), all verified directly with the active engine (run
+2026-07-23), 552 → 564; and the same-day `v530`–`v533` review-round
+promotion adds 20 more exact mirrors (v530 center quotient compiler: the
+fixed line `Cv = v`, the unimodular quotient `= {{8,2},{5,3}}` atom matrix,
+the invariants/self-code `(7,11,13)`/CP code `(1,7,11,13)`, the resolvent
+factorisation `Det[C+kI] = (k+1)Det[A+kI]` and the honest K/Q uniqueness
+controls — 6 checks; v531 Stage A tensor clock: `T₃₀ = Comp(Φ₅)⊗Comp(Φ₆)`
+with `χ = Φ₃₀`, exact order 30, the full Ramanujan trace tomography
+`c₃₀ = c₅·c₆`, the honest Φ₁₅ signed-table scope and the coprimality
+controls — 5 checks; v532 dual-degree modular checksum: the `(60,192,240,
+252)` sum/product/gcd identities, the `q`-series recomputation of
+`j = q⁻¹+744+196884q`, the D16 control `1488 = 3·496`, the six
+non-heterotic control failures and the prime-totative fingerprint with
+the maximality scan to 10⁴ — 5 checks; v533 disc −7 norm line: the norm
+identity `D(t) = N(α_t)`, the translation orbit with norms `(2,4,14,32)`,
+the constant discriminant −7 + vertex and the winding/anchor-block
+negative controls — 4 checks), verified directly with the active engine
+(run 2026-07-23), 564 → 584; and the `v534` straddle-cone round adds 4
+more exact mirrors (the stabilizer census of the mark family — the π/2
+member carries the full clock+mirror group with four admissible bond
+cuts; the π/2 quartet partition + the straddle incidence tables; the
+reflection-closure signs `θ_c(Q_q) = +Q_q` of the symmetric straddles
+vs the open asymmetric ones; and the equivariant Fix rays, uniform on
+`m = 2..6` and NS-wrap-twisted `(1,−1,1,1)`/`(−1,−1,−1,1)` on the tight
+members `m = 1/7` — the 256-dim Fock spectra, the PT Gram corrections
+and the finite-g survival scans stay Python-only, flagged), verified
+directly with the active engine (run 2026-07-24), 584 → 588; and the
+`v535` Hecke-from-geometry round adds 5 more exact mirrors (the Kneser
+count identity `#iso_lines = σ₃·#P³` with anchors
+`(135,1120,19656,137600)`; the affine law `(a,b)=(448,24)/(4032,124)` at
+`p=3,5`; the `λ_odd`/`a_p` cusp rule with `p=7` consistency `19840`; and
+the dim-7 / projector / 2-adic oldform arithmetic — the live `p=3` FP
+census and q-series builds stay Python-only, flagged), verified directly
+with the active engine (run 2026-07-24), 588 → 593; and the `v536`
+Eichler-trace-layer round adds 5 more exact mirrors (Witt `λ_Eis`
+identity with anchors `(336,3780,19264)`; Eichler anchors / `N_⊥`
+`(352,3784,19840)` / `(364,3906,19608)`; local densities
+`N_A/N_B` with `p=7` `(82560,743040)`; signed `a_p`/`b`/`R` tables; and
+the assembler / Ramanujan identities — live FP `Shell(p)`/`Shell(p²)`
+stay Python-only, flagged), verified directly with the active engine
+(run 2026-07-24), 593 → 598; and the `v537` half-integral-bridge round
+adds 5 more exact mirrors (the `a_p(f8)` head table
+`(-4,-2,24,-44,22)`; Shimura scale `-8` / weight `5/2→4` with related
+scales `{+8,-16,+16}`; Kohnen scope fence `M=8` even / `W(4)`
+unsolvable; twist root number `ε_d=χ_d(8)` on `d≡1,5 mod 8`; and
+signed-scale uniqueness cardinality `1-of-4` — q-series builds,
+AFE/L-values and `R`-constancy stay Python-only, flagged), verified
+directly with the active engine (run 2026-07-24), 598 → 603; and the
+`v538` relative-trace-identity round adds 5 more exact mirrors (R1 Tr
+anchors `6304/105848/727680` with `f8`-channel `352/3784/19840`; full
+projector table at `p=5,7`; R2 orbit dictionary
+`λ_Eis=(336,3780,19264)`, `a_p²=(16,4,576)`; `ν`-law `(a,b)` anchors;
+finite RTF scope cardinality — q-series builds, AFE/L-values and
+`R`-constancy stay Python-only, flagged), verified directly with the
+active engine (run 2026-07-25), 603 → 608; and the `v539`
+Weil-structure-family round adds 5 more exact mirrors (`G_0` algebraic
+identity; `Φ_k` Chebyshev character expansions; core series
+`c_{k,0}=[1,0,2,0,2,0]`; Dirichlet `2^ω` head; obstruction-(c)
+`e^{-Y}` dlog identity — arch digamma / numeric Q assembly stay
+Python-only, flagged), verified directly with the active engine
+(run 2026-07-25), 608 → 613; and the `v540` amplitude-linear-carrier
+round adds 5 more exact mirrors (the Cauchy–Littlewood window lemma
+with free Satake symbols + the determinant instantiation `1−p⁶X²`;
+the three square channels b²/Θ²/Θ·g vs closed forms at `χ=0`; the
+tower double-counting `fam+2♭+δ_{k1}=[2,2,2,2]` generating functions;
+the linear-carrier full weights `λ_k = 1+p^{3k}−(χp)^k` + pole-kernel
+collapse + FE line map; the Möbius square sieve head + the Cohen seed
+anchors `Θ(1)=4=−48ζ(−1)`, `17·Θ(17)=24·S2(17)=3264` — lattice
+enumeration, FFT autocorrelations and the mpmath split-Mellin FE stay
+Python-only, flagged), verified directly with the active engine
+(run 2026-07-25), 613 → 618; and the `v541` matching-lemma-ledger
+round adds 5 more exact mirrors (the mod-8 character decomposition
+`4(−ψ) = [4χ₋₄+χ₈+χ₋₈]·Θ` with the sympy/LinearSolve coefficient
+system `(0,1,1/4,1/4)` on the theta heads; the `ψ` `w`-table
+recursion `w(8x) = 9w(x) − 8w(x/8)` with first steps `−3/2/−1/2/+1`;
+the Legendre duplication bridge
+`(2π)^{−s}Γ(s) = ½Γ_R(s)Γ_R(s+1)` plus the Gauss-digamma kernel
+anchor at `t = 0`; the certificate head `7S(j) < 40A(j)` at
+`j ∈ {12,24,48,60}` on exact theta heads plus the sign law
+`n ≤ 60`; the CM carrier head `c1(5)=−14`, `c1(13)=−238`,
+inert/ramified laws and `μ₁(5)=−7/25 ∈ [−1,1]` — the 10⁶ integer
+sieves, FFT autocorrelation batteries, Cornacchia tables and the
+mpmath digamma/erfc quadratures stay Python-only, flagged), verified
+directly with the active engine (run 2026-07-25), 618 → 623):
 
 ```
---- Wolfram extension v84-v237 + v259-v260 + v267-v268 + v271 + v273 + v277 + v278 + v281 + v282 + v313-v320 + v325 + v327 + v337 + v341 + v342 + v344 + v345 + v347 + v348 + v349 + v350 + v351 + v352 + v354 + v355 + v358 + v359 + v410-v419 + v422 + v429 + v430 + v431 + v437 + v445 + v450-v454 + v456 + v457 + v459 + v461 + v462 + v463 + v469 + v470: 368 passed, 0 failed ---
+--- Wolfram extension v84-v237 + v259-v260 + v267-v268 + v271 + v273 + v277 + v278 + v281 + v282 + v313-v320 + v325 + v327 + v337 + v341 + v342 + v344 + v345 + v347 + v348 + v349 + v350 + v351 + v352 + v354 + v355 + v358 + v359 + v410-v419 + v422 + v429 + v430 + v431 + v437 + v445 + v450-v454 + v456 + v457 + v459 + v461 + v462 + v463 + v469 + v470 + v473 + v474 + v475 + v477 + v479 + v491 + v493 + v495 + v496 + v497 + v498 + v499 + v500 + v501 + v502 + v503 + v504 + v505 + v506 + v507 + v508 + v509 + v510 + v511 + v512 + v513 + v514 + v515 + v516 + v517 + v518 + v519 + v520 + v521 + v522 + v523 + v524 + v525 + v526 + v527 + v528 + v529 + v530 + v531 + v532 + v533 + v534 + v535 + v536 + v537 + v538 + v539 + v540 + v541: 623 passed, 0 failed ---
 ALL WOLFRAM EXTENSION CHECKS PASSED
 ```
 
@@ -156,6 +420,661 @@ re-verification are numerical, Python-only (as for `v367`/`v461`). The
 curvature of the occupied-frame det line = 1 = the inflow level, on the same
 collar model) is likewise numerical (dense eigh + FHS twist grid),
 Python-only by the same convention, like `v471`.
+
+The 2026-07-13 entropic-action bridge `v473_entropic_action_bridge.py`
+(Bianconi, *Gravity from entropy*, PRD 111, 066001 (2025); arXiv:2408.14391)
+adds 3 more exact mirrors (total `371/371`): (i) the carrier Hodge count
+`dim Ω^{0,1,2}(ℂ⁵) = 1+5+10 = 16 = 2^{g_car−1} = dim S⁺` (vs the 4d fiber
+`1+4+6 = 11`) plus the coefficient pin `β′_B = c₃/6 = 1/(48π)` from
+`3β′ = 1/(16π)`; (ii) the entropy potential `s(x) = x−1−ln x` (nonnegative,
+quadratic minimum, series `ε²/2 − ε³/3`) with the Λ-channel target
+`Tr Q² = 32c₃⁴ = 1/(128π⁴) = (2/3)δ_top`; (iii) the `R²` kill-test gap
+`3c₃⁻⁹ = 3(8π)⁹ ≈ 1.2×10¹³`. The Frullani quadrature
+`−ln A = ∫dt/t(e^{−tA}−e^{−t})` is numerical (mpmath), Python-only, flagged in
+the `.wl` comment.
+
+The 2026-07-13 operator-level follow-up `v474_entropic_hodge_carrier.py`
+(work packages 1 + 4-algebra of the v473 round) adds 2 more exact mirrors
+(total `373/373`): (i) the Q-target enumeration — `d·k² = 32` with integer `k`
+has exactly the supports `(2,4), (8,2), (32,1) = {|Z₂|, rank E₈, 2^{g_car}}`,
+the two-form block `d = 10` and the fiber `d = 16` are excluded (irrational
+multipliers `√(16/5)`, `√2`), minimal uniform `q = c₃² = 1/(64π²)`, and the
+mode-ratio identity `Tr Q²/δ_top = 32/48 = 2/3`; (ii) the fold-is-conjugation
+weight identity — the traceless `u(5)` weights of `Λ⁴ℂ⁵` are the negatives of
+those of `Λ¹` (`5 → 5̄`), with the Pascal blocks `{1,5,10}` vs `{1,10,5}`. The
+32×32 Fock/Clifford matrix checks (CAR ⇒ Clifford, the 45-dim `so(10)` span
+preserving `Λ^even`, the symbolic Hodge–Dirac symbol identity) are Python-only
+by the matrix-construction convention, flagged in the `.wl` comment.
+
+The 2026-07-13 kill-test round `v475_entropic_scalaron_gate.py` (work package
+5 of the v473 round, executed) adds 3 more exact mirrors (total `376/376`):
+(i) the maximally-symmetric eigenvalues of the relative curvature operator —
+Ricci block `(R/4)Id₄` and the flattened 6×6 Riemann-on-2-forms block
+`(R/6)Id₆` on a general diagonal 4d metric (Bianconi's Appendix-B flattening
+verified); (ii) the exact vacuum `f(R) = 3βR + (17/24)β²R² + O(R³)` with the
+raw scalaron mass `m² = 4608π²/17·M̄²` (two routes identical, trans-Planckian
+`≈ 51.7 M̄`), the required enhancement exactly `(72/17)(8π)⁹` and the domain
+pole `1/β = 384π²M̄²`; (iii) the Lorentzian-positivity witness — timelike
+gradient eigenvalues `{1−αv², 1,1,1}` vs spacelike `{1+αv², 1,1,1}`. All three
+blocks are exact; nothing is Python-only in this round.
+
+The 2026-07-13 AP2 well-posing `v476_entropic_compression_toy.py` (the
+compression conjecture of the v473 round exercised on a gapped chain: the
+operator-side reading `P f(C) P` ill-posed on a pure bulk, the state-side
+reading forced, the mismatch exactly second order in the cross-cut block,
+gap-controlled convergence) is numerical (numpy lattice model + Peschel
+modular data), Python-only by the suite convention; its one exact ingredient
+(the symbolic block identity `[Cⁿ]_AA − (C_AA)ⁿ` carrying the cross block
+twice) is trivial block algebra, flagged here rather than mirrored (the
+Wolfram exact-check count stays unchanged at `376/376`).
+
+The 2026-07-13 scale-flow round `v477_entropic_scaleflow.py` adds 2 more
+exact mirrors (total `378/378`): (i) the Frullani/scale-flow identity
+`−ln a = ∫dt/t (e^{−ta}−e^{−t})` (symbolic) plus the moment dictionary — at
+the flat weight the maximally-symmetric relative trace integrates to exactly
+the v475 raw coefficients `3βR + (17/24)β²R²` (unit moments); (ii) the ONE
+moment condition `μ₂/μ₁² = (72/17)(8π)⁹` with the exact closure identity
+`(4608π²/17)/((72/17)(8π)⁹) = c₃⁷` and the v36 consistency
+`f₀ = 6(4π)²/c₃⁷ ⇔ M²/M̄² = c₃⁷`. The χ-form quadrature of the Frullani
+substitution is numerical (mpmath), Python-only, flagged in the `.wl`
+comment.
+
+The 2026-07-13 two-leg exhibit `v478_entropic_continuum_legs.py` (leg A: the
+compressed critical state's modular data flows to the CHM/BW geometric form —
+Calabrese–Cardy `c_est → 1`, CHM parabola, even bands exactly zero; leg B: the
+single-scale corollary `μ₂/μ₁² = e^{t₀}` forcing `t₀ = ln(72/17) + 9ln(8π) =
+30.461` with the `h(E₈) = 30` near-miss explicitly declined) is
+high-precision numerical (mpmath 50-digit eigensolver on the sinc kernel),
+Python-only by the suite convention; its one exact ingredient (the point-
+measure moment ratio `e^{t₀}`) is trivial calculus, flagged here rather than
+mirrored (the Wolfram exact-check count stays unchanged at `378/378`).
+
+The 2026-07-14 Kronheimer bridge `v479_kronheimer_quiver_bridge.py` has its
+two exact mirrors ADDED to `tfpt_readouts_extension.wl` (the Kac marks as
+null/Perron vector of the affine-E₈ Cartan/adjacency; the hyper-Kähler
+quotient dimension count `dim_R X = 4` with `Σ_edges d_i d_j = Σ d_i² = 120 =
+|μ₄|h(E₈)`; the unimodular finite-E₈ Cartan with SNF = identity); they are
+COUNTED since the verified 2026-07-21 engine run (part of the 378 → 394
+step) — the identical statements are machine-verified in Python (sympy,
+exact) in `v479` itself. The 2026-07-14
+companions `v480_multilocal_four_interval.py` (numpy lattice modular data)
+and `v481_seesaw_carrier_ladder.py` (explicit 1-loop RG integration) are
+numerical, Python-only by the suite convention, flagged here rather than
+mirrored.
+
+The 2026-07-14 deep-dive round: `v482_seesaw_rung_decision.py` (bracketed RG
+envelopes) is numerical, Python-only; `v483_pillowcase_exact_traces.py`
+verifies EXACT statements (twisted traces = 1, contact term = 1/2) by
+position-space quadrature — numerical verification of exact facts,
+Python-only, with the exact arithmetic (48c₃⁴ = 3/(256π⁴), ratio 3/16)
+sympy-exact inside the module; `v484_seam_contact_unit.py` is sympy-exact +
+40-digit mpmath polylog (the unit chain 1/(2π) = 4c₃, the mark-Green integers
+−4/−8 · c₃ln2, circ(0,1,2,1) spectrum {4,−2,0,−2}, the Λ prefactor 3/(4π²) =
+48c₃²) — mirrorable in principle but NOT yet mirrored in the `.wl` file
+(so the verified 2026-07-21 engine run does not count it), flagged here per
+the suite convention. Likewise `v485_contact_diagonal_closed.py` (the diagonal
+zero at the KMS scale G_reg(0;ℓ) = (1/π)ln(ℓ/2π), the closed-form mark
+determinant (1−4u)(1+2u)², the exact charge sums Tr₁₆Y² = 10/3 and Ginsparg
+(3/5)(41/6) = 41/10): sympy/Fraction-exact in Python, mirrorable in
+principle, still unmirrored.
+
+The 2026-07-15 generator round `v486_transfer_full_rule.py` (the unique lazy
+Z₂-pair walk (1/2, 1/6, 1/3) generating eig(B⁶) = {64/729, 1/729} exactly)
+and its closure `v487_transfer_clock_rungs.py` (the split forced by the v124
+clock-ladder faithfulness: eig(M) = {1, 2/3, 1/3} = the complete ladder below
+the wall; deck parity = rung index; ω₁/ω₂ = log_{3/2}3 the bend) are
+sympy-exact in Python, mirrorable in principle but NOT yet mirrored in the
+`.wl` file (so the verified 2026-07-21 engine run does not count them),
+flagged here per the suite convention.  Likewise `v488_majorana_clebsch_door.py`
+(the 3/5 Clebsch door closed: sym²(16) = 10 + 126, 16×16bar = 1 + 45 + 210,
+the ν^c charge table with Tr₁₆Y² = 10/3, the {2,3}-smooth channel weights and
+k_Y = 5/3 decoupled by Y(ν^c) = 0): Fraction/sympy-exact, mirrorable in
+principle, still unmirrored.
+
+The 2026-07-20 ground-state-witness round: `v489_seam_modular_commutator.py`
+(the Kim–Shehab–Kim modular commutator c₋ = 8 on the exact BdG ground state)
+and `v490_seam_parity_census.py` (the T² spin-structure parity census
+μ_pre = 4 + the TEE fence) are numerical (numpy/scipy dense linear algebra),
+Python-only by the suite convention, flagged here rather than mirrored (the
+exact θ_v = e^{2πiν/16} = 1 arithmetic inside `v490` is sympy-exact in
+Python). The exact partition corollary `v491_p2_partition_corollary.py`
+(P2.PARTITION.01: 4 into exactly 3 positive parts uniquely {1,1,2} ⇒
+e = (4,5,2) ⇒ g_car = 5, |Z₂| = 2, N_fam = 3 as corollaries, with all four
+negative controls and the v53 sharpening) has its THREE exact mirrors ADDED
+to `tfpt_readouts_extension.wl`; they are COUNTED since the verified
+2026-07-21 engine run (part of the 378 → 394 step) — the identical
+statements are machine-verified in Python (sympy, exact) in `v491` itself.
+
+The 2026-07-20 celestial round: `v492_celestial_z4_orbifold.py`
+(CELEST.WP1.01: the E₈ μ₄-glue as inner order-4 torus element / flat Z₄
+monodromy, the equivariant 60/64 towers, the (E₈)₁ character sum, the
+clock²=deck spin bridge) is sympy-exact and mirrorable in principle but
+NOT yet mirrored in the `.wl` file (so the verified 2026-07-21 engine run
+does not count it; flagged in its docstring).
+`v493_celestial_wp2_clock_deformation.py` (CELEST.WP2.01: the clock-invariant
+deformation XY = Z⁴ + a₀ — sharp selection, disc = 256a₀³, quartic
+invariants I = 12a₀ / J = 0 identically ⇒ j = 1728 frozen, the Coxeter/
+Picard–Lefschetz monodromy with the χ₁-Fourier eigenline, versal weights
+(1,2,3,0), S-algebra corrections linear in a₀ with the EH k = 2 analogue)
+has its FOUR exact mirrors ADDED to `tfpt_readouts_extension.wl`; they are
+COUNTED since the verified 2026-07-21 engine run (part of the 378 → 394
+step); the identical statements are machine-verified in Python
+(sympy, exact, 47 checks) in `v493` itself.
+
+The 2026-07-21 celestial WP3/WP4 round:
+`v495_celestial_wp3_gs_alignment.py` (CELEST.WP3.01: the Green–Schwarz
+alignment test — Deligne closed form λ̃² = h∨+6 across Costello's list,
+λ_E8 = 6 resp. 1/10 exact, (κ/c₃)² = 12 = |μ₄|N_fam resp. 1/300 with
+κ/c₃ itself irrational, the so8 factor-2 slip, and the look-elsewhere
+pass counts 8/8 / 2/8 / 1/8 / 4/8 / 5/8 with the e8 exponents =
+totatives of 30) has its THREE exact mirrors ADDED, and
+`v496_celestial_wp4_character_shadow.py` (CELEST.WP4.01: the character
+vs S-algebra type mismatch — E₄/η⁸ through q⁶ with the q·j cross-check,
+the equivariant Hilbert series (60+128t+60t²)/(1−t²)² with the quadratic
+cumulative count 31s²+92s+60, the two-sided jet-Fock mismatch with
+strictly increasing f_n/χ_n and the level-2 null ideal 27000 = 30³ =
+h∨³, and the boundary bridges: μ₄ period sum 248, 248 never a tower
+dimension, loop Fock 897266) has its FOUR exact mirrors ADDED — all
+seven COUNTED since the verified 2026-07-21 engine run (completing the
+378 → 394 step); the identical statements are
+machine-verified in Python (Fraction/sympy, exact, 25 checks each) in
+`v495`/`v496` themselves.  The Okubo root-sum identity of `v495`
+(polynomial in x over explicit root systems) stays Python-verified; its
+arithmetic consequence λ̃² = h∨+6 is what the mirror checks.
+
+The 2026-07-21 celestial WP5a round:
+`v497_celestial_wp5a_null_ideal.py` (CELEST.WP5A.01: "the null ideal from
+the limit") has its FOUR exact mirrors ADDED and VERIFIED the same day with
+the active engine (394 → 398): (i) the χ_w stabilisation family (u^n
+coefficient = quarter-moded loop Fock for all w ≥ n+1, strictly larger for
+w ≤ n; w = 2 = the chiral jet grading with generator counts
+64,120,128,180,192,240,256,300; loop Fock 897266 at u⁴); (ii) the null
+ideal DERIVED via the Weyl dimension formula in the standard E₈ frame
+(dim V(2θ) = 27000 = 30³ = h∨³, dim V(ω) = 3875, Sym²(248) count 30876 =
+1+3875+27000; Casimirs (60,124,96), Dynkin indices 6750/750; level-1
+integrability ⟨2θ,θ∨⟩ = 4, ⟨ω,θ∨⟩ = 2; quotient 31124 − 27000 = 4124);
+(iii) the two-route identity (μ₄ theta-split sector sum at q² =
+(1036,1024,1040,1024) = 4124, q³ = 34752, glue diagonal h = (0,1,1,1));
+(iv) the negative controls (SO(16)₁: Weyl dims 5304+1820+135+1, 5304 ≠
+14³, quotient 2076 = Θ_D8/η⁸ with shells (1,112,1136), block weights
+(0,1/2,1,1); false periodisation 64/124/248/496; swapped glue 64 ≠ 60).
+The Freudenthal/peeling residual-zero derivation itself (exact
+integer/Fraction recursion) stays Python-side in `v497`; the
+Weyl-dimension and counting consequences are what the mirrors check.
+
+The 2026-07-21 celestial WP5b round:
+`v498_celestial_wp5b_singular_vector.py` (CELEST.WP5B.01: "the singular
+vector as an operator") has its FIVE exact mirrors ADDED and VERIFIED the
+same day with the active engine (398 → 403): (i) the case classification
+of the J^a_1 condition over the 248-element basis from the standard E₈
+root data — tally (190, 57, 1), exactly one case sees the level k;
+θ-grading dims (1,56,134,56,1), a+2θ re-enters for exactly one root
+(a = −θ); (ii) the level dial DERIVED from the affine sl₂ commutation —
+F^θ_1 (E^θ_{−1})ⁿ|0⟩ = n(k−n+1)(E_{−1})^{n−1}|0⟩, square coefficient
+2(k−1) = −2(1−k) with values (−2, 0, 2) at k = 0, 1, 2, Shapovalov
+2k(k−1) (0 at k = 1, 4 at k = 2), cube singular exactly at k = 2;
+(iii) the μ₄ glue data — 240 glue roots with classes (52,64,60,64), inner
+grading ⟨α,h⟩ = class mod 4 on all 240, ⟨θ,h⟩ = 5 ⟹ j(θ) = 1, clock
+phase i² = −1, cross-table rows (1,56,126,56,1); (iv) the 27000 match +
+comark discriminator — mult(2θ) = 1 in the level-2 Fock, 27000 = 30³,
+(2θ,2θ)/2 = 4 > 2, E₈ comarks (2,2,3,3,4,4,5,6) all ≥ 2 vs D₈
+(1,1,1,2,2,2,2,2) with h = (1/2,1,1); (v) the twisted-slot tension —
+two sector-C₁ modes never sum to 8 quarters (minimum 6 = q^{3/2}),
+per-period 248. The full Chevalley/Frenkel–Kac construction and the PBW
+singularity run (J^a_1|s⟩ = 0 on all 248 basis elements, engine
+unit-tested on all 61504 pairs, exact Fractions) stay Python-side in
+`v498`; the counting/dial/grading consequences are what the mirrors
+check.
+
+The 2026-07-21 P2 weight-typing round:
+`v499_p2_weights_deligne_bg.py` (P2.TYPING.01: the anchor a = (1,1,2) as
+the Birkhoff–Grothendieck splitting exponents of the Deligne canonical
+extension — the v491 check-9 residual hardened) has its FIVE exact
+mirrors ADDED and VERIFIED the same day with the active engine
+(403 → 408): (i) the partition enumeration under the full typing (unique
+{1,1,2}, e₂ = 5; BG dictionary h⁰ = 0 ⟺ aᵢ ≥ 1 on the exhaustive window;
+the naive-typing negative control h¹(E′) = 3 ⟹ deg −6 with three
+splittings, e₂ never 5; the h¹ discrepancy h¹(anchor bundle) = 1 ≠ 3);
+(ii) the Deligne residue-trace degree (cusp exponents {0,1/3,2/3} = the
+unique lift of spec(λ³−1) to [0,1), trace 1 per mark, deg E = −4,
+par-deg 0, witness A₀* char poly λ(λ−1/3)(λ−2/3)); (iii) the Schur–Horn
+permutohedron integer points {(2,2,0),(2,1,1)} with h⁰ = 0 killing
+{2,2,0}; (iv) the Biswas ℤ₃-cover degree arithmetic (genus 2,
+eigensheaves O(−2)², χ cross-check −1 = −1, regular-rep weights, the
+decomposable model {0,2,2} with h⁰ = 1 = the unstable companion; deck
+double genus 1, j = 1728); (v) the n-mark formula e₂ = (n−2)(n+1)/2 = 5
+only at n = 4. The sympy symbolic parts (H¹ residue basis, monodromy
+group closure |⟨U,M₀⟩| = 24, the 324-case stability skeleton) stay
+Python-side in `v499`.
+
+The 2026-07-21 WP5c GNS-limit-state round:
+`v500_celestial_wp5c_gns_limit_state.py` (CELEST.WP5C.01: the state whose
+GNS kernel contains the null ideal) has its FOUR exact mirrors ADDED and
+VERIFIED the same day with the active engine (408 → 412): (i) the level-2
+block census from the E₈ root data (31124 = 248 + 30876 monomials in 9361
+weight blocks, dim profile {164:1, 37:240, 7:2160, 1:6960}, orbit census
+by norm (240, 6720, 2160, 240, 1)); (ii) the rank/kernel arithmetic (rank
+table (0,0,1,8,44) ⟹ total 4124 = 1 + 248 + 3875 = χ₂ with
+dim V(ω) = 3875 recomputed by Weyl; kernel per orbit (1,1,6,29,120)
+summing to 27000 = 30³ = dim V(2θ)); (iii) the clock-class split at the
+state level (the glue-frame census turns the rank table into
+(1036,1024,1040,1024) = Θ_Cj/η⁸ at q², level 1 = (60,64,60,64));
+(iv) the threshold + level-dial + D₈ arithmetic (w·r ≥ N+1 for all r ≥ 1
+iff w ≥ N+1 sharp at w = N; ⟨s|s⟩ = 2k(k−1); D₈ census 7380 in 2705
+blocks, quotient 2076). The exact Gram itself (9361 blocks over
+Fractions, PSD inertia, the highest-weight norms (3844, 49, 2, 0), the
+anti-involution and contravariance machine checks on 61504 pairs) stays
+Python-side in `v500`.
+
+The 2026-07-21 WP5d-alpha two-interval-index round:
+`v501_celestial_wp5d_two_interval_index.py` (CELEST.WP5D.01: the KLM
+two-interval index from the lattice) has its FOUR exact mirrors ADDED and
+VERIFIED the same day with the active engine (412 → 416): (i) the Cartan
+determinants (det D₅ = det A₃ = 4, product 16; det D₈ = 4; det E₈ = 1,
+explicit matrices); (ii) the KLM/Longo–Rehren quotients μ/|L|²
+(16/4² = 1, 16/2² = 4 → 4/2² = 1, both routes exact); (iii) the Σd²
+cross-checks (Ising 4, SO(16)₁ 4, (E₈)₁ 1) + the index-reading arithmetic
+([F:F_even] = e^{ln 2} = 2, μ_gauged = 4, 16 ln 2 = ln 2¹⁶, budget
+ln 4 = ln μ(SO(16)₁)); (iv) the 16-fold-way condensability (θ_v = 1
+exactly at ν = 2c₋ = 16 vs the rivals ν = 1, 2, 8). The lattice curves
+(Peschel covariance, Rényi-2 offsets, the ln 2 plateau, the
+duality-asymmetry witness, all ED validations) are numerical and stay
+Python-only in `v501`.
+
+The 2026-07-21 WP5e-alpha prefactor-and-level round:
+`v502_celestial_wp5e_prefactor_level.py` (CELEST.WP5E.ALPHA.01: the
+CFT-side anchor of the twistor uplift) has its FOUR exact mirrors ADDED
+and VERIFIED the same day with the active engine (416 → 420): (i) the
+Hurwitz-ζ vacuum energies (ζ(−1,θ) = −B₂(θ)/2 at rational twists,
+E_b = −1/24 + θ(1−θ)/4, Ising shift 1/16, vacuum 8·(−1/24) = −1/3 =
+−c/24 with Sugawara 248/31 = 8, η⁸ exponent 8/24 = 1/3); (ii) the
+discriminant-form = Casimir identity (exact coset minima (0,5/8,1/2,5/8) /
+(0,3/8,1/2,3/8) / glue (0,1,1,1); spectral flow j²(h,h)/32 with
+(h,h) = 20, (h′,h′) = 12, sum 32; free-fermion route n/16 on
+10 + 6 = 16 = 2^{g_car−1} Majoranas; deck failure 3/16 ≠ 3/8); (iii) the
+k = 1 fixing equations (closed forms 5k/8, 3k/8; glue integrality for ALL
+k = 1..8 — the honest "fixes nothing" finding; current condition h(J) =
+k = 1; embedding 47k² + 219k − 266 = (k−1)(47k+266) and 128k(1−k) = 0;
+central charge 240(k−1) = 0; Shapovalov 2k(k−1) = (0,4,12,24); Weyl dims
+248/3875/27000, count 31124 − 27000 = 4124); (iv) the character sums (the
+four glue-coset thetas sum to E₄ = (1,240,2160,6720); sector characters
+(1,64,60,64)/(60,64,60,64) sum to E₄/η⁸ = q^{−1/3}(1,248,4124,34752);
+D₈ control Θ_D8 + Θ_s = E₄ with h_v = 1/2). The sympy symbolics and the
+PBW engine stay Python-side in `v502`.
+
+The 2026-07-21 QGEO-emergence-light round:
+`v503_qgeo_emergence_light.py` (QGEO.EMERGE.LIGHT.01: the v215 lever-7
+light execution + the residual convergence QGEO-R1 ≡ P2-R1) has its FOUR
+mirrors ADDED and VERIFIED the same day with the active engine
+(420 → 424): (i) the CM-point identities (the q-series E₂ reproduces
+E₂(i) = 3/π and E₂(ρ) = 2√3/π to 30 digits, so E₂*(i) = E₂*(ρ) = 0
+exactly by arithmetic; j(i) = 1728, j(ρ) = 0 via KleinInvariantJ;
+DedekindEta[I] = Γ(1/4)/(2π^{3/4}) exact); (ii) the no-dynamical-selection
+witnesses (logF S-invariant at 30 digits; the hexagonal winner
+logF(ρ) − logF(i) = 0.02116…; the saddle signature of τ = i); (iii) the
+pillowcase halving (exact N = 8 discrete-torus spectrum, 3 nonzero
+self-paired cone modes + 30 ±-pairs, dim(even) = 34 = (N²+4)/2,
+det′_even² = det′_torus·prod_self exactly); (iv) clock ⇒ square + Coxeter
+(SolveAlways forces a₃ = a₂ = a₁ = 0, j = 1728 identically; charpoly
+λ³+λ²+λ+1, order 4 = |μ₄| = N_fam + 1; Aut(hexagonal) = ℤ₆ has no
+order-4 element). The v280-style lattice DtN curves (mod-4 off-character
+weights via sqrtm/expm) are numerical and stay Python-only in `v503`.
+
+The 2026-07-21 WP5d-beta round:
+`v504_celestial_wp5d_klm_completeness.py` (CELEST.WP5DB.01: "split + strong
+additivity from the lattice" — the two remaining KLM legs of complete
+rationality; the μ-index is v501) has its FIVE mirrors ADDED and VERIFIED
+the same day with the active engine (424 → 429): (i) the GF2 span theorem
+(Majorana monomials multiply as GF(2) labels, so the strong-additivity
+span is an exact set count: shared boundary Majorana ⇒ Even(A) ∨ Even(B) =
+Even(A∪B) exactly, 64/64, 256/256, 1024/1024; disjoint exactly half =
+index 2); (ii) the Pimsner–Popa identity + attainment (E(a) − a/2 = PaP/2
+identically on a symbolic 4×4 matrix; explicit gamma matrices give
+E(x*x) − λ·x*x = 2(1−λ) − 2λh with spec(h) = ±1, so λ_PP = 1/2 =
+1/[F:F_even] exactly); (iii) the two-interval group + index consistency
+(E₄(vv⁺) = I/4 exactly ⇒ λ_E4 = 1/4 = 1/μ; (1/λ_PP)² = 4 = 1/λ_E4 =
+μ(SO(16)₁) = det Cartan(D₈)); (iv) the Λ²-compound (Minors[·,2]:
+Cauchy–Binet functoriality, diag products {σ_a σ_b}, and Minors[−C,2] =
+Minors[C,2] identically — the exact orbifold split-inheritance mechanism);
+(v) the U(1) PP control (dephasing on m modes gives λ = 1/(m+1) → 0
+exactly: infinite index). The lattice curves (deficit tables, Ising
+exponent p = 0.2444, elliptic-nome ladder, Klich–Levitov slope, ED
+validations) are numerical and stay Python-only in `v504`.
+
+The 2026-07-21 WP5e-beta round:
+`v505_celestial_wp5e_beta_equivariant_ledger.py` (CELEST.WP5E.BETA.01: "the
+equivariant anomaly ledger on twistor space" — the Atiyah–Bott/Lefschetz
+skeleton of the one-loop twistor inflow on ℂ²/ℤ₄) has its FIVE mirrors
+ADDED and VERIFIED the same day with the active engine (429 → 434): (i) the
+AB denominators + equivariant characters (det(1−g_j⁻¹) = (2,4,2), Dedekind
+sum 5/4 = (|ℤ₄|²−1)/12; characters (248,0,−8,0) by TWO routes — graded dims
+and the explicit 240-root sum; invariant average 60 = carrier, Frobenius
+61568); (ii) the index bridge (ch₂(T_m) = −(C⁻¹)_mm/2 = (−3/8,−1/2,−3/8) =
+f(m) exactly; glue defect −78 by both routes, classes (−24,−30,−24);
+Σ_m h_A3(m) = 5/4 = Σ_j 1/det_j); (iii) Okubo per sector + the rigid 32·T₃
+residual (the invariant quartic sum over the 240 glue roots = 36⟨x,x⟩²
+exactly; the twisted quartics carry T₅/T₃ content; the AB-weighted sum =
+9P₁ − 30P₂ − 15P₃ + 32T₃ exactly); (iv) the level dials (lattice current
+count 240/0/0/0 for k = 1..4; embedding residual (0,360,814,1362);
+det(A−1) = −4); (v) the axion-slot weight arithmetic (clock weights =
+regular μ₄ rep; a₀ Hamiltonian in O(2) = the graviton slot, X = −2 ≠ +2 = Y
+with mismatch 4 = |μ₄|; Coxeter eigencharacters {i,−1,−i} = the three
+twisted slots).
+
+The 2026-07-21 clock-rigidity round:
+`v506_seam_clock_rigidity.py` (SEAM.CLOCK.RIGIDITY.01: Route B of the v503
+classification — Part A Möbius + Part B Fock) has its FOUR mirrors ADDED
+and VERIFIED the same day with the active engine (434 → 438): (i) the
+complete square-root solve (g² = deck forces diagonal with (a/d)² = −1 —
+exactly two roots z → ±iz, both projective order 4, mutually inverse; the
+traceless branch is scalar with det 0); (ii) the D₄ center + order-4 count
++ the silver counterexample (the μ₄ stabiliser {iᵏz, iᵏ/z} has profile
+{1,2,2,2,2,2,4,4}, exactly 2 order-4 elements squaring to the deck, center
+= {id, deck}; the silver set {±1, ±(3+2√2)} has j = 1728 and a full D₄ of
+8 exact elements but its order-4 elements square to the CENTRAL crossing
+involution z → −v/z, not the deck: zero roots); (iii) the Cl(16) identity
+(on explicit 256×256 Jordan–Wigner gamma matrices, Ũ² = 256·γ₁⋯γ₁₆
+exactly, i.e. U² = (−1)^F, with the R implementer squaring to +256 — the
+split control); (iv) the n-arithmetic + generic kill (S₄ orders {1,2,3,4},
+kill table for n = 5..8, free orbits n | 4, cusp degree 5 ≠ 3, transfer
+spectrum {1, 64/729, 1/729}, the generic V₄ = {±z, ±2/z} with exponent 2).
+The 24-triple stabiliser enumeration, the A₄/hexagonal profile and the Z8
+block-lift nullspace construction stay Python-only in `v506` (flagged).
+
+The 2026-07-21 bit-origin round:
+`v507_seam_bit_origin.py` (SEAM.BIT.ORIGIN.01: the tautology attack on the
+v506 alignment bit — Part A torus origin + Part B fermion dichotomy) has
+its SIX mirrors ADDED and VERIFIED the same day with the active engine
+(438 → 444): (i) the half-period descent (fixed points of w → −w = the 4
+half-periods Λ/2Λ, the 1/3-control fails; t_c descends iff 2c ∈ Λ; the
+explicit rational descent σᵢ(x) = eᵢ + (eᵢ−eⱼ)(eᵢ−e_k)/(x−eᵢ) with the
+exact curve-lift identity ∏(σᵢ−e_l) = ψᵢ²∏(x−e_l), symbolic e₁,e₂,e₃,
+Klein-V₄ closure); (ii) the core solve (pair cross-ratio = −1 solves to
+λ = −1, 2, 1/2 — one per half-period; harmonic orbit j = 1728 vs j(3) =
+21952/9 and j(hex) = 0); (iii) the stabiliser counts (the complete
+24-triple enumeration gives (4,3,3)/(8,5,3)/(12,3,3) with the free
+involutions exactly the three σ_c in ALL types — the deck class is
+forced); (iv) the CM fixed point (mult-by-i mod 2 fixes exactly (1,1) =
+c* = (1+τ)/2, mult-by-ρ 3-cycles all three; the lemniscatic clock needs
+ψ = 2i/(x+1)², t²+1 irreducible over ℚ, and squares to the central −1/x);
+(v) the Cl(16) dichotomy (on the 256×256 Jordan–Wigner gammas the central
+implementer squares to 256·γ₁⋯γ₁₆ while the EDGE implementer implements
+the NS edge reflection and squares to the SCALAR +2⁷ — split; in the
+32-element NS dihedral lift group the central deck has exactly 2 square
+roots, the edge deck 0); (vi) the silver bijection census (all 8 mark
+bijections carry the silver deck to the edge σ₂/σ₃, never the central σ₁;
+all 8 μ₄ bijections carry the seam deck to the central σ₁ only). The v493
+circularity-audit direction and the 28/21 arrangement census stay
+Python-only in `v507` (flagged).
+
+The 2026-07-21 WP5e-gamma round:
+`v508_celestial_wp5e_gamma_pairing.py` (CELEST.WP5E.GAMMA.01: the
+sphere-axion pairing check — the exchange route killed with a certificate)
+has its SIX mirrors ADDED and VERIFIED the same day with the active engine
+(444 → 450): (i) the vertex-space dims (the W(D5)×W(A3)-invariant
+quadratics on the 8-dim glue Cartan have bidegree dims (1,0,1), total 2 =
+span{s₅, s₃}, and the quartics (2,0,1,0,2), total 5 = span{P₁,P₂,P₃,T₅,T₃}
+— exact generator-wise Weyl nullspace arithmetic); (ii) the twisted
+quadratics + the even-sector collapse (K⁽⁰⁾ = 60(s₅+s₃), K⁽¹⁾ = K⁽³⁾ =
+4s₅−12s₃, K⁽²⁾ = −4(s₅+s₃), and K⁽⁰⁾ = −15·K⁽²⁾: parallel); (iii) the
+product theorem (symbolic a,b,c,d: any two invariant quadratics multiply
+into span{P₁,P₂,P₃} — zero T₅/T₃ content); (iv) the rank-3 certificate
+(channels E₁₃ = (16,−96,144,0,0), E₂₂ = (16,32,16,0,0), E₀₀ = 225·E₂₂;
+exchange matrix rank 2, kernel 0, rank([M | A_fix]) = 3 with A_fix =
+(9,−30,−15,0,32) and (Φ_T5, Φ_T3, Φ_P)(A_fix) = (0, 32, 72); the
+naturalness images (25/4,−11/2,97/4,0,0) and (12,−40,76,0,0) both certify
+(0,0)); (v) the SO(16) AB sum (15,−18,−15,−4,40) — T₅ does not even
+cancel, odd classes empty; (vi) the D8 native quartic (28·s₈ Killing,
+16·T₈ + 12·s₈² — no T₃ structure). The selection-rule triple enumeration
+and the flipped-rule control stay Python-only in `v508` (flagged).
+
+The 2026-07-21 WP5e-epsilon-2 round:
+`v509_celestial_wp5e_eps2_level_from_flux.py` (CELEST.WP5E.EPS2.01: the
+CPS level-from-flux dial, verdict B — k = 1 from flux quantisation on the
+lockstep spheres) has its SEVEN mirrors ADDED and VERIFIED the same day
+with the active engine (450 → 457): (i) the CPS period integrals (the S³
+period of the brane back-reaction 3-form = (2πi)² exactly, pullback
+density −sin 2θ; the exceptional-sphere Kähler flux = 2πN exactly with the
+flat part dying at t → 0); (ii) the level~flux contraction (symplectic
+bosons: +2N direct / −2N crossed for N = 1, 2, 3) with the Dynkin
+normalisation T(so8 vector) = 1, T(adj) = 6; (iii) the pairing-matrix
+enumeration 48 → 2 (row candidates (8, 6, 8); 48 unimodular solutions of
+P·C⁻¹·Pᵀ = C⁻¹; with effectivity P ≥ 0 exactly 2 = {identity, A₃ diagram
+flip}); (iv) the three fluxes (64, 60, 64) = dim g_i with total 188 =
+248 − 60, flip-invariant, flux per adjoint current (1, 1, 1); (v) the
+sector-counter dial (#primaries((E₈)_k) = (1, 3, 5, 10, 15, 27) for
+k = 1..6 from the affine marks — one sector iff k = 1, KLM 16/4² = 1);
+(vi) the lockstep theorem + the 0/24 negative probe (clock invariance
+forces a₃ = a₂ = a₁ = 0; squared period moduli 2t² equal on all three
+spheres; monodromy = pure phase i; det(A−1) = −4; Z⁴ − Z with disc −27:
+zero lockstep orderings of the non-μ₄-orbit branch points {0, 1, ω, ω²});
+(vii) the negative controls (SO(16) fluxes (0, 60, 0) with ch₂ defect −30
+and condensation stuck at 4 = det Cartan(D8); A₂: det 3, glue diagonal
+23/24 ∉ ℤ, μ = 12 no perfect square, Coxeter order 3 ≠ 4). The lattice
+current-count table (240, 0, 0, 0) is already mirrored in the `v505`
+round; the k = 2 residual/prefactor controls are mirrored there too — the
+`v509`-specific Python-only parts (none beyond bookkeeping) are flagged.
+
+The 2026-07-21 seam-bit-freedom round:
+`v510_seam_bit_freedom.py` (SEAM.BIT.FREEDOM.01: the freedom attack on the
+v506/v507 alignment bit — the POSITION half of the bit is topology) has
+its SIX mirrors ADDED and VERIFIED the same day with the active engine
+(457 → 463): (i) the dihedral census + quotient topology (D₁₆ has 17
+involutions with exactly ONE free = the antipodal shift by 8; all 16
+reflections have exactly 2 circle fixed points, 8 site-axis + 8 edge-axis;
+robustness N = 8, 12; odd control N = 9: zero free; χ(circle/antipode) = 0
+closed vs χ(circle/reflection) = 1 interval); (ii) the Aut completeness
+(Aut(C₈) = D₈ by brute force over all 8! = 40320 permutations; Aut(C₁₆) =
+D₁₆ by degree-2 propagation, all 32 candidates); (iii) the Cl(16)
+dichotomy census (on the 256×256 Jordan–Wigner gammas the free deck's NS
+implementer squares to 256·γ₁⋯γ₁₆ = 256·(−1)^F nonsplit, while the
+implementers of ALL 16 reflections exist and square to SCALARS {2⁷
+site-axis, 2⁸ edge-axis} — NONSPLIT ⟺ FREE over the complete census; root
+dichotomy 2 vs 0 total); (iv) the real-structure table (M·D = ±D·M solves
+symbolically to the two families diagonal/antidiagonal; per configuration:
+μ₄ → equatorial/FREE, silver → real-axis/NOT free, generic-real →
+real-axis, generic-unit → equatorial/free, hexagonal → NO mark-fixing real
+structure); (v) harmonic + free ⇒ μ₄ ((1−b)²/(1+b)² = −1 solves exactly
+to b = ±i; λ table (2, 1/2, 3/4, 5/4) real, hexagonal Im λ = √3/2);
+(vi) the honest counterwitnesses ({0,1,8,9} shift-invariant + crossing but
+not quarter-shift-invariant; {±1, ±(3+4i)/5} with pair cross-ratio −1/4,
+j = 148176/25 ≠ 1728, clock not preserving). The Möbius/Klein covering
+models and the pillowcase branch control stay Python-only in `v510`
+(flagged).
+
+The 2026-07-21 WP5e-delta-2 round:
+`v511_celestial_wp5e_delta2_tensor_ledger.py` (CELEST.WP5E.DELTA2.01: the
+full-tensor ledger — the v508 collapse is confirmed full-tensorially, and
+one cubic door opens) has its SEVEN mirrors ADDED and VERIFIED the same
+day with the active engine (463 → 470): (i) the innerness count + g₀
+structure (240 glue roots, class split (52, 64, 60, 64); h and h′ read
+the class mod 4 on all 240 roots; the 52 class-0 roots split 40 pure D₅ +
+12 pure A₃ with no mixed root, root span rank 8 — g₀ = d₅ ⊕ a₃
+semisimple, no u(1); class(−α) = −class(α)); (ii) the bilinear Hom table
+by exact Kostant alternating sums on the minuscule weight orbits (nonzero
+ONLY at j′ = −j with dims (2, 1, 1, 1), all 12 charged pairs zero);
+(iii) the trilinear Hom table (all 15 non-neutral triples zero, neutral
+dims (3, 2, 2, 1, 1)); (iv) the unique symmetric survivor (Inv(S³ adj) =
+(0, 1) for (d₅, a₃), Inv(L³ adj) = (1, 1), Inv(S² adj) = (1, 1);
+Inv(S³ g₀) = 1, Inv(L³ g₀) = 2 — the su(4) d-symbol; dual guard 4×4 = 0
+vs 4×4̄ = 1); (v) the controls (SO(16)/D₈ bilinears (1, 0, 1), trilinears
+(1, 0, 1, 0), Inv(S³ adj_D8) = 0, Inv(L³ adj_D8) = 1; false g₀ =
+d₅+a₂+u(1): (5, 2, 2) ≠ (2, 1, 1), Inv(S³ g₀) = 6 ≠ 1; false sector
+(16_s, 4̄): both pairings 0 vs true value 1); (vi) Q_dd by two routes
+(explicit su(4) matrices: brackets/root-contractions/tadpoles all 0;
+Q_dd = (0, 0, −1/240, 0, 1/60) = (1/60)(T₃ − P₃/4) agreeing with the
+hand route; Tr X³ = 0 antisymmetric); (vii) the ψ certificate + the
+relaxed solution (E₁₃/E₂₂/E₀₀/A_fix replicated; rank 3 vs augmented 4;
+ψ = Φ_P − Φ_T3/4 annihilates all four channels, ψ(A_fix) = 72 − 8 = 64;
+relaxed A_fix = −u + 8v + 2w + 1920·Q_dd exactly, 1920 = |W(D₅)| =
+8·240).
+
+The 2026-07-22 flag-transitivity round:
+`v512_seam_tau_flag.py` (SEAM.TAU.FLAG.01: the flag-transitivity
+equivalence web — bare mark-transitivity falsified as a selector, FLAG
+transitivity ⇔ δ = π/2 ⇔ τ = i) has its SIX mirrors ADDED and VERIFIED
+the same day with the active engine (470 → 476): (i) the V₄/D₄ census
+table over five exact members incl. flag/arc orbit counts (generic
+(4, 2, transitive, 2, 2), μ₄ (8, 4, transitive, 1, 1)); (ii) the
+solveset equivalences (b² = −1 / cos δ = 0 / tan(δ/2) = 1 / δ = π − δ
+all reduce to {π/2} on (0, π/2]) + the family identities (λ = sec²(δ/2),
+pair cross-ratio = −tan²(δ/2); counterwitness λ = 5/4, j = 148176/25,
+cross-ratio −1/4); (iii) the spectral faces in closed form (deck-odd
+split exp(π·split/2) = cot(δ/2), arc-Laplacian spectrum, K3 indicator
+Frobenius² = 8(u−v)²); (iv) the twist mode identity (m²−n²)(t−1/t) +
+Atiyah–Bott δ-blindness + the j-rationality control; (v) H4 rigidity
+(centraliser scalar, intertwiner ∝ U, U² nonscalar, V₄ orders {1,2,2,2});
+(vi) the negative controls (hexagonal/silver/Z₁₆ census 0 vs 28/n = 3
+rigidity). The mpmath heat-trace/kleinj numerics and the numpy lattice
+commutator stay Python-only in `v512` (flagged).
+
+The 2026-07-22 c_d-nonderivation round:
+`v513_celestial_dterm_nonderivation.py` (CELEST.DTERM.NONDERIV.01: the
+c_d negative certificate — the 1920 = |W(D₅)| fence typed
+look-elsewhere-loaded and convention-contingent) has its SIX mirrors
+ADDED and VERIFIED the same day with the active engine (476 → 482):
+(i) the propagator anchor Σ⟨α,e⟩² = 120 = 2h∨⟨e,e⟩ + the T3-slot pinning
+(det(P-block) = −64, c_d = 32/(1/60) = 1920); (ii) the five-way
+convention table (1920, 120, 256, 32, 69120) with exactly one |W(D₅)|
+hit + the convention-stable factorisation c_d·Φ_T3(Q) = 32 in all five;
+(iii) the flux enumeration (legal pairings 2048/1800 bracket and miss,
+the 64·60/2 hit charge-forbidden) + the look-elsewhere ledger (924
+expressions, 11 hits on 1920; controls 1800 → 8, 2016 → 0, 2048 → 5);
+(iv) the K2 quantisation lattices (coroot quantum 6, weight quantum 3/8,
+60ℤ with 1920 the 32nd multiple, ch₃ units 2160ℤ excluding, 12
+factorisations of 32); (v) the K3 provenance clash (cubic A_m =
+(0, 16, 0, −16), twisted sum 32i vs quartic contributions
+(10, −4, 30, −4); Weyl data |W(D₅)| = 1920 = |W(E₈)|/|W(A₈)|,
+|W(A₃)| = 24, |W(D₈)| = 5160960); (vi) the K4 controls (SO(16) cubic
+class sums 0, k = 2 doubling 7680, false g₀ six cubics).
+
+The 2026-07-22 WP5e-epsilon-1 bulk-axion-slot round:
+`v514_celestial_wp5e_eps1_axion_slot.py` (CELEST.WP5E.EPS1.01: the O(−2)
+bulk-axion slot, verdict B — the slot as a construction, λ̃ = 6 triply
+pinned, the GH/A₃ back-reaction step) has its EIGHT mirrors ADDED and
+VERIFIED the same day with the active engine (482 → 490): (i) the
+equivariant Penrose ledger (pushforward blocks = exact wave-operator
+kernels, block by block, all d ≤ 6, all four characters, (d+1)² per
+degree); (ii) the character series P₀ = 1 + 3t² + 15t⁴ + 21t⁶ + 45t⁸,
+P₁ = P₃ = 2t + 8t³ + 18t⁵, P₂ = 6t² + 10t⁴ + 28t⁶ with the surviving
+bulk-axion zero mode (1, 0, 0, 0), density 1/2 = (1/4)·2 and twisted
+minimal content (2t, 6t², 2t); (iii) the Molien hypersurface
+(1 − t⁸)/((1 − t⁴)²(1 − t²)) with relation degree 8 = the a₀ weight +
+the diag(i,i) Veronese control (1 + 3t⁴)/(1 − t⁴)² and the Coxeter
+clock det(A − 1) = −4; (iv) the Okubo residue (6⟨x,x⟩)² on the 240
+glue roots + the so8 irrationality control (perfect squares {9, 36}
+only); (v) the measure cancellation (λ_eff² = 36 for arbitrary μ,
+wrong bookings 9 and 144 excluded) + the flux dial (#primaries
+(1, 3, 5, 10), (κ/c₃)² = 12); (vi) the GH centre dichotomy re-deriving
+the v493 family (Π(Z − iᵖz₀) = Z⁴ − z₀⁴, monodromy = one clock step);
+(vii) the period lockstep 4π t₀(i−1)(1, i, i²) + the GH point =
+ℝ⁴/ℤ_k cone + the Coxeter clock Π·A = iΠ from geometry; (viii) the
+multipole selection rule m ≡ 0 mod 4 with the (4, ±4) amplitude
+(35/16) sin⁴θ + the EH log ledger (det g = 1 exact, asymptotic log
+coefficient 0, exceptional flux 2πa², Burns contrast det g = 1 + N/u).
+
+The 2026-07-22 WP5e-M1 back-reaction round:
+`v515_celestial_wp5e_m1_omega_n.py` (CELEST.WP5E.M1.01: the A₃ Ω_N —
+milestone M1 executed, SUCCESS on the preregistered v514 S8.1 criterion)
+has its EIGHT mirrors ADDED and VERIFIED the same day with the active
+engine (490 → 498): (i) the residue-form identities (invariant-cover
+pullback 4·dz₁∧dz₂ = |μ₄| × flat, deck-invariant, clock phase i; weight
+ledger 4+4+2−8 = 2, Ω ∈ O(4) = −deg K_PT; EH anchor 2 = |ℤ₂|;
+wrong-weight control 4 ≠ 2); (ii) the twistor family closed (O(2)
+reality of the four centre sections, XY = Z⁴ + 4t₀²λ²Z² − t₀⁴(1−λ⁴)²
+exactly, seam fibre = the v493 family, self-mirror, CY-compatible clock
+lift γ: (Z, λ) → (iZ, −iλ), γ⁴ = 1, Ω → +Ω); (iii) the period reduction
++ lockstep (∫ω₂ = 2πi(q_b − q_a) generic, seam vector 2πi t₀(i−1)(1, i,
+i²) with equal squared moduli 8π²t₀², covariance Π_{j+1}(−iλ) = iΠ_j(λ)
+for all λ, Π·A = iΠ, closure 0, residue 0 = the zero-flux Ω₀ baseline);
+(iv) the collision ledger (12 nodes exactly on the 8 eighth roots of
+unity, adjacent λ² = i^{2j+3}, antipodal double nodes, clock orbits
+4+4+4); (v) the BM anchor (density −sin 2θ, ∫_{S³}K = (2πi)²,
+iterated two-circle residue) + the lens forcing N ∈ 4ℤ (only N ≡ 0 mod
+4 passes; fractional charges excluded); (vi) the source curve (four
+centre lines on the family, clock-permuted, K4-connected with 6 edges /
+12 points, cover count 16 = |μ₄|²); (vii) the conifold nodes (Hessian
+det 512t₀⁶, quadric rank 4, transversality, Π₀(λ₀) = 0); (viii) the
+KILL probe + negative controls (forbidden Z⁴ − Z family: 0/24 lockstep
+vs 8/24, twelfth-root support ≠ ℤ₈, no antipodal pairing — integrality
+alone is NOT the discriminator; EH charge 2 forced; diag(i,i) collapse
+i·i = −1). The dict-based exterior-algebra identities dK = 0 and the
+generic-profile sphere parametrisation stay Python-side in `v515`,
+flagged in the `.wl` comment.
+
+The 2026-07-22 WP5e-M2+M3 back-reaction rounds:
+`v516_celestial_wp5e_m2_twisted_ks_measure.py` (CELEST.WP5E.M2.01: the
+twisted Kodaira–Spencer measure — milestone M2 executed, SUCCESS on the
+preregistered v514 S8.2 criterion on the DECLARED completion measure)
+has its SIX mirrors ADDED and VERIFIED the same day with the active
+engine (498 → 504): (i) the completion-weight identity w_m =
+Σ_j(1 − i^{jm})/det_j = (0, 3/2, 2, 3/2) = 4h_m = |μ₄|h_m = −4 ch₂(T_m)
+with the index bridge f(m) = −h_m = ch₂ (no free scale, ratio 4:3);
+(ii) the root/quartic replication (240 roots split (52, 64, 60, 64),
+class quartics Q_m, A_fix = (9, −30, −15, 0, 32) two routes, bulk Okubo
+36⟨x,x⟩² = (K⁽⁰⁾)²/100); (iii) the parameter-free locks (T₅ = 0 for
+symbolic scale, T₃ budget forces c = 4 = |μ₄|, leading system det 256
+with unique weights (3/2, 2)); (iv) the contact term two forms +
+the success table (per-sector perfect Okubo squares 36⟨x,x⟩²/det_j,
+total 45⟨x,x⟩² = (5/4)·36 = Dedekind × Okubo, certificates 32/72/ψ = 64
+all killed, exchange-span remainder, μ-blind measure chain); (v) the
+negative controls (wrong scale 32 − 8c, shuffled weights T₅ = −14 /
+T₃ = 36, SO(16) keeps T₅ = 20 / T₃ = −40 — the KILL fires there,
+diag(i,i) degeneration, ℤ₂/EH anchor 9⟨x,x⟩² at scale 2 = |ℤ₂|);
+(vi) the multiplier note (discriminant T-phase orders (1, 8, 2, 8)
+squaring to (1, 4, 1, 4), Gauss sums 2e(3/8) / 2e(5/8) / 4). The
+completion reading itself is the declared [C] fence (not mirrorable —
+it is a typing, not an identity).
+`v517_celestial_wp5e_m3_a0_uplift.py` (CELEST.WP5E.M3.01: the a₀
+uplift — milestone M3 executed, SUCCESS on the preregistered v514 S8.3
+criterion) has its SIX mirrors ADDED and VERIFIED the same day with
+the active engine (504 → 510): (i) the GH multipole ledger (dipole/
+octupole 0, quadrupole m = 0, (4, ±4) amplitude (35/16) sin⁴θ,
+selection rule m ≡ 0 mod 4) + the family at general orbit phase (e₁ =
+e₃ = 0, a₂ = 4z₀z̄₀ζ², a₀(ζ) = −(z₀² − z̄₀²ζ⁴)², v515 slice); (ii) the
+kernel bridge (null coordinate: Δ₃d G(η_p) = 0 for arbitrary G;
+residue V-ledger identity 1/(2r); flux −4π per centre); (iii) the
+asymptotic kernel log (coefficient 4 = |μ₄|, seam-fibre first
+correction a₀/η⁴, exact m-grading with the m = 0 piece −6t₀⁴ φ₀-free,
+GLT tower p_{4k} = 4(−a₀)^k, no log×power terms); (iv) the
+exceptional-locus log (χ(0) = log a₀ = 4 log t₀ + i(4φ₀ + π), modulus
+response 1 at the locus vs power-law a₀/η⁴ at infinity); (v) the
+period response (Π_j linear in t₀, d log Π/d log a₀ = 1/4 = 1/|μ₄|,
+integrated monodromy i = one Coxeter clock step, centre permutation,
+a₀-rigid node support, K₄ discriminants ∼ t₀²); (vi) the negative
+controls ((4,0) φ₀-free, ℤ₂/EH reads 2 on every dial, k = 3/5 orbits
+move the coefficient with slots O(6)/O(10), forbidden family p₃ = 3 /
+e₄ = 0). The GLT contour-transform typing is the declared [C]
+dictionary; the BM kernel anchor is already mirrored in the v515
+round.
+
+The 2026-07-22 delta-1 decision round
+`v518_celestial_wp5e_delta1_derived_kill.py` (CELEST.WP5E.DELTA1.01:
+the delta-1 chain delta-1b + delta-1c + delta-1d decided — kill under
+the DERIVED chiral measure, with the v516 declared-measure tension
+stated honestly) has its SIX mirrors ADDED and VERIFIED the same day
+with the active engine (510 → 516): (i) the 16-component Weil system
+of the D5 ⊕ A3 discriminant module ℤ₄ × ℤ₄ with q = (5x² + 3y²)/8
+(Gauss sums 2ζ₈⁵ × 2ζ₈³ = 4 = √16, signature 0 mod 8 = rank E8; S
+symmetric + unitary, S² = C, (ST)³ = S², S⁴ = 1, T⁸ = 1; tensor split
+S = S_D5 ⊗ S_A3); (ii) the two invariant Lagrangians (diagonal H and
+anti-diagonal H′, both S- and T-fixed = two E8 gluings; 6 isotropic
+classes; P_H S P_H = (1/4)J with 3/4 of every S-image weight on the
+12 shifted classes — why the naive 4-character rule fails); (iii) the
+koboundary test on the recorded exact transport phases (the SL(2,ℤ)
+relation defects c_{S⁴}, c_{(ST)³S⁻²}, c_{[S²,T]} are (1, 1, 1) on
+all 15 sector pairs: the μ₄ multiplier system is a CHARACTER of the
+orbit stabilisers, not a genuine 2-cocycle); (iv) the Γ₁(4) character
+formula λ(γ) = i^{2B + C/4} on the recorded loop matrices (all in
+Γ₁(4), all four equivalent monomial solutions agreeing); (v) the T-fix
+mechanism ((−1)·e(−1/6) = e(1/3) = χ₄(T) uniformly for f₁f₃, while
+f₁f₂f₃ demands {χ₃, χ₄} and f₂ demands {χ₅, χ₆} — inconsistent at the
+T-fixed nodes alone); (vi) the misassignment controls (wrong form
+(x² + y²)/4: |Gauss|² = 64 ≠ 16 and S² ≠ C exactly; wrong signature
+σ = e(−1/4): S² = e(−1/2)C exactly). The Harvey–Moore integrals, the
+SVD contraction solves, the theta covariance certificates and the
+block transport measurements are numerical (mpmath 30+ digits /
+numpy) and stay Python-only, flagged in the `.wl` comment.
 
 (ledger `GATE.WOLFRAM.02`). The scipy-only parts of the round (the `v86`
 pivot ODE solve, the `v88` data pulls, the `v99` mpmath ODE probe of the

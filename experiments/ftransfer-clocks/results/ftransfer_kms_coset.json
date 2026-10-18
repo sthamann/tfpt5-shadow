@@ -1,0 +1,138 @@
+{
+  "probe": "ftransfer_kms_coset",
+  "executed": "2026-08-06 10:35:05",
+  "freeze": {
+    "yaml": "880224f76380c77dce2c1e3d7651bccc9e1619e74c60b7e15326ee0ee2bbf4d0",
+    "gstar": "8ae2a4fec098fd68d3a469fbf2b7806ee1630f5595498a3e6cf2abca2d79b939",
+    "alphas": "2ca6332dd1ee0caa089f64be58e90a8c916c94bbe612125eca41da50c33a2ac2"
+  },
+  "criterion": "time-1 PGL2 holonomy class + detailed-balance multiplier cross-ratio (no Schwarzian, no derivatives)",
+  "theorem": "S_transported = -(ln lambda)^2/2",
+  "blind_assignment": {
+    "F_pole": {
+      "typing": "modular",
+      "ln_mult_abs": "-log(64/729)",
+      "witness_ok": true
+    },
+    "F_Boltzmann": {
+      "typing": "modular",
+      "ln_mult_abs": "-log(64/729)",
+      "witness_ok": true
+    },
+    "F_QCD": {
+      "typing": "autonomous",
+      "ln_mult_abs": "0",
+      "witness_ok": true
+    },
+    "F_relic": {
+      "typing": "degenerate",
+      "ln_mult_abs": "None",
+      "witness_ok": true
+    }
+  },
+  "unblinding": {
+    "F_pole": "-18*log(3)**2 - 18*log(2)**2 + 36*log(2)*log(3)",
+    "F_Boltzmann": "-18*log(3/2)**2",
+    "F_QCD": "0"
+  },
+  "controls": {
+    "C1_fake_caught": true,
+    "C2_affine_invariant": true,
+    "C3_moebius_positive_case": true
+  },
+  "verdict": "KMS-COSET-THEOREM",
+  "checks_total": 18,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "name": "H0 prereg YAML byte-freeze reused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H0 frozen g_*s table untouched",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H0 frozen alpha_s table untouched",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H1 non-circularity: the classifier source contains NO Schwarzian reference and NO derivative call of any order -- typing uses only the functional identity, the holonomy class, fixed points and the multiplier cross-ratio",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H1 Lemma A: {M(e^{a x}), x} = -a^2/2 identically for GENERIC Moebius M (symbolic coefficients) -- modular charts carry -(ln lambda)^2/2",
+      "ok": true,
+      "detail": "residual = 0"
+    },
+    {
+      "name": "H1 Lemma B: {M(x), x} = 0 identically -- autonomous charts carry 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H1 Lemma C: -a^2/2 = -Delta^2/2 iff a = +-Delta (exact solve: [log(64/729), log(729/64)], each +-Delta symbolically); affine sigma-dictionaries (slope +-1) leave the value -- the coset is a FUNCTION of the typing datum lambda alone: S = -(ln lambda)^2/2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H2 blind F_pole -> modular (|ln lambda| = Delta = 6 log(3/2) exact, witness constant)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H2 blind F_Boltzmann -> modular (|ln lambda| = Delta = 6 log(3/2) exact, witness constant)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H2 blind F_QCD -> autonomous (parabolic holonomy, lambda = 1)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H2 blind F_relic -> degenerate (identity holonomy -> unclassifiable (consistency with degenerate jets))",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H3 F_pole: predicted -log(64/729)**2/2 = -2.959235170076978, transported Schwarzian -18*log(3)**2 - 18*log(2)**2 + 36*log(2)*log(3) -- EXACT match",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H3 F_Boltzmann: predicted -log(64/729)**2/2 = -2.959235170076978, transported Schwarzian -18*log(3/2)**2 -- EXACT match",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H3 F_QCD: predicted 0 = 0.000000000000000, transported Schwarzian 0 -- EXACT match",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H3 relic consistency: criterion says unclassifiable (identity holonomy) AND the jets are degenerate (y' = 0 identically) -- no coset assigned, none exists",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H4.C1 fake-KMS control FIRES: scrambled detailed-balance data w(x) = e^{-Delta x}(1+x^2) with the claimed seam holonomy is caught (functional identity fails; ratio non-constant: m(0)/m(1) = 128/729 vs 160/729)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H4.C2 affine-invariance control: x -> -x + c leaves typing (modular) and |ln lambda| = Delta unchanged -- typing is affine-invariant, as the dictionary class requires",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "H4.C3 Moebius-clock control FIRES (the positive case): t = e^{Delta sigma} on the QCD chart flips typing to MODULAR with |ln lambda| = Delta, the theorem predicts -Delta^2/2, and the transported Schwarzian IS -Delta^2/2 exactly -- the K1-duty transplant as theorem confirmation",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}
